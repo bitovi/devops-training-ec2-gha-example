@@ -1,6 +1,10 @@
-name: Deploy
+name: Destroy
 
 on:
+  workflow_dispatch:
+    inputs:
+      aws_resource_identifier:
+        description: Resource Identifier for deployed resources
   pull_request:
     types: [ closed ]
 
@@ -9,7 +13,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - id: deploy
+    - id: destroy
       uses: bitovi/github-actions-node-app-to-aws-vm@tf-destroy
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING}}
@@ -18,5 +22,5 @@ jobs:
         stack_destroy: true
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         # dot_env: ${{ secrets.DOT_ENV }}
-
+        aws_resource_identifier: ${{ github.event.inputs.aws_resource_identifier }}
         app_port: 3000
