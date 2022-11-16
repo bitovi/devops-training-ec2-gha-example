@@ -22,5 +22,5 @@ jobs:
         stack_destroy: true
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         # dot_env: ${{ secrets.DOT_ENV }}
-        aws_resource_identifier: ${{ inputs.aws_resource_identifier }}
+        aws_resource_identifier: ${{ github.event.inputs.aws_resource_identifier }}
         app_port: 3000
