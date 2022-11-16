@@ -10,7 +10,7 @@ on:
 
 
 jobs:
-  deploy:
+  destroy:
     runs-on: ubuntu-latest
     steps:
     - id: destroy
