@@ -14,4 +14,4 @@ services:
       - /app/node_modules
 
     ports:
-      - 80:3000
+      - 3000:3000
