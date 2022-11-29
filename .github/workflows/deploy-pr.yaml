@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     # if the branch name of the PR does not contain 'skip-deploy'
-    if: "!contains(github.head_ref, 'skip-deploy')"
+    # if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
     env:
       PULL_REQUEST_REF: ${{ github.head_ref }}
