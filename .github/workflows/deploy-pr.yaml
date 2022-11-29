@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PULL_REQUEST_REF: ${{ github.event.payload.pull_request.head.ref }}
-      PULL_REQUEST_OBJ: ${{ JSON.stringify(github.event.payload.pull_request) }}
+      PULL_REQUEST_OBJ: ${{ github.event.payload.pull_request }}
     steps:
     - run: echo "debugging"; echo "${{ github.event.payload.pull_request.head.ref }}"
     - run: echo "PULL_REQUEST_REF ($PULL_REQUEST_REF)"
