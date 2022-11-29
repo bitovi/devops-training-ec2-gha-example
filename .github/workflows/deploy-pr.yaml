@@ -11,9 +11,7 @@ jobs:
     if: "!contains(github.event.payload.pull_request.head.ref, 'skip-deploy')"
     runs-on: ubuntu-latest
     steps:
-    - run: |
-      echo "debugging"
-      echo "${{ github.event.payload.pull_request.head.ref }}"
+    - run: echo "debugging"; echo "${{ github.event.payload.pull_request.head.ref }}"
 
     # - id: deploy
     #   uses: bitovi/github-actions-node-app-to-aws-vm@main
