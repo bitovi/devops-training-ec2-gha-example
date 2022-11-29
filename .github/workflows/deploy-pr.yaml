@@ -10,6 +10,7 @@ jobs:
     # if the branch name of the PR does not contain 'skip-deploy'
     if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
+    steps:
     - id: deploy
       uses: bitovi/github-actions-node-app-to-aws-vm@main
       with:
