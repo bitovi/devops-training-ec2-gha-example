@@ -8,24 +8,16 @@ on:
 jobs:
   deploy:
     # if the branch name of the PR does not contain 'skip-deploy'
-    # if: "!contains(github.head_ref, 'skip-deploy')"
+    if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
-    env:
-      PULL_REQUEST_REF: ${{ github.head_ref }}
-      PULL_REQUEST_OBJ: ${{ github.event.payload.pull_request }}
-    steps:
-    - run: echo "debugging"; echo "${{ github.head_ref }}"
-    - run: echo "PULL_REQUEST_REF ($PULL_REQUEST_REF)"
-    - run: echo "PULL_REQUEST_OBJ ($PULL_REQUEST_OBJ)"
+    - id: deploy
+      uses: bitovi/github-actions-node-app-to-aws-vm@main
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING}}
+        aws_default_region: us-east-1
 
-    # - id: deploy
-    #   uses: bitovi/github-actions-node-app-to-aws-vm@main
-    #   with:
-    #     aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING}}
-    #     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING}}
-    #     aws_default_region: us-east-1
+        # Provide a secret called `DOT_ENV` to append environment variables to the .env file
+        # dot_env: ${{ secrets.DOT_ENV }}
 
-    #     # Provide a secret called `DOT_ENV` to append environment variables to the .env file
-    #     # dot_env: ${{ secrets.DOT_ENV }}
-
-    #     app_port: 3000
+        app_port: 3000
