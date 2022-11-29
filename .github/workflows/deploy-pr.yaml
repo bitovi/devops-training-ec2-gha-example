@@ -8,13 +8,13 @@ on:
 jobs:
   deploy:
     # if the branch name of the PR does not contain 'skip-deploy'
-    if: "!contains(github.event.payload.pull_request.head.ref, 'skip-deploy')"
+    if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
     env:
-      PULL_REQUEST_REF: ${{ github.event.payload.pull_request.head.ref }}
+      PULL_REQUEST_REF: ${{ github.head_ref }}
       PULL_REQUEST_OBJ: ${{ github.event.payload.pull_request }}
     steps:
-    - run: echo "debugging"; echo "${{ github.event.payload.pull_request.head.ref }}"
+    - run: echo "debugging"; echo "${{ github.head_ref }}"
     - run: echo "PULL_REQUEST_REF ($PULL_REQUEST_REF)"
     - run: echo "PULL_REQUEST_OBJ ($PULL_REQUEST_OBJ)"
 
