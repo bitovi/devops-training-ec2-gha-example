@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment:
-      name: github-pages
+      name: vm_url
       url: ${{ steps.deploy.vm_url }}
     steps:
     - id: deploy
@@ -24,3 +24,7 @@ jobs:
         # dot_env: ${{ secrets.DOT_ENV }}
 
         app_port: 3000
+    - id: summary
+      run: |
+        echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
+        echo "VM Public URL: $vm_url" >> $GITHUB_STEP_SUMMARY
