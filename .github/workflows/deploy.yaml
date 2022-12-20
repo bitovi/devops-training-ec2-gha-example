@@ -27,4 +27,4 @@ jobs:
     - id: summary
       run: |
         echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
-        echo "VM Public URL: $vm_url" >> $GITHUB_STEP_SUMMARY
+        echo " ${{ steps.deploy.outputs.vm_url }}" >> $GITHUB_STEP_SUMMARY
