@@ -24,6 +24,7 @@ jobs:
 
         app_port: 3000
   Print_URL:
+    needs: Deploy
     runs-on: ubuntu-latest
     environment:
       name: vm-url
