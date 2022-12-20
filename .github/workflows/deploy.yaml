@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: vm_url
-      url: ${{ steps.deploy.vm_url }}
+      url: ${{ steps.deploy.outputs.vm_url }}
     steps:
     - id: deploy
       uses: bitovi/github-actions-deploy-docker-to-ec2@42-surface-dns-records
