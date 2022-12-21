@@ -6,12 +6,12 @@ on:
 
 
 jobs:
-  deploy:
+  EC2-Deploy:
     runs-on: ubuntu-latest
     outputs:
       vm_url: ${{ steps.deploy.vm_url }}
     steps:
-    - id: EC2-Deploy
+    - id: deploy
       uses: bitovi/github-actions-deploy-docker-to-ec2@42-surface-dns-records
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING}}
@@ -23,11 +23,11 @@ jobs:
         # dot_env: ${{ secrets.DOT_ENV }}
 
         app_port: 3000
-    - if: ${{ stack_destroy == 'false' }}
+    - if: ${{ steps.deploy.stack_destroy == 'false' }}
       run: |
         echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
         echo " ${{ steps.deploy.outputs.vm_url }}" >> $GITHUB_STEP_SUMMARY
-    - if: ${{ stack_destroy == 'true' }}
+    - if: ${{ steps.deploy.stack_destroy == 'true' }}
       run: |
         echo "## VM Destroyed! :boom:" >> $GITHUB_STEP_SUMMARY
         echo "Buckets and whole infrastructure should be gone now!"
