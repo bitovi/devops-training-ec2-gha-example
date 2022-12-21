@@ -6,10 +6,10 @@ on:
 
 
 jobs:
-  Deploy:
+  deploy:
     runs-on: ubuntu-latest
     outputs:
-      vm_url: ${{ steps.deploy.outputs.vm_url }}
+      vm_url: ${{ steps.deploy.vm_url }}
     steps:
     - id: deploy
       uses: bitovi/github-actions-deploy-docker-to-ec2@42-surface-dns-records
@@ -23,14 +23,7 @@ jobs:
         # dot_env: ${{ secrets.DOT_ENV }}
 
         app_port: 3000
-  Print_URL:
-    needs: Deploy
-    runs-on: ubuntu-latest
-    environment:
-      name: vm-url
-      url: ${{ steps.deploy.outputs.vm_url }}
-    steps:
-    - id: print_url
+    - id: summary
       run: |
         echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
         echo " ${{ steps.deploy.outputs.vm_url }}" >> $GITHUB_STEP_SUMMARY
