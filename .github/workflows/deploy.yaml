@@ -23,6 +23,7 @@ jobs:
         # dot_env: ${{ secrets.DOT_ENV }}
 
         app_port: 3000
+        lb_port: 5000
     - if: ${{ steps.deploy.outputs.vm_url != '' }}
       run: |
         echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
