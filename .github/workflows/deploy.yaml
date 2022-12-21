@@ -23,11 +23,11 @@ jobs:
         # dot_env: ${{ secrets.DOT_ENV }}
 
         app_port: 3000
-    - if: ${{ steps.deploy.stack_destroy == 'false' }}
+    - if: ${{ steps.deploy.outputs.vm_url != '' }}
       run: |
         echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
         echo " ${{ steps.deploy.outputs.vm_url }}" >> $GITHUB_STEP_SUMMARY
-    - if: ${{ steps.deploy.stack_destroy == 'true' }}
+    - if: ${{ steps.deploy.outputs.vm_url == '' }}
       run: |
         echo "## VM Destroyed! :boom:" >> $GITHUB_STEP_SUMMARY
         echo "Buckets and whole infrastructure should be gone now!"
