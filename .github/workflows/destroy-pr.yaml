@@ -1,4 +1,4 @@
-name: Destroy
+name: Destroy-PR
 
 on:
   workflow_dispatch:
@@ -8,15 +8,21 @@ on:
   pull_request:
     types: [ closed ]
 
+permissions:
+  contents: read
 
 jobs:
-  destroy:
+  EC2-Destroy:
     # if the branch name of the PR does not contain 'skip-deploy'
     if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name }}
+      url: ${{ steps.destroy.outputs.vm_url }}
     steps:
     - id: destroy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@v0.1.0
+      name: Destroy
+      uses: bitovi/github-actions-deploy-docker-to-ec2@v0.4.1
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING}}
@@ -26,3 +32,14 @@ jobs:
         # dot_env: ${{ secrets.DOT_ENV }}
         aws_resource_identifier: ${{ github.event.inputs.aws_resource_identifier }}
         app_port: 3000
+
+    - if: ${{ steps.destroy.outputs.vm_url != '' }}
+      name: Print result created
+      run: |
+        echo "## VM Created! :rocket:" >> $GITHUB_STEP_SUMMARY
+        echo " ${{ steps.destroy.outputs.vm_url }}" >> $GITHUB_STEP_SUMMARY
+    - if: ${{ steps.destroy.outputs.vm_url == '' }}
+      name: Print result destroyed
+      run: |
+        echo "## VM Destroyed! :boom:" >> $GITHUB_STEP_SUMMARY
+        echo "Buckets and whole infrastructure should be gone now!" >> $GITHUB_STEP_SUMMARY
