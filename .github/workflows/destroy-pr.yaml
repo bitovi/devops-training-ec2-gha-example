@@ -13,8 +13,8 @@ permissions:
 
 jobs:
   EC2-Destroy:
-    # if the branch name of the PR does not contain 'skip-deploy'
-    if: "!contains(github.head_ref, 'skip-deploy')"
+    # if the branch name of the PR does not contain 'skip-deploy' or 'st2'
+    if: "!contains(github.head_ref, 'skip-deploy') && !contains(github.head_ref, 'st2')"
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name }}
