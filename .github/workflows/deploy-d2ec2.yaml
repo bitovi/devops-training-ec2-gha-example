@@ -23,6 +23,7 @@ jobs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING}}
         aws_default_region: us-east-1
+        tf_state_bucket: bitovi-devops-training-ec2-gha-example-d2ec2-tf-state
 
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         # dot_env: ${{ secrets.DOT_ENV }}
