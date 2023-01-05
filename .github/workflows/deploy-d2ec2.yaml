@@ -2,7 +2,7 @@ name: Deploy D2EC2 Testing branch
 
 on:
   push:
-    branches: [ D2EC2 ]
+    branches: [ d2ec2 ]
 
 permissions:
   contents: read
