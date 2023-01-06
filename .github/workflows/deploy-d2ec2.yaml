@@ -18,15 +18,16 @@ jobs:
     steps:
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@54-move-the-output-tasks-to-the-gha
+      uses: bitovi/github-actions-deploy-docker-to-ec2@55-ensure-bucket-name-follows-aws-requirements
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING}}
         aws_default_region: us-east-1
+        tf_state_bucket: github-actions-deploy-docker-to-ec2@55-ensure-bucket-name-follows-aws-requirements
 
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         # dot_env: ${{ secrets.DOT_ENV }}
 
         app_port: 3000
-        stack_destroy: true
+#        stack_destroy: true
 #        tf_state_bucket_destroy: true
