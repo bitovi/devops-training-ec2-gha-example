@@ -18,7 +18,7 @@ jobs:
     steps:
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@58-play-with-github-outputs
+      uses: bitovi/github-actions-deploy-docker-to-ec2@69-buckets-name-errors-are-passed-to-bucket-names
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING}}
