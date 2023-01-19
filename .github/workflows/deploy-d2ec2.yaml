@@ -24,10 +24,9 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING}}
         aws_default_region: us-east-1
         aws_ami_id: ami-06878d265978313ca
-        tf_state_bucket: WILL-_-NOT-_-WORK
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         # dot_env: ${{ secrets.DOT_ENV }}
 
         app_port: 3000
-        stack_destroy: false
+        stack_destroy: true
         tf_state_bucket_destroy: true
