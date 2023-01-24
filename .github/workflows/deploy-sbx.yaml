@@ -18,13 +18,14 @@ jobs:
     steps:
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@v0.0.4.9
+      uses: bitovi/github-actions-deploy-docker-to-ec2@rds
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
         aws_default_region: us-east-1
         tf_state_bucket: bitovi-operations-aws-sandbox
         aws_resource_identifier: bitovi-gha-deploy-docker-to-ec2
+        stack_destroy: true
 
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         # dot_env: ${{ secrets.DOT_ENV }}
