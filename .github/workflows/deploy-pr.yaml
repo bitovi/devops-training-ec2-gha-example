@@ -8,6 +8,9 @@ on:
       stack_destroy:  
         type: boolean
         default: false
+      stack_deploy:  
+        type: boolean
+        default: false  
 
 permissions:
   contents: read
