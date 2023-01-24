@@ -3,6 +3,11 @@ name: Deploy-PR
 on:
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      stack_destroy:  
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -10,7 +15,6 @@ permissions:
 jobs:
   EC2-Deploy:
     # if the branch name of the PR does not contain 'skip-deploy'
-    if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name }}
