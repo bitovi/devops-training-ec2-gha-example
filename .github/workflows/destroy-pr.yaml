@@ -1,15 +1,15 @@
-# name: Destroy-PR
+name: Destroy-PR
 
-# on:
-#   workflow_dispatch:
-#     inputs:
-#       aws_resource_identifier:
-#         description: Resource Identifier for deployed resources
-#   pull_request:
-#     types: [ closed ]
+on:
+  workflow_dispatch:
+    inputs:
+      aws_resource_identifier:
+        description: Resource Identifier for deployed resources
+  pull_request:
+    types: [ closed ]
 
-# permissions:
-#   contents: read
+permissions:
+  contents: read
 
 # jobs:
 #   EC2-Destroy:
