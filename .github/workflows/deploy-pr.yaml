@@ -10,7 +10,7 @@ permissions:
 jobs:
   EC2-Deploy:
     # if the branch name of the PR does not contain 'skip-deploy'
-    if: "!contains(github.head_ref, 'skip-deploy')"
+    if: "!contains(github.head_ref, 'skip-deploy') && !contains(github.head_ref, 'rds')"
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name }}
