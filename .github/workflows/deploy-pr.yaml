@@ -18,6 +18,8 @@ permissions:
 
 jobs:
   deploy:
+  EC2-Deploy:
+    # if the branch name of the PR does not contain 'skip-deploy'
     runs-on: ubuntu-latest
     steps:
     - id: deploy
