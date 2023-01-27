@@ -19,19 +19,19 @@ jobs:
     environment:
       name: ${{ github.ref_name }}
       url: ${{ steps.destroy.outputs.vm_url }}
-    # steps:
-    # - id: destroy
-    #   name: Destroy
-    #   uses: bitovi/github-actions-deploy-docker-to-ec2@v0.4.1
-    #   with:
-    #     aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING}}
-    #     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING}}
-    #     aws_default_region: us-east-1
-    #     stack_destroy: "true"
-    #     # Provide a secret called `DOT_ENV` to append environment variables to the .env file
-    #     # dot_env: ${{ secrets.DOT_ENV }}
-    #     aws_resource_identifier: ${{ github.event.inputs.aws_resource_identifier }}
-    #     app_port: 3000
+    steps:
+    - id: destroy
+      name: Destroy
+      uses: bitovi/github-actions-deploy-docker-to-ec2@feature-commontest
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING}}
+        aws_default_region: us-east-1
+        stack_destroy: "true"
+        # Provide a secret called `DOT_ENV` to append environment variables to the .env file
+        # dot_env: ${{ secrets.DOT_ENV }}
+        aws_resource_identifier: ${{ github.event.inputs.aws_resource_identifier }}
+        app_port: 3000
 
     - if: ${{ steps.destroy.outputs.vm_url != '' }}
       name: Print result created
