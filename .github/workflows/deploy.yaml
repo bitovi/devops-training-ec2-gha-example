@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ srini-main ]
+    branches: [ feature-commonscripts ]
 
 permissions:
   contents: read
