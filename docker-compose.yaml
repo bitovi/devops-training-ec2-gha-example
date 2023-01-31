@@ -7,7 +7,28 @@ services:
 
     # Specify a .env file for credentials
     # the `AWS_INSTANCE_URL` environment variable will be prepended to that file
-    # env_file: .env
+    # if `enable_postgres` is set to `true`, the env file will also have the following
+    # ==== Postgres ====
+    # # Amazon Resource Name (ARN) of cluster
+    # POSTGRES_CLUSTER_ARN
+    # # Writer endpoint for the cluster
+    # POSTGRES_CLUSTER_ENDPOINT
+    # # A read-only endpoint for the cluster, automatically load-balanced across replicas
+    # POSTGRES_CLUSTER_READER_ENDPOINT
+    # # The running version of the cluster database
+    # POSTGRES_CLUSTER_ENGINE_VERSION_ACTUAL
+    # # Name for an automatically created database on cluster creation
+    # # database_name is not set on `aws_rds_cluster` resource if it was not specified, so can't be used in output
+    # POSTGRES_CLUSTER_DATABASE_NAME
+    # # The database port
+    # POSTGRES_CLUSTER_PORT
+    # # The database master password
+    # POSTGRES_CLUSTER_MASTER_PASSWORD
+    # # The database master username
+    # POSTGRES_CLUSTER_MASTER_USERNAME
+    # # The Route53 Hosted Zone ID of the endpoint
+    # POSTGRES_CLUSTER_HOSTED_ZONE_ID
+    env_file: .env
 
     volumes:
       - .:/app
