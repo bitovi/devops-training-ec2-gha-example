@@ -4,7 +4,7 @@ var app = express();
 const { Pool, Client } = require('pg')
 
 app.get('/', async function (req, res) {
-  console.log("received request", req);
+  console.log("received request", req.route.path);
   const client = new Client();
   const postgresNow = await client.query('SELECT NOW()');
   await client.end();
