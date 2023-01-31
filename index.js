@@ -10,7 +10,7 @@ process.env['PGDATABASE'] = process.env['POSTGRES_CLUSTER_DATABASE_NAME'];
 process.env['PGPORT'] = process.env['POSTGRES_CLUSTER_PORT'];
 
 
-app.get('/', function (req, res) {
+app.get('/', async function (req, res) {
   const client = new Client();
   const postgresNow = await client.query('SELECT NOW()');
   await client.end();
