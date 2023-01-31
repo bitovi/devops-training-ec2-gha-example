@@ -3,13 +3,6 @@ var express = require('express');
 var app = express();
 // const { Pool, Client } = require('pg')
 
-// Set env vars for postgres
-process.env['PG_USER'] = process.env['POSTGRES_CLUSTER_MASTER_USERNAME'];
-process.env['PG_PASSWORD'] = process.env['POSTGRES_CLUSTER_MASTER_PASSWORD'];
-process.env['PGDATABASE'] = process.env['POSTGRES_CLUSTER_DATABASE_NAME'];
-process.env['PGPORT'] = process.env['POSTGRES_CLUSTER_PORT'];
-
-
 app.get('/', async function (req, res) {
   console.log("received request", req);
   // const client = new Client();
