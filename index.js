@@ -3,13 +3,6 @@ var express = require('express');
 var app = express();
 const { Pool, Client } = require('pg')
 
-
-// const client = new Client({
-//   host: process.env["PGHOST"],
-//   port: process.env["PGPORT"],
-//   user: process.env["PG_USER"],
-//   password: process.env["PG_PASSWORD"]
-// });
 // const client = new Client({
 //   host: process.env.PGHOST,
 //   port: process.env.PGPORT,
@@ -18,7 +11,7 @@ const { Pool, Client } = require('pg')
 //   database: process.env.PGDATABASE
 // });
 
-const conStringWithoutCreds = `${process.env.PGHOST}\:${process.env.PGPORT}/${process.env.PG_DATABASE}`
+const conStringWithoutCreds = `${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PG_DATABASE}`
 const conString = `postgres://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${conStringWithoutCreds}`;
 const client = new Client(conString);
 
