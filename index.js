@@ -4,11 +4,17 @@ var app = express();
 const { Pool, Client } = require('pg')
 
 
+// const client = new Client({
+//   host: process.env["PGHOST"],
+//   port: process.env["PGPORT"],
+//   user: process.env["PG_USER"],
+//   password: process.env["PG_PASSWORD"]
+// });
 const client = new Client({
-  host: process.env["PGHOST"],
-  port: process.env["PGPORT"],
-  user: process.env["PG_USER"],
-  password: process.env["PG_PASSWORD"]
+  host: process.env.PGHOST,
+  port: process.env.PGPORT,
+  user: process.env.PG_USER,
+  password: process.env.PG_PASSWORD
 });
 
 
