@@ -11,7 +11,7 @@ const { Pool, Client } = require('pg')
 //   database: process.env.PGDATABASE
 // });
 
-const conStringWithoutCreds = `${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PG_DATABASE}`
+const conStringWithoutCreds = `${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`
 const conString = `postgres://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${conStringWithoutCreds}`;
 const client = new Client(conString);
 
