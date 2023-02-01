@@ -15,7 +15,8 @@ const client = new Client({
   port: process.env.PGPORT,
   user: process.env.PG_USER,
   password: process.env.PG_PASSWORD,
-  database: process.env.PGDATABASE
+  database: process.env.PGDATABASE,
+  ssl: true
 });
 
 console.log("=========DEBUGGING")
