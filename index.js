@@ -10,6 +10,7 @@ app.get('/', async function (req, res) {
 app.get('/postgres', async function (req, res) {
   console.log("received request", req.route.path);
   const client = new Client();
+  client.connect()
   const postgresNow = await client.query('SELECT NOW()');
   await client.end();
   res.send(`Hello SQL timestamp: ${postgresNow}`);
