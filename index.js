@@ -14,8 +14,13 @@ const client = new Client({
   host: process.env.PGHOST,
   port: process.env.PGPORT,
   user: process.env.PG_USER,
-  password: process.env.PG_PASSWORD
+  password: process.env.PG_PASSWORD,
+  database: process.env.PGDATABASE
 });
+
+console.log("=========DEBUGGING")
+console.log("pg host", process.env.PGHOST)
+console.log("pg user", process.env.PG_USER)
 
 
 app.get('/', async function (req, res) {
