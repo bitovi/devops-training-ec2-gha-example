@@ -21,11 +21,11 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING }}
         aws-region: us-east-1
         
-        cluster-name: 'BitOps-Demo-Cluster'
+        cluster-name: BitOps-Demo-Cluster
         chart-path: fluent/fluent-bit
-        namespace: logging
+        namespace: default
         name: fluent-bit
-        chart-repository: https://fluent.github.io/helm-charts
-        version: 0.20.6
+        chart-repository: https://fluent.github.io/helm-charts/
+        version: 0.20.7
         atomic: true
         timeout: 10s
