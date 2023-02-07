@@ -48,6 +48,7 @@ jobs:
         # TODO:
         # postgres_vpc_id                 = "vpc-081abe910edab4281"
         # postgres_vpc_cidr               = "172.31.0.0/16"
+        postgres_database_port: 5444
 
     - if: ${{ steps.deploy.outputs.vm_url != '' }}
       name: Print result created
