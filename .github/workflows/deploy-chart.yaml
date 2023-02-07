@@ -17,10 +17,10 @@ jobs:
       name: Deploy
       uses: bitovi/github-actions-deploy-eks-helm@main
       with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING }}
-        aws_default_region: us-east-1
-
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING }}
+        aws-region: us-east-1
+        
         cluster-name: BitOps-Demo-Cluster
         cluster-role-arn: ${{ secrets.AWS_ROLE_ARN }}
         config-files: fluent-bit/prod/values.yaml
