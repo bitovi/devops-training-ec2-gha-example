@@ -37,13 +37,13 @@ jobs:
         ###
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         # dot_env: ${{ secrets.DOT_ENV }}
-        stack_destroy: true
+        #stack_destroy: true
         
         ###
         ### Postgres config
         ###
         # postgres_subnets: "subnet-0f1b65df74adf6e87,subnet-05d768eabcd7591ea,subnet-082c8c6a0f81405d3"
-        enable_postgres: true
+        #enable_postgres: true
 
         # TODO:
         # postgres_vpc_id                 = "vpc-081abe910edab4281"
