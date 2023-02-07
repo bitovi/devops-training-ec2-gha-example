@@ -21,8 +21,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING }}
         aws-region: us-east-1
         
-        cluster-name: BitOps-Demo-Cluster
-        cluster-role-arn: ${{ secrets.AWS_ROLE_ARN }}
+        cluster-name: 'BitOps-Demo-Cluster'
         config-files: fluent-bit/prod/values.yaml
         chart-path: fluent/fluent-bit
         namespace: logging
