@@ -8,17 +8,14 @@ permissions:
   contents: read
 
 jobs:
-  EC2-Deploy:
+  Chart-Deploy:
     # if the branch name of the PR does not contain 'skip-deploy'
     if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.ref_name }}
-      url: ${{ steps.deploy.outputs.vm_url }}
     steps:
     - id: deploy
       name: Deploy
-      uses: macmiranda/github-actions-deploy-eks-helm@alpine-k8s
+      uses: bitovi/github-actions-deploy-eks-helm@main
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING }}
