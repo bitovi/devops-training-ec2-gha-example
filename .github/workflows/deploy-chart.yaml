@@ -1,0 +1,36 @@
+name: Deploy Chart - EKS Helm GHA Test
+
+on:
+  push:
+    branches: [ eks ]
+
+permissions:
+  contents: read
+
+jobs:
+  EC2-Deploy:
+    # if the branch name of the PR does not contain 'skip-deploy'
+    if: "!contains(github.head_ref, 'skip-deploy')"
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name }}
+      url: ${{ steps.deploy.outputs.vm_url }}
+    steps:
+    - id: deploy
+      name: Deploy
+      uses: macmiranda/github-actions-deploy-eks-helm@alpine-k8s
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING }}
+        aws_default_region: us-east-1
+
+        cluster-name: BitOps-Demo-Cluster
+        cluster-role-arn: ${{ secrets.AWS_ROLE_ARN }}
+        config-files: fluent-bit/prod/values.yaml
+        chart-path: fluent/fluent-bit
+        namespace: logging
+        name: fluent-bit
+        chart-repository: https://fluent.github.io/helm-charts
+        version: 0.20.6
+        atomic: true
+        timeout: 10s
