@@ -15,7 +15,7 @@ jobs:
     steps:
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-eks-helm@main
+      uses: bitovi/github-actions-deploy-eks-helm@v1.2.1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING }}
@@ -24,7 +24,7 @@ jobs:
         cluster-name: BitOps-Demo-Cluster
         chart-path: fluent/fluent-bit
         namespace: default
-        name: fluent-bit
+        name: fluent-bita
         chart-repository: https://fluent.github.io/helm-charts/
         version: 0.20.7
         atomic: true
