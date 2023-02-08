@@ -22,7 +22,8 @@ jobs:
         aws-region: us-east-1
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-eks-helm@23-repo-list-fail
+      #uses: bitovi/github-actions-deploy-eks-helm@23-repo-list-fail
+      uses: macmiranda/github-actions-deploy-eks-helm@alpine-k8s
       with:
         cluster-name: BitOps-Demo-Cluster
         chart-path: fluent/fluent-bit
