@@ -13,15 +13,19 @@ jobs:
     if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
     steps:
-    - id: deploy
-      name: Deploy
-      uses: bitovi/github-actions-deploy-eks-helm@23-repo-list-fail
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_EKS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_EKS_KEY }}
         aws-region: us-east-1
-        cluster-role-arn: ${{ secrets.AWS_ROLE_ARN }}
-
+        role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+        role-duration-seconds: 1200
+        role-session-name: EKS-Testing
+    - id: deploy
+      name: Deploy
+      uses: bitovi/github-actions-deploy-eks-helm@23-repo-list-fail
+      with:
         cluster-name: BitOps-Demo-Cluster
         chart-path: fluent/fluent-bit
         namespace: default
