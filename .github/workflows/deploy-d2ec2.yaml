@@ -20,6 +20,8 @@ jobs:
       name: Deploy
       uses: bitovi/github-actions-deploy-docker-to-ec2@cosmetics-fixes
       with:
+        # Causing a fail
+        tf_state_bucket: NOT_A-valid_BUCKET-name-!"#$%&/(
         # Action defaults inputs
         checkout: true
         #stack_destroy: true
