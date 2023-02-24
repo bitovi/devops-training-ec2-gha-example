@@ -32,7 +32,8 @@ jobs:
         # dot_env: ${{ secrets.DOT_ENV }}
 
         app_port: 3000
-
+        stack_destroy: true
+        tf_state_bucket_destroy: true
     - if: ${{ steps.deploy.outputs.vm_url != '' }}
       name: Print result created
       run: |
