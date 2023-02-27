@@ -33,6 +33,7 @@ jobs:
         # EC2 Inputs
         aws_ami_id: ami-06878d265978313ca
         create_keypair_sm_entry: true
+        ec2_instance_type: t2.medium
         
         # EFS Inputs
         #aws_create_efs: true
