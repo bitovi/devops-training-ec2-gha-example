@@ -48,8 +48,8 @@ jobs:
 
         # Certificate Inputs
         domain_name: bitovi-sandbox.com
-        sub_domain: d2ec2
-        create_sub_cert: true
+        #sub_domain: d2ec2
+        #create_sub_cert: true
 
         # Application Inputs
         app_port: 3000
