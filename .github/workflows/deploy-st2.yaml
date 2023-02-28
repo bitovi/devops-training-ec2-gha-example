@@ -43,4 +43,4 @@ jobs:
         domain_name: bitovi-sandbox.com
         sub_domain: st2-test
         create_sub_cert: true
-        no_cert: true
+        #no_cert: true
