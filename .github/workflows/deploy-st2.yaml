@@ -30,11 +30,11 @@ jobs:
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_ec2_instance_type: t2.small
-        tf_stack_destroy: true
+        #aws_ec2_instance_type: t2.small
+        #tf_stack_destroy: true
         
         aws_default_region: us-east-1
         st2_auth_username: ${{ secrets.ST2_AUTH_USERNAME_GHA_SINGLEVM_TESTU}}
         st2_auth_password: ${{ secrets.ST2_AUTH_PASSWORD_GHA_SINGLEVM_TESTU}}
         st2_packs: "st2, https://github.com/bitovi-stackstorm-exchange/incident_reduction.git"
-        infrastructure_only: true
+        #infrastructure_only: true
