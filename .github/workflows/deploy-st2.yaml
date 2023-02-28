@@ -26,7 +26,8 @@ jobs:
     - id: deploy
       name: Deploy
       # https://github.com/bitovi/github-actions-deploy-stackstorm/releases/tag/v0.1.1
-      uses: bitovi/github-actions-deploy-stackstorm@main
+      #uses: bitovi/github-actions-deploy-stackstorm@main
+      uses: bitovi/github-actions-deploy-stackstorm@11-domain-handling
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
