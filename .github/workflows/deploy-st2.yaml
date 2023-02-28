@@ -38,3 +38,4 @@ jobs:
         st2_auth_password: ${{ secrets.ST2_AUTH_PASSWORD_GHA_SINGLEVM_TESTU}}
         st2_packs: "st2, https://github.com/bitovi-stackstorm-exchange/incident_reduction.git"
         #infrastructure_only: true
+        #
