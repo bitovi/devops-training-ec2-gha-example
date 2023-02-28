@@ -40,3 +40,4 @@ jobs:
         st2_packs: "st2, https://github.com/bitovi-stackstorm-exchange/incident_reduction.git"
         #infrastructure_only: true
         #
+        domain_name: bitovi-sandbox.com
