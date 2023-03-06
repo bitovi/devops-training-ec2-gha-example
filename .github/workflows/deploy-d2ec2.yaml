@@ -21,8 +21,8 @@ jobs:
       uses: bitovi/github-actions-commons@commons
       with:
         # Action defaults inputs
-        checkout: true
-        stack_destroy: true
+        #checkout: true
+        #stack_destroy: true
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
@@ -47,14 +47,14 @@ jobs:
         #aws_postgres_database_port: 5435
 
         # Certificate Inputs
-        domain_name: bitovi-sandbox.com
-        sub_domain: d2ec2
-        create_sub_cert: true
+        #domain_name: bitovi-sandbox.com
+        #sub_domain: d2ec2
+        #create_sub_cert: true
 
         # Application Inputs
-        app_port: 3000
+        #app_port: 3000
         
         # Terraform inputs
-        tf_state_bucket_destroy: true
+        #tf_state_bucket_destroy: true
         #
         
