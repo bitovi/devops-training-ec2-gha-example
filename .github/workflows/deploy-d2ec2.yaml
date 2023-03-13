@@ -28,12 +28,13 @@ jobs:
         aws_default_region: us-east-1
         
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
-        dot_env: ${{ secrets.DOT_ENV }}
+        #dot_env: ${{ secrets.DOT_ENV }}
+        env_ghs: ${{ secrets.DOT_ENV }}
 
         # EC2 Inputs
-        aws_ami_id: ami-06878d265978313ca
-        create_keypair_sm_entry: true
-        ec2_instance_type: t2.medium
+        aws_ec2_ami_id: ami-06878d265978313ca
+        aws_ec2_create_keypair_sm: true
+        aws_ec2_instance_type: t2.medium
         
         # EFS Inputs
         #aws_create_efs: true
@@ -47,12 +48,12 @@ jobs:
         #aws_postgres_database_port: 5435
 
         # Certificate Inputs
-        domain_name: bitovi-sandbox.com
+        aws_r53_domain_name: bitovi-sandbox.com
         #sub_domain: d2ec2
         #create_sub_cert: true
 
         # Application Inputs
-        app_port: 3000
+        aws_elb_app_port: 3000
         
         # Terraform inputs
         tf_state_bucket_destroy: true
