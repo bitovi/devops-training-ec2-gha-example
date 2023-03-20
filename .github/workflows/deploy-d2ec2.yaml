@@ -58,6 +58,4 @@ jobs:
         lb_port: 3000
         
         # Terraform inputs
-        tf_state_bucket_destroy: true
-        tf_state_bucket: I.need-an-INVALID-NAME-that+breaks.everything-somehow#=D
-        
+        tf_state_bucket_destroy: true        
