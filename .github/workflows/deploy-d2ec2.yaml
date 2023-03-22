@@ -29,7 +29,6 @@ jobs:
         aws_default_region: us-east-1
         
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
-        #dot_env: ${{ secrets.DOT_ENV }}
         dot_env: ${{ secrets.DOT_ENV }}
 
         # EC2 Inputs
@@ -39,20 +38,20 @@ jobs:
         
         # EFS Inputs
         aws_create_efs: true
-        #aws_create_ha_efs: true
-        #aws_create_efs_replica: true
-        #aws_enable_efs_backup_policy: true
+        aws_create_ha_efs: true
+        aws_create_efs_replica: true
+        aws_enable_efs_backup_policy: true
         
         # RDS Inputs
-        #aws_enable_postgres: true
-        #aws_postgres_database_name: db_name
-        #aws_postgres_database_port: 5435
+        aws_enable_postgres: true
+        aws_postgres_database_name: db_name
+        aws_postgres_database_port: 5435
 
         # Certificate Inputs
         domain_name: bitovi-sandbox.com
-        # sub_domain: d2ec2
-        # create_sub_cert: true
-        # no_cert: true
+        sub_domain: d2ec2
+        create_sub_cert: true
+        no_cert: true
 
         # Application Inputs
         lb_port: 3000
