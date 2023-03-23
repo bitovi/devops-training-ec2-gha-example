@@ -22,7 +22,7 @@ jobs:
       with:
         # Action defaults inputs
         checkout: true
-        stack_destroy: true
+        #stack_destroy: true
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -37,21 +37,21 @@ jobs:
         ec2_instance_type: t2.medium
         
         # EFS Inputs
-        aws_create_efs: true
-        aws_create_ha_efs: true
-        aws_create_efs_replica: true
-        aws_enable_efs_backup_policy: true
+        #aws_create_efs: true
+        #aws_create_ha_efs: true
+        #aws_create_efs_replica: true
+        #aws_enable_efs_backup_policy: true
         
         # RDS Inputs
-        aws_enable_postgres: true
-        aws_postgres_database_name: db_name
-        aws_postgres_database_port: 5435
+        #aws_enable_postgres: true
+        #aws_postgres_database_name: db_name
+        #aws_postgres_database_port: 5435
 
         # Certificate Inputs
         #domain_name: bitovi-sandbox.com
         #sub_domain: d2ec2
         #create_sub_cert: true
-        no_cert: true
+        #no_cert: true
 
         # Application Inputs
         lb_port: 3000
