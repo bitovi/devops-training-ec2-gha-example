@@ -22,7 +22,7 @@ jobs:
       with:
         # Action defaults inputs
         #checkout: true
-        #stack_destroy: true
+        stack_destroy: true
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -43,7 +43,7 @@ jobs:
         #aws_enable_efs_backup_policy: true
         
         # RDS Inputs
-        aws_enable_postgres: true
+        #aws_enable_postgres: true
         #aws_postgres_database_name: db_name
         #aws_postgres_database_port: 5435
 
