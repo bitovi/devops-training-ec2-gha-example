@@ -37,13 +37,13 @@ jobs:
         #ec2_instance_type: t2.medium
         
         # EFS Inputs
-        aws_create_efs: true
+        #aws_create_efs: true
         #aws_create_ha_efs: true
         #aws_create_efs_replica: true
         #aws_enable_efs_backup_policy: true
         
         # RDS Inputs
-        #aws_enable_postgres: true
+        aws_enable_postgres: true
         #aws_postgres_database_name: db_name
         #aws_postgres_database_port: 5435
 
