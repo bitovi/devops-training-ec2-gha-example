@@ -41,7 +41,7 @@ jobs:
         st2_packs: "st2, https://github.com/bitovi-stackstorm-exchange/incident_reduction.git"
         #infrastructure_only: true
         #
-        domain_name: bitovi-sandbox.com
-        sub_domain: st2-test-leo
+        aws_domain_name: bitovi-sandbox.com
+        aws_sub_domain: st2-test-leo
         #create_sub_cert: true
         #no_cert: true
