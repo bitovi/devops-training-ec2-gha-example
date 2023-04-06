@@ -27,12 +27,12 @@ jobs:
       name: Deploy
       # https://github.com/bitovi/github-actions-deploy-stackstorm/releases/tag/v0.1.1
       #uses: bitovi/github-actions-deploy-stackstorm@main
-      uses: bitovi/github-actions-deploy-stackstorm@11-domain-handling
+      uses: bitovi/github-actions-deploy-stackstorm@commons
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
         #aws_ec2_instance_type: t2.small
-        tf_stack_destroy: true
+        #tf_stack_destroy: true
         tf_state_bucket_destroy: true
         
         aws_default_region: us-east-1
@@ -42,6 +42,6 @@ jobs:
         #infrastructure_only: true
         #
         domain_name: bitovi-sandbox.com
-        sub_domain: st2-test
-        create_sub_cert: true
+        sub_domain: st2-test-leo
+        #create_sub_cert: true
         #no_cert: true
