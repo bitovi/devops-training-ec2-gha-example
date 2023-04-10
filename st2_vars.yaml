@@ -1,4 +1,4 @@
-st2_version: "3.8.0"
+st2_version: "3.8.0*"
 
 # Install specific pack versions from StackStorm Exchange
 st2_packs:
