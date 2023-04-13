@@ -40,7 +40,7 @@ jobs:
         st2_auth_username: leo
         st2_auth_password: pass
         st2_packs: "st2, https://github.com/bitovi-stackstorm-exchange/incident_reduction.git"
-        st2_ansible_extra_vars_file: "st2_vars.yaml"
+        #st2_ansible_extra_vars_file: "st2_vars.yaml"
 
         #infrastructure_only: true
         #
