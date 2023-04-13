@@ -22,7 +22,7 @@ jobs:
       with:
         # Action defaults inputs
         #checkout: true
-        stack_destroy: true
+        #stack_destroy: true
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -35,6 +35,7 @@ jobs:
         #aws_ami_id: ami-06878d265978313ca
         #create_keypair_sm_entry: true
         #ec2_instance_type: t2.medium
+        ec2_volume_size: 10
         
         # EFS Inputs
         #aws_create_efs: true
