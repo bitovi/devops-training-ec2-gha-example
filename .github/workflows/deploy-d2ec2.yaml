@@ -19,7 +19,7 @@ jobs:
     - id: deploy
       name: Deploy
       #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      uses: bitovi/github-actions-deploy-docker-to-ec2@117-sg-naming-issue
+      uses: bitovi/github-actions-deploy-docker-to-ec2@main
       #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.4.6
       with:
         # Action defaults inputs
