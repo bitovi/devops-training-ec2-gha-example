@@ -25,8 +25,8 @@ jobs:
     # Bitovi's Deploy StackStorm action
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-stackstorm@v0.3.0
-      #uses: bitovi/github-actions-deploy-stackstorm@commons
+      #uses: bitovi/github-actions-deploy-stackstorm@v0.3.0
+      uses: bitovi/github-actions-deploy-stackstorm@commons
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
@@ -45,6 +45,6 @@ jobs:
         #infrastructure_only: true
         #
         aws_domain_name: bitovi-sandbox.com
-        aws_sub_domain: st2-test-leo
+        aws_sub_domain: st2-test-leo-new
         #create_sub_cert: true
         #no_cert: true
