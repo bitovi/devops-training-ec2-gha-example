@@ -34,31 +34,31 @@ jobs:
         dot_env: ${{ secrets.DOT_ENV }}
 
         # EC2 Inputs
-        #aws_ami_id: ami-06878d265978313ca
+        aws_ami_update: true
         #create_keypair_sm_entry: true
-        #ec2_instance_type: t2.medium
+        ec2_instance_protect: true
         ec2_volume_size: 10
         
         # EFS Inputs
-        #aws_create_efs: true
-        #aws_create_ha_efs: true
-        #aws_create_efs_replica: true
-        #aws_enable_efs_backup_policy: true
+        aws_create_efs: true
+        aws_create_ha_efs: true
+        aws_create_efs_replica: true
+        aws_enable_efs_backup_policy: true
         
         # RDS Inputs
-        #aws_enable_postgres: true
-        #aws_postgres_database_name: db_name
-        #aws_postgres_database_port: 5435
+        aws_enable_postgres: true
+        aws_postgres_database_name: db_name
+        aws_postgres_database_port: 5435
 
         # Certificate Inputs
-        #domain_name: bitovi-sandbox.com
-        #sub_domain: d2ec2
-        #create_sub_cert: true
+        domain_name: bitovi-sandbox.com
+        sub_domain: d2ec2-test
+        create_sub_cert: true
         #no_cert: true
 
         # Application Inputs
-        #lb_port: 3000
+        lb_port: 3000
         
         # Terraform inputs
-        #tf_state_bucket_destroy: true 
+        tf_state_bucket_destroy: true 
 # RERUN
