@@ -50,8 +50,8 @@ jobs:
         aws_enable_postgres: true
         aws_postgres_database_name: db_name
         aws_postgres_database_port: 5435
-        aws_postgres_database_protection: true
-        #aws_postgres_database_final_snapshot: true
+        #aws_postgres_database_protection: true
+        aws_postgres_database_final_snapshot: true
 
         # Certificate Inputs
         domain_name: bitovi-sandbox.com
