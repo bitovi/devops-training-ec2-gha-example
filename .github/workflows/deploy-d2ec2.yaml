@@ -25,11 +25,11 @@ jobs:
         # Action defaults inputs
         #checkout: true
         
-        #stack_destroy: true
+        stack_destroy: true
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
+        aws_default_region: us-east-2
         
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         dot_env: ${{ secrets.DOT_ENV }}
