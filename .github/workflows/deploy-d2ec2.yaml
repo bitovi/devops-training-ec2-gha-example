@@ -25,7 +25,7 @@ jobs:
         # Action defaults inputs
         #checkout: true
         
-        stack_destroy: true
+        #stack_destroy: true
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -39,16 +39,17 @@ jobs:
         #create_keypair_sm_entry: true
         ec2_volume_size: 10
         #ec2_instance_protect: true
+        ec2_instance_type: t1-micro
         
         # EFS Inputs
-        #aws_create_efs: true
-        #aws_efs_volume_preserve: true
+        aws_create_efs: true
+        aws_efs_volume_preserve: true
         #aws_create_ha_efs: true
         #aws_create_efs_replica: true
         #aws_enable_efs_backup_policy: true
         
         # RDS Inputs
-        aws_enable_postgres: true
+        #aws_enable_postgres: true
         #aws_postgres_database_name: db_name
         #aws_postgres_database_port: 5435
         #aws_postgres_database_protection: true
