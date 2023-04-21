@@ -18,16 +18,16 @@ jobs:
     steps:
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+      #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
       #uses: bitovi/github-actions-deploy-docker-to-ec2@main
-      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.4.6
+      uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.0
       with:
         # Action defaults inputs
         #checkout: true
         
         #bitops_code_store: true
         
-        stack_destroy: true
+        #stack_destroy: true
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -39,7 +39,7 @@ jobs:
         # EC2 Inputs
         aws_ami_update: true
         #create_keypair_sm_entry: true
-        ec2_volume_size: 10
+        #ec2_volume_size: 10
         #ec2_instance_protect: true
         #ec2_instance_type: t2.micro
         
