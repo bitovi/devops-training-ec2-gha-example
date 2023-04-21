@@ -56,8 +56,8 @@ jobs:
         #aws_postgres_database_final_snapshot: true
 
         # Certificate Inputs
-        domain_name: bitovi-sandbox.com
-        sub_domain: d2ec2-test
+        #domain_name: bitovi-sandbox.com
+        #sub_domain: d2ec2-test
         #create_sub_cert: true
         #no_cert: true
 
