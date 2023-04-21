@@ -18,9 +18,9 @@ jobs:
     steps:
     - id: deploy
       name: Deploy
-      #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
       #uses: bitovi/github-actions-deploy-docker-to-ec2@main
-      uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.1
+      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.1
       with:
         # Action defaults inputs
         #checkout: true
