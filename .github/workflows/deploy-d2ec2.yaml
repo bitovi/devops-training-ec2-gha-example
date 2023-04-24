@@ -25,7 +25,7 @@ jobs:
         # Action defaults inputs
         #checkout: true
         bitops_code_only: true
-        #bitops_code_store: true
+        bitops_code_store: true
         
         #stack_destroy: true
         
