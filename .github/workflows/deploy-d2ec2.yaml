@@ -18,9 +18,9 @@ jobs:
     steps:
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+      #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
       #uses: bitovi/github-actions-deploy-docker-to-ec2@main
-      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.1
+      uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
       with:
         # Action defaults inputs
         #checkout: true
@@ -58,8 +58,8 @@ jobs:
         #aws_postgres_database_final_snapshot: true
 
         # Certificate Inputs
-        domain_name: dllan.com.ar
-        sub_domain: leo-test
+        #domain_name: dllan.com.ar
+        #sub_domain: leo-test
         cert_arn: arn:aws:acm:us-east-1:755521597925:certificate/8fad4291-96e4-4693-a296-8c3ca62ea021
         #create_sub_cert: true
         #no_cert: true
