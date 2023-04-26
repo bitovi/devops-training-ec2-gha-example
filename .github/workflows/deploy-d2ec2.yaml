@@ -24,7 +24,7 @@ jobs:
       with:
         # Action defaults inputs
         #checkout: true
-        bitops_code_only: true
+        #bitops_code_only: true
         bitops_code_store: true
         
         #stack_destroy: true
@@ -44,22 +44,23 @@ jobs:
         ec2_instance_type: t2.micro
         
         # EFS Inputs
-        aws_create_efs: true
+        #aws_create_efs: true
         #aws_efs_volume_preserve: true
-        aws_create_ha_efs: true
-        aws_create_efs_replica: true
-        aws_enable_efs_backup_policy: true
+        #aws_create_ha_efs: true
+        #aws_create_efs_replica: true
+        #aws_enable_efs_backup_policy: true
         
         # RDS Inputs
-        aws_enable_postgres: true
-        aws_postgres_database_name: db_name
-        aws_postgres_database_port: 5435
+        #aws_enable_postgres: true
+        #aws_postgres_database_name: db_name
+        #aws_postgres_database_port: 5435
         #aws_postgres_database_protection: true
-        aws_postgres_database_final_snapshot: true
+        #aws_postgres_database_final_snapshot: true
 
         # Certificate Inputs
-        domain_name: bitovi-sandbox.com
-        sub_domain: d2ec2-test
+        domain_name: dllan.com.ar
+        sub_domain: leo-test
+        cert_arn: arn:aws:acm:us-east-1:755521597925:certificate/8fad4291-96e4-4693-a296-8c3ca62ea021
         #create_sub_cert: true
         #no_cert: true
 
