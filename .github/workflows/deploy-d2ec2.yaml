@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-Deploy-1:
+  Deploy-1:
     # if the branch name of the PR does not contain 'skip-deploy'
     if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
@@ -39,7 +39,7 @@ Deploy-1:
         # Terraform inputs
         tf_state_bucket_destroy: true 
         aws_resource_identifier: leo-d2ec2-deploy1
-Deploy-2:
+  Deploy-2:
     # if the branch name of the PR does not contain 'skip-deploy'
     if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
