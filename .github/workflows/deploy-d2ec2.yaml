@@ -108,7 +108,7 @@ jobs:
         dot_env: ${{ secrets.DOT_ENV }}
         # Certificate Inputs
         domain_name: bitovi-sandbox.com
-        sub_domain: test1
+        sub_domain: test2
         create_sub_cert: true
         #no_cert: true
 
