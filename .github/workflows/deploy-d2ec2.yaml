@@ -8,65 +8,65 @@ permissions:
   contents: read
 
 jobs:
-  Deploy-1:
-    # if the branch name of the PR does not contain 'skip-deploy'
-    if: "!contains(github.head_ref, 'skip-deploy')"
-    runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.ref_name }}
-      url: ${{ steps.deploy1.outputs.vm_url }}
-    steps:
-    - id: deploy1
-      name: Deploy 1
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
-      with:
-        stack_destroy: true
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        
-        dot_env: ${{ secrets.DOT_ENV }}
-        # Certificate Inputs
-        domain_name: bitovi-sandbox.com
-        sub_domain: test1
-        create_sub_cert: true
-        #no_cert: true
-
-        # Application Inputs
-        app_port: 3000
-        
-        # Terraform inputs
-        tf_state_bucket_destroy: true 
-        aws_resource_identifier: leo-d2ec2-deploy1
-  Deploy-2:
-    # if the branch name of the PR does not contain 'skip-deploy'
-    if: "!contains(github.head_ref, 'skip-deploy')"
-    runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.ref_name }}
-      url: ${{ steps.deploy2.outputs.vm_url }}
-    steps:
-    - id: deploy2
-      name: Deploy 2
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
-      with:
-        stack_destroy: true
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        
-        dot_env: ${{ secrets.DOT_ENV }}
-
-        domain_name: bitovi-sandbox.com
-        sub_domain: test2
-        create_sub_cert: true
-
-        app_port: 3000
-        
-        tf_state_bucket_destroy: true 
-        aws_resource_identifier:  leo-d2ec2-deploy2
+#  Deploy-1:
+#    # if the branch name of the PR does not contain 'skip-deploy'
+#    if: "!contains(github.head_ref, 'skip-deploy')"
+#    runs-on: ubuntu-latest
+#    environment:
+#      name: ${{ github.ref_name }}
+#      url: ${{ steps.deploy1.outputs.vm_url }}
+#    steps:
+#    - id: deploy1
+#      name: Deploy 1
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
+#      with:
+#        stack_destroy: true
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#        
+#        dot_env: ${{ secrets.DOT_ENV }}
+#        # Certificate Inputs
+#        domain_name: bitovi-sandbox.com
+#        sub_domain: test1
+#        create_sub_cert: true
+#        #no_cert: true
+#
+#        # Application Inputs
+#        app_port: 3000
+#        
+#        # Terraform inputs
+#        tf_state_bucket_destroy: true 
+#        aws_resource_identifier: leo-d2ec2-deploy1
+#  Deploy-2:
+#    # if the branch name of the PR does not contain 'skip-deploy'
+#    if: "!contains(github.head_ref, 'skip-deploy')"
+#    runs-on: ubuntu-latest
+#    environment:
+#      name: ${{ github.ref_name }}
+#      url: ${{ steps.deploy2.outputs.vm_url }}
+#    steps:
+#    - id: deploy2
+#      name: Deploy 2
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
+#      with:
+#        stack_destroy: true
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#        
+#        dot_env: ${{ secrets.DOT_ENV }}
+#
+#        domain_name: bitovi-sandbox.com
+#        sub_domain: test2
+#        create_sub_cert: true
+#
+#        app_port: 3000
+#        
+#        tf_state_bucket_destroy: true 
+#        aws_resource_identifier:  leo-d2ec2-deploy2
 
 
 
@@ -98,6 +98,8 @@ jobs:
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         dot_env: ${{ secrets.DOT_ENV }}
 
+        gh_deployment_input_terraform: some_terraform_code
+        gh_action_input_terraform: terraform_code
         # EC2 Inputs
         #aws_ami_update: true
         #create_keypair_sm_entry: true
