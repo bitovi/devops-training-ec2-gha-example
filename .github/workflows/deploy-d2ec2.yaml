@@ -105,7 +105,7 @@ jobs:
         #create_keypair_sm_entry: true
         #ec2_volume_size: 10
         #ec2_instance_protect: true
-        #ec2_instance_type: t2.micro
+        ec2_instance_type: t2.micro
         
         # EFS Inputs
         #aws_create_efs: true
