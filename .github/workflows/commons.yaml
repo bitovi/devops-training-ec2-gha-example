@@ -95,7 +95,7 @@ jobs:
         aws_elb_healthcheck:
         
         # AWS EFS
-        aws_efs_create: true
+        aws_efs_create: 
         aws_efs_create_ha:
         aws_efs_create_replica:
         aws_efs_enable_backup_policy:
@@ -109,7 +109,7 @@ jobs:
         aws_efs_ec2_mount_point:
         
         # AWS RDS
-        aws_postgres_enable:
+        aws_postgres_enable: true
         aws_postgres_engine:
         aws_postgres_engine_version:
         aws_postgres_instance_class:
