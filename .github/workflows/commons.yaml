@@ -1,0 +1,124 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  EC2-Deploy:
+    # if the branch name of the PR does not contain 'skip-deploy'
+    if: "!contains(github.head_ref, 'skip-deploy')"
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name }}
+      url: ${{ steps.deploy.outputs.vm_url }}
+    steps:
+    - id: deploy
+      name: Commons Deploy
+      uses: bitovi/github-actions-commons@terraform_split
+      with:
+        # GitHub Commons main inputs
+        checkout:
+        bitops_code_only:
+        bitops_code_store:
+        bitops_extra_env_vars:
+        bitops_extra_env_vars_file:
+        tf_stack_destroy:
+        tf_state_bucket:
+        tf_state_bucket_destroy: true
+        tf_state_bucket_provider: aws
+        tf_targets:
+        ansible_skip:
+      
+        # GitHub Deployment repo inputs
+        gh_deployment_input_terraform:
+        gh_deployment_input_ansible:
+        gh_deployment_input_ansible_playbook:
+        gh_deployment_input_ansible_extra_vars_file:
+        gh_deployment_action_input_ansible_extra_vars_file:
+      
+        # GitHub Action repo inputs
+        gh_action_repo:
+        gh_action_input_terraform:
+        gh_action_input_ansible:
+        gh_action_input_ansible_playbook:
+          
+        # AWS Specific
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING}}
+        aws_session_token:
+        aws_default_region: us-east-1
+        aws_resource_identifier:
+        aws_additional_tags:
+      
+        # ENV files
+        env_aws_secret:
+        env_repo:
+        env_ghs:
+        env_ghv:
+      
+        # EC2 Instance
+        aws_ec2_instance_create:
+        aws_ec2_ami_filter:
+        aws_ec2_ami_owner:
+        aws_ec2_ami_id:
+        aws_ec2_ami_update:
+        aws_ec2_iam_instance_profile:
+        aws_ec2_instance_type:
+        aws_ec2_instance_protect:
+        aws_ec2_instance_root_vol_size:
+        aws_ec2_instance_root_vol_preserve:
+        aws_ec2_security_group_name:
+        aws_ec2_create_keypair_sm:
+        aws_ec2_instance_public_ip:
+        aws_ec2_port_list:
+      
+        # AWS Route53 Domains abd Certificates
+        aws_r53_enable:
+        aws_r53_domain_name:
+        aws_r53_sub_domain_name:
+        aws_r53_root_domain_deploy:
+        aws_r53_enable_cert:
+        aws_r53_cert_arn:
+        aws_r53_create_root_cert:
+        aws_r53_create_sub_cert:
+      
+        # AWS ELB
+        aws_elb_create:
+        aws_elb_app_port:
+        aws_elb_app_protocol:
+        aws_elb_listen_port:
+        aws_elb_listen_protocol:
+        aws_elb_healthcheck:
+        
+        # AWS EFS
+        aws_efs_create:
+        aws_efs_create_ha:
+        aws_efs_create_replica:
+        aws_efs_enable_backup_policy:
+        aws_efs_volume_preserve:
+        aws_efs_zone_mapping:
+        aws_efs_transition_to_inactive:
+        aws_efs_replication_destination:
+        aws_efs_mount_id:
+        aws_efs_mount_security_group_id:
+        aws_efs_mount_target:
+        aws_efs_ec2_mount_point:
+        
+        # AWS RDS
+        aws_postgres_enable:
+        aws_postgres_engine:
+        aws_postgres_engine_version:
+        aws_postgres_instance_class:
+        aws_postgres_security_group_name:
+        aws_postgres_subnets:
+        aws_postgres_database_name:
+        aws_postgres_database_port:
+        aws_postgres_database_protection:
+        aws_postgres_database_final_snapshot:
+          
+        # Docker 
+        docker_install:
+        docker_repo_app_directory:
+        docker_efs_mount_target:
