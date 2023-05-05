@@ -26,9 +26,9 @@ jobs:
         bitops_code_store: 
         bitops_extra_env_vars:
         bitops_extra_env_vars_file:
-        tf_stack_destroy: 
+        tf_stack_destroy: true
         tf_state_bucket:
-        tf_state_bucket_destroy:
+        tf_state_bucket_destroy: true
         tf_state_bucket_provider:
         tf_targets:
         ansible_skip:
