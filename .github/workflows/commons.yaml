@@ -22,8 +22,8 @@ jobs:
       with:
         # GitHub Commons main inputs
         checkout:
-        bitops_code_only: true
-        bitops_code_store: true
+        bitops_code_only: 
+        bitops_code_store: 
         bitops_extra_env_vars:
         bitops_extra_env_vars_file:
         tf_stack_destroy: 
