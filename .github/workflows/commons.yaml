@@ -95,7 +95,7 @@ jobs:
         aws_elb_healthcheck:
         
         # AWS EFS
-        aws_efs_create: true
+        aws_efs_create:
         aws_efs_create_ha:
         aws_efs_create_replica:
         aws_efs_enable_backup_policy:
