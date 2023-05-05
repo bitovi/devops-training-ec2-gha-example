@@ -61,7 +61,7 @@ jobs:
         env_ghv:
       
         # EC2 Instance
-        aws_ec2_instance_create: 
+        aws_ec2_instance_create: true
         aws_ec2_ami_filter:
         aws_ec2_ami_owner:
         aws_ec2_ami_id:
