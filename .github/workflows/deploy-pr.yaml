@@ -16,10 +16,22 @@ jobs:
 
     - name: Install Terraform
       uses: hashicorp/setup-terraform@v2
-    - run: terraform init
+      with:
+        terraform_version: 1.0.0
+
+    - name: Terraform Init
+      uses: hashicorp/terraform-github-actions@master
+      with:
+          args: init
+      env:
+        terraform_version: 1.0.0
           
-    - id: plan
-      run: terraform plan -no-color
+    - name: Terraform Plan
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        args: plan -out=tfplan
+      env:
+        terraform_version: 1.0.0  
           
     - run: echo ${{ steps.plan.outputs.stdout }}
     - run: echo ${{ steps.plan.outputs.stderr }}
