@@ -91,7 +91,7 @@ jobs:
         #bitops_code_only: true
         #bitops_code_store: true
         
-        stack_destroy: true
+        stack_destroy: false
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -128,12 +128,12 @@ jobs:
 
         # Certificate Inputs
         domain_name: bitovi-sandbox.com
-        #sub_domain: leo-test
+        sub_domain: leo-test
         create_sub_cert: true
         #no_cert: true
 
         # Application Inputs
-     #   app_port: 3000
+        app_port: 3000
         
         # Terraform inputs
      #   tf_state_bucket_destroy: true 
