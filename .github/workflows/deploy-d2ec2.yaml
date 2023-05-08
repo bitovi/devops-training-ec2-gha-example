@@ -1,10 +1,8 @@
 name: Deploy D2EC2 Testing branch
 
 on:
-  workflow_dispatch:
-
-  #push:
-   # branches: [ d2ec2 ]
+  push:
+    branches: [ d2ec2 ]
 
 permissions:
   contents: read
