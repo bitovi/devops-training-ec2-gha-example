@@ -26,7 +26,7 @@ jobs:
         bitops_code_store: 
         bitops_extra_env_vars:
         bitops_extra_env_vars_file:
-        tf_stack_destroy: true
+        tf_stack_destroy: 
         tf_state_bucket:
         tf_state_bucket_destroy: true
         tf_state_bucket_provider:
@@ -61,19 +61,18 @@ jobs:
         env_ghv:
       
         # EC2 Instance
-        aws_ec2_instance_create: true
+        aws_ec2_instance_create:
         aws_ec2_ami_filter:
         aws_ec2_ami_owner:
         aws_ec2_ami_id:
         aws_ec2_ami_update:
         aws_ec2_iam_instance_profile:
         aws_ec2_instance_type:
-        aws_ec2_instance_protect:
         aws_ec2_instance_root_vol_size:
         aws_ec2_instance_root_vol_preserve:
         aws_ec2_security_group_name:
         aws_ec2_create_keypair_sm:
-        aws_ec2_instance_public_ip: true
+        aws_ec2_instance_public_ip:
         aws_ec2_port_list:
       
         # AWS Route53 Domains abd Certificates
@@ -99,7 +98,6 @@ jobs:
         aws_efs_create_ha:
         aws_efs_create_replica:
         aws_efs_enable_backup_policy:
-        aws_efs_volume_preserve:
         aws_efs_zone_mapping:
         aws_efs_transition_to_inactive:
         aws_efs_replication_destination:
@@ -109,7 +107,7 @@ jobs:
         aws_efs_ec2_mount_point:
         
         # AWS RDS
-        aws_postgres_enable:
+        aws_postgres_enable: true
         aws_postgres_engine:
         aws_postgres_engine_version:
         aws_postgres_instance_class:
@@ -117,7 +115,7 @@ jobs:
         aws_postgres_subnets:
         aws_postgres_database_name:
         aws_postgres_database_port:
-        aws_postgres_database_protection:
+        aws_postgres_database_protection: true
         aws_postgres_database_final_snapshot:
           
         # Docker 
