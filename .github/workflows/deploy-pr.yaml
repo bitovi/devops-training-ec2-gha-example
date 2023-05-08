@@ -23,6 +23,7 @@ jobs:
       uses: hashicorp/terraform-github-actions@master
       with:
         args: init
+        terraform_version: 1.0.0
 
     - name: Terraform Plan
       uses: hashicorp/terraform-github-actions@master
