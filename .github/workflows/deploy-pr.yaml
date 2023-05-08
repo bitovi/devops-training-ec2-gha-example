@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: bitovi/github-actions-deploy-eks@vdeploy-eks
+      uses: bitovi/github-actions-deploy-eks@deploy-eks
       
 
     - name: Install Terraform
