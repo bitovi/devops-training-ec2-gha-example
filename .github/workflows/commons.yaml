@@ -61,7 +61,7 @@ jobs:
         env_ghv:
       
         # EC2 Instance
-        aws_ec2_instance_create:
+        aws_ec2_instance_create: true
         aws_ec2_ami_filter:
         aws_ec2_ami_owner:
         aws_ec2_ami_id:
@@ -74,7 +74,7 @@ jobs:
         aws_ec2_create_keypair_sm:
         aws_ec2_instance_public_ip:
         aws_ec2_port_list:
-        aws_ec2_user_data_file:
+        aws_ec2_user_data_file: echo.sh
       
         # AWS Route53 Domains abd Certificates
         aws_r53_enable:
@@ -108,7 +108,7 @@ jobs:
         aws_efs_ec2_mount_point:
         
         # AWS RDS
-        aws_postgres_enable: true
+        aws_postgres_enable: 
         aws_postgres_engine:
         aws_postgres_engine_version:
         aws_postgres_instance_class:
