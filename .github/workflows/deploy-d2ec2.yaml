@@ -1,8 +1,10 @@
 name: Deploy D2EC2 Testing branch
 
 on:
-  push:
-    branches: [ d2ec2 ]
+  workflow_dispatch:
+
+  #push:
+   # branches: [ d2ec2 ]
 
 permissions:
   contents: read
@@ -80,8 +82,8 @@ jobs:
     steps:
     - id: deploy
       name: Deploy
-      #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      uses: bitovi/github-actions-deploy-docker-to-ec2@Ansible_timeout_fix
+      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+      #uses: bitovi/github-actions-deploy-docker-to-ec2@Ansible_timeout_fix
       #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
       with:
         # Action defaults inputs
@@ -106,6 +108,7 @@ jobs:
         #ec2_volume_size: 10
         #ec2_instance_protect: true
         #ec2_instance_type: t2.micro
+        ec2_user_data_file: echo.sh
         
         # EFS Inputs
         #aws_create_efs: true
