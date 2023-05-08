@@ -42,7 +42,7 @@ jobs:
         gh_deployment_action_input_ansible_extra_vars_file:
       
         # GitHub Action repo inputs
-        gh_action_repo:
+        gh_action_repo: ${{ github.action_path }}
         gh_action_input_terraform:
         gh_action_input_ansible:
         gh_action_input_ansible_playbook:
