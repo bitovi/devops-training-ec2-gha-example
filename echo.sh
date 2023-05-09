@@ -1,3 +1,3 @@
 #!/bin/bash
-echo "hola" >> hola.file
-echo "Hola" >> /tmp/hola.file
+echo "hola1" >> hola.file
+echo "Hola2" >> /tmp/hola.file
