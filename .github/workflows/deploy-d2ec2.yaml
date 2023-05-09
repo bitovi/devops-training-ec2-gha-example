@@ -98,7 +98,7 @@ jobs:
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         dot_env: ${{ secrets.DOT_ENV }}
         
-        docker_repo_app_directory: files
+        app_directory: files
 
         gh_deployment_input_terraform: some_terraform_code
         gh_action_input_terraform: terraform_code
