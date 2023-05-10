@@ -2,7 +2,7 @@ name: Deploy EKS Cluster
 
 on:
   push:
-    branches: [ deploy-eks, workflow_dispatch ]
+    branches: [ deploy-eks ]
       
 
 jobs:
