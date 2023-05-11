@@ -69,7 +69,7 @@ jobs:
         #no_cert: true
 
         # Application Inputs
-        app_port: 3000
+        app_port: 3000,3001,3002
         
         # Terraform inputs
      #   tf_state_bucket_destroy: true 
