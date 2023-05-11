@@ -47,7 +47,7 @@ jobs:
         #ec2_instance_protect: true
         #ec2_instance_type: t2.micro
         ec2_user_data_file: echo.sh
-        ec2_user_data_replace_on_change: false
+        ec2_user_data_replace_on_change: 
         
         # EFS Inputs
         #aws_create_efs: true
@@ -66,7 +66,6 @@ jobs:
         # Certificate Inputs
         domain_name: bitovi-sandbox.com
         sub_domain: leo-test
-        create_sub_cert: true
         #no_cert: true
 
         # Application Inputs
