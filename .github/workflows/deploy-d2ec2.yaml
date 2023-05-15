@@ -18,8 +18,8 @@ jobs:
     steps:
     - id: deploy
       name: Deploy
-      #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      uses: bitovi/github-actions-deploy-docker-to-ec2@Ansible_timeout_fix
+      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+      #uses: bitovi/github-actions-deploy-docker-to-ec2@Ansible_timeout_fix
       #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
       with:
         # Action defaults inputs
@@ -27,7 +27,7 @@ jobs:
         #bitops_code_only: true
         #bitops_code_store: true
         
-        stack_destroy: true
+        stack_destroy: 
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
