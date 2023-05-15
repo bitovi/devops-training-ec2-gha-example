@@ -27,7 +27,7 @@ jobs:
         #bitops_code_only: true
         #bitops_code_store: true
         
-        stack_destroy: true
+        stack_destroy: 
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -57,7 +57,7 @@ jobs:
         #aws_enable_efs_backup_policy: true
         
         # RDS Inputs
-        #aws_enable_postgres: true
+        aws_enable_postgres: true
         #aws_postgres_database_name: db_name
         #aws_postgres_database_port: 5435
         #aws_postgres_database_protection: true
@@ -70,8 +70,6 @@ jobs:
 
         # Application Inputs
         app_port: 3000
-        lb_port: 3001
-        lb_healthcheck: "TCP:22"
         # Terraform inputs
         tf_state_bucket_destroy: true 
 
