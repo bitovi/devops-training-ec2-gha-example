@@ -58,9 +58,9 @@ jobs:
         
         # RDS Inputs
         aws_enable_postgres: true
-        aws_postgres_engine: "aurora-mysql"
-        aws_postgres_group_family: "aurora-mysql8.0"
-        aws_postgres_engine_version: "8.0"
+        #aws_postgres_engine: "aurora-mysql"
+        #aws_postgres_group_family: "aurora-mysql8.0"
+        #aws_postgres_engine_version: "8.0"
         #aws_postgres_database_name: db_name
         #aws_postgres_database_port: 5435
         #aws_postgres_database_protection: true
