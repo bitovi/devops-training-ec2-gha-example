@@ -28,7 +28,7 @@ jobs:
         #bitops_code_only: true
         #bitops_code_store: true
         
-        stack_destroy: true
+        stack_destroy: 
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -60,7 +60,8 @@ jobs:
         # RDS Inputs
         aws_enable_postgres: true
         aws_postgres_engine: "aurora-mysql"
-        aws_postgres_group_family: "aurora-mysql8.0"
+        #aws_postgres_group_family: "aurora-mysql8.0"
+        aws_postgres_database_group_family: "aurora-mysql8.0"
         aws_postgres_engine_version: "8.0"
         #aws_postgres_database_name: db_name
         #aws_postgres_database_port: 5435
