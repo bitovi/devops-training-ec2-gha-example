@@ -70,7 +70,7 @@ jobs:
         #aws_postgres_database_final_snapshot: true
 
         # Certificate Inputs
-        #domain_name: bitovi-sandbox.com
+        domain_name: bitovi-sandbox.com
         #sub_domain: leo
         #no_cert: true
 
