@@ -25,10 +25,10 @@ jobs:
       with:
         # Action defaults inputs
         #checkout: true
-        #bitops_code_only: true
+        bitops_code_only: true
         #bitops_code_store: true
         
-        stack_destroy: true
+        #stack_destroy: true
         
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -59,11 +59,11 @@ jobs:
         #aws_enable_efs_backup_policy: true
         
         # RDS Inputs
-        aws_enable_postgres: true
-        aws_postgres_engine: "aurora-mysql"
+        #aws_enable_postgres: true
+        #aws_postgres_engine: "aurora-mysql"
         #aws_postgres_group_family: "aurora-mysql8.0"
-        aws_postgres_database_group_family: "aurora-mysql8.0"
-        aws_postgres_engine_version: "8.0"
+        #aws_postgres_database_group_family: "aurora-mysql8.0"
+        #aws_postgres_engine_version: "8.0"
         #aws_postgres_database_name: db_name
         #aws_postgres_database_port: 5435
         #aws_postgres_database_protection: true
