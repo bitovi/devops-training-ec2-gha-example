@@ -25,7 +25,7 @@ jobs:
       with:
         # Action defaults inputs
         #checkout: true
-        bitops_code_only: true
+        #bitops_code_only: true
         #bitops_code_store: true
         
         #stack_destroy: true
@@ -70,12 +70,12 @@ jobs:
         #aws_postgres_database_final_snapshot: true
 
         # Certificate Inputs
-        domain_name: bitovi-sandbox.com
+        #domain_name: bitovi-sandbox.com
         #sub_domain: leo
         #no_cert: true
 
         # Application Inputs
-        app_port: 3000
+        #app_port: 3000
         # Terraform inputs
         tf_state_bucket_destroy: true 
 
