@@ -18,7 +18,7 @@ jobs:
     steps:
     - id: deploy
       name: Commons Deploy
-      uses: bitovi/github-actions-commons@terraform_split
+      uses: bitovi/github-actions-commons@fix_db_family
       with:
         # GitHub Commons main inputs
         checkout:
@@ -62,7 +62,7 @@ jobs:
         env_ghv:
       
         # EC2 Instance
-        aws_ec2_instance_create: true
+        aws_ec2_instance_create: 
         aws_ec2_ami_filter:
         aws_ec2_ami_owner:
         aws_ec2_ami_id:
