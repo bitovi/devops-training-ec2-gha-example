@@ -48,7 +48,7 @@ jobs:
         #ec2_volume_size: 10
         #ec2_instance_protect: true
         #ec2_instance_type: t2.micro
-        ec2_user_data_file: echo.sh
+        #ec2_user_data_file: echo.sh
         #ec2_user_data_replace_on_change: 
         
         # EFS Inputs
