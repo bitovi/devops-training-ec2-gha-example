@@ -18,10 +18,10 @@ jobs:
     steps:
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+      #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
       #uses: bitovi/github-actions-deploy-docker-to-ec2@Ansible_timeout_fix
       #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
-      #uses: bitovi/github-actions-deploy-docker-to-ec2@main
+      uses: bitovi/github-actions-deploy-docker-to-ec2@main
       with:
         # Action defaults inputs
         #checkout: true
