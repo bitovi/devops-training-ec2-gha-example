@@ -52,7 +52,7 @@ jobs:
         #ec2_user_data_replace_on_change: 
         
         # EFS Inputs
-        aws_create_efs: true
+        #aws_create_efs: true
         #aws_efs_volume_preserve: true
         #aws_create_ha_efs: true
         #aws_create_efs_replica: true
