@@ -1,0 +1,4 @@
+.ignore
+.somefolder2
+somefile-in-somefolder3
+.somefolder3/.*
