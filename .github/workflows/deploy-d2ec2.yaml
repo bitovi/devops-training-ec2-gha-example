@@ -17,7 +17,7 @@ jobs:
       url: ${{ steps.deploy.outputs.vm_url }}
     steps:
     - id: initial-destroy
-      name: Deploy
+      name: Initial destroy
       uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -25,16 +25,11 @@ jobs:
         aws_default_region: us-east-1
 
         app_directory: files
-        
         aws_create_efs: true
-
         domain_name: bitovi-sandbox.com
-
         tf_state_bucket_destroy: true 
-        
-        docker_full_cleanup: true
-        app_directory_cleanup: true
-
+        #docker_full_cleanup: true
+        #app_directory_cleanup: true
         stack_destroy: true
 
    ## - id: deploy
@@ -134,7 +129,26 @@ jobs:
         
         #docker_full_cleanup: true
         #app_directory_cleanup: true
+        
+    - if: ${{ success() }}
+      id: add-efs-v2
+      name: Deploy add-efs v2
+      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
 
+        app_directory: files
+    
+        aws_create_efs: true
+
+        domain_name: bitovi-sandbox.com
+
+        tf_state_bucket_destroy: true 
+        
+        #docker_full_cleanup: true
+        #app_directory_cleanup: true
     - if: ${{ success() }}
       id: deploy-docker-cleanup-efs
       name: Deploy docker-cleanup-efs
