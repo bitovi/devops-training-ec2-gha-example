@@ -78,8 +78,8 @@ jobs:
         # Terraform inputs
         tf_state_bucket_destroy: true 
         
-        docker_full_cleanup: true
-        app_directory_cleanup: true
+        #docker_full_cleanup: true
+        #app_directory_cleanup: true
 
   
 #  Deploy-1:
