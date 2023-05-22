@@ -16,70 +16,271 @@ jobs:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
     steps:
+
     - id: deploy
       name: Deploy
-      #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      #uses: bitovi/github-actions-deploy-docker-to-ec2@Ansible_timeout_fix
-      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
       uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
       with:
-        # Action defaults inputs
-        #checkout: true
-        #bitops_code_only: true
-        #bitops_code_store: true
-        
-        stack_destroy: true
-        
-        
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
-        
-        # Provide a secret called `DOT_ENV` to append environment variables to the .env file
-        # dot_env: ${{ secrets.DOT_ENV }}
-        
+
         app_directory: files
+    
+        #aws_create_efs: true
 
-        #gh_deployment_input_terraform: some_terraform_code
-        #gh_action_input_terraform: terraform_code
-        # EC2 Inputs
-        #aws_ami_update: true
-        #create_keypair_sm_entry: true
-        #ec2_volume_size: 10
-        #ec2_instance_protect: true
-        #ec2_instance_type: t2.micro
-        #ec2_user_data_file: echo.sh
-        #ec2_user_data_replace_on_change: 
-        
-        # EFS Inputs
-        aws_create_efs: true
-        #aws_efs_volume_preserve: true
-        #aws_create_ha_efs: true
-        #aws_create_efs_replica: true
-        #aws_enable_efs_backup_policy: true
-        
-        # RDS Inputs
-        #aws_enable_postgres: true
-        #aws_postgres_engine: "aurora-mysql"
-        #aws_postgres_database_group_family: "aurora-mysql8.0"
-        #aws_postgres_engine_version: "8.0"
-        #aws_postgres_database_name: db_name
-        #aws_postgres_database_port: 5435
-        #aws_postgres_database_protection: true
-        #aws_postgres_database_final_snapshot: true
-
-        # Certificate Inputs
         domain_name: bitovi-sandbox.com
-        #sub_domain: leo
-        #no_cert: true
 
-        # Application Inputs
-        #app_port: 3000
-        # Terraform inputs
         tf_state_bucket_destroy: true 
         
         #docker_full_cleanup: true
         #app_directory_cleanup: true
+    - if: ${{ success() }}
+      id: deploy-docker-cleanup
+      name: Deploy docker-cleanup
+      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        app_directory: files
+    
+        #aws_create_efs: true
+
+        domain_name: bitovi-sandbox.com
+
+        tf_state_bucket_destroy: true 
+        
+        docker_full_cleanup: true
+        #app_directory_cleanup: true
+
+    - if: ${{ success() }}
+      id: docker-app-cleanup
+      name: Deploy app-cleanup
+      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        app_directory: files
+    
+        #aws_create_efs: true
+
+        domain_name: bitovi-sandbox.com
+
+        tf_state_bucket_destroy: true 
+        
+        #docker_full_cleanup: true
+        app_directory_cleanup: true
+
+    - if: ${{ success() }}
+      id: deploy-both-cleanup
+      name: Deploy both-cleanup
+      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        app_directory: files
+    
+        #aws_create_efs: true
+
+        domain_name: bitovi-sandbox.com
+
+        tf_state_bucket_destroy: true 
+        
+        docker_full_cleanup: true
+        app_directory_cleanup: true
+
+    - if: ${{ success() }}
+      id: add-efs
+      name: Deploy add-efs
+      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        app_directory: files
+    
+        #aws_create_efs: true
+
+        domain_name: bitovi-sandbox.com
+
+        tf_state_bucket_destroy: true 
+        
+        docker_full_cleanup: true
+        #app_directory_cleanup: true
+
+    - if: ${{ success() }}
+      id: deploy-docker-cleanup-efs
+      name: Deploy docker-cleanup-efs
+      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        app_directory: files
+    
+        aws_create_efs: true
+
+        domain_name: bitovi-sandbox.com
+
+        tf_state_bucket_destroy: true 
+        
+        docker_full_cleanup: true
+        #app_directory_cleanup: true
+
+    - if: ${{ success() }}
+      id: docker-app-cleanup-efs
+      name: Deploy app-cleanup-efs
+      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        app_directory: files
+    
+        aws_create_efs: true
+
+        domain_name: bitovi-sandbox.com
+
+        tf_state_bucket_destroy: true 
+        
+        #docker_full_cleanup: true
+        app_directory_cleanup: true
+
+    - if: ${{ success() }}
+      id: deploy-both-cleanup-efs
+      name: Deploy both-cleanup-efs
+      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        app_directory: files
+    
+        aws_create_efs: true
+
+        domain_name: bitovi-sandbox.com
+
+        tf_state_bucket_destroy: true 
+        
+        docker_full_cleanup: true
+        app_directory_cleanup: true
+
+    - if: ${{ success() }}
+      id: remove-efs-cleanup
+      name: Deploy remove-efs-cleanup
+      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        app_directory: files
+    
+        #aws_create_efs: true
+
+        domain_name: bitovi-sandbox.com
+
+        tf_state_bucket_destroy: true 
+        
+        docker_full_cleanup: true
+        app_directory_cleanup: true
+
+    - if: ${{ success() }}
+      id: destroy
+      name: Deploy
+      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        app_directory: files
+        
+        aws_create_efs: true
+
+        domain_name: bitovi-sandbox.com
+
+        tf_state_bucket_destroy: true 
+        
+        docker_full_cleanup: true
+        app_directory_cleanup: true
+
+        stack_destroy: true
+
+##    - id: deploy
+##      name: Deploy
+##      #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+##      #uses: bitovi/github-actions-deploy-docker-to-ec2@Ansible_timeout_fix
+##      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
+##      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+##      with:
+##        # Action defaults inputs
+##        #checkout: true
+##        #bitops_code_only: true
+##        #bitops_code_store: true
+##        
+##        stack_destroy: true
+##        
+##        
+##        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+##        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+##        aws_default_region: us-east-1
+##        
+##        # Provide a secret called `DOT_ENV` to append environment variables to the .env file
+##        # dot_env: ${{ secrets.DOT_ENV }}
+##        
+##        app_directory: files
+##
+##        #gh_deployment_input_terraform: some_terraform_code
+##        #gh_action_input_terraform: terraform_code
+##        # EC2 Inputs
+##        #aws_ami_update: true
+##        #create_keypair_sm_entry: true
+##        #ec2_volume_size: 10
+##        #ec2_instance_protect: true
+##        #ec2_instance_type: t2.micro
+##        #ec2_user_data_file: echo.sh
+##        #ec2_user_data_replace_on_change: 
+##        
+##        # EFS Inputs
+##        aws_create_efs: true
+##        #aws_efs_volume_preserve: true
+##        #aws_create_ha_efs: true
+##        #aws_create_efs_replica: true
+##        #aws_enable_efs_backup_policy: true
+##        
+##        # RDS Inputs
+##        #aws_enable_postgres: true
+##        #aws_postgres_engine: "aurora-mysql"
+##        #aws_postgres_database_group_family: "aurora-mysql8.0"
+##        #aws_postgres_engine_version: "8.0"
+##        #aws_postgres_database_name: db_name
+##        #aws_postgres_database_port: 5435
+##        #aws_postgres_database_protection: true
+##        #aws_postgres_database_final_snapshot: true
+##
+##        # Certificate Inputs
+##        domain_name: bitovi-sandbox.com
+##        #sub_domain: leo
+##        #no_cert: true
+##
+##        # Application Inputs
+##        #app_port: 3000
+##        # Terraform inputs
+##        tf_state_bucket_destroy: true 
+##        
+##        #docker_full_cleanup: true
+##        #app_directory_cleanup: true
 
   
 #  Deploy-1:
