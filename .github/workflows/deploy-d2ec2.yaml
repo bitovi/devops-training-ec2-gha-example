@@ -240,7 +240,7 @@ jobs:
 
         app_directory: files
         
-        aws_create_efs: true
+      #  aws_create_efs: true
 
         domain_name: bitovi-sandbox.com
 
