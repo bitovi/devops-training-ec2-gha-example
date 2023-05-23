@@ -8,14 +8,34 @@ permissions:
   contents: read
 
 jobs:
-  EC2-Deploy:
-    # if the branch name of the PR does not contain 'skip-deploy'
+  Deployments:
     if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
     steps:
+    - id: Initial-destroy
+      name: Final destroy
+      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        app_directory: files
+        
+        aws_create_efs: true
+
+        domain_name: bitovi-sandbox.com
+
+        tf_state_bucket_destroy: true 
+        
+        docker_full_cleanup: true
+        app_directory_cleanup: true
+
+        stack_destroy: true
+
     - id: initial-final-destroy
       name: Initial Final destroy
       uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
