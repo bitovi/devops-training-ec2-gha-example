@@ -8,246 +8,206 @@ permissions:
   contents: read
 
 jobs:
-  Deployments:
+  EC2-Deploy:
+    # if the branch name of the PR does not contain 'skip-deploy'
     if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
     steps:
-    - id: Initial-destroy-d2ec2
-      name: Final destroy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        app_directory: files
-        
-        aws_create_efs: true
-
-        domain_name: bitovi-sandbox.com
-
-        tf_state_bucket_destroy: true 
-        
-        docker_full_cleanup: true
-        app_directory_cleanup: true
-
-        stack_destroy: true
-
-    - id: initial-final-destroy
-      name: Initial Final destroy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        app_directory: files
-        
-        aws_create_efs: true
-
-        domain_name: bitovi-sandbox.com
-
-        tf_state_bucket_destroy: true 
-        
-        docker_full_cleanup: true
-        app_directory_cleanup: true
-
-        stack_destroy: true
-    - id: initial-destroy
-      name: Initial destroy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        app_directory: files
-        aws_create_efs: true
-        domain_name: bitovi-sandbox.com
-        tf_state_bucket_destroy: true 
+  #  - id: initial-destroy
+  #    name: Initial destroy
+  #    uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+  #    with:
+  #      aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+  #      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+  #      aws_default_region: us-east-1
+#
+  #      app_directory: files
+  #      aws_create_efs: true
+  #      domain_name: bitovi-sandbox.com
+  #      tf_state_bucket_destroy: true 
+  #      #docker_full_cleanup: true
+  #      #app_directory_cleanup: true
+  #      stack_destroy: true
+#
+   # - id: deploy
+   #   name: Deploy
+   #   uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+   #   with:
+   #     aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+   #     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+   #     aws_default_region: us-east-1
+#
+   #     app_directory: files
+   # 
+   #     #aws_create_efs: true
+#
+   #     domain_name: bitovi-sandbox.com
+#
+   #     tf_state_bucket_destroy: true 
+ #       
         #docker_full_cleanup: true
         #app_directory_cleanup: true
-        stack_destroy: true
-
-    - id: deploy
-      name: Deploy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        app_directory: files
-    
-        #aws_create_efs: true
-
-        domain_name: bitovi-sandbox.com
-
-        tf_state_bucket_destroy: true 
-        
-        #docker_full_cleanup: true
-        #app_directory_cleanup: true
-    - if: ${{ success() }}
-      id: deploy-docker-cleanup
-      name: Deploy docker-cleanup
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        app_directory: files
-    
-        #aws_create_efs: true
-
-        domain_name: bitovi-sandbox.com
-
-        tf_state_bucket_destroy: true 
-        
-        docker_full_cleanup: true
-        #app_directory_cleanup: true
-
-    - if: ${{ success() }}
-      id: docker-app-cleanup
-      name: Deploy app-cleanup
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        app_directory: files
-    
-        #aws_create_efs: true
-
-        domain_name: bitovi-sandbox.com
-
-        tf_state_bucket_destroy: true 
-        
-        #docker_full_cleanup: true
-        app_directory_cleanup: true
-
-    - if: ${{ success() }}
-      id: deploy-both-cleanup
-      name: Deploy both-cleanup
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        app_directory: files
-    
-        #aws_create_efs: true
-
-        domain_name: bitovi-sandbox.com
-
-        tf_state_bucket_destroy: true 
-        
-        docker_full_cleanup: true
-        app_directory_cleanup: true
-
-    - if: ${{ success() }}
-      id: add-efs
-      name: Deploy add-efs
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        app_directory: files
-    
-        aws_create_efs: true
-
-        domain_name: bitovi-sandbox.com
-
-        tf_state_bucket_destroy: true 
-        
-        #docker_full_cleanup: true
-        #app_directory_cleanup: true
-        
-    - if: ${{ success() }}
-      id: add-efs-v2
-      name: Deploy add-efs v2
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        app_directory: files
-    
-        aws_create_efs: true
-
-        domain_name: bitovi-sandbox.com
-
-        tf_state_bucket_destroy: true 
-        
-        #docker_full_cleanup: true
-        #app_directory_cleanup: true
-    - if: ${{ success() }}
-      id: deploy-docker-cleanup-efs
-      name: Deploy docker-cleanup-efs
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        app_directory: files
-    
-        aws_create_efs: true
-
-        domain_name: bitovi-sandbox.com
-
-        tf_state_bucket_destroy: true 
-        
-        docker_full_cleanup: true
-        #app_directory_cleanup: true
-
-    - if: ${{ success() }}
-      id: docker-app-cleanup-efs
-      name: Deploy app-cleanup-efs
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        app_directory: files
-    
-        aws_create_efs: true
-
-        domain_name: bitovi-sandbox.com
-
-        tf_state_bucket_destroy: true 
-        
-        #docker_full_cleanup: true
-        app_directory_cleanup: true
-
-    - if: ${{ success() }}
-      id: deploy-both-cleanup-efs
-      name: Deploy both-cleanup-efs
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        app_directory: files
-    
-        aws_create_efs: true
-
-        domain_name: bitovi-sandbox.com
-
-        tf_state_bucket_destroy: true 
-        
-        docker_full_cleanup: true
-        app_directory_cleanup: true
+#    - if: ${{ success() }}
+#      id: deploy-docker-cleanup
+#      name: Deploy docker-cleanup
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#
+#        app_directory: files
+#    
+#        #aws_create_efs: true
+#
+#        domain_name: bitovi-sandbox.com
+#
+#        tf_state_bucket_destroy: true 
+#        
+#        docker_full_cleanup: true
+#        #app_directory_cleanup: true
+#
+#    - if: ${{ success() }}
+#      id: docker-app-cleanup
+#      name: Deploy app-cleanup
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#
+#        app_directory: files
+#    
+#        #aws_create_efs: true
+#
+#        domain_name: bitovi-sandbox.com
+#
+#        tf_state_bucket_destroy: true 
+#        
+#        #docker_full_cleanup: true
+#        app_directory_cleanup: true
+#
+#    - if: ${{ success() }}
+#      id: deploy-both-cleanup
+#      name: Deploy both-cleanup
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#
+#        app_directory: files
+#    
+#        #aws_create_efs: true
+#
+#        domain_name: bitovi-sandbox.com
+#
+#        tf_state_bucket_destroy: true 
+#        
+#        docker_full_cleanup: true
+#        app_directory_cleanup: true
+#
+#    - if: ${{ success() }}
+#      id: add-efs
+#      name: Deploy add-efs
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#
+#        app_directory: files
+#    
+#        aws_create_efs: true
+#
+#        domain_name: bitovi-sandbox.com
+#
+#        tf_state_bucket_destroy: true 
+#        
+#        #docker_full_cleanup: true
+#        #app_directory_cleanup: true
+#        
+#    - if: ${{ success() }}
+#      id: add-efs-v2
+#      name: Deploy add-efs v2
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#
+#        app_directory: files
+#    
+#        aws_create_efs: true
+#
+#        domain_name: bitovi-sandbox.com
+#
+#        tf_state_bucket_destroy: true 
+#        
+#        #docker_full_cleanup: true
+#        #app_directory_cleanup: true
+#    - if: ${{ success() }}
+#      id: deploy-docker-cleanup-efs
+#      name: Deploy docker-cleanup-efs
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#
+#        app_directory: files
+#    
+#        aws_create_efs: true
+#
+#        domain_name: bitovi-sandbox.com
+#
+#        tf_state_bucket_destroy: true 
+#        
+#        docker_full_cleanup: true
+#        #app_directory_cleanup: true
+#
+#    - if: ${{ success() }}
+#      id: docker-app-cleanup-efs
+#      name: Deploy app-cleanup-efs
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#
+#        app_directory: files
+#    
+#        aws_create_efs: true
+#
+#        domain_name: bitovi-sandbox.com
+#
+#        tf_state_bucket_destroy: true 
+#        
+#        #docker_full_cleanup: true
+#        app_directory_cleanup: true
+#
+#    - if: ${{ success() }}
+#      id: deploy-both-cleanup-efs
+#      name: Deploy both-cleanup-efs
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#
+#        app_directory: files
+#    
+#        aws_create_efs: true
+#
+#        domain_name: bitovi-sandbox.com
+#
+#        tf_state_bucket_destroy: true 
+#        
+#        docker_full_cleanup: true
+#        app_directory_cleanup: true
 
     - if: ${{ success() }}
       id: remove-efs-cleanup
@@ -416,7 +376,3 @@ jobs:
 #        
 #        tf_state_bucket_destroy: true 
 #        aws_resource_identifier:  leo-d2ec2-deploy2
-
-
-
-
