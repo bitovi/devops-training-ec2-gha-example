@@ -15,7 +15,7 @@ jobs:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
     steps:
-    - id: Initial-destroy
+    - id: Initial-destroy-d2ec2
       name: Final destroy
       uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
       with:
