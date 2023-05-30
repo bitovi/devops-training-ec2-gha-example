@@ -63,7 +63,7 @@ jobs:
         aws_r53_create_root_cert:
         aws_r53_create_sub_cert:
 
-    - name: Add CDN Deploy
+    - name: Add CDN Deploy + Domain
       uses: bitovi/github-actions-deploy-serverless-website@DEVOPS-792-GHA-deploy-to-s3-cloudfront-cert
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
