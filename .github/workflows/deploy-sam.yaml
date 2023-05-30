@@ -22,8 +22,7 @@ jobs:
         tf_state_bucket:
         tf_state_bucket_destroy: true
 
-        aws_spa_file_sources: index.html
-        aws_spa_file_keys:
+        aws_spa_source_folder:
         aws_spa_website_bucket_name: 
         aws_spa_cdn_enabled:
         aws_spa_cdn_root_object:
@@ -49,8 +48,7 @@ jobs:
         tf_state_bucket:
         tf_state_bucket_destroy: true
 
-        aws_spa_file_sources: index.html
-        aws_spa_file_keys: index.html
+        aws_spa_source_folder:
         aws_spa_website_bucket_name: 
         aws_spa_cdn_enabled: true
         aws_spa_cdn_root_object:
@@ -71,13 +69,12 @@ jobs:
         aws_default_region: us-east-1
         #aws_additional_tags: {"Status": "debug"}
 
-        tf_action: 'apply'
+        tf_action: 'destroy'
         tf_plan_show_details: false
         tf_state_bucket:
         tf_state_bucket_destroy: true
 
-        aws_spa_file_sources: index.html
-        aws_spa_file_keys: index.html
+        aws_spa_source_folder:
         aws_spa_website_bucket_name: 
         aws_spa_cdn_enabled: true
         aws_spa_cdn_root_object:
