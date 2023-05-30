@@ -15,7 +15,7 @@ jobs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
         aws_default_region: us-east-1
-        aws_additional_tags: `{"Status": "debug"}`
+        aws_additional_tags: {"Status": "debug"}
 
         tf_action: plan
         tf_plan_show_details: false
