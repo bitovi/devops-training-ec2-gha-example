@@ -1,7 +1,7 @@
 name: Deploy SAM
 on:
   push:
-    branches: [ serverless ]
+    branches: [ serverless-2 ]
       
 
 jobs:
@@ -9,32 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Destroy
-      uses: bitovi/github-actions-deploy-serverless-website@DEVOPS-792-GHA-deploy-to-s3-cloudfront-cert
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-        #aws_additional_tags: {"Status": "debug"}
-#
-        tf_action: 'destroy'
-#        tf_plan_show_details: false
-#        tf_state_bucket:
-#        tf_state_bucket_destroy: true
-#
-        aws_spa_source_folder: vite
-#        aws_spa_website_bucket_name: 
-        aws_spa_cdn_enabled: true
-#        aws_spa_cdn_root_object: index.html
-#
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: vite
-#        aws_r53_root_domain_deploy: false
-        aws_r53_enable_cert: true
-#        aws_r53_cert_arn:
-#        aws_r53_create_root_cert:
-#        aws_r53_create_sub_cert:
-#
     - name: Create
       uses: bitovi/github-actions-deploy-serverless-website@DEVOPS-792-GHA-deploy-to-s3-cloudfront-cert
       with:
@@ -48,15 +22,14 @@ jobs:
 #        tf_state_bucket:
 #        tf_state_bucket_destroy: true
 #
-        aws_spa_source_folder: vite
+        aws_spa_source_folder: 
 #        aws_spa_website_bucket_name: 
         aws_spa_cdn_enabled: true
 #        aws_spa_cdn_root_object: index.html
 #
         aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: vite
+        aws_r53_sub_domain_name: spa-test
 #        aws_r53_root_domain_deploy: false
-        aws_r53_enable_cert: true
 #        aws_r53_cert_arn:
 #        aws_r53_create_root_cert:
 #        aws_r53_create_sub_cert:
