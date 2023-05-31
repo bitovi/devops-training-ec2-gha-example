@@ -15,13 +15,13 @@ jobs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
         aws_default_region: us-east-1
-        #aws_resource_identifier: "spa-test"
+        aws_resource_identifier: "spa-test"
         #aws_additional_tags: {"Status": "debug"}
 #
         tf_action: 'destroy'
 #        tf_plan_show_details: false
 #        tf_state_bucket:
-#        tf_state_bucket_destroy: true
+        tf_state_bucket_destroy: true
 #
         aws_spa_source_folder: 
 #        aws_spa_website_bucket_name: 
@@ -34,32 +34,3 @@ jobs:
 #        aws_r53_cert_arn:
 #        aws_r53_create_root_cert:
 #        aws_r53_create_sub_cert:
-
-  deploy-bucket-only:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Create deploy-bucket-only
-      uses: bitovi/github-actions-deploy-serverless-website@DEVOPS-792-GHA-deploy-to-s3-cloudfront-cert
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-        aws_resource_identifier: "spa-test-bucket-only"
-
-        tf_action: 'destroy'
-
-  deploy-bucket-with-cdn:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Create deploy-bucket-with-cdn
-      uses: bitovi/github-actions-deploy-serverless-website@DEVOPS-792-GHA-deploy-to-s3-cloudfront-cert
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-        aws_resource_identifier: "spa-test-bucket-with-cdn"
-
-        tf_action: 'destroy'
-        aws_spa_cdn_enabled: true
