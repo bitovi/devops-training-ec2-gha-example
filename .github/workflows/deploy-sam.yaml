@@ -15,10 +15,10 @@ jobs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
         aws_default_region: us-east-1
-        aws_resource_identifier: "spa-test"
+        #aws_resource_identifier: "spa-test"
         #aws_additional_tags: {"Status": "debug"}
 #
-        tf_action: 'apply'
+        tf_action: 'destroy'
 #        tf_plan_show_details: false
 #        tf_state_bucket:
 #        tf_state_bucket_destroy: true
@@ -47,7 +47,7 @@ jobs:
         aws_default_region: us-east-1
         aws_resource_identifier: "spa-test-bucket-only"
 
-        tf_action: 'apply'
+        tf_action: 'destroy'
 
   deploy-bucket-with-cdn:
     runs-on: ubuntu-latest
@@ -61,5 +61,5 @@ jobs:
         aws_default_region: us-east-1
         aws_resource_identifier: "spa-test-bucket-with-cdn"
 
-        tf_action: 'apply'
+        tf_action: 'destroy'
         aws_spa_cdn_enabled: true
