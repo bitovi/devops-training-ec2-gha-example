@@ -47,6 +47,8 @@ jobs:
 
         tf_action: 'apply'
         tf_state_bucket_destroy: true
+        
+        aws_spa_cdn_enabled: true
 #
 #  deploy-bucket-with-cdn:
 #    runs-on: ubuntu-latest
