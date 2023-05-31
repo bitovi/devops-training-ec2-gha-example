@@ -25,7 +25,7 @@ jobs:
         aws_spa_source_folder: vite
 #        aws_spa_website_bucket_name: 
         aws_spa_cdn_enabled: true
-        aws_spa_cdn_root_object: index.html
+#        aws_spa_cdn_root_object: index.html
 #
         aws_r53_domain_name: bitovi-sandbox.com
         aws_r53_sub_domain_name: vite
