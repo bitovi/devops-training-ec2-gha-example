@@ -17,7 +17,7 @@ jobs:
         aws_default_region: us-east-1
         #aws_additional_tags: {"Status": "debug"}
 
-        tf_action: 'apply'
+        tf_action: destroy
         tf_plan_show_details: false
         tf_state_bucket:
         tf_state_bucket_destroy: true
