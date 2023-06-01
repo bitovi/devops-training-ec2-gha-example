@@ -47,6 +47,7 @@ jobs:
 
         tf_action: 'apply'
         tf_state_bucket_destroy: true
+        tf_plan_show_details: true
         
         aws_spa_cdn_enabled: true
         
