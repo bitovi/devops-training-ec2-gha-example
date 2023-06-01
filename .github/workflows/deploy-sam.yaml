@@ -21,59 +21,60 @@ jobs:
         aws_default_region: us-east-1
         tf_action: 'apply'
 
-    - name: Create deploy-bucket-dns
-      id: bucket-deploy-bucket-dns
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'apply'
-
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: spa-test
-    - name: Create deploy-bucket-cdn
-      id: bucket-deploy-bucket-cdn
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'apply'
-        tf_state_bucket_destroy: true
-        
-        aws_spa_cdn_enabled: true
-
-    - name: Create deploy-bucket-cdn-dns
-      id: bucket-deploy-bucket-cdn-dns
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'apply'
-        tf_state_bucket_destroy: true
-        
-        aws_spa_cdn_enabled: true
-        
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: spa-test
-        
-    - name: Destroy deploy-bucket-cdn-dns
-      id: destroy
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'destroy'
-        tf_state_bucket_destroy: true
-        
-        aws_spa_cdn_enabled: true
-        
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: spa-test
+#    - name: Create deploy-bucket-dns
+#      id: bucket-deploy-bucket-dns
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'apply'
+#
+#        aws_r53_domain_name: bitovi-sandbox.com
+#        aws_r53_sub_domain_name: spa-test
+#    - name: Create deploy-bucket-cdn
+#      id: bucket-deploy-bucket-cdn
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'apply'
+#        tf_state_bucket_destroy: true
+#        
+#        aws_spa_cdn_enabled: true
+#
+#    - name: Create deploy-bucket-cdn-dns
+#      id: bucket-deploy-bucket-cdn-dns
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'apply'
+#        tf_state_bucket_destroy: true
+#        
+#        aws_spa_cdn_enabled: true
+#        
+#        aws_r53_domain_name: bitovi-sandbox.com
+#        aws_r53_sub_domain_name: spa-test
+#        
+#    - name: Destroy deploy-bucket-cdn-dns
+#      id: destroy
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'destroy'
+#        tf_state_bucket_destroy: true
+#        
+#        aws_spa_cdn_enabled: true
+#        
+#        aws_r53_domain_name: bitovi-sandbox.com
+#        aws_r53_sub_domain_name: spa-test
+#
