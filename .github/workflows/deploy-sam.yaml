@@ -62,8 +62,8 @@ jobs:
         aws_r53_domain_name: bitovi-sandbox.com
         aws_r53_sub_domain_name: spa-test
         
-    - name: Create deploy-bucket-cdn-dns
-      id: bucket-deploy-bucket-cdn-dns
+    - name: Destroy deploy-bucket-cdn-dns
+      id: destroy
       uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
