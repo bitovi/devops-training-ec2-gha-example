@@ -5,40 +5,15 @@ on:
       
 
 jobs:
-#  deploy-with-domain:
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#    - name: Create deploy-with-domain
-#      uses: bitovi/github-actions-deploy-serverless-website@DEVOPS-792-GHA-deploy-to-s3-cloudfront-cert
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-#        aws_default_region: us-east-1
-#        #aws_additional_tags: {"Status": "debug"}
-##
-#        tf_action: 'destroy'
-##        tf_plan_show_details: false
-##        tf_state_bucket:
-##        tf_state_bucket_destroy: true
-##
-#        aws_spa_source_folder: 
-##        aws_spa_website_bucket_name: 
-#        aws_spa_cdn_enabled: true
-##        aws_spa_cdn_root_object: index.html
-##
-#        aws_r53_domain_name: bitovi-sandbox.com
-#        aws_r53_sub_domain_name: spa-test
-##        aws_r53_root_domain_deploy: false
-##        aws_r53_cert_arn:
-##        aws_r53_create_root_cert:
-##        aws_r53_create_sub_cert:
-#
   deploy-bucket-only:
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name }}
+      url: ${{ steps.bucket-deploy.outputs.public_url }}
 
     steps:
-    - name: Create deploy-bucket-only
+    - name: Create deploy-bucket-
+      id: bucket-deploy
       uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
@@ -52,17 +27,3 @@ jobs:
         
         aws_r53_domain_name: bitovi-sandbox.com
         aws_r53_sub_domain_name: spa-test
-#
-#  deploy-bucket-with-cdn:
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#    - name: Create deploy-bucket-with-cdn
-#      uses: bitovi/github-actions-deploy-serverless-website@DEVOPS-792-GHA-deploy-to-s3-cloudfront-cert
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-#        aws_default_region: us-east-1
-#
-#        tf_action: 'destroy'
-#        aws_spa_cdn_enabled: true
