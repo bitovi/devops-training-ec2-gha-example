@@ -39,7 +39,7 @@ jobs:
 
     steps:
     - name: Create deploy-bucket-only
-      uses: bitovi/github-actions-deploy-serverless-website@DEVOPS-792-GHA-deploy-to-s3-cloudfront-cert
+      uses: bitovi/github-actions-deploy-static-site-to-aws@v0.1.0
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
