@@ -30,7 +30,7 @@ jobs:
         aws_default_region: us-east-1
 
         tf_action: 'destroy'
-
+        tf_state_bucket_destroy: true
         aws_r53_domain_name: bitovi-sandbox.com
         aws_r53_sub_domain_name: spa-test
 #    - name: Create deploy-bucket-cdn
