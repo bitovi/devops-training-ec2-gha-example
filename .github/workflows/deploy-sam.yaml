@@ -32,7 +32,7 @@ jobs:
         tf_action: 'apply'
         #tf_state_bucket_destroy: true
         aws_spa_cdn_enabled: true
-        aws_r53_domain_name: bitovi-sandbox.com
+        #aws_r53_domain_name: bitovi-sandbox.com
         #aws_r53_root_domain_deploy: true
         #aws_r53_sub_domain_name: spa-test
 #    - name: Create deploy-bucket-cdn
