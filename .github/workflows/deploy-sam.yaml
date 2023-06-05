@@ -89,7 +89,7 @@ jobs:
         #aws_r53_sub_domain_name: spa-test
 
     - name: Create deploy-bucket-sub-dns-cdn
-      id: bucket-deploy-bucket-dns
+      id: bucket-deploy-bucket-dns-sub-cdn
       uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
