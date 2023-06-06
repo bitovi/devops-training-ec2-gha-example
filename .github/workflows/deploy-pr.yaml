@@ -42,3 +42,4 @@ jobs:
         aws_eks_desired_capacity: 
         aws_eks_max_size: 
         aws_eks_min_size:
+ 
