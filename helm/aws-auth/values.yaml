@@ -8,7 +8,7 @@ data:
     - "groups":
       - "system:bootstrappers"
       - "system:nodes"
-      "rolearn": "arn:aws:iam::755521597925:role/prod-eksworker"
+      "rolearn": "arn:aws:iam::755521597925:role/env-eksworker"
       "username": "system:node:{{EC2PrivateDNSName}}"
     - "groups":
       - "system:masters"
