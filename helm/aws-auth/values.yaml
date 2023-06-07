@@ -13,3 +13,4 @@ data:
     - "groups":
       - "system:masters"
       "rolearn": "arn:aws:iam::755521597925:role/AWSReservedSSO_AdministratorAccess_402f22a297379e03"   
+      username: cluster-admin
