@@ -19,8 +19,8 @@ jobs:
 
         input_helm_charts: helm
   
-        bitops_code_only: true
-        bitops_code_store: true
+        bitops_code_only: 
+        bitops_code_store: 
         aws_eks_create: 
         aws_eks_region: 
         aws_eks_security_group_name_master: 
