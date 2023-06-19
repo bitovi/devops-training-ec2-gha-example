@@ -35,10 +35,10 @@ jobs:
         aws_eks_cluster_name: 
         aws_eks_cluster_log_types: 
         aws_eks_cluster_version:
-        aws_eks_image_id: 
         aws_eks_instance_type: 
         aws_eks_user_data_file: 
-        aws_eks_ec2_key_pair: ${{ vars.AWS_EKS_EC2_KEY_PAIR }}
+        aws_eks_ec2_key_pair:
+        aws_eks_store_keypair_sm: true
         aws_eks_desired_capacity: 
         aws_eks_max_size: 
         aws_eks_min_size:
