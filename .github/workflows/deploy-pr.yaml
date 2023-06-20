@@ -17,7 +17,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
 
-        input_helm_charts: helm
+        input_helm_charts:
   
         bitops_code_only: 
         bitops_code_store: 
@@ -40,7 +40,7 @@ jobs:
         aws_eks_instance_type: 
         aws_eks_user_data_file: 
         aws_eks_ec2_key_pair:
-        aws_eks_store_keypair_sm: true
+        aws_eks_store_keypair_sm: 
         aws_eks_desired_capacity: 
         aws_eks_max_size: 
         aws_eks_min_size:
