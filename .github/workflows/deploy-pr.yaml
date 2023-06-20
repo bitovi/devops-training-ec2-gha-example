@@ -21,7 +21,9 @@ jobs:
   
         bitops_code_only: 
         bitops_code_store: 
-        aws_eks_create: true
+        tf_state_bucket_destroy: true
+        
+        aws_eks_create: 
         aws_eks_region: 
         aws_eks_security_group_name_master: 
         aws_eks_security_group_name_worker: 
