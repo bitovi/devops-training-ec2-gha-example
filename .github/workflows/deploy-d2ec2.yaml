@@ -8,14 +8,53 @@ permissions:
   contents: read
 
 jobs:
-  EC2-Deploy:
+  EC2-Simple-Deploy:
     # if the branch name of the PR does not contain 'skip-deploy'
     if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.ref_name }}
-      url: ${{ steps.deploy.outputs.vm_url }}
     steps:
+      - id: EC2-Simple-Deploy
+        # Pin to use the configurable instance size feature
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.4
+        with:
+          bitops_code_only: true
+          bitops_code_store: true
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          stack_destroy: 
+          tf_state_bucket_destroy: true
+  EC2-Complete-Deploy:
+    # if the branch name of the PR does not contain 'skip-deploy'
+    if: "!contains(github.head_ref, 'skip-deploy')"
+    runs-on: ubuntu-latest
+    steps:
+      - id: EC2-Complete-Deploy
+        # Pin to use the configurable instance size feature
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.4
+        with:
+          bitops_code_only: true
+          bitops_code_store: true
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          stack_destroy: 
+          tf_state_bucket_destroy: true
+          aws_secret_env: test-secret
+          # SM
+          create_keypair_sm_entry: true
+          # EFS
+          aws_create_efs_ha: true
+          aws_create_efs_replica: true
+          aws_enable_efs_backup_policy: true
+          # RDS
+          aws_enable_postgres: true
+          # Certs
+          domain_name: bitovi-sandbox.com
+          sub_domain: some-test
+          create_sub_cert: true
+          #
+          
 #    - id: initial-destroy
 #      name: Initial destroy
 #      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
@@ -229,63 +268,63 @@ jobs:
 #        app_directory_cleanup: true
 #
 #    - if: ${{ success() }}
-    - id: final-create
-      name: Final destroy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-#
-        app_directory: files
-#        
-#        aws_create_efs: true
-#
-        domain_name: bitovi-sandbox.com
-#
-        tf_state_bucket_destroy: true 
-#        
-#        docker_full_cleanup: true
-#        app_directory_cleanup: true
-#
-    - id: final-destroy
-      name: Final destroy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-#
-        app_directory: files
-#        
-#        aws_create_efs: true
-#
-        domain_name: bitovi-sandbox.com
-#
-        tf_state_bucket_destroy: true 
-#        
-#        docker_full_cleanup: true
-#        app_directory_cleanup: true
-#
-        stack_destroy: true
-#
-##    - id: deploy
-##      name: Deploy
-##      #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-##      #uses: bitovi/github-actions-deploy-docker-to-ec2@Ansible_timeout_fix
-##      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
-##      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
-##      with:
-##        # Action defaults inputs
-##        #checkout: true
-##        #bitops_code_only: true
-##        #bitops_code_store: true
+#    - id: final-create
+#      name: Final destroy
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+##
+#        app_directory: files
 ##        
-##        stack_destroy: true
+##        aws_create_efs: true
+##
+#        domain_name: bitovi-sandbox.com
+##
+#        tf_state_bucket_destroy: true 
 ##        
+##        docker_full_cleanup: true
+##        app_directory_cleanup: true
+##
+#    - id: final-destroy
+#      name: Final destroy
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+##
+#        app_directory: files
 ##        
-##        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-##        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+##        aws_create_efs: true
+##
+#        domain_name: bitovi-sandbox.com
+##
+#        tf_state_bucket_destroy: true 
+##        
+##        docker_full_cleanup: true
+##        app_directory_cleanup: true
+##
+#        stack_destroy: true
+##
+###    - id: deploy
+###      name: Deploy
+###      #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+###      #uses: bitovi/github-actions-deploy-docker-to-ec2@Ansible_timeout_fix
+###      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
+###      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
+###      with:
+###        # Action defaults inputs
+###        #checkout: true
+###        #bitops_code_only: true
+###        #bitops_code_store: true
+###        
+###        stack_destroy: true
+###        
+###        
+###        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+###        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
 ##        aws_default_region: us-east-1
 ##        
 ##        # Provide a secret called `DOT_ENV` to append environment variables to the .env file
