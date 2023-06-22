@@ -17,7 +17,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
 
-        input_helm_charts:
+        input_helm_charts: helm
   
         bitops_code_only: 
         bitops_code_store: 
