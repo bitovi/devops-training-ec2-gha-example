@@ -44,7 +44,7 @@ jobs:
           # SM
           create_keypair_sm_entry: true
           # EFS
-          aws_create_efs_ha: true
+          aws_create_ha_efs: true
           aws_create_efs_replica: true
           aws_enable_efs_backup_policy: true
           # RDS
