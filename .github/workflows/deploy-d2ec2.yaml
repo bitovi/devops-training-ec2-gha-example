@@ -15,7 +15,7 @@ jobs:
     steps:
       - id: EC2-Simple-Deploy
         # Pin to use the configurable instance size feature
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.4
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons
         with:
           bitops_code_only: true
           bitops_code_store: true
@@ -31,7 +31,7 @@ jobs:
     steps:
       - id: EC2-Complete-Deploy
         # Pin to use the configurable instance size feature
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.4
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons
         with:
           bitops_code_only: true
           bitops_code_store: true
