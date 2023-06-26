@@ -6,7 +6,7 @@ on:
 
 permissions:
   contents: read
-
+ 
 jobs:
   EC2-Deploy:
     # if the branch name of the PR does not contain 'skip-deploy'
