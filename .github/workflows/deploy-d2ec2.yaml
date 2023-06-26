@@ -13,15 +13,15 @@ jobs:
     if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
     steps:
-    #- id: EC2-Initial-Destroy
-    #  # Pin to use the configurable instance size feature
-    #  uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-    #  with:
-    #    aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-    #    aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-    #    aws_default_region: us-east-1
-    #    stack_destroy: true
-    #    tf_state_bucket_destroy: true
+    - id: EC2-Initial-Destroy
+      # Pin to use the configurable instance size feature
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        stack_destroy: true
+        tf_state_bucket_destroy: true
     - id: EC2-Simple-Deploy
       # Pin to use the configurable instance size feature
       uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
@@ -31,52 +31,52 @@ jobs:
         aws_default_region: us-east-1
         stack_destroy: 
         tf_state_bucket_destroy: true
-#      - id: EC2-Simple-Destroy
-#        # Pin to use the configurable instance size feature
-#        uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-#        with:
-#          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#          aws_default_region: us-east-1
-#          stack_destroy: true
-#          tf_state_bucket_destroy: true
-#      - id: EC2-Complete-Deploy
-#        # Pin to use the configurable instance size feature
-#        uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-#        with:
-#          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#          aws_default_region: us-east-1
-#          stack_destroy: 
-#          tf_state_bucket_destroy: true
-#          aws_secret_env: test-secret
-#          # SM
-#          create_keypair_sm_entry: true
-#          # EFS
-#          aws_create_ha_efs: true
-#          aws_create_efs_replica: true
-#          aws_enable_efs_backup_policy: true
-#          # RDS
-#          aws_enable_postgres: true
-#          # Certs
-#          domain_name: bitovi-sandbox.com
-#          sub_domain: some-test
-#          create_sub_cert: true
-#          #
-#      - id: EC2-Simple-Destroy2
-#        # Pin to use the configurable instance size feature
-#        uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-#        with:
-#          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#          aws_default_region: us-east-1
-#          stack_destroy: true
-#          tf_state_bucket_destroy: true
-##    - id: initial-destroy
-##      name: Initial destroy
-##      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-##      with:
-##        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+    - id: EC2-Simple-Destroy
+      # Pin to use the configurable instance size feature
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        stack_destroy: true
+        tf_state_bucket_destroy: true
+    - id: EC2-Complete-Deploy
+      # Pin to use the configurable instance size feature
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        stack_destroy: 
+        tf_state_bucket_destroy: true
+        aws_secret_env: test-secret
+        # SM
+        create_keypair_sm_entry: true
+        # EFS
+        aws_create_ha_efs: true
+        aws_create_efs_replica: true
+        aws_enable_efs_backup_policy: true
+        # RDS
+        aws_enable_postgres: true
+        # Certs
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        #
+    - id: EC2-Simple-Destroy2
+      # Pin to use the configurable instance size feature
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        stack_destroy: true
+        tf_state_bucket_destroy: true
+#    - id: initial-destroy
+#      name: Initial destroy
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
 ##        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
 #        aws_default_region: us-east-1
 #
