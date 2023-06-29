@@ -22,6 +22,8 @@ jobs:
         aws_default_region: us-east-1
         stack_destroy: 
         tf_state_bucket_destroy: true
+        domain_name: bitovi-sandbox.com
+
         # RDS
         aws_enable_postgres: true
 
@@ -34,7 +36,7 @@ jobs:
         aws_default_region: us-east-1
         stack_destroy: 
         tf_state_bucket_destroy: true
-        
+        domain_name: bitovi-sandbox.com
         # RDS
         aws_enable_postgres: true
         aws_postgres_initial_snapshot: true
@@ -48,7 +50,7 @@ jobs:
         aws_default_region: us-east-1
         stack_destroy: 
         tf_state_bucket_destroy: true
-
+        domain_name: bitovi-sandbox.com
         # RDS
         aws_enable_postgres: true
         aws_postgres_initial_snapshot: true
@@ -62,7 +64,7 @@ jobs:
         aws_default_region: us-east-1
         stack_destroy: 
         tf_state_bucket_destroy: true
-
+        domain_name: bitovi-sandbox.com
         # RDS
         aws_enable_postgres: true
         aws_postgres_initial_snapshot: true
@@ -77,6 +79,7 @@ jobs:
         aws_default_region: us-east-1
         stack_destroy: 
         tf_state_bucket_destroy: true
+        domain_name: bitovi-sandbox.com
 
         # RDS
         aws_enable_postgres: true
