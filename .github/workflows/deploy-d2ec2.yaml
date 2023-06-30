@@ -13,63 +13,6 @@ jobs:
     if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
     steps:
-    - id: EC2-1stdep
-      # Pin to use the configurable instance size feature
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        stack_destroy: 
-        tf_state_bucket_destroy: true
-        domain_name: bitovi-sandbox.com
-
-        # RDS
-        aws_enable_postgres: true
-
-    - id: EC2-2nddep
-      # Pin to use the configurable instance size feature
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        stack_destroy: 
-        tf_state_bucket_destroy: true
-        domain_name: bitovi-sandbox.com
-        # RDS
-        aws_enable_postgres: true
-        aws_postgres_initial_snapshot: true
-
-    - id: EC2-3rddep
-      # Pin to use the configurable instance size feature
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        stack_destroy: 
-        tf_state_bucket_destroy: true
-        domain_name: bitovi-sandbox.com
-        # RDS
-        aws_enable_postgres: true
-        aws_postgres_initial_snapshot: true
-
-    - id: EC2-4thdep
-      # Pin to use the configurable instance size feature
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        stack_destroy: 
-        tf_state_bucket_destroy: true
-        domain_name: bitovi-sandbox.com
-        # RDS
-        aws_enable_postgres: true
-        aws_postgres_initial_snapshot: true
-        aws_postgres_database_wipe: true
-
     - id: EC2-5thdep
       # Pin to use the configurable instance size feature
       uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
@@ -77,14 +20,9 @@ jobs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
-        stack_destroy: 
+        stack_destroy: true
         tf_state_bucket_destroy: true
         domain_name: bitovi-sandbox.com
-
-        # RDS
-        aws_enable_postgres: true
-        aws_postgres_initial_snapshot: true
-        aws_postgres_database_wipe: true
 
 #########        
 #    - id: EC2-Initial-Destroy
