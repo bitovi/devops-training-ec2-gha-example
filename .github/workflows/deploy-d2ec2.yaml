@@ -23,7 +23,7 @@ jobs:
         tf_state_bucket_destroy: true
         domain_name: bitovi-sandbox.com
 
-    - id: EC2-5thdep
+    - id: EC2-5thdep2
       # Pin to use the configurable instance size feature
       uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
       with:
