@@ -27,12 +27,12 @@ jobs:
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         # dot_env: ${{ secrets.DOT_ENV }}
         domain_name: bitovi-sandbox.com
-        sub_domain: example-node-${{ github.ref_name }}
+        sub_domain: example-node-${{ github.job }}
         
         docker_full_cleanup: true
         app_directory_cleanup: true
   
-        stack_destroy: true
+        #stack_destroy: true
         tf_state_bucket_destroy: true
 
 #########        
