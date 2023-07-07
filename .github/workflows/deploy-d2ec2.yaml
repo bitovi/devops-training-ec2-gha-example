@@ -16,24 +16,13 @@ jobs:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
     steps:
-    - id: deploy-with-dns
+    - id: minimum-deploy
       name: Deploy
       uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
-
-        # Provide a secret called `DOT_ENV` to append environment variables to the .env file
-        # dot_env: ${{ secrets.DOT_ENV }}
-        domain_name: bitovi-sandbox.com
-        sub_domain: example-node-${{ github.job }}
-        
-        docker_full_cleanup: true
-        app_directory_cleanup: true
-  
-        #stack_destroy: true
-        tf_state_bucket_destroy: true
 
 #########        
 #    - id: EC2-Initial-Destroy
