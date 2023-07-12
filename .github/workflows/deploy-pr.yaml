@@ -24,7 +24,6 @@ jobs:
         tf_state_bucket_destroy: true
  
         aws_eks_create: false
-        tf_state_bucket_destroy: true
         aws_eks_environment: qa
         aws_eks_stackname: qa-stack
         aws_eks_cluster_version: 1.25
