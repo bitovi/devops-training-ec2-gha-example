@@ -10,8 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Create EKS Cluster
+      uses: bitovi/github-actions-deploy-eks@gha-testing
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+        aws_default_region: us-east-1
+  
+        aws_eks_create: true
     - name: deploy
-      uses: bitovi/github-actions-deploy-eks@main
+      uses: bitovi/github-actions-deploy-eks@gha-testing
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -39,7 +47,7 @@ jobs:
   
         
     - name: destroy
-      uses: bitovi/github-actions-deploy-eks@main
+      uses: bitovi/github-actions-deploy-eks@gha-testing
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
