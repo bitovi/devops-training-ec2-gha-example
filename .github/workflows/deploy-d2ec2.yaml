@@ -16,629 +16,266 @@ jobs:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
     steps:
-    
-    - id: now-add-efs-1
-#      name: now-add-efs
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
+    - id: destroy
+      name: Destroy
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        stack_destroy: true
+        tf_state_bucket_destroy: true
+
+    - id: minimum-deploy
+      name: minimum-deploy
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+    - id: minimum-deploy-dns-no-cert
+      name: minimum-deploy-dns-no-cert
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         domain_name: bitovi-sandbox.com
-        stack_destroy: true
-        tf_state_bucket_destroy: true
+        no_cert: true
+        
+    - id: minimum-deploy-dns-cert
+      name: minimum-deploy-dns-cert
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        
+    - id: minimum-deploy-dns-sub-cert
+      name: minimum-deploy-dns-sub-cert
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+
+    - id: minimum-deploy-dns-sub-cert-create
+      name: minimum-deploy-dns-sub-cert-create
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        
+    - id: minimum-deploy-dns-sub-cert-add-secret
+      name: minimum-deploy-dns-sub-cert-add-secret
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        aws_secret_env: test-secret
+        
+    - id: minimum-deploy-dns-sub-cert-add-secret-and-store-one
+      name: minimum-deploy-dns-sub-cert-add-secret-and-store-one
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        aws_secret_env: test-secret
+        create_keypair_sm_entry: true
+        
+    - id: now-add-efs-1
+      name: now-add-efs
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        aws_secret_env: test-secret
+        create_keypair_sm_entry: true
+        
         # EFS
         aws_create_efs: true
-#    - id: destroy
-#      name: Destroy
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        stack_destroy: true
-#        tf_state_bucket_destroy: true
-#
-#    - id: minimum-deploy
-#      name: minimum-deploy
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#
-#    - id: minimum-deploy-dns-no-cert
-#      name: minimum-deploy-dns-no-cert
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        domain_name: bitovi-sandbox.com
-#        no_cert: true
-#        
-#    - id: minimum-deploy-dns-cert
-#      name: minimum-deploy-dns-cert
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        domain_name: bitovi-sandbox.com
-#        
-#    - id: minimum-deploy-dns-sub-cert
-#      name: minimum-deploy-dns-sub-cert
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        domain_name: bitovi-sandbox.com
-#        sub_domain: some-test
-#
-#    - id: minimum-deploy-dns-sub-cert-create
-#      name: minimum-deploy-dns-sub-cert-create
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        domain_name: bitovi-sandbox.com
-#        sub_domain: some-test
-#        create_sub_cert: true
-#        
-#    - id: minimum-deploy-dns-sub-cert-add-secret
-#      name: minimum-deploy-dns-sub-cert-add-secret
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        domain_name: bitovi-sandbox.com
-#        sub_domain: some-test
-#        create_sub_cert: true
-#        aws_secret_env: test-secret
-#        
-#    - id: minimum-deploy-dns-sub-cert-add-secret-and-store-one
-#      name: minimum-deploy-dns-sub-cert-add-secret-and-store-one
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        domain_name: bitovi-sandbox.com
-#        sub_domain: some-test
-#        create_sub_cert: true
-#        aws_secret_env: test-secret
-#        create_keypair_sm_entry: true
-#        
-#    - id: now-add-efs-1
-#      name: now-add-efs
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        domain_name: bitovi-sandbox.com
-#        sub_domain: some-test
-#        create_sub_cert: true
-#        aws_secret_env: test-secret
-#        create_keypair_sm_entry: true
-#        
-#        # EFS
-#        aws_create_efs: true
-#        
-#    - id: now-add-efs-2
-#      name: now-add-efs-2
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        domain_name: bitovi-sandbox.com
-#        sub_domain: some-test
-#        create_sub_cert: true
-#        aws_secret_env: test-secret
-#        create_keypair_sm_entry: true
-#        
-#        # EFS
-#        aws_create_ha_efs: true
-#        
-#    - id: now-add-efs-3
-#      name: now-add-efs-3
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        domain_name: bitovi-sandbox.com
-#        sub_domain: some-test
-#        create_sub_cert: true
-#        aws_secret_env: test-secret
-#        create_keypair_sm_entry: true
-#        
-#        # EFS
-#        aws_create_ha_efs: true
-#        aws_create_efs_replica: true
-#        
-#    - id: now-add-efs-4
-#      name: now-add-efs-4
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        domain_name: bitovi-sandbox.com
-#        sub_domain: some-test
-#        create_sub_cert: true
-#        aws_secret_env: test-secret
-#        create_keypair_sm_entry: true
-#        
-#        # EFS
-#        aws_create_ha_efs: true
-#        aws_create_efs_replica: true
-#        aws_enable_efs_backup_policy: true
-#        
-#    - id: now-add-aurora
-#      name: now-add-aurora
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        domain_name: bitovi-sandbox.com
-#        sub_domain: some-test
-#        create_sub_cert: true
-#        aws_secret_env: test-secret
-#        create_keypair_sm_entry: true
-#        
-#        ## EFS
-#        #aws_create_ha_efs: true
-#        #aws_create_efs_replica: true
-#        #aws_enable_efs_backup_policy: true
-#        
-#        # RDS
-#        aws_enable_postgres: true
-#
-      
-#########        
-#    - id: EC2-Initial-Destroy
-#      # Pin to use the configurable instance size feature
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        stack_destroy: true
-#        tf_state_bucket_destroy: true
-#    - id: EC2-Simple-Deploy
-#      # Pin to use the configurable instance size feature
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        stack_destroy: 
-#        tf_state_bucket_destroy: true
-#    - id: EC2-Simple-Destroy
-#      # Pin to use the configurable instance size feature
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        stack_destroy: true
-#        tf_state_bucket_destroy: true
-#    - id: EC2-Complete-Deploy
-#      # Pin to use the configurable instance size feature
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        stack_destroy: 
-#        tf_state_bucket_destroy: true
-#        aws_secret_env: test-secret
-#        # SM
-#        create_keypair_sm_entry: true
-#        # EFS
-#        aws_create_ha_efs: true
-#        aws_create_efs_replica: true
-#        aws_enable_efs_backup_policy: true
-#        # RDS
-#        aws_enable_postgres: true
-#        # Certs
-#        domain_name: bitovi-sandbox.com
-#        sub_domain: some-test
-#        create_sub_cert: true
-#        #
-#    - id: EC2-Simple-Destroy2
-#      # Pin to use the configurable instance size feature
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        stack_destroy: true
-#        tf_state_bucket_destroy: true
-#
-#
-##########        
-#    - id: initial-destroy
-#      name: Initial destroy
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-##        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#
-#        app_directory: files
-#        aws_create_efs: true
-#        domain_name: bitovi-sandbox.com
-#        tf_state_bucket_destroy: true 
-#        #docker_full_cleanup: true
-#        #app_directory_cleanup: true
-#        stack_destroy: true
-#
-#    - id: deploy
-#      name: Deploy
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        app_directory: files
-#    
-#        #aws_create_efs: true
-#
-#        domain_name: bitovi-sandbox.com
-#
-#        tf_state_bucket_destroy: true 
-#        
-#        #docker_full_cleanup: true
-#        #app_directory_cleanup: true
-#    - if: ${{ success() }}
-#      id: deploy-docker-cleanup
-#      name: Deploy docker-cleanup
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#
-#        app_directory: files
-#    
-#        #aws_create_efs: true
-#
-#        domain_name: bitovi-sandbox.com
-#
-#        tf_state_bucket_destroy: true 
-#        
-#        docker_full_cleanup: true
-#        #app_directory_cleanup: true
-#
-#    - if: ${{ success() }}
-#      id: docker-app-cleanup
-#      name: Deploy app-cleanup
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#
-#        app_directory: files
-#    
-#        #aws_create_efs: true
-#
-#        domain_name: bitovi-sandbox.com
-#
-#        tf_state_bucket_destroy: true 
-#        
-#        #docker_full_cleanup: true
-#        app_directory_cleanup: true
-#
-#    - if: ${{ success() }}
-#      id: deploy-both-cleanup
-#      name: Deploy both-cleanup
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#
-#        app_directory: files
-#    
-#        #aws_create_efs: true
-#
-#        domain_name: bitovi-sandbox.com
-#
-#        tf_state_bucket_destroy: true 
-#        
-#        docker_full_cleanup: true
-#        app_directory_cleanup: true
-#
-#    - if: ${{ success() }}
-#      id: add-efs
-#      name: Deploy add-efs
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#
-#        app_directory: files
-#    
-#        aws_create_efs: true
-#
-#        domain_name: bitovi-sandbox.com
-#
-#        tf_state_bucket_destroy: true 
-#        
-#        #docker_full_cleanup: true
-#        #app_directory_cleanup: true
-#        
-#    - if: ${{ success() }}
-#      id: add-efs-v2
-#      name: Deploy add-efs v2
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#
-#        app_directory: files
-#    
-#        aws_create_efs: true
-#
-#        domain_name: bitovi-sandbox.com
-#
-#        tf_state_bucket_destroy: true 
-#        
-#        #docker_full_cleanup: true
-#        #app_directory_cleanup: true
-#    - if: ${{ success() }}
-#      id: deploy-docker-cleanup-efs
-#      name: Deploy docker-cleanup-efs
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#
-#        app_directory: files
-#    
-#        aws_create_efs: true
-#
-#        domain_name: bitovi-sandbox.com
-#
-#        tf_state_bucket_destroy: true 
-#        
-#        docker_full_cleanup: true
-#        #app_directory_cleanup: true
-#
-#    - if: ${{ success() }}
-#      id: docker-app-cleanup-efs
-#      name: Deploy app-cleanup-efs
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#
-#        app_directory: files
-#    
-#        aws_create_efs: true
-#
-#        domain_name: bitovi-sandbox.com
-#
-#        tf_state_bucket_destroy: true 
-#        
-#        #docker_full_cleanup: true
-#        app_directory_cleanup: true
-#
-#    - if: ${{ success() }}
-#      id: deploy-both-cleanup-efs
-#      name: Deploy both-cleanup-efs
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#
-#        app_directory: files
-#    
-#        aws_create_efs: true
-#
-#        domain_name: bitovi-sandbox.com
-#
-#        tf_state_bucket_destroy: true 
-#        
-#        docker_full_cleanup: true
-#        app_directory_cleanup: true
-#
-#    - if: ${{ success() }}
-#      id: remove-efs-cleanup
-#      name: Deploy remove-efs-cleanup
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#
-#        app_directory: files
-#    
-#        aws_create_efs: true
-#
-#        domain_name: bitovi-sandbox.com
-#
-#        tf_state_bucket_destroy: true 
-#        
-#        docker_full_cleanup: true
-#        app_directory_cleanup: true
-#
-#    - if: ${{ success() }}
-#    - id: final-create
-#      name: Final destroy
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-##
-#        app_directory: files
-##        
-##        aws_create_efs: true
-##
-#        domain_name: bitovi-sandbox.com
-##
-#        tf_state_bucket_destroy: true 
-##        
-##        docker_full_cleanup: true
-##        app_directory_cleanup: true
-##
-#    - id: final-destroy
-#      name: Final destroy
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-##
-#        app_directory: files
-##        
-##        aws_create_efs: true
-##
-#        domain_name: bitovi-sandbox.com
-##
-#        tf_state_bucket_destroy: true 
-##        
-##        docker_full_cleanup: true
-##        app_directory_cleanup: true
-##
-#        stack_destroy: true
-##
-###    - id: deploy
-###      name: Deploy
-###      #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-###      #uses: bitovi/github-actions-deploy-docker-to-ec2@Ansible_timeout_fix
-###      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
-###      uses: bitovi/github-actions-deploy-docker-to-ec2@add_cleanup_options
-###      with:
-###        # Action defaults inputs
-###        #checkout: true
-###        #bitops_code_only: true
-###        #bitops_code_store: true
-###        
-###        stack_destroy: true
-###        
-###        
-###        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-###        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-##        aws_default_region: us-east-1
-##        
-##        # Provide a secret called `DOT_ENV` to append environment variables to the .env file
-##        # dot_env: ${{ secrets.DOT_ENV }}
-##        
-##        app_directory: files
-##
-##        #gh_deployment_input_terraform: some_terraform_code
-##        #gh_action_input_terraform: terraform_code
-##        # EC2 Inputs
-##        #aws_ami_update: true
-##        #create_keypair_sm_entry: true
-##        #ec2_volume_size: 10
-##        #ec2_instance_protect: true
-##        #ec2_instance_type: t2.micro
-##        #ec2_user_data_file: echo.sh
-##        #ec2_user_data_replace_on_change: 
-##        
-##        # EFS Inputs
-##        aws_create_efs: true
-##        #aws_efs_volume_preserve: true
-##        #aws_create_ha_efs: true
-##        #aws_create_efs_replica: true
-##        #aws_enable_efs_backup_policy: true
-##        
-##        # RDS Inputs
-##        #aws_enable_postgres: true
-##        #aws_postgres_engine: "aurora-mysql"
-##        #aws_postgres_database_group_family: "aurora-mysql8.0"
-##        #aws_postgres_engine_version: "8.0"
-##        #aws_postgres_database_name: db_name
-##        #aws_postgres_database_port: 5435
-##        #aws_postgres_database_protection: true
-##        #aws_postgres_database_final_snapshot: true
-##
-##        # Certificate Inputs
-##        domain_name: bitovi-sandbox.com
-##        #sub_domain: leo
-##        #no_cert: true
-##
-##        # Application Inputs
-##        #app_port: 3000
-##        # Terraform inputs
-##        tf_state_bucket_destroy: true 
-##        
-##        #docker_full_cleanup: true
-##        #app_directory_cleanup: true
+        
+    - id: now-add-efs-2
+      name: now-add-efs-2
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        aws_secret_env: test-secret
+        create_keypair_sm_entry: true
+        
+        # EFS
+        aws_create_ha_efs: true
+        
+    - id: now-add-efs-3
+      name: now-add-efs-3
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        aws_secret_env: test-secret
+        create_keypair_sm_entry: true
+        
+        # EFS
+        aws_create_ha_efs: true
+        aws_create_efs_replica: true
+        
+    - id: now-add-efs-4
+      name: now-add-efs-4
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        aws_secret_env: test-secret
+        create_keypair_sm_entry: true
+        
+        # EFS
+        aws_create_ha_efs: true
+        aws_create_efs_replica: true
+        aws_enable_efs_backup_policy: true
+        
+    - id: now-add-aurora
+      name: now-add-aurora
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        aws_secret_env: test-secret
+        create_keypair_sm_entry: true
+        
+        ## EFS
+        aws_create_ha_efs: true
+        aws_create_efs_replica: true
+        aws_enable_efs_backup_policy: true
+        
+        # RDS
+        aws_enable_postgres: true
 
-  
-#  Deploy-1:
-#    # if the branch name of the PR does not contain 'skip-deploy'
-#    if: "!contains(github.head_ref, 'skip-deploy')"
-#    runs-on: ubuntu-latest
-#    environment:
-#      name: ${{ github.ref_name }}
-#      url: ${{ steps.deploy1.outputs.vm_url }}
-#    steps:
-#    - id: deploy1
-#      name: Deploy 1
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
-#      with:
-#        stack_destroy: true
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        
-#        dot_env: ${{ secrets.DOT_ENV }}
-#        # Certificate Inputs
-#        domain_name: bitovi-sandbox.com
-#        sub_domain: test1
-#        create_sub_cert: true
-#        #no_cert: true
-#
-#        # Application Inputs
-#        app_port: 3000
-#        
-#        # Terraform inputs
-#        tf_state_bucket_destroy: true 
-#        aws_resource_identifier: leo-d2ec2-deploy1
-#  Deploy-2:
-#    # if the branch name of the PR does not contain 'skip-deploy'
-#    if: "!contains(github.head_ref, 'skip-deploy')"
-#    runs-on: ubuntu-latest
-#    environment:
-#      name: ${{ github.ref_name }}
-#      url: ${{ steps.deploy2.outputs.vm_url }}
-#    steps:
-#    - id: deploy2
-#      name: Deploy 2
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-commons
-#      #uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
-#      with:
-#        stack_destroy: true
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        
-#        dot_env: ${{ secrets.DOT_ENV }}
-#
-#        domain_name: bitovi-sandbox.com
-#        sub_domain: test2
-#        create_sub_cert: true
-#
-#        app_port: 3000
-#        
-#        tf_state_bucket_destroy: true 
-#        aws_resource_identifier:  leo-d2ec2-deploy2
+    - id: now-add-aurora-2
+      name: now-add-aurora-2
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        aws_secret_env: test-secret
+        create_keypair_sm_entry: true
+        
+        ## EFS
+        aws_create_ha_efs: true
+        aws_create_efs_replica: true
+        aws_enable_efs_backup_policy: true
+        
+        # RDS
+        aws_enable_postgres: true
+
+    - id: now-add-aurora-efs
+      name: now-add-aurora-efs
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        aws_secret_env: test-secret
+        create_keypair_sm_entry: true
+        
+        # RDS
+        aws_enable_postgres: true
+
+    - id: now-remove-aurora
+      name: now-remove-aurora
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        aws_secret_env: test-secret
+        create_keypair_sm_entry: true
+        
+        ## EFS
+        aws_create_ha_efs: true
+        aws_create_efs_replica: true
+        aws_enable_efs_backup_policy: true
+
+    - id: now-remove-efs
+      name: now-remove-efs
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        aws_secret_env: test-secret
+        create_keypair_sm_entry: true
+        
+    - id: change-ec2-type
+      name: change-ec2-type
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        domain_name: bitovi-sandbox.com
+        sub_domain: some-test
+        create_sub_cert: true
+        aws_secret_env: test-secret
+        create_keypair_sm_entry: true
+        ec2_instance_type: t2.medium
+
+      
+    - id: final-destroy
+      name: final-destroy
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        stack_destroy: true
+        tf_state_bucket_destroy: true
