@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: deploy
-      uses: bitovi/github-actions-deploy-eks@gha-testing
+      uses: bitovi/github-actions-deploy-eks@main
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -20,7 +20,7 @@ jobs:
         input_helm_charts: helm
   
         bitops_code_only: 
-        bitops_code_store: 
+        bitops_code_store: true 
         tf_state_bucket_destroy: true
  
         aws_eks_create: false
@@ -38,3 +38,15 @@ jobs:
         aws_eks_public_subnets: "10.0.11.0/24,10.0.12.0/24,10.0.13.0/24"
   
         
+    - name: destroy
+      uses: bitovi/github-actions-deploy-eks@main
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        input_helm_charts: helm
+  
+        bitops_code_only: 
+        bitops_code_store:  
+        tf_state_bucket_destroy: true
