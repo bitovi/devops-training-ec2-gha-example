@@ -7,15 +7,37 @@ on:
 permissions:
   contents: read
 
+#jobs:
+#  EC2-Deploy:
+#    # if the branch name of the PR does not contain 'skip-deploy'
+#    if: "!contains(github.head_ref, 'skip-deploy')"
+#    runs-on: ubuntu-latest
+#    environment:
+#      name: ${{ github.ref_name }}
+#      url: ${{ steps.deploy.outputs.vm_url }}
+#    steps:
+#    
+#    name: Develop Platform Basic deploy
+#on:
+#  push:
+#    branches: [develop]
+
 jobs:
-  EC2-Deploy:
-    # if the branch name of the PR does not contain 'skip-deploy'
-    if: "!contains(github.head_ref, 'skip-deploy')"
+  Deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.ref_name }}
-      url: ${{ steps.deploy.outputs.vm_url }}
     steps:
+      - id: deploy
+        uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          bitops_code_only: true
+          bitops_code_store: true
+
+          ec2_instance_type: t2.medium
+
+          docker_full_cleanup: true
 #    - id: destroy
 #      name: Destroy
 #      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
@@ -255,27 +277,27 @@ jobs:
 #        aws_secret_env: test-secret
 #        create_keypair_sm_entry: true
 #        
-    - id: change-ec2-type
-      name: change-ec2-type
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        domain_name: bitovi-sandbox.com
-        sub_domain: some-test
-        create_sub_cert: true
-        aws_secret_env: test-secret
-        create_keypair_sm_entry: true
-        ec2_instance_type: t2.medium
+#    - id: change-ec2-type
+#      name: change-ec2-type
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#        domain_name: bitovi-sandbox.com
+#        sub_domain: some-test
+#        create_sub_cert: true
+#        aws_secret_env: test-secret
+#        create_keypair_sm_entry: true
+#        ec2_instance_type: t2.medium
 
       
-    - id: final-destroy
-      name: final-destroy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        stack_destroy: true
-        tf_state_bucket_destroy: true
+#    - id: final-destroy
+#      name: final-destroy
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#        stack_destroy: true
+#        tf_state_bucket_destroy: true
