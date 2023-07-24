@@ -11,6 +11,13 @@ jobs:
     steps:
     
             
+    - name: destroy0
+      uses: bitovi/github-actions-deploy-eks@terraform-generator-remove
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1  
+        tf_state_bucket_destroy: true
     - name: destroy1
       uses: bitovi/github-actions-deploy-eks@gha-testing
       with:
