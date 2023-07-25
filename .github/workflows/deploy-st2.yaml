@@ -13,15 +13,6 @@ jobs:
       url: ${{ steps.deploy.outputs.lb_url }}
 
     steps:
-
-    # Foresight's GitHub Action Monitoring workflow action
-    # Make sure you put workflow kit action on top of all the steps 
-    - name: Collect Workflow Telemetry
-      uses: runforesight/foresight-workflow-kit-action@v1
-      if: ${{ always() }}
-      with:
-        api_key: ${{ secrets.FORESIGHT_API_KEY }}
-
     # Bitovi's Deploy StackStorm action
     - id: deploy
       name: Deploy
@@ -31,7 +22,7 @@ jobs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
         #aws_ec2_instance_type: t2.small
-        tf_stack_destroy: true
+        tf_stack_destroy: 
         tf_state_bucket_destroy: true
         
         aws_default_region: us-east-1
