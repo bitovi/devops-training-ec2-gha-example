@@ -291,8 +291,8 @@ jobs:
         
         aws_eks_create: true
 
-    - id: co-create-eks
-      name: co-create-eks
+    - id: co-create-eks-2
+      name: co-create-eks-2
       uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -352,7 +352,7 @@ jobs:
         input_helm_charts: helm
 
 
-    - name: destroy2
+    - name: destroy-all
       uses: bitovi/github-actions-deploy-eks@gha-testing
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
