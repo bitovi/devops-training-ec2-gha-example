@@ -52,7 +52,7 @@ jobs:
  
         aws_eks_create: true
   
-      - name: deploy2
+    - name: deploy2
       uses: bitovi/github-actions-deploy-eks@gha-testing
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
