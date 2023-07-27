@@ -23,7 +23,7 @@ jobs:
         #aws_eks_create: true
 
         tf_state_bucket_destroy: true
-        stack_destroy: true
+        tf_stack_destroy: true
         
 #    - name: Create EKS Cluster
 #      uses: bitovi/github-actions-deploy-eks@gha-testing
