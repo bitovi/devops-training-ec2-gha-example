@@ -16,15 +16,15 @@ jobs:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
     steps:
-    - id: deploy
-      name: Deploy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        tf_state_bucket_destroy: true
-
+#    - id: deploy
+#      name: Deploy
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#        tf_state_bucket_destroy: true
+#
 #    - id: destroy
 #      name: Destroy
 #      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
@@ -292,13 +292,13 @@ jobs:
 #
 #        tf_state_bucket_destroy: true
 
-#    - id: minimum-deploy-vpc-none
-#      name: minimum-deploy-vpc-none
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
+    - id: minimum-deploy-vpc-none
+      name: minimum-deploy-vpc-none
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
 
     - id: minimum-deploy-vpc
       name: minimum-deploy-vpc
@@ -309,95 +309,95 @@ jobs:
         aws_default_region: us-east-1
         aws_vpc_id: vpc-01f89261069ddec77
 
-#    - id: minimum-deploy-create-vpc
-#      name: minimum-deploy-create-vpc
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        aws_vpc_create: true
-#
-#    - id: minimum-deploy-create-vpc-name
-#      name: minimum-deploy-create-vpc-name
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        aws_vpc_create: true
-#        aws_vpc_name: change-vpc-to-some-stupid-name
-#
-#    - id: minimum-deploy-create-vpc-cidr
-#      name: minimum-deploy-create-vpc-cidr
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        aws_vpc_create: true
-#        aws_vpc_name: change-vpc-to-some-stupid-name
-#        aws_vpc_cidr_block: 192.168.0.0/16
-#        aws_vpc_public_subnets: 192.168.110.0/24
-#
-#    - id: minimum-deploy-create-vpc-cidr-1
-#      name: minimum-deploy-create-vpc-cidr-1
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        aws_vpc_create: true
-#        aws_vpc_name: change-vpc-to-some-stupid-name
-#        aws_vpc_cidr_block: 192.168.0.0/16
-#        aws_vpc_public_subnets: 192.168.110.0/24
-#        aws_vpc_private_subnets: 192.168.210.0/24
-#
-#    - id: minimum-deploy-create-vpc-cidr-subnets
-#      name: minimum-deploy-create-vpc-cidr-subnets
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        aws_vpc_create: true
-#        aws_vpc_name: change-vpc-to-some-stupid-name
-#        aws_vpc_cidr_block: 192.168.0.0/16
-#        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
-#      
-#    - id: minimum-deploy-create-vpc-cidr-subnets2
-#      name: minimum-deploy-create-vpc-cidr-subnets2
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        aws_vpc_create: true
-#        aws_vpc_name: change-vpc-to-some-stupid-name
-#        aws_vpc_cidr_block: 192.168.0.0/16
-#        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
-#        aws_vpc_private_subnets: 192.168.210.0/24,192.168.211.0/24
-#
-#    - id: minimum-deploy-create-vpc-cidr-subnets21
-#      name: minimum-deploy-create-vpc-cidr-subnets21
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        aws_vpc_create: true
-#        aws_vpc_name: change-vpc-to-some-stupid-name
-#        aws_vpc_cidr_block: 192.168.0.0/16
-#        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
-#        aws_vpc_private_subnets: 192.168.210.0/24,192.168.211.0/24
-#        aws_vpc_availability_zones: us-east-1a,us-east-1b
-#
-#    - name: destroy-all
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        stack_destroy: true
-#
-#        tf_state_bucket_destroy: true
+    - id: minimum-deploy-create-vpc
+      name: minimum-deploy-create-vpc
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_vpc_create: true
+
+    - id: minimum-deploy-create-vpc-name
+      name: minimum-deploy-create-vpc-name
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_vpc_create: true
+        aws_vpc_name: change-vpc-to-some-stupid-name
+
+    - id: minimum-deploy-create-vpc-cidr
+      name: minimum-deploy-create-vpc-cidr
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_vpc_create: true
+        aws_vpc_name: change-vpc-to-some-stupid-name
+        aws_vpc_cidr_block: 192.168.0.0/16
+        aws_vpc_public_subnets: 192.168.110.0/24
+
+    - id: minimum-deploy-create-vpc-cidr-1
+      name: minimum-deploy-create-vpc-cidr-1
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_vpc_create: true
+        aws_vpc_name: change-vpc-to-some-stupid-name
+        aws_vpc_cidr_block: 192.168.0.0/16
+        aws_vpc_public_subnets: 192.168.110.0/24
+        aws_vpc_private_subnets: 192.168.210.0/24
+
+    - id: minimum-deploy-create-vpc-cidr-subnets
+      name: minimum-deploy-create-vpc-cidr-subnets
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_vpc_create: true
+        aws_vpc_name: change-vpc-to-some-stupid-name
+        aws_vpc_cidr_block: 192.168.0.0/16
+        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
+      
+    - id: minimum-deploy-create-vpc-cidr-subnets2
+      name: minimum-deploy-create-vpc-cidr-subnets2
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_vpc_create: true
+        aws_vpc_name: change-vpc-to-some-stupid-name
+        aws_vpc_cidr_block: 192.168.0.0/16
+        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
+        aws_vpc_private_subnets: 192.168.210.0/24,192.168.211.0/24
+
+    - id: minimum-deploy-create-vpc-cidr-subnets21
+      name: minimum-deploy-create-vpc-cidr-subnets21
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_vpc_create: true
+        aws_vpc_name: change-vpc-to-some-stupid-name
+        aws_vpc_cidr_block: 192.168.0.0/16
+        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
+        aws_vpc_private_subnets: 192.168.210.0/24,192.168.211.0/24
+        aws_vpc_availability_zones: us-east-1a,us-east-1b
+
+    - name: destroy-all
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        stack_destroy: true
+
+        tf_state_bucket_destroy: true
