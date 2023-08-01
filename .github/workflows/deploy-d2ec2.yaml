@@ -16,14 +16,14 @@ jobs:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
     steps:
-#    - id: deploy
-#      name: Deploy
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        tf_state_bucket_destroy: true
+    - id: deploy
+      name: Deploy
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        tf_state_bucket_destroy: true
 
 #    - id: destroy
 #      name: Destroy
@@ -292,13 +292,13 @@ jobs:
 #
 #        tf_state_bucket_destroy: true
 
-    - id: minimum-deploy-vpc-none
-      name: minimum-deploy-vpc-none
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
+#    - id: minimum-deploy-vpc-none
+#      name: minimum-deploy-vpc-none
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
 
     - id: minimum-deploy-vpc
       name: minimum-deploy-vpc
