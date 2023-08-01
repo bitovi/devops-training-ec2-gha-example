@@ -378,8 +378,8 @@ jobs:
         aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
         aws_vpc_private_subnets: 192.168.210.0/24,192.168.211.0/24
 
-    - id: minimum-deploy-create-vpc-cidr-subnets2
-      name: minimum-deploy-create-vpc-cidr-subnets2
+    - id: minimum-deploy-create-vpc-cidr-subnets21
+      name: minimum-deploy-create-vpc-cidr-subnets21
       uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
