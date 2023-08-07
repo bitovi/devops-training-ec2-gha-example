@@ -137,7 +137,7 @@ jobs:
         create_keypair_sm_entry: true
         
         # EFS
-        aws_efs_create_ha: true
+        #aws_efs_create_ha: true
 
         # VPC 
         aws_vpc_id: vpc-01f89261069ddec77
