@@ -189,83 +189,83 @@ jobs:
 #        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
 #        
 #        
-    - id: now-add-aurora
-      name: now-add-aurora
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        domain_name: bitovi-sandbox.com
-        sub_domain: some-test
-        create_sub_cert: true
-        aws_secret_env: test-secret
-        create_keypair_sm_entry: true
+#    - id: now-add-aurora
+#      name: now-add-aurora
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#        domain_name: bitovi-sandbox.com
+#        sub_domain: some-test
+#        create_sub_cert: true
+#        aws_secret_env: test-secret
+#        create_keypair_sm_entry: true
+#        
+#        ## EFS
+#        aws_efs_create_ha: true
+#        aws_efs_create_replica: true
+#        aws_efs_enable_backup_policy: true
+#        
+#        # RDS
+#        aws_aurora_enable: true
+#
+#        # VPC
+#        aws_vpc_create: true
+#        aws_vpc_cidr_block: 192.168.0.0/16
+#        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
+        
+
+#    - id: now-add-aurora-2
+#      name: now-add-aurora-2
+#     uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#        domain_name: bitovi-sandbox.com
+#        sub_domain: some-test
+#        create_sub_cert: true
+#        aws_secret_env: test-secret
+#        create_keypair_sm_entry: true
         
         ## EFS
-        aws_efs_create_ha: true
-        aws_efs_create_replica: true
-        aws_efs_enable_backup_policy: true
-        
+#        aws_efs_create_ha: true
+#        aws_efs_create_replica: true
+#        aws_efs_enable_backup_policy: true
+#        
         # RDS
-        aws_aurora_enable: true
+#        aws_aurora_enable: true
+#        aws_aurora_database_protection: true
+#        aws_aurora_database_final_snapshot: true
 
         # VPC
-        aws_vpc_create: true
-        aws_vpc_cidr_block: 192.168.0.0/16
-        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
-        
-
-    - id: now-add-aurora-2
-      name: now-add-aurora-2
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        domain_name: bitovi-sandbox.com
-        sub_domain: some-test
-        create_sub_cert: true
-        aws_secret_env: test-secret
-        create_keypair_sm_entry: true
-        
-        ## EFS
-        aws_efs_create_ha: true
-        aws_efs_create_replica: true
-        aws_efs_enable_backup_policy: true
+#        aws_vpc_create: true
+#        aws_vpc_cidr_block: 192.168.0.0/16
+#        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
+#        
+#        
+#    - id: now-add-aurora-remove-efs
+#      name: now-add-aurora-remove-efs
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#        domain_name: bitovi-sandbox.com
+#        sub_domain: some-test
+#        create_sub_cert: true
+#        aws_secret_env: test-secret
+#        create_keypair_sm_entry: true
         
         # RDS
-        aws_aurora_enable: true
-        aws_aurora_database_protection: true
-        aws_aurora_database_final_snapshot: true
+#        aws_aurora_enable: true
 
         # VPC
-        aws_vpc_create: true
-        aws_vpc_cidr_block: 192.168.0.0/16
-        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
-        
-        
-    - id: now-add-aurora-remove-efs
-      name: now-add-aurora-remove-efs
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        domain_name: bitovi-sandbox.com
-        sub_domain: some-test
-        create_sub_cert: true
-        aws_secret_env: test-secret
-        create_keypair_sm_entry: true
-        
-        # RDS
-        aws_aurora_enable: true
-
-        # VPC
-        aws_vpc_create: true
-        aws_vpc_cidr_block: 192.168.0.0/16
-        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
-        
+#        aws_vpc_create: true
+#        aws_vpc_cidr_block: 192.168.0.0/16
+#        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
+#        
     - id: now-add-aurora-remove-efs-and-vpc
       name: now-add-aurora-remove-efs-and-vpc
       uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
@@ -330,15 +330,15 @@ jobs:
         ec2_root_preserve: false
 
 #
-#    - name: destroy-all
-#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        stack_destroy: true
-#
-#        tf_state_bucket_destroy: true
+    - name: destroy-all
+      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        stack_destroy: true
+
+        tf_state_bucket_destroy: true
 #
 #    - id: minimum-deploy-vpc-none
 #      name: minimum-deploy-vpc-none
