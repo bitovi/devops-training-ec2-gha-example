@@ -142,53 +142,53 @@ jobs:
 #        # VPC 
 #        aws_vpc_id: vpc-01f89261069ddec77
 #        aws_vpc_subnet_id: subnet-0130ff288ca98c43f
-        
-    - id: now-add-efs-3
-      name: now-add-efs-3
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        domain_name: bitovi-sandbox.com
-        sub_domain: some-test
-        create_sub_cert: true
-        aws_secret_env: test-secret
-        create_keypair_sm_entry: true
-        
-        # EFS
-        aws_efs_create_ha: true
-        aws_efs_create_replica: true
-
-        # VPC
-        aws_vpc_create: true
-        aws_vpc_cidr_block: 192.168.0.0/16
-        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
-        
-    - id: now-add-efs-4
-      name: now-add-efs-4
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        domain_name: bitovi-sandbox.com
-        sub_domain: some-test
-        create_sub_cert: true
-        aws_secret_env: test-secret
-        create_keypair_sm_entry: true
-        
-        # EFS
-        aws_efs_create_ha: true
-        aws_efs_create_replica: true
-        aws_efs_enable_backup_policy: true
-
-        # VPC
-        aws_vpc_create: true
-        aws_vpc_cidr_block: 192.168.0.0/16
-        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
-        
-        
+#        
+#    - id: now-add-efs-3
+#      name: now-add-efs-3
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#        domain_name: bitovi-sandbox.com
+#        sub_domain: some-test
+#        create_sub_cert: true
+#        aws_secret_env: test-secret
+#        create_keypair_sm_entry: true
+#        
+#        # EFS
+#        aws_efs_create_ha: true
+#        aws_efs_create_replica: true
+#
+#        # VPC
+#        aws_vpc_create: true
+#        aws_vpc_cidr_block: 192.168.0.0/16
+#        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
+#        
+#    - id: now-add-efs-4
+#      name: now-add-efs-4
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#        domain_name: bitovi-sandbox.com
+#        sub_domain: some-test
+#        create_sub_cert: true
+#        aws_secret_env: test-secret
+#        create_keypair_sm_entry: true
+#        
+#        # EFS
+#        aws_efs_create_ha: true
+#        aws_efs_create_replica: true
+#        aws_efs_enable_backup_policy: true
+#
+#        # VPC
+#        aws_vpc_create: true
+#        aws_vpc_cidr_block: 192.168.0.0/16
+#        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
+#        
+#        
     - id: now-add-aurora
       name: now-add-aurora
       uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
