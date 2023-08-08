@@ -17,12 +17,12 @@ jobs:
     - id: deploy
       name: Deploy
       #uses: bitovi/github-actions-deploy-stackstorm@v0.3.0
-      uses: bitovi/github-actions-deploy-stackstorm@commons
+      uses: bitovi/github-actions-deploy-stackstorm@main
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
         #aws_ec2_instance_type: t2.small
-        tf_stack_destroy: true
+        #tf_stack_destroy: true
         tf_state_bucket_destroy: true
         
         aws_default_region: us-east-1
