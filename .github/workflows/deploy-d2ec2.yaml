@@ -266,21 +266,21 @@ jobs:
 #        aws_vpc_cidr_block: 192.168.0.0/16
 #        aws_vpc_public_subnets: 192.168.110.0/24,192.168.111.0/24
 #        
-    - id: now-add-aurora-remove-efs-and-vpc
-      name: now-add-aurora-remove-efs-and-vpc
-      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        domain_name: bitovi-sandbox.com
-        sub_domain: some-test
-        create_sub_cert: true
-        aws_secret_env: test-secret
-        create_keypair_sm_entry: true
+#    - id: now-add-aurora-remove-efs-and-vpc
+#      name: now-add-aurora-remove-efs-and-vpc
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@gha-testing-2
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#        domain_name: bitovi-sandbox.com
+#        sub_domain: some-test
+#        create_sub_cert: true
+#        aws_secret_env: test-secret
+#        create_keypair_sm_entry: true
         
         # RDS
-        aws_aurora_enable: true
+#        aws_aurora_enable: true
         
         
     - id: now-remove-aurora
