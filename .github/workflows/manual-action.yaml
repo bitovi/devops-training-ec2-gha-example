@@ -1,4 +1,4 @@
-name: Deploy D2EC2 Testing branch
+name: Manual Deploy D2EC2 Branch workflow
 
 on:
   workflow_dispatch:
