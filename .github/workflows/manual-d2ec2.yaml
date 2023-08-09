@@ -1,0 +1,29 @@
+name: Manual Deploy D2EC2 Branch workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      destroy:
+        type: boolean
+        default: false
+      d2ec2-branch:
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  EC2-Deploy:
+    if: "!contains(github.head_ref, 'skip-deploy')"
+    runs-on: ubuntu-latest
+    steps:
+    - id: Deploy
+      name: now-add-efs-3
+      uses: bitovi/github-actions-deploy-docker-to-ec2@${{ github.event.inputs.d2ec2-branch }}
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        stack_destroy: ${{ github.event.inputs.destroy }}
+        tf_state_bucket_destroy: true
