@@ -4,10 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       destroy:
-        type: choice
-        options:
-          - false
-          - true
+        type: boolean
+        default: false
       d2ec2-branch:
         type: string
 
