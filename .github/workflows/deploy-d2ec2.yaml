@@ -177,11 +177,6 @@ jobs:
         create_sub_cert: true
         aws_secret_env: test-secret
         create_keypair_sm_entry: true
-        
-        # EFS
-        aws_efs_create_ha: true
-        aws_efs_create_replica: true
-        aws_efs_enable_backup_policy: true
 
         # VPC
         aws_vpc_create: true
