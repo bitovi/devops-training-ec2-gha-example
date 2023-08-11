@@ -14,132 +14,133 @@ jobs:
     steps:
     - name: Create deploy-bucket
       id: bucket-deploy-bucket
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+      uses: bitovi/github-actions-deploy-static-site-to-aws@debug
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
         aws_default_region: us-east-1
         tf_action: 'apply'
-
-    - name: Create deploy-bucket-dns
-      id: bucket-deploy-bucket-dns
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'apply'
-        aws_r53_domain_name: bitovi-sandbox.com
-
-
-    - name: Create deploy-bucket-dns-root
-      id: bucket-deploy-bucket-dns-root
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'apply'
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_root_domain_deploy: true
-
-
-    - name: Create deploy-bucket-dns-sub
-      id: bucket-deploy-bucket-dns-sub
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'apply'
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: spa-test
-
-
-    - name: Create deploy-bucket-dns-cdn
-      id: bucket-deploy-bucket-dns-cdn
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'apply'
-        aws_spa_cdn_enabled: true
-        aws_r53_domain_name: bitovi-sandbox.com
-        #aws_r53_root_domain_deploy: true
-        #aws_r53_sub_domain_name: spa-test
-
-    - name: Create deploy-bucket-dns-root-cdn
-      id: bucket-deploy-bucket-dns-root-cdn
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'apply'
-        #tf_state_bucket_destroy: true
-        aws_spa_cdn_enabled: true
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_root_domain_deploy: true
-        #aws_r53_sub_domain_name: spa-test
-
-    - name: Create deploy-bucket-sub-dns-cdn
-      id: bucket-deploy-bucket-dns-sub-cdn
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'apply'
-        aws_spa_cdn_enabled: true
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: spa-test
-
-    - name: Create deploy-bucket-cdn
-      id: bucket-deploy-bucket-cdn
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'apply'
-        aws_spa_cdn_enabled: true
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: spa-test
-
-    - name: Create deploy-bucket-cdn-remove
-      id: bucket-deploy-bucket-cdn-remove
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'apply'
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: spa-test
-
- 
-    - name: Destroy deploy-bucket-cdn-dns
-      id: destroy
-      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-
-        tf_action: 'destroy'
-        tf_state_bucket_destroy: true
-        
-        aws_spa_cdn_enabled: true
-        
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: spa-test
-
+#
+#    - name: Create deploy-bucket-dns
+#      id: bucket-deploy-bucket-dns
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'apply'
+#        aws_r53_domain_name: bitovi-sandbox.com
+#
+#
+#    - name: Create deploy-bucket-dns-root
+#      id: bucket-deploy-bucket-dns-root
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'apply'
+#        aws_r53_domain_name: bitovi-sandbox.com
+#        aws_r53_root_domain_deploy: true
+#
+#
+#    - name: Create deploy-bucket-dns-sub
+#      id: bucket-deploy-bucket-dns-sub
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'apply'
+#        aws_r53_domain_name: bitovi-sandbox.com
+#        aws_r53_sub_domain_name: spa-test
+#
+#
+#    - name: Create deploy-bucket-dns-cdn
+#      id: bucket-deploy-bucket-dns-cdn
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'apply'
+#        aws_spa_cdn_enabled: true
+#        aws_r53_domain_name: bitovi-sandbox.com
+#        #aws_r53_root_domain_deploy: true
+#        #aws_r53_sub_domain_name: spa-test
+#
+#    - name: Create deploy-bucket-dns-root-cdn
+#      id: bucket-deploy-bucket-dns-root-cdn
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'apply'
+#        #tf_state_bucket_destroy: true
+#        aws_spa_cdn_enabled: true
+#        aws_r53_domain_name: bitovi-sandbox.com
+#        aws_r53_root_domain_deploy: true
+#        #aws_r53_sub_domain_name: spa-test
+#
+#    - name: Create deploy-bucket-sub-dns-cdn
+#      id: bucket-deploy-bucket-dns-sub-cdn
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'apply'
+#        aws_spa_cdn_enabled: true
+#        aws_r53_domain_name: bitovi-sandbox.com
+#        aws_r53_sub_domain_name: spa-test
+#
+#    - name: Create deploy-bucket-cdn
+#      id: bucket-deploy-bucket-cdn
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'apply'
+#        aws_spa_cdn_enabled: true
+#        aws_r53_domain_name: bitovi-sandbox.com
+#        aws_r53_sub_domain_name: spa-test
+#
+#    - name: Create deploy-bucket-cdn-remove
+#      id: bucket-deploy-bucket-cdn-remove
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'apply'
+#        aws_r53_domain_name: bitovi-sandbox.com
+#        aws_r53_sub_domain_name: spa-test
+#
+# 
+#    - name: Destroy deploy-bucket-cdn-dns
+#      id: destroy
+#      uses: bitovi/github-actions-deploy-static-site-to-aws@fix-plan-bug
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
+#
+#        tf_action: 'destroy'
+#        tf_state_bucket_destroy: true
+#        
+#        aws_spa_cdn_enabled: true
+#        
+#        aws_r53_domain_name: bitovi-sandbox.com
+#        aws_r53_sub_domain_name: spa-test
+#
+#
