@@ -25,3 +25,4 @@ jobs:
         aws_default_region: us-east-1
         stack_destroy: true
         tf_state_bucket_destroy: true
+        
