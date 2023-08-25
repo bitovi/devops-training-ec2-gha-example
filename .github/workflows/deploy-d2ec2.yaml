@@ -25,5 +25,5 @@ jobs:
         aws_default_region: us-east-1
         #stack_destroy: true
         tf_state_bucket_destroy: true
-        ec2_additional_tags: '{dev = "t2.micro",staging = "t2.small", production = "t2.medium"}'
+        ec2_additional_tags: '{"key": "value"}'
         
