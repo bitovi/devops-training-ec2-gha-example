@@ -25,5 +25,5 @@ jobs:
         aws_default_region: us-east-1
         #stack_destroy: true
         tf_state_bucket_destroy: true
-        ec2_additional_tags: '{\"o2:instance:backups:type\":\"ami\", \"o2:platform\":\"linux\", \"o2:patch:group\":\"\"}'
-        additional_tags: '{\"o2:phi\":\"true\", \"o2:environment\":\"dev\", \"terraform\":\"true\"}'
+        ec2_additional_tags: '{\"o2:instance:backups:type\":\"ami\",\"o2:platform\":\"linux\",\"o2:patch:group\":\"\"}'
+        additional_tags: '{\"o2:phi\":\"true\",\"o2:environment\":\"dev\",\"terraform\":\"true\"}'
