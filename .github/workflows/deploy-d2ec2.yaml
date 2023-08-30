@@ -27,3 +27,7 @@ jobs:
         tf_state_bucket_destroy: true
         ec2_additional_tags: '{\"o2:instance:backups:type\":\"ami\",\"o2:platform\":\"linux\",\"o2:patch:group\":\"\"}'
         additional_tags: '{\"o2:phi\":\"true\",\"o2:environment\":\"dev\",\"terraform\":\"true\"}'
+
+        aws_vpc_id: vpc-081abe910edab4281
+        aws_vpc_subnet_id: subnet-0f1b65df74adf6e87
+
