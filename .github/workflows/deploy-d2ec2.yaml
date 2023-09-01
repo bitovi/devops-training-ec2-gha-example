@@ -20,6 +20,8 @@ jobs:
       name: Destroy
       uses: bitovi/github-actions-deploy-docker-to-ec2@commons
       with:
+        ansible_skip: true
+
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
@@ -27,6 +29,8 @@ jobs:
         tf_state_bucket_destroy: true
         ec2_additional_tags: '{\"o2:instance:backups:type\":\"ami\",\"o2:platform\":\"linux\",\"o2:patch:group\":\"\"}'
         additional_tags: '{\"o2:phi\":\"true\",\"o2:environment\":\"dev\",\"terraform\":\"true\"}'
+ 
+        aws_ec2_user_data_file: get-runner.sh
 
         aws_vpc_id: vpc-081abe910edab4281
         aws_vpc_subnet_id: subnet-0f1b65df74adf6e87
