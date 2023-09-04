@@ -1,6 +1,10 @@
 #!/bin/bash
 # Repo file
 # Update and upgrade packages as root
+REPO_URL=RESERVED_FOR_REPO_URL
+ACCESS_TOKEN=RESERVED_FOR_REPO_ACCESS_TOKEN
+
+# Update and upgrade packages as root
 sudo apt update -y
 sudo apt upgrade -y
 
@@ -15,7 +19,7 @@ sudo -u ubuntu curl -O -L "$(curl -s https://api.github.com/repos/actions/runner
 sudo -u ubuntu tar xzf ./actions-runner-linux-x64*.tar.gz
 
 # Configure the runner using the environment variables as ubuntu
-sudo -u ubuntu ./config.sh --url RESERVED_FOR_REPO_URL --token RESERVED_FOR_REPO_ACCESS_TOKEN --unattended
+sudo -u ubuntu ./config.sh --url $REPO_URL --token $ACCESS_TOKEN --unattended
 #Config Options:
 # --unattended           Disable interactive prompts for missing arguments. Defaults will be used for missing options
 # --url string           Repository to add the runner to. Required if unattended
@@ -37,4 +41,4 @@ sudo -u ubuntu ./svc.sh start
 
 # Add the runner to autostart on boot as ubuntu
 sudo -u ubuntu systemctl enable actions-runner
-sudo -u ubuntu echo "Used the deployment file" > result
+sudo -u ubuntu echo "Used the deployment file. It's URL was $REPO_URL" > result
