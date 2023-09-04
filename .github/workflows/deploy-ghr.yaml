@@ -16,7 +16,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
         aws_default_region: us-east-1
 
-        stack_destroy: true
+#        stack_destroy: true
         tf_state_bucket_destroy: true
         
         repo_url: https://github.com/bitovi/devops-training-ec2-gha-example
