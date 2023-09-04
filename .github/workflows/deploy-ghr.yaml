@@ -1,0 +1,20 @@
+name: Deploy GHR
+on:
+  push:
+    branches: [ ghr ]
+      
+
+jobs:
+  deploy-bucket-only:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create deploy-bucket
+      id: bucket-deploy-bucket
+      uses: bitovi/github-actions-deploy-gh-runner-to-ec2@initial
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+        aws_default_region: us-east-1
+        #tf_action: 'destroy'
+        repo_url: https://github.com/bitovi/devops-training-ec2-gha-example
+        repo_access_token: ${{ secrets.THIS_REPO_RUNNER_TOKEN }}
