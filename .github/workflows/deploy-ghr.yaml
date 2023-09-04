@@ -21,4 +21,4 @@ jobs:
         
         repo_url: https://github.com/bitovi/devops-training-ec2-gha-example
         repo_access_token: ${{ secrets.THIS_REPO_RUNNER_TOKEN }}
-        ec2_user_data_file: user-data.sh
+#        ec2_user_data_file: user-data.sh
