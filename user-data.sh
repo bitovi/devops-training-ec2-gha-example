@@ -1,5 +1,5 @@
 #!/bin/bash
-REPO_URL=RESERVED_FOR_REPO_URL
+REPO_URL="https://github.com/bitovi/devops-training-ec2-gha-example"
 ACCESS_TOKEN=RESERVED_FOR_REPO_ACCESS_TOKEN
 
 # Update and upgrade packages as root
