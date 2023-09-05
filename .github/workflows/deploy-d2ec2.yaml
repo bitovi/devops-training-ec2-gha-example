@@ -11,7 +11,7 @@ jobs:
   EC2-Deploy:
     # if the branch name of the PR does not contain 'skip-deploy'
     if: "!contains(github.head_ref, 'skip-deploy')"
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     environment:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
@@ -31,7 +31,7 @@ jobs:
         ec2_additional_tags: '{\"o2:instance:backups:type\":\"ami\",\"o2:platform\":\"linux\",\"o2:patch:group\":\"\"}'
         additional_tags: '{\"o2:phi\":\"true\",\"o2:environment\":\"dev\",\"terraform\":\"true\"}'
  
-        ec2_user_data_file: get-runner.sh
+        #ec2_user_data_file: get-runner.sh
 
         aws_vpc_id: vpc-081abe910edab4281
         aws_vpc_subnet_id: subnet-0f1b65df74adf6e87
