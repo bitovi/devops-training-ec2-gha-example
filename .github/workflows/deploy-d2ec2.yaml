@@ -26,7 +26,7 @@ jobs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
-        stack_destroy: false
+        stack_destroy: true
         tf_state_bucket_destroy: true
         ec2_instance_public_ip: false
         ansible_ssh_to_private_ip: true
