@@ -27,7 +27,8 @@ jobs:
         aws_default_region: us-east-1
         #stack_destroy: true
         tf_state_bucket_destroy: true
-        ec2_instance_public_ip: false
+        ec2_instance_public_ip: true
+        ansible_ssh_to_private_ip: true
         
         ec2_additional_tags: '{\"o2:instance:backups:type\":\"ami\",\"o2:platform\":\"linux\",\"o2:patch:group\":\"\"}'
         additional_tags: '{\"o2:phi\":\"true\",\"o2:environment\":\"dev\",\"terraform\":\"true\"}'
