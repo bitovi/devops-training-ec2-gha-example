@@ -11,7 +11,7 @@ jobs:
   EC2-Deploy:
     # if the branch name of the PR does not contain 'skip-deploy'
     if: "!contains(github.head_ref, 'skip-deploy')"
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
