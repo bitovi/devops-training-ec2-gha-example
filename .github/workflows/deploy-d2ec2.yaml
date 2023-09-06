@@ -31,6 +31,7 @@ jobs:
         ec2_instance_public_ip: false
         ansible_ssh_to_private_ip: true
         ansible_skip: true
+        lb_create: false
 
         ec2_port_list: 3000,3001
 
