@@ -19,7 +19,7 @@ jobs:
     steps:
     - id: destroy
       name: Destroy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons
+      uses: bitovi/github-actions-deploy-docker-to-ec2@debug
       with:
         #ansible_skip: true
 
