@@ -26,18 +26,17 @@ jobs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
-        stack_destroy: true
+        #stack_destroy: true
         tf_state_bucket_destroy: true
-        ec2_instance_public_ip: true
-        ansible_ssh_to_private_ip: false
-        ansible_start_docker_timeout: 1000
-        ansible_skip: false
         lb_create: false
 
-        ec2_port_list: 3000,3001
-        app_port: 3000,3001
-        lb_port: 3000,3001
+        ec2_port_list: 3000
+        app_port: 3000
+        lb_port: 3000
         lb_healthcheck: TCP:22
 
         aws_vpc_id: vpc-081abe910edab4281
         aws_vpc_subnet_id: subnet-0f1b65df74adf6e87
+
+        docker_remove_orphans: true
+        docker_full_cleanup: true
