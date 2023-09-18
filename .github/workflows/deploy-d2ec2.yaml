@@ -40,7 +40,6 @@ jobs:
 
         docker_remove_orphans: true
         docker_full_cleanup: true
-        app_directory: app
         app_directory_cleanup: true
         data_mount_target: stre
 
