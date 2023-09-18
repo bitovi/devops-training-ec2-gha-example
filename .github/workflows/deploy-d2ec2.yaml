@@ -26,10 +26,13 @@ jobs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
-        stack_destroy: true
         tf_state_bucket_destroy: true
 
         ec2_port_list: 3000
         app_port: 3000
         lb_port: 3000
-        lb_healthcheck: TCP:22
+        lb_healthcheck: "HTTP:3000"
+
+        domain_name: bitovi-sandbox.com
+        sub_domain: deleteme
+        ec2_volume_size: 16
