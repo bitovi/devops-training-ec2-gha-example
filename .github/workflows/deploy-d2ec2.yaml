@@ -34,13 +34,3 @@ jobs:
         app_port: 3000
         lb_port: 3000
         lb_healthcheck: TCP:22
-
-        aws_vpc_id: vpc-081abe910edab4281
-        aws_vpc_subnet_id: subnet-0f1b65df74adf6e87
-
-        docker_remove_orphans: true
-        docker_full_cleanup: true
-        app_directory_cleanup: true
-        data_mount_target: stre
-
-        aws_efs_fs_id: fs-089a6338a687599fc
