@@ -53,9 +53,8 @@ jobs:
         aws_default_region: us-east-1
         aws_ecr_repo_name: testing-repo-leo-v2
         #image_tag:
-        #use_latest:
-        #use_sha:
         #org_name:
-        #repo_name:
         #build_args:
+        use_latest: true
+        use_sha: true
         working_directory: container
