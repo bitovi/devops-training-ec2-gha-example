@@ -29,3 +29,4 @@ jobs:
         app_port: 3000
         lb_port: 3000
         lb_healthcheck: "HTTP:3000"
+        ec2_volume_size: 16
