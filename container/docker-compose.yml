@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  web:
+    container_name: web
+    build:
+      context: .
+      target: web
+    restart: unless-stopped
+    ports:
+      - 8080:80

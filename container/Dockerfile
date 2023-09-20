@@ -1,0 +1,5 @@
+FROM nginx:latest as web
+EXPOSE 8080
+COPY index.html /usr/share/nginx/html/index.html
+
+CMD ["nginx", "-g", "daemon off;"]%

@@ -1,32 +1,65 @@
-name: Deploy
-
+name: Deploy GHR
 on:
   push:
-    branches: [ main ]
-
-permissions:
-  contents: read
+    branches: [ ecr-ecs-fargate ]
+      
 
 jobs:
-  EC2-Deploy:
-    # if the branch name of the PR does not contain 'skip-deploy'
-    if: "!contains(github.head_ref, 'skip-deploy')"
+  deploy-bucket-only:
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.ref_name }}
-      url: ${{ steps.deploy.outputs.vm_url }}
     steps:
-    - id: deploy
-      name: Deploy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@v0.4.6
+    - name: Create ECR Registry
+      id: create-ecr
+      uses: bitovi/github-actions-deploy-aws-ecr-registry@testing
       with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVOPS_TRAINING}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVOPS_TRAINING}}
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
         aws_default_region: us-east-1
-
-        # Provide a secret called `DOT_ENV` to append environment variables to the .env file
-        # dot_env: ${{ secrets.DOT_ENV }}
-
-        app_port: 3000
-        stack_destroy: true
+        
+        tf_stack_destroy: true
         tf_state_bucket_destroy: true
+        
+        aws_ecr_repo_create: true
+        aws_ecr_repo_type: 
+        aws_ecr_repo_name: testing-repo-leo-v2
+        aws_ecr_repo_mutable:
+        aws_ecr_repo_encryption_type: 
+        aws_ecr_repo_encryption_key_arn:
+        aws_ecr_repo_force_destroy: true
+        aws_ecr_repo_image_scan: 
+        aws_ecr_registry_scan_rule: 
+        aws_ecr_registry_pull_through_cache_rules:
+        aws_ecr_registry_scan_config:
+        aws_ecr_registry_replication_rules_input:
+        aws_ecr_repo_policy_attach:
+        aws_ecr_repo_policy_create:
+        aws_ecr_repo_policy_input:
+        aws_ecr_repo_read_arn:
+        aws_ecr_repo_write_arn:
+        aws_ecr_repo_read_arn_lambda:
+        aws_ecr_lifecycle_policy_input:
+        aws_ecr_public_repo_catalog:
+        aws_ecr_registry_policy_input:
+        aws_ecr_additional_tags: '{\"CreatedBy\":\"Leo\",\"Deleteable\":\"Yes\"}'
+
+    - name: Build tag and push container
+      id: tag-and-push
+      uses: bitovi/github-actions-ecr-publish@main
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+        aws_default_region: us-east-1
+        aws_ecr_repo_name: testing-repo-leo-v2
+
+        checkout: true
+        aws_login: true
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+        aws_default_region: us-east-1
+        aws_ecr_repo_name: testing-repo-leo
+        image_tag:
+        use_latest:
+        use_sha:
+        org_name:
+        repo_name:
+        build_args:
+        working_directory: container
