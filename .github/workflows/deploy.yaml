@@ -22,7 +22,7 @@ jobs:
         aws_ecr_repo_create: true
         aws_ecr_repo_type: 
         aws_ecr_repo_name: testing-repo-leo-v2
-        aws_ecr_repo_mutable:
+        aws_ecr_repo_mutable: true
         aws_ecr_repo_encryption_type: 
         aws_ecr_repo_encryption_key_arn:
         aws_ecr_repo_force_destroy: true
