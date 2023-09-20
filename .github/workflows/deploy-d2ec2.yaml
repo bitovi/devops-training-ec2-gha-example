@@ -13,9 +13,6 @@ jobs:
     if: "!contains(github.head_ref, 'skip-deploy')"
     #runs-on: ubuntu-latest
     runs-on: self-hosted
-    environment:
-      name: ${{ github.ref_name }}
-      url: ${{ steps.deploy.outputs.vm_url }}
     steps:
     - id: destroy
       name: Destroy
@@ -27,12 +24,8 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         tf_state_bucket_destroy: true
-        stack_destroy: true
+        stack_destroy: 
         ec2_port_list: 3000
         app_port: 3000
         lb_port: 3000
         lb_healthcheck: "HTTP:3000"
-
-        domain_name: bitovi-sandbox.com
-        sub_domain: deleteme
-        ec2_volume_size: 16
