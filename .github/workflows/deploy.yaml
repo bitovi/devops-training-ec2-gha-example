@@ -56,7 +56,6 @@ jobs:
         #org_name:
         #build_args:
         use_latest: true
-        use_sha: true
         working_directory: container
 
     - name: Create an RDS DB
