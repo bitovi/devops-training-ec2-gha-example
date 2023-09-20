@@ -45,17 +45,12 @@ jobs:
     - name: Build tag and push container
       id: tag-and-push
       uses: bitovi/github-actions-ecr-publish@main
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-        aws_ecr_repo_name: testing-repo-leo-v2
-
         checkout: true
         aws_login: true
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
-        aws_ecr_repo_name: testing-repo-leo
+        aws_ecr_repo_name: testing-repo-leo-v2
         image_tag:
         use_latest:
         use_sha:
