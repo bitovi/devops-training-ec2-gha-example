@@ -11,8 +11,8 @@ jobs:
   EC2-Deploy:
     # if the branch name of the PR does not contain 'skip-deploy'
     if: "!contains(github.head_ref, 'skip-deploy')"
-    #runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    #runs-on: self-hosted
     steps:
     - id: destroy
       name: Destroy
