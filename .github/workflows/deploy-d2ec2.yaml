@@ -30,4 +30,4 @@ jobs:
         lb_port: 3000
         lb_healthcheck: "HTTP:3000"
         ec2_volume_size: 16
-        aws_rds_db_enable: true
+        aws_rds_db_enable: 
