@@ -31,3 +31,4 @@ jobs:
         lb_healthcheck: "HTTP:3000"
         ec2_volume_size: 16
         aws_rds_db_enable: 
+        docker_remove_orphans: true
