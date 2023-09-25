@@ -45,3 +45,4 @@ jobs:
         tf_state_bucket_destroy: true
         
         aws_rds_db_enable: true
+        aws_rds_db_name: postgresdevelopment
