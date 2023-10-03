@@ -35,6 +35,6 @@ jobs:
         tf_state_bucket_destroy: true
         aws_ecs_enable: true
         aws_ecs_app_image: 755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:ecr-ecs-fargate
-
+        aws_ecs_container_port: 3000
         aws_vpc_id: vpc-081abe910edab4281
         aws_vpc_subnet_id: subnet-056feca23aa09e324
