@@ -14,20 +14,20 @@ jobs:
     runs-on: ubuntu-latest
     #runs-on: self-hosted
     steps:
-    - id: deploy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons
-      with:
+    #- id: deploy
+    #  uses: bitovi/github-actions-deploy-docker-to-ec2@commons
+    #  with:
         #ansible_skip: true
 
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        tf_state_bucket_destroy: true
-        stack_destroy: true
-        ec2_port_list: 3000
-        app_port: 3000
-        lb_port: 3000
-        lb_healthcheck: "HTTP:3000"
+    #    aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+    #    aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+    #    aws_default_region: us-east-1
+    #    tf_state_bucket_destroy: true
+    #    stack_destroy: true
+    #    ec2_port_list: 3000
+    #    app_port: 3000
+    #    lb_port: 3000
+    #    lb_healthcheck: "HTTP:3000"
      #   ec2_volume_size: 16
      #   aws_rds_db_enable: 
      #   docker_remove_orphans: true
@@ -48,8 +48,8 @@ jobs:
       name: Build image
       uses: bitovi/github-actions-ecr-publish@v0.1.0
       with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         aws_ecr_repo_name: testing-repo-leo
        # working_directory: ./app/inner-folder
