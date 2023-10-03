@@ -23,7 +23,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         tf_state_bucket_destroy: true
-     #   stack_destroy: true
+        stack_destroy: true
         ec2_port_list: 3000
         app_port: 3000
         lb_port: 3000
@@ -44,3 +44,15 @@ jobs:
     #    tf_stack_destroy: true
     #    aws_rds_db_enable: true
     #    aws_rds_db_name: postgresdevelopment
+    - id: ecr-publish
+      name: Build image
+      uses: bitovi/github-actions-ecr-publish@v0.1.0
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_default_region: us-east-1
+        aws_ecr_repo_name: testing-repo-leo
+       # working_directory: ./app/inner-folder
+    - run: |
+        echo "Image Created:  ${{ env.image }}"
+        echo "Tag Created: ${{ env.tag }}"
