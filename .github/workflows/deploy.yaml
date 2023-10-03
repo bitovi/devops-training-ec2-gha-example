@@ -31,7 +31,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
 
-        stack_destroy: true
+        stack_destroy: 
         tf_state_bucket_destroy: true
         aws_ecs_enable: true
         aws_ecs_app_image: 755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:d2ec2
