@@ -33,7 +33,7 @@ jobs:
 
         stack_destroy: true
         tf_state_bucket_destroy: true
-        aws_ecs_enable: true
+        aws_ecs_enable: 
         aws_ecs_app_image: 755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:d2ec2
         aws_ecs_container_port: 3000
         aws_vpc_id: vpc-081abe910edab4281
