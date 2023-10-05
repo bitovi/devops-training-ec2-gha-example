@@ -34,3 +34,4 @@ jobs:
         aws_sub_domain: st2-karam
         #create_sub_cert: true
         #no_cert: true
+        aws_ec2_create_keypair_sm: true
