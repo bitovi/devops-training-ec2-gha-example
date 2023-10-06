@@ -39,7 +39,7 @@ jobs:
         aws_ecs_app_cpu: 2048
         aws_ecs_app_mem: 4096
         aws_ecs_assign_public_ip: true
-        aws_ecs_container_port: 3000,3000
+        aws_ecs_container_port: 3000,3001
         aws_ecs_lb_port: 3000,3001
         aws_vpc_id: vpc-081abe910edab4281
         aws_vpc_subnet_id: subnet-056feca23aa09e324
