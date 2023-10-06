@@ -31,15 +31,15 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
 
-        stack_destroy: true
+        stack_destroy: 
         tf_state_bucket: ecs-leo-testing
         tf_state_bucket_destroy: 
         aws_ecs_enable: true
-        aws_ecs_app_image: 755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:d2ec2
+        aws_ecs_app_image: 755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:d2ec2,755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:hello
         aws_ecs_app_cpu: 2048
         aws_ecs_app_mem: 4096
         aws_ecs_assign_public_ip: true
-        aws_ecs_container_port: 3000
+        aws_ecs_container_port: 3000,3001
         aws_vpc_id: vpc-081abe910edab4281
         aws_vpc_subnet_id: subnet-056feca23aa09e324
       
