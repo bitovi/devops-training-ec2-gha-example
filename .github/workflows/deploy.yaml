@@ -49,17 +49,18 @@ jobs:
         aws_ecs_app_cpu: 2048,2048
         aws_ecs_app_mem: 4096,6144
         aws_ecs_env_vars: 
-        aws_ecs_security_group_name: testing-ecs-sg-name
+        aws_ecs_security_group_name:
         aws_ecs_assign_public_ip: true
         aws_ecs_container_port: 3000,3001
         aws_ecs_lb_port: 3000,3001
         aws_ecs_cloudwatch_enable: true
-        aws_ecs_cloudwatch_lg_name: testing-ecs-cw-name
+        aws_ecs_cloudwatch_lg_name:
         aws_ecs_cloudwatch_skip_destroy: false
         aws_ecs_cloudwatch_retention_days: 14
         aws_ecs_logs_s3_bucket: 
         aws_ecs_logs_s3_bucket_prefix: 
         aws_ecs_additional_tags: 
 
-
+        domain_name: bitovi-sandbox.com
+        sub_domain: ecs-testing
         tf_state_file_name_append: tbd
