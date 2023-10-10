@@ -31,7 +31,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
 
-        stack_destroy: true
+        stack_destroy: 
         tf_state_bucket: ecs-leo-testing
         tf_state_bucket_destroy: 
         aws_vpc_id: vpc-081abe910edab4281
