@@ -40,7 +40,7 @@ jobs:
         aws_ecs_enable: true
         aws_ecs_service_name: a
         aws_ecs_cluster_name: b
-        aws_ecs_task_name: taskd,taske,taskf,taskg
+        aws_ecs_task_name: taskd,taske,bitovi-devops-training-ec2-gha-example-ecr-ecs-fargate-app2,bitovi-devops-training-ec2-gha-example-ecr-ecs-fargate-app3
         aws_ecs_task_execution_role: ecsTaskExecutionRole
         aws_ecs_task_json_definition_file: c0.json,c1.json
         aws_ecs_node_count: 1,2,1,1
