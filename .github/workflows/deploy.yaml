@@ -67,3 +67,4 @@ jobs:
         domain_name: bitovi-sandbox.com
         sub_domain: ecs-testing
         tf_state_file_name_append: tbd
+        
