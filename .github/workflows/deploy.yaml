@@ -40,7 +40,7 @@ jobs:
         aws_ecs_enable: true
         aws_ecs_service_name: a
         aws_ecs_cluster_name: b
-        aws_ecs_task_name: d,e,f,g
+        aws_ecs_task_name: taskd,taske,taskf,taskg
         aws_ecs_task_execution_role: ecsTaskExecutionRole
         aws_ecs_task_json_definition_file: c0.json,c1.json
         aws_ecs_node_count: 1,2,1,1
@@ -48,7 +48,7 @@ jobs:
         aws_ecs_image_path: api,2,3
         aws_ecs_app_cpu: 2048,2048,1024,1024
         aws_ecs_app_mem: 4096,6144,2048,2048
-        aws_ecs_security_group_name: sg
+        aws_ecs_security_group_name: somesgname
         aws_ecs_assign_public_ip: true
         aws_ecs_container_port: 3000,3001,3002,3003
         aws_ecs_lb_port: 3000,3001,3002,3003
