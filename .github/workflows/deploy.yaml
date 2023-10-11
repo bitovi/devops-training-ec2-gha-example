@@ -61,7 +61,6 @@ jobs:
         aws_ecs_logs_s3_bucket_prefix: 
         aws_ecs_additional_tags: 
 
-
         ghv_env: ${{ vars.GHV_VARS }}
         aws_r53_enable: true
         domain_name: bitovi-sandbox.com
