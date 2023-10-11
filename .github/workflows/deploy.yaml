@@ -42,16 +42,16 @@ jobs:
         aws_ecs_cluster_name: 
         aws_ecs_task_name: 
         aws_ecs_task_execution_role: 
-        aws_ecs_task_json_definition_file: 
-        aws_ecs_node_count: 
+        aws_ecs_task_json_definition_file: c0.json,c1.json
+        aws_ecs_node_count: 2
         aws_ecs_app_image: 755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:d2ec2,755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:hello
         aws_ecs_image_path: api
         aws_ecs_app_cpu: 2048,2048
         aws_ecs_app_mem: 4096,6144
         aws_ecs_security_group_name:
         aws_ecs_assign_public_ip: true
-        aws_ecs_container_port: 3000,3001
-        aws_ecs_lb_port: 3000,3001
+        aws_ecs_container_port: 3000,3001,3002,3003
+        aws_ecs_lb_port: 3000,3001,3002,3003
         aws_ecs_lb_redirect_enable: true
         aws_ecs_cloudwatch_enable: true
         aws_ecs_cloudwatch_lg_name:
