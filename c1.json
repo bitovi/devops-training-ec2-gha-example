@@ -1,4 +1,5 @@
-{
+[
+  {
     "image": "755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:hello",
     "cpu": 2048,
     "memory": 6144,
@@ -24,3 +25,4 @@
       }
     }
   }
+]
