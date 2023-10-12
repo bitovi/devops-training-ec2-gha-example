@@ -54,7 +54,7 @@ jobs:
         aws_ecs_assign_public_ip: true
         aws_ecs_container_port: 3000,3001,3002,3003
         aws_ecs_lb_port: 3000,3001,3002,3003
-        aws_ecs_lb_redirect_enable: true
+        aws_ecs_lb_redirect_enable: false
         aws_ecs_cloudwatch_enable: true
         aws_ecs_cloudwatch_lg_name: ecstest
         aws_ecs_cloudwatch_skip_destroy: false
