@@ -1,0 +1,26 @@
+[
+      {
+        "image": "755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:hello",
+        "name": "backend",
+        "networkMode": "awsvpc",
+        "portMappings": [
+          {
+            "name": "port-3001",
+            "containerPort": 3001,
+            "hostPort": 3001,
+            "protocol": "tcp",
+            "appProtocol": "http"
+          }
+        ],
+        "environment": [],
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-create-group": "true",
+            "awslogs-region": "us-east-1",
+            "awslogs-group": "bitovi-devops-training-ec2-gha-example-ecr-ecs-fargate-ecs-logs",
+            "awslogs-stream-prefix": "po"
+          }
+        }
+      }
+  ]
