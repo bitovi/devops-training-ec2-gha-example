@@ -53,7 +53,6 @@ jobs:
         aws_default_region: us-east-1
         aws_ecr_repo_name: testing-repo-leo
         image_tag: auth
-        working_directory: ./
     - run: |
         echo "Image Created:  ${{ env.image }}"
         echo "Tag Created: ${{ env.tag }}"
