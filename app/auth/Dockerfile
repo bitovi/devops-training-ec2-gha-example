@@ -1,6 +1,5 @@
-ENV AUTH_PORT=8080
-
 FROM nginx:latest as auth
+ENV AUTH_PORT=8080
 EXPOSE $AUTH_PORT
 
 COPY app/auth/nginx.conf /etc/nginx/conf.d/default.conf
