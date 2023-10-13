@@ -52,8 +52,8 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         aws_ecr_repo_name: testing-repo-leo
-        image_tag: hello
-       # working_directory: ./app/inner-folder
+        image_tag: auth
+        working_directory: ./app/auth
     - run: |
         echo "Image Created:  ${{ env.image }}"
         echo "Tag Created: ${{ env.tag }}"
