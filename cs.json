@@ -1,0 +1,74 @@
+[
+    {
+      "image": "755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:auth",
+      "name": "auth",
+      "networkMode": "bridge",
+      "portMappings": [
+        {
+          "name": "port-8080",
+          "containerPort": 80,
+          "hostPort": 8080,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "environment": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-create-group": "true",
+          "awslogs-region": "us-east-1",
+          "awslogs-group": "bitovi-devops-training-ec2-gha-example-ecr-ecs-fargate-ecs-logs",
+          "awslogs-stream-prefix": "\\\"{{.Name}}\\\""
+        }
+      }
+    },
+    {
+        "image": "755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:d2ec2",
+        "name": "frontend",
+        "networkMode": "bridge",
+        "portMappings": [
+          {
+            "name": "port-3000",
+            "containerPort": 3000,
+            "hostPort": 3000,
+            "protocol": "tcp",
+            "appProtocol": "http"
+          }
+        ],
+        "environment": [],
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-create-group": "true",
+            "awslogs-region": "us-east-1",
+            "awslogs-group": "bitovi-devops-training-ec2-gha-example-ecr-ecs-fargate-ecs-logs",
+            "awslogs-stream-prefix": "\\\"{{.Name}}\\\""
+          }
+        }
+      },
+      {
+        "image": "755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:hello",
+        "name": "backend",
+        "networkMode": "bridge",
+        "portMappings": [
+          {
+            "name": "port-3001",
+            "containerPort": 3001,
+            "hostPort": 3001,
+            "protocol": "tcp",
+            "appProtocol": "http"
+          }
+        ],
+        "environment": [],
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-create-group": "true",
+            "awslogs-region": "us-east-1",
+            "awslogs-group": "bitovi-devops-training-ec2-gha-example-ecr-ecs-fargate-ecs-logs",
+            "awslogs-stream-prefix": "\\\"{{.Name}}\\\""
+          }
+        }
+      }
+  ]
