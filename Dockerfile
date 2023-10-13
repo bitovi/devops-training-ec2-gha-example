@@ -1,11 +1,9 @@
-FROM node:18-alpine
-ENV PORT=3001
+FROM nginx:latest as auth
+ENV AUTH_PORT=8080
+EXPOSE $AUTH_PORT
 
-WORKDIR app
-COPY . .
+COPY app/auth/nginx.conf /etc/nginx/conf.d/default.conf
+COPY app/auth/.htpasswd  /etc/nginx/.htpasswd
+COPY app/auth/index.html /usr/share/nginx/html/hc/index.html
 
-COPY package.json .
-RUN npm install
-
-EXPOSE $PORT
-CMD npm run start
+CMD ["nginx", "-g", "daemon off;"]
