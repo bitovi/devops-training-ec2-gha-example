@@ -1,0 +1,41 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch name'
+        required: true
+
+jobs:
+  build:
+    name: "Automated Tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch }} 
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm t
+      - uses: isbang/compose-action@v1.5.1
+        with:
+          down-flags: "--remove-orphans --timeout 30"
+        env:
+          PWD: ${{ github.workspace }}
+      - name: Provision LocalStack Resources
+        ## These are not real AWS credentials. They are only needed to trick the AWS CLI so it can hit LocalStack.
+        run: AWS_DEFAULT_REGION=us-west-1 AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY ./tools/provision-localstack
+        shell: bash
+      - name: Deploy app to LocalStack
+        run: ./tools/deploy local
+        shell: bash
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: "npm"
+      - run: npm run test:integration
