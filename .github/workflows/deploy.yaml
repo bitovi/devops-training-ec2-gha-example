@@ -40,7 +40,7 @@ jobs:
         aws_ecs_enable: true
         #aws_ecs_service_name: a
         #aws_ecs_cluster_name: b
-        aws_ecs_task_name: auth,frontend,backend,extra-a,extra-b,extra-c
+        aws_ecs_task_name: extra-a,extra-b,extra-c,auth,frontend,backend
         aws_ecs_task_execution_role: ecsTaskExecutionRole
         aws_ecs_task_json_definition_file: auth.json,fe.json,be.json
         #aws_ecs_task_network_mode: awsvpc
