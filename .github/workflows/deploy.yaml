@@ -53,7 +53,7 @@ jobs:
         aws_ecs_image_path: ',api,,papi,'
         #aws_ecs_security_group_name: somesgname
         aws_ecs_assign_public_ip: true
-        aws_ecs_container_port: 8080,3000,3001,8081,3002,3003
+        aws_ecs_container_port: 8080,3000,3001,8080,3000,3001
         aws_ecs_lb_port: 8080,3000,3001,8081,3002,3003
         aws_ecs_lb_redirect_enable: true
         aws_ecs_cloudwatch_enable: true
