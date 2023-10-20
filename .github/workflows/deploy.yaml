@@ -31,7 +31,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         aws_resource_identifier: leo-rds-different-testing
-        tf_stack_destroy: 
+        tf_stack_destroy: true
         tf_state_bucket: leo-rds-debugging-testing
         tf_state_bucket_destroy: true
         aws_rds_db_enable: true
