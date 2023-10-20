@@ -35,7 +35,7 @@ jobs:
         tf_state_bucket: leo-rds-debugging-testing
         tf_state_bucket_destroy: true
         aws_rds_db_enable: true
-        aws_rds_db_name: testing
+        aws_rds_db_name: leo-testing
 
 
     - name: Create an ECS-Fargate deploy
