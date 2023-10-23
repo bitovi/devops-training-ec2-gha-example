@@ -16,6 +16,7 @@ jobs:
     steps:
     - id: deploy
       uses: bitovi/github-actions-deploy-docker-to-ec2@commons
+      #uses: bitovi/github-actions-deploy-docker-to-ec2@140-env-ec2_instance_profile-is-not-respected
       with:
         #ansible_skip: true
 
