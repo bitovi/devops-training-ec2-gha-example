@@ -42,9 +42,9 @@ jobs:
         aws_default_region: us-east-1
         
         tf_state_bucket_destroy: true
-        tf_stack_destroy: true
+        tf_stack_destroy: 
         aws_rds_db_enable: true
-        aws_rds_db_proxy: true
+        aws_rds_db_proxy: 
     #    aws_rds_db_name: postgresdevelopment
     #- id: ecr-publish
     #  name: Build image
