@@ -17,7 +17,7 @@ jobs:
         aws_default_region: us-east-1
         ec2_instance_type: t2.medium
         
-#        stack_destroy: true
+        stack_destroy: true
         tf_state_bucket_destroy: true
         
         repo_url: https://github.com/bitovi/devops-training-ec2-gha-example
