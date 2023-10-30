@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Create deploy-bucket
       id: bucket-deploy-bucket
-      uses: bitovi/github-actions-deploy-gh-runner-to-ec2@add-aws-tool
+      uses: bitovi/github-actions-deploy-gh-runner-to-ec2@main
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
