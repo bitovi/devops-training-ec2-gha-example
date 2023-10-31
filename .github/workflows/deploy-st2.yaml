@@ -29,7 +29,7 @@ jobs:
         st2_auth_password: ${{ secrets.KARAM_ST2 }}
         st2_packs: "st2"
         #st2_ansible_extra_vars_file: "st2_vars.yaml"
-        st_version_tag: "v3.2.0"
+        st2_version_tag: "v3.2.0"
 
         aws_domain_name: bitovi-sandbox.com
         aws_sub_domain: st2-leo
