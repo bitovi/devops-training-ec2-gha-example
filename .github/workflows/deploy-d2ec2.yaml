@@ -39,7 +39,7 @@ jobs:
         #no_cert: true
         
     - id: deploy2
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons
+      uses: bitovi/github-actions-deploy-docker-to-ec2@v0.4.0
       with:
         #ansible_skip: true
 
@@ -52,6 +52,8 @@ jobs:
         app_port: 3001
         lb_port: 3001
         tf_state_file_name_append: d2ec2
+        stack_destroy: true
+        tf_state_bucket_destroy: true
        # lb_healthcheck: "HTTP:3001"
      #   ec2_volume_size: 16
      #   aws_rds_db_enable: 
