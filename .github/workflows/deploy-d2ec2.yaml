@@ -50,8 +50,6 @@ jobs:
         aws_rds_db_proxy: true
         aws_rds_db_name: postgresdevelopment
         aws_additional_tags: '{\"some\":\"tag\"}'
-
-        aws_rds_db_name: platformdev
         aws_rds_db_user:
         aws_rds_db_allowed_security_groups:
         # This is only for traffic coming from the same VPC
