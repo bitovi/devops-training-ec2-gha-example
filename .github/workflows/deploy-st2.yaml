@@ -24,7 +24,7 @@ jobs:
         #tf_stack_destroy: true
         tf_state_bucket_destroy: true
 
-        aws_ec2_instance_type: t2.medium
+        aws_ec2_instance_type: t2.large
         
         aws_default_region: us-east-1
         st2_auth_username: karam
