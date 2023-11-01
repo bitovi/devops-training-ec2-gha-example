@@ -15,31 +15,6 @@ jobs:
       url: ${{ steps.deploy.outputs.lb_url }}
 
     steps:
-    # Bitovi's Deploy StackStorm action
-    - id: deploy
-      name: Deploy
-      uses: bitovi/github-actions-deploy-stackstorm@v0.4.0
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-
-        tf_stack_destroy: true
-        tf_state_file_name_append: st2demo
-        tf_state_bucket_destroy: true
-
-        aws_ec2_instance_type: t2.large
-        
-        aws_default_region: us-east-1
-        st2_packs: "st2"
-        #st2_ansible_extra_vars_file: "st2_vars.yaml"
-        st2_auth_username: st2demo
-        st2_auth_password: ${{ secrets.ST2_DEMO }}
-        
-        aws_domain_name: bitovi-sandbox.com
-        aws_sub_domain: st2-demo
-        #create_sub_cert: true
-        #no_cert: true
-        
     #- id: deploy2
     #  uses: bitovi/github-actions-deploy-docker-to-ec2@commons-rc
     #  with:
@@ -61,19 +36,31 @@ jobs:
      #   aws_rds_db_enable: 
      #   docker_remove_orphans: true
 
-    #- name: Create an RDS DB
-    #  id: create-rds
-    #  uses: bitovi/github-actions-deploy-rds@multiple-fixes
-    #  with:
-    #    aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-    #    aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-    #    aws_default_region: us-east-1
+    - name: Create an RDS DB
+      id: create-rds
+      uses: bitovi/github-actions-deploy-rds@v0.1.1
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
     #    
-    #    tf_state_bucket_destroy: true
+        tf_state_bucket_destroy: true
     #    tf_stack_destroy: true
-    #    aws_rds_db_enable: true
-    #    aws_rds_db_proxy: true
-    #    aws_rds_db_name: postgresdevelopment
+        aws_rds_db_enable: true
+        aws_rds_db_proxy: true
+        aws_rds_db_name: postgresdevelopment
+        aws_additional_tags: '{\"some\":\"tag\"}'
+
+        aws_rds_db_name: platformdev
+        aws_rds_db_user:
+        aws_rds_db_allowed_security_groups:
+        # This is only for traffic coming from the same VPC
+        aws_rds_db_ingress_allow_all: true
+        aws_rds_db_allocated_storage: 10
+        aws_rds_db_max_allocated_storage:
+        aws_rds_db_instance_class: db.t3.micro
+          
+        tf_state_file_name_append: rds-dev-db
     #- id: ecr-publish
     #  name: Build image
     #  uses: bitovi/github-actions-ecr-publish@v0.1.0
