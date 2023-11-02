@@ -15,22 +15,22 @@ jobs:
       url: ${{ steps.deploy.outputs.lb_url }}
 
     steps:
-    #- id: deploy2
-    #  uses: bitovi/github-actions-deploy-docker-to-ec2@commons-rc
-    #  with:
+    - id: deploy2
+      uses: bitovi/github-actions-deploy-docker-to-ec2@commons-rc
+      with:
         #ansible_skip: true
 
-    #    aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-    #    aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-    #    aws_default_region: us-east-1
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
         #tf_state_bucket_destroy: true
         #stack_destroy: true
-    #    ec2_port_list: 3001
-    #    app_port: 3001
-    #    lb_port: 3001
-    #    tf_state_file_name_append: d2ec2
-    #    stack_destroy: true
-    #    tf_state_bucket_destroy: true
+        ec2_port_list: 3001
+        app_port: 3001
+        lb_port: 3001
+        tf_state_file_name_append: d2ec2
+        stack_destroy: true
+        tf_state_bucket_destroy: true
        # lb_healthcheck: "HTTP:3001"
      #   ec2_volume_size: 16
      #   aws_rds_db_enable: 
