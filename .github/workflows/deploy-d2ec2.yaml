@@ -56,7 +56,7 @@ jobs:
         aws_rds_db_ingress_allow_all: true
         aws_rds_db_allocated_storage: 10
         aws_rds_db_max_allocated_storage:
-        aws_rds_db_instance_class: db.t3.micro
+        aws_rds_db_instance_class: db.t3.small
           
     #    tf_state_file_name_append: rds-dev-db
     #- id: ecr-publish
