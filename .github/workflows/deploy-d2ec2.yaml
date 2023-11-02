@@ -36,28 +36,41 @@ jobs:
      #   aws_rds_db_enable: 
      #   docker_remove_orphans: true
 
-    - name: Create an RDS DB
-      id: create-rds
-      uses: bitovi/github-actions-deploy-rds@commons-testing
+    #- name: Create an RDS DB
+    #  id: create-rds
+    #  uses: bitovi/github-actions-deploy-rds@commons-testing
+    #  with:
+    #    aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+    #    aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+    #    aws_default_region: us-east-1
+    #    
+    #    tf_state_bucket_destroy: true
+    #    tf_stack_destroy: true
+    #    aws_rds_db_enable: true
+    #    aws_rds_db_proxy: true
+    #    aws_rds_db_name: postgres
+    #    aws_additional_tags: '{\"some\":\"tag\"}'
+    #    aws_rds_db_user:
+    #    aws_rds_db_allowed_security_groups:
+        # This is only for traffic coming from the same VPC
+    #    aws_rds_db_ingress_allow_all: true
+    #    aws_rds_db_allocated_storage: 10
+    #    aws_rds_db_max_allocated_storage:
+    #    aws_rds_db_instance_class: db.t3.small
+
+
+    - name: Create an Redis DB
+      id: create-redis
+      uses: bitovi/github-actions-deploy-redis-db@initial-testing-branch
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
     #    
         tf_state_bucket_destroy: true
-        tf_stack_destroy: true
-        aws_rds_db_enable: true
-        aws_rds_db_proxy: true
-        aws_rds_db_name: postgres
-        aws_additional_tags: '{\"some\":\"tag\"}'
-        aws_rds_db_user:
-        aws_rds_db_allowed_security_groups:
-        # This is only for traffic coming from the same VPC
-        aws_rds_db_ingress_allow_all: true
-        aws_rds_db_allocated_storage: 10
-        aws_rds_db_max_allocated_storage:
-        aws_rds_db_instance_class: db.t3.small
-          
+        #tf_stack_destroy: true
+        aws_redis_enable: true
+
     #    tf_state_file_name_append: rds-dev-db
     #- id: ecr-publish
     #  name: Build image
