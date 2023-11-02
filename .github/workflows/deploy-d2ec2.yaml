@@ -29,34 +29,34 @@ jobs:
         app_port: 3001
         lb_port: 3001
         #tf_state_file_name_append: d2ec2
-        #stack_destroy: true
+        stack_destroy: true
         tf_state_bucket_destroy: true
        # lb_healthcheck: "HTTP:3001"
      #   ec2_volume_size: 16
      #   aws_rds_db_enable: 
      #   docker_remove_orphans: true
 
-    #- name: Create an RDS DB
-    #  id: create-rds
-    #  uses: bitovi/github-actions-deploy-rds@v0.1.1
-    #  with:
-    #    aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-    #    aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-    #    aws_default_region: us-east-1
+    - name: Create an RDS DB
+      id: create-rds
+      uses: bitovi/github-actions-deploy-rds@v0.1.1
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
     #    
-    #    tf_state_bucket_destroy: true
+        tf_state_bucket_destroy: true
     #    tf_stack_destroy: true
-    #    aws_rds_db_enable: true
-    #    aws_rds_db_proxy: true
-    #    aws_rds_db_name: postgresdevelopment
-    #    aws_additional_tags: '{\"some\":\"tag\"}'
-    #    aws_rds_db_user:
-    #    aws_rds_db_allowed_security_groups:
+        aws_rds_db_enable: true
+        aws_rds_db_proxy: true
+        aws_rds_db_name: postgres
+        aws_additional_tags: '{\"some\":\"tag\"}'
+        aws_rds_db_user:
+        aws_rds_db_allowed_security_groups:
         # This is only for traffic coming from the same VPC
-    #    aws_rds_db_ingress_allow_all: true
-    #    aws_rds_db_allocated_storage: 10
-    #    aws_rds_db_max_allocated_storage:
-    #    aws_rds_db_instance_class: db.t3.micro
+        aws_rds_db_ingress_allow_all: true
+        aws_rds_db_allocated_storage: 10
+        aws_rds_db_max_allocated_storage:
+        aws_rds_db_instance_class: db.t3.micro
           
     #    tf_state_file_name_append: rds-dev-db
     #- id: ecr-publish
