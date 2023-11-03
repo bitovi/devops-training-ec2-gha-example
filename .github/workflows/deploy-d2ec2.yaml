@@ -79,7 +79,7 @@ jobs:
         aws_default_region: us-east-1
     #    
         tf_state_bucket_destroy: true
-        #tf_stack_destroy: true
+        tf_stack_destroy: true
         aws_redis_enable: true
         aws_redis_cloudwatch_enabled: true
         
