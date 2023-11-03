@@ -81,7 +81,7 @@ jobs:
         tf_state_bucket_destroy: true
         #tf_stack_destroy: true
         aws_redis_enable: true
-        aws_redis_cloudwatch_enabled: true
+        aws_redis_cloudwatch_enabled: false
 
         aws_redis_single_line_url_secret: true
 
