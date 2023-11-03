@@ -91,7 +91,7 @@ jobs:
         aws_redis_parameter_group_name: default.redis7.cluster.on
 
         aws_redis_apply_immediately: true
-        aws_redis_cloudwatch_log_type: slow-log,engine-log
+        aws_redis_cloudwatch_log_type: engine-log
         
     #    tf_state_file_name_append: rds-dev-db
     #- id: ecr-publish
