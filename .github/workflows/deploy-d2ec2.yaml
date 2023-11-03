@@ -83,15 +83,6 @@ jobs:
         aws_redis_enable: true
         aws_redis_cloudwatch_enabled: false
 
-        aws_redis_single_line_url_secret: true
-
-        aws_redis_num_cache_clusters: 0
-        aws_redis_num_node_groups: 2
-        aws_redis_replicas_per_node_group: 1
-        aws_redis_parameter_group_name: default.redis7.cluster.on
-
-        aws_redis_apply_immediately: true
-        aws_redis_cloudwatch_log_type: engine-log
         
     #    tf_state_file_name_append: rds-dev-db
     #- id: ecr-publish
