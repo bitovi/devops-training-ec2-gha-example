@@ -82,7 +82,7 @@ jobs:
         #tf_stack_destroy: true
         aws_redis_enable: true
         aws_redis_cloudwatch_enabled: false
-        aws_redis_automatic_failover: true
+       # aws_redis_automatic_failover: true
         
     #    tf_state_file_name_append: rds-dev-db
     #- id: ecr-publish
