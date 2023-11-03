@@ -81,6 +81,7 @@ jobs:
         tf_state_bucket_destroy: true
         #tf_stack_destroy: true
         aws_redis_enable: true
+        num_cache_clusters: 0
         aws_redis_num_node_groups: 2
         aws_redis_replicas_per_node_group: 1
         aws_redis_cloudwatch_enabled: true
