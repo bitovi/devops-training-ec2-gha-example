@@ -27,13 +27,18 @@ jobs:
         with:
           secrets: leo-test-secret2
           parse-json: true
+      - name: Checkout if required
+        uses: actions/checkout@v3
 
       - name: Print
         if: ${{ success() }}
         id: print
         shell: bash
         run: |
-          env
+          apt install postgresql-client
+          cd $GITHUB_ACTION_PATH
+          tree -l .
+          
 
 
     #- id: deploy2
