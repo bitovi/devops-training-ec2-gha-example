@@ -38,6 +38,7 @@ jobs:
 
           aws_secret_name: ${{ steps.create-rds.outputs.db_secret_details_name }}
           sql_scripts_path: sql-files
+          dry_run: false
 
 
     #- id: deploy2
