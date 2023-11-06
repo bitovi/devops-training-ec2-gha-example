@@ -46,7 +46,8 @@ jobs:
           echo "::group::Tree 2 Excecution"  
           tree -l $GITHUB_ACTION_PATH
           echo "::endgroup::"
-          psql -v
+          psql --help
+          
 
 
     #- id: deploy2
