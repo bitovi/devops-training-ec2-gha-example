@@ -37,6 +37,9 @@ jobs:
         run: |
           sudo apt install postgresql-client
           pwd
+          echo "::group::ENV"  
+          env
+          echo "::endgroup::"
           echo "::group::Tree 1 Excecution"  
           tree -l .
           echo "::endgroup::"
