@@ -16,39 +16,14 @@ jobs:
 
     steps:
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: bitovi/github-actions-apply-sql-files-to-postgres@initial-branch
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws-region: us-east-1 #${{ secrets.AWS_REGION }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_region: us-east-1 
 
-      - name: Read secrets from AWS Secrets Manager into environment variables
-        uses: bitovi/github-actions-aws-secrets-manager@v2.1.0
-        with:
-          secrets: leo-test-secret2
-          parse-json: true
-      - name: Checkout if required
-        uses: actions/checkout@v3
-
-      - name: Print
-        if: ${{ success() }}
-        id: print
-        shell: bash
-        run: |
-          sudo apt update -y -q && sudo apt install postgresql-client -y -q
-          pwd
-          echo "::group::ENV"  
-          env
-          echo "::endgroup::"
-          echo "::group::Tree 1 Excecution"  
-          tree -l .
-          echo "::endgroup::"
-          echo "::group::Tree 2 Excecution"  
-          tree -l $GITHUB_ACTION_PATH
-          echo "::endgroup::"
-          psql --help
-          
-
+          aws_secret_name: leo-test-secret2
+          sql_scripts_path: sql-files
 
     #- id: deploy2
       #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-rc
