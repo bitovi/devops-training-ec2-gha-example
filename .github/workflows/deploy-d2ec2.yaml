@@ -35,7 +35,7 @@ jobs:
         id: print
         shell: bash
         run: |
-          sudo apt install postgresql-client
+          sudo apt update -y -q && sudo apt install postgresql-client -y -q
           pwd
           echo "::group::ENV"  
           env
@@ -46,6 +46,7 @@ jobs:
           echo "::group::Tree 2 Excecution"  
           tree -l $GITHUB_ACTION_PATH
           echo "::endgroup::"
+          psql -v
 
 
     #- id: deploy2
