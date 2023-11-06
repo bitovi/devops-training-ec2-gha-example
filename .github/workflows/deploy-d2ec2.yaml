@@ -25,6 +25,7 @@ jobs:
           aws_secret_name: leo-test-secret2
           sql_scripts_path: sql-files
 
+
     #- id: deploy2
       #uses: bitovi/github-actions-deploy-docker-to-ec2@commons-rc
       #with:
