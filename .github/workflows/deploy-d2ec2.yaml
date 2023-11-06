@@ -22,7 +22,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_region: us-east-1 
 
-          aws_secret_name: leo-test-secret2
+          aws_secret_name: b4i-bedf340cf32fca7f562bbf-f5e-rdsdb-pub-FzspH
           sql_scripts_path: sql-files
 
 
