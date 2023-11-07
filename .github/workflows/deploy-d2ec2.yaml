@@ -15,20 +15,20 @@ jobs:
      # url: ${{ steps.deploy.outputs.lb_url }}
 
     steps:
-      - name: Create an RDS DB
-        id: create-rds
-        uses: bitovi/github-actions-deploy-rds@v0.1.2
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-    #    
-          tf_state_bucket_destroy: true
-          tf_state_file_name_append: rds
-          #tf_stack_destroy: true
-          aws_rds_db_enable: true
-          aws_rds_db_proxy: true
-          aws_rds_db_name: postgres
+      #- name: Create an RDS DB
+      #  id: create-rds
+      #  uses: bitovi/github-actions-deploy-rds@v0.1.2
+      #  with:
+      #    aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+      #    aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+      #    aws_default_region: us-east-1
+    # #   
+      #    tf_state_bucket_destroy: true
+      #    tf_state_file_name_append: rds
+      #    #tf_stack_destroy: true
+      #    aws_rds_db_enable: true
+      #    aws_rds_db_proxy: true
+      #    aws_rds_db_name: postgres
 
       - id: deploy
         uses: bitovi/github-actions-deploy-github-runner-to-ec2@v0.1.1
@@ -44,7 +44,7 @@ jobs:
           repo_access_token: ${{ secrets.THIS_REPO_RUNNER_TOKEN }}
           
           tf_state_file_name_append: github-runner
-          #stack_destroy: true
+          stack_destroy: true
           tf_state_bucket_destroy: true
 
   #initialize:
@@ -144,4 +144,5 @@ jobs:
     #    image_tag: auth
     #- run: |
     #    echo "Image Created:  ${{ env.image }}"
+
     #    echo "Tag Created: ${{ env.tag }}"
