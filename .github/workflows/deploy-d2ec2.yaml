@@ -32,6 +32,17 @@ jobs:
           aws_rds_db_ingress_allow_all: true
           aws_rds_db_publicly_accessible: true
 
+      - name: Configure AWS Credentials
+        uses: bitovi/github-actions-apply-sql-files-to-postgres@inital-branch
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1 
+          aws_secret_name: ${{ steps.create-rds.outputs.db_secret_details_name }}
+          #aws_secret_name: b4i-d4s-t6g-ec2-gha-e5e-d32-rdsdb-pub-FdyNx
+          sql_scripts_path: sql-files
+          dry_run: false
+
 #      - id: deploy
 #        uses: bitovi/github-actions-deploy-github-runner-to-ec2@v0.1.1
 #        with:
@@ -52,16 +63,6 @@ jobs:
   #initialize:
    # runs-on: self-hosted
    # steps:
-      - name: Configure AWS Credentials
-        uses: bitovi/github-actions-apply-sql-files-to-postgres@inital-branch
-        with:
-            aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-            aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-            aws_default_region: us-east-1 
-            aws_secret_name: ${{ steps.create-rds.outputs.db_secret_details_name }}
-            #aws_secret_name: b4i-d4s-t6g-ec2-gha-e5e-d32-rdsdb-pub-FdyNx
-            sql_scripts_path: sql-files
-            dry_run: false
  
 
 
