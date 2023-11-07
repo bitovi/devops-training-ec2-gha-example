@@ -44,7 +44,7 @@ jobs:
           repo_access_token: ${{ secrets.THIS_REPO_RUNNER_TOKEN }}
           
           tf_state_file_name_append: github-runner
-          stack_destroy: true
+          #stack_destroy: true
           tf_state_bucket_destroy: true
 
   #initialize:
