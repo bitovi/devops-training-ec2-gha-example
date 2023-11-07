@@ -44,8 +44,8 @@ jobs:
       - id: deploy
         uses: bitovi/github-actions-deploy-github-runner-to-ec2@v0.1.1
         with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVELOPMENT }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVELOPMENT }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
 
           ec2_instance_type: t2.medium
