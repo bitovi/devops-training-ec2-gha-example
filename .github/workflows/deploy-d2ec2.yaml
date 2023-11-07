@@ -23,14 +23,6 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
     # #   
-          tf_state_bucket_destroy: true
-          tf_state_file_name_append: rds
-      #    #tf_stack_destroy: true
-          aws_rds_db_enable: true
-          aws_rds_db_proxy: true
-          aws_rds_db_name: postgres
-          aws_rds_db_ingress_allow_all: true
-          aws_rds_db_publicly_accessible: true
 
       - name: Configure AWS Credentials
         uses: bitovi/github-actions-apply-sql-files-to-postgres@inital-branch
@@ -38,8 +30,7 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1 
-          #aws_secret_name: ${{ steps.create-rds.outputs.db_secret_details_name }}
-          aws_secret_name: b4i-d4s-t6g-ec2-gha-e5e-d32-rdsdb-pub-FdyNx
+          aws_secret_name: ${{ steps.create-rds.outputs.db_secret_details_name }}
           sql_scripts_path: sql-files
           dry_run: false
 
