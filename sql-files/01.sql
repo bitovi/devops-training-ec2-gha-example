@@ -1,3 +1,3 @@
-\c kleartrust;
+\c postgres;
 
-create schema kleartrust;
+create schema postgres;

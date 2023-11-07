@@ -1,4 +1,4 @@
-\c kleartrust;
+\c postgres;
 
 create schema data_exchange;
 
