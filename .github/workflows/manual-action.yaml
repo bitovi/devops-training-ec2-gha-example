@@ -1,27 +1,63 @@
-name: Manual Deploy D2EC2 Branch workflow
+#name: Manual Deploy D2EC2 Branch workflow
+#
+#on:
+#  workflow_dispatch:
+#    inputs:
+#      destroy:
+#        type: boolean
+#        default: false
+#
+#permissions:
+#  contents: read
+#
+#jobs:
+#  EC2-Deploy:
+#    if: "!contains(github.head_ref, 'skip-deploy')"
+#    runs-on: ubuntu-latest
+#    steps:
+#    - id: Deploy
+#      name: now-add-efs-3
+#      uses: bitovi/github-actions-deploy-docker-to-ec2@commons
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#        aws_default_region: us-east-1
+#
+#        stack_destroy: ${{ github.event.inputs.destroy }}
+#        tf_state_bucket_destroy: true
+
+name: Man-SQL-apply
 
 on:
   workflow_dispatch:
     inputs:
-      destroy:
+      secret_name:
+        type: string
+        description: "Database secret name"
+        required: true
+      scripts_path:
+        type: string
+        description: "Path containing SQL files"
+        required: true
+        default: 'sql-files'
+      dry_run:
         type: boolean
-        default: false
+        required: true
+        default: true
 
 permissions:
   contents: read
-
+ 
 jobs:
-  EC2-Deploy:
-    if: "!contains(github.head_ref, 'skip-deploy')"
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: self-hosted
     steps:
-    - id: Deploy
-      name: now-add-efs-3
-      uses: bitovi/github-actions-deploy-docker-to-ec2@commons
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        stack_destroy: ${{ github.event.inputs.destroy }}
-        tf_state_bucket_destroy: true
+      - name: Apply SQL files
+        uses: bitovi/github-actions-apply-sql-files-to-postgres@main
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1 
+          aws_secret_name: ${{ inputs.secret_name }}
+          sql_scripts_path: ${{ inputs.scripts_path }}
+          dry_run: ${{ inputs.dry_run }}
