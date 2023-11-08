@@ -1,7 +1,7 @@
 name: Deploy D2EC2 Testing branch
 
 on:
-  push:
+  push:https://github.com/bitovi/devops-training-ec2-gha-example/actions
     branches: [ d2ec2 ]
 
 permissions:
@@ -16,22 +16,22 @@ jobs:
     # #   
     steps:
 
-      - name: Create an RDS DB
-        id: create-rds
-        uses: bitovi/github-actions-deploy-rds@commons-testing
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
+      #- name: Create an RDS DB
+      #  id: create-rds
+      #  uses: bitovi/github-actions-deploy-rds@commons-testing
+      #  with:
+      #    aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+      #    aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+      #    aws_default_region: us-east-1
     # #   
-          tf_state_bucket_destroy: true
-          tf_state_file_name_append: rds
+      #    tf_state_bucket_destroy: true
+      #    tf_state_file_name_append: rds
       #    #tf_stack_destroy: true
-          aws_rds_db_enable: true
-          aws_rds_db_proxy: true
-          aws_rds_db_name: postgres
-          aws_rds_db_ingress_allow_all: true
-          aws_rds_db_publicly_accessible: true
+      #    aws_rds_db_enable: true
+      #    aws_rds_db_proxy: true
+      #    aws_rds_db_name: postgres
+      #    aws_rds_db_ingress_allow_all: true
+      #    aws_rds_db_publicly_accessible: true
 
       - name: Apply SQL files
         uses: bitovi/github-actions-apply-sql-files-to-postgres@main
@@ -39,7 +39,8 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1 
-          aws_secret_name: ${{ steps.create-rds.outputs.db_proxy_secret_name_rds }}
+          #aws_secret_name: ${{ steps.create-rds.outputs.db_proxy_secret_name_rds }}
+          aws_secret_name: b4i-d4s-t6g-ec2-gha-e5e-d32-proxy-FdyNx
           sql_scripts_path: sql-files
           dry_run: true
 
