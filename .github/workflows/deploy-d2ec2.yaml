@@ -8,7 +8,8 @@ permissions:
  
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: self-hosted
     #environment:
      # name: ${{ github.ref_name }}
      # url: ${{ steps.deploy.outputs.lb_url }}
