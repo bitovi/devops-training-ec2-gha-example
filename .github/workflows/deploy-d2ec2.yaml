@@ -13,24 +13,15 @@ jobs:
     #environment:
      # name: ${{ github.ref_name }}
      # url: ${{ steps.deploy.outputs.lb_url }}
-
-    steps:
-      - name: Create an RDS DB
-        id: create-rds
-        uses: bitovi/github-actions-deploy-rds@v0.1.2
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
     # #   
-
+    steps:
       - name: Apply SQL files
         uses: bitovi/github-actions-apply-sql-files-to-postgres@main
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1 
-          aws_secret_name: ${{ steps.create-rds.outputs.db_secret_details_name }}
+          aws_secret_name: b4i-d4s-t6g-ec2-gha-e5e-d32-rdsdb-pub-FdyNx
           sql_scripts_path: sql-files
           dry_run: false
 
