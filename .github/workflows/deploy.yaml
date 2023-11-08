@@ -23,18 +23,6 @@ jobs:
         #build_args:
 #        use_latest: true
 #        working_directory: container
-    - name: Create an RDS DB
-      id: create-rds
-      uses: bitovi/github-actions-deploy-rds@multiple-fixes
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        tf_stack_destroy: true
-        tf_state_bucket_destroy: true
-        aws_rds_db_enable: true
-        aws_rds_db_name: testing
-
 
     - name: Create an ECS-Fargate deploy
       uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
@@ -43,7 +31,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
 
-        stack_destroy: true
+        stack_destroy: 
         tf_state_bucket: ecs-leo-testing
         tf_state_bucket_destroy: 
         #aws_vpc_id: vpc-081abe910edab4281
