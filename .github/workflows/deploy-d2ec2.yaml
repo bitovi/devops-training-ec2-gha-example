@@ -34,6 +34,7 @@ jobs:
           aws_rds_db_name: postgres
           aws_rds_db_ingress_allow_all: true
           aws_rds_db_publicly_accessible: true
+          aws_db_proxy_allowed_security_group: sg-0d93315ea70f0f860
           aws_db_proxy_allow_all_incoming: true
 
       - name: Apply SQL files
@@ -45,7 +46,7 @@ jobs:
           #aws_secret_name: ${{ steps.create-rds.outputs.db_proxy_secret_name_rds }}
           aws_secret_name: b4i-d4s-t6g-ec2-gha-e5e-d32-proxy-FdyNx
           sql_scripts_path: sql-files
-          dry_run: true
+          dry_run: false
 
 #      - id: deploy
 #        uses: bitovi/github-actions-deploy-github-runner-to-ec2@v0.1.1
