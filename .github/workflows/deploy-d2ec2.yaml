@@ -1,7 +1,6 @@
-name: Deploy D2EC2 Testing branch
 
 on:
-  push:https://github.com/bitovi/devops-training-ec2-gha-example/actions
+  push:
     branches: [ d2ec2 ]
 
 permissions:
@@ -15,6 +14,8 @@ jobs:
      # url: ${{ steps.deploy.outputs.lb_url }}
     # #   
     steps:
+
+      #- name: Create an RDS DB
 
       #- name: Create an RDS DB
       #  id: create-rds
