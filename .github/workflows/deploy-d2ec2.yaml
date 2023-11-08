@@ -24,8 +24,8 @@ jobs:
           aws_default_region: us-east-1
     # #   
 
-      - name: Configure AWS Credentials
-        uses: bitovi/github-actions-apply-sql-files-to-postgres@inital-branch
+      - name: Apply SQL files
+        uses: bitovi/github-actions-apply-sql-files-to-postgres@main
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
