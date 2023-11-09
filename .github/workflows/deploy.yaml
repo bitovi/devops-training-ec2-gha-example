@@ -51,10 +51,10 @@ jobs:
         aws_ecs_lb_port: 8000
         aws_ecs_lb_redirect_enable: true
         #aws_ecs_lb_container_path: ''
-        aws_ecs_cloudwatch_enable: false
-        #aws_ecs_cloudwatch_lg_name: ecstest
+        aws_ecs_cloudwatch_enable: true
+        aws_ecs_cloudwatch_lg_name: ecstest
         #aws_ecs_cloudwatch_skip_destroy: false
-        #aws_ecs_cloudwatch_retention_days: 7
+        aws_ecs_cloudwatch_retention_days: 7
         #aws_ecs_additional_tags: 
 
         #aws_ecs_autoscaling_enable: false
@@ -66,6 +66,6 @@ jobs:
         #ghv_env: ${{ vars.TEST_VARS }}
         #dot_env: ${{ secrets.KV_SECRET_TEST }}
         aws_r53_enable: true
-        domain_name: bitovi-sandbox.com
-        sub_domain: ecs-final-testing
+        aws_r53_domain_name: bitovi-sandbox.com
+        aws_r53_sub_domain_name: ecs-final-testing
         tf_state_file_name_append: tbd
