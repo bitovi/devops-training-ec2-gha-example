@@ -33,7 +33,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
 
-        #tf_stack_destroy: true
+        tf_stack_destroy: true
         tf_state_bucket_destroy: true
 
         aws_ecs_task_cpu: 256,512,512
