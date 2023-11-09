@@ -2,11 +2,51 @@ name: Deploy GHR
 on:
   push:
     branches: [ ecr-ecs-fargate ]
-      
 
+jobs:
+  ECS-Deploy:
+    runs-on: ubuntu-latest
+    environment: 
+      name: ECS
+      url: ${{ steps.ecs.outputs.ecs_dns_record }}
+    steps:
+      - name: Deploy to ECS
+        id: ecs
+        #uses: bitovi/github-actions-deploy-ecs@main
+        uses: bitovi/github-actions-deploy-ecs@commons-testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_ecs_enable: true
+          aws_ecs_app_image: bitovi/deno-demo:latest
+
+          aws_ecs_task_cpu: 2048
+          aws_ecs_task_mem: 4096
+
+          aws_ecs_cloudwatch_enable: true
+          aws_ecs_cloudwatch_retention_days: 7
+
+          aws_ecs_container_port: 8000
+          aws_ecs_lb_port: 8000
+          aws_ecs_lb_redirect_enable: true
+
+          tf_stack_destroy: true
+          tf_state_bucket_destroy: true
+
+          aws_resource_identifier: deno-demo-ecs-leo
+          aws_r53_enable: true
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: deno-ecs-leo
+          aws_r53_enable_cert: true
+          aws_ecs_assign_public_ip: true
 jobs:
   deploy-bucket-only:
     runs-on: ubuntu-latest
+    environment: 
+      name: nginx-leo
+      url: ${{ steps.ecs.outputs.ecs_dns_record }}
     steps:
 #    - name: Build tag and push container
 #      id: tag-and-push
@@ -31,32 +71,34 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
 
-        tf_stack_destroy: true
+        #tf_stack_destroy: true
         tf_state_bucket: ecs-leo-testing
-        tf_state_bucket_destroy: 
+        tf_state_bucket_destroy: true
         #aws_vpc_id: vpc-081abe910edab4281
         #aws_vpc_subnet_id: subnet-056feca23aa09e324
         
         aws_ecs_enable: true
-        aws_ecs_task_cpu: 2048
-        aws_ecs_task_mem: 4096
+        aws_ecs_task_cpu: 256
+        aws_ecs_task_mem: 512
         #aws_ecs_container_cpu: 2048
         #aws_ecs_container_mem: 4096
         #aws_ecs_container_cpu: 1024,1024,512,512
         #aws_ecs_container_mem: 2048,2048,1024,1024
         #aws_ecs_node_count: 1
-        aws_ecs_app_image: bitovi/deno-demo:latest
+        aws_ecs_app_image: nginx:latest
         #aws_ecs_app_image: 755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:auth,755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:d2ec2,755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:hello
         #aws_ecs_security_group_name: somesgname
         #aws_ecs_assign_public_ip: true
-        aws_ecs_container_port: 8000
+        aws_ecs_container_port: 80
         aws_ecs_lb_port: 8000
+        aws_ecs_assign_public_ip: true
+        
         #aws_ecs_lb_redirect_enable: true
         #aws_ecs_lb_container_path: ''
         aws_ecs_cloudwatch_enable: true
-        aws_ecs_cloudwatch_lg_name: ecstest
+        aws_ecs_cloudwatch_lg_name: nginx-leo
         #aws_ecs_cloudwatch_skip_destroy: false
-        aws_ecs_cloudwatch_retention_days: 7
+        aws_ecs_cloudwatch_retention_days: 1 
         #aws_ecs_additional_tags: 
 
         #aws_ecs_autoscaling_enable: false
@@ -69,5 +111,5 @@ jobs:
         #dot_env: ${{ secrets.KV_SECRET_TEST }}
         aws_r53_enable: true
         aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: ecs-final-testing
-        tf_state_file_name_append: tbd
+        aws_r53_sub_domain_name: nginx-leo
+        tf_state_file_name_append: nginx-leo
