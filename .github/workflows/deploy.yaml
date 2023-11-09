@@ -25,7 +25,7 @@ jobs:
 #        working_directory: container
 
     - name: Create an ECS-Fargate deploy
-      uses: bitovi/github-actions-deploy-ecs@commons-testing
+      uses: bitovi/github-actions-deploy-ecs@v0.1.1
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -38,23 +38,24 @@ jobs:
         #aws_vpc_subnet_id: subnet-056feca23aa09e324
         
         aws_ecs_enable: true
-        aws_ecs_task_cpu: 1024,2048,2048
-        aws_ecs_task_mem: 2048,6144,6144
+        aws_ecs_task_cpu: 1024
+        aws_ecs_task_mem: 2048
         #aws_ecs_container_cpu: 1024,1024,512,512
         #aws_ecs_container_mem: 2048,2048,1024,1024
         #aws_ecs_node_count: 1
-        aws_ecs_app_image: 755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:auth,755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:d2ec2,755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:hello
+        aws_ecs_app_image: bitovi/deno-demo:latest
+        #aws_ecs_app_image: 755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:auth,755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:d2ec2,755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:hello
         #aws_ecs_security_group_name: somesgname
-        aws_ecs_assign_public_ip: true
-        aws_ecs_container_port: 8080,3000,3001
-        aws_ecs_lb_port: 8080,3000,3001
+        #aws_ecs_assign_public_ip: true
+        aws_ecs_container_port: 8000
+        aws_ecs_lb_port: 8000
         aws_ecs_lb_redirect_enable: true
-        aws_ecs_lb_container_path: ',api'
-        aws_ecs_cloudwatch_enable: true
+        #aws_ecs_lb_container_path: ''
+        aws_ecs_cloudwatch_enable: false
         #aws_ecs_cloudwatch_lg_name: ecstest
-        aws_ecs_cloudwatch_skip_destroy: false
-        aws_ecs_cloudwatch_retention_days: 7
-        aws_ecs_additional_tags: 
+        #aws_ecs_cloudwatch_skip_destroy: false
+        #aws_ecs_cloudwatch_retention_days: 7
+        #aws_ecs_additional_tags: 
 
         #aws_ecs_autoscaling_enable: false
         #aws_ecs_autoscaling_max_nodes: 3,2,3,1
