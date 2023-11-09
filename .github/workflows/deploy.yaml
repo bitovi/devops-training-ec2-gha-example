@@ -27,6 +27,7 @@ jobs:
 
     - name: Create an ECS-Fargate deploy
       uses: bitovi/github-actions-deploy-ecs@commons-testing
+      id: ecs
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -53,6 +54,7 @@ jobs:
         aws_r53_enable: true
         aws_r53_domain_name: bitovi-sandbox.com
         aws_r53_sub_domain_name: nginx-leo
+        aws_r53_enable_cert: true
         tf_state_file_name_append: nginx-leo
 
 
