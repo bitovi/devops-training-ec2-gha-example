@@ -48,8 +48,7 @@ jobs:
           sql_scripts_path: sql-files
           dry_run: true
           db_host: bitovi-devops-training-ec2-gha-example-d2ec2.cxctnxfc3bfg.us-east-1.rds.amazonaws.com
-          sql_scripts_path: sql-files
-          dry_run: true
+
 
 #      - id: deploy
 #        uses: bitovi/github-actions-deploy-github-runner-to-ec2@v0.1.1
