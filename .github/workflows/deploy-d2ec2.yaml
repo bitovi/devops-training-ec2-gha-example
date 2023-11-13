@@ -46,7 +46,9 @@ jobs:
           #aws_secret_name: ${{ steps.create-rds.outputs.db_proxy_secret_name_rds }}
           aws_secret_name: b4i-d4s-t6g-ec2-gha-e5e-d32-proxy-FdyNx
           sql_scripts_path: sql-files
-          dry_run: false
+          dry_run: true
+          db_host: bitovi-devops-training-ec2-gha-example-d2ec2.proxy-cxctnxfc3bfg.us-east-1.rds.amazonaws.com
+          
 
 #      - id: deploy
 #        uses: bitovi/github-actions-deploy-github-runner-to-ec2@v0.1.1
