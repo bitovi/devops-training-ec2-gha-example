@@ -51,8 +51,8 @@ jobs:
           dry_run: true
           db_host: bitovi-devops-training-ec2-gha-example-d2ec2.cxctnxfc3bfg.us-east-1.rds.amazonaws.com
           db_port: 5432
-          db_user: dbuser
-          database: postgres
+          db_username: dbuser
+          db_name: postgres
 
 
 #      - id: deploy
