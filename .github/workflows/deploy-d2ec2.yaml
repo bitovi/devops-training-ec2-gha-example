@@ -39,7 +39,7 @@ jobs:
      #     aws_db_proxy_allow_all_incoming: true
 
       - name: Apply SQL files
-        uses: bitovi/github-actions-apply-sql-files-to-postgres@main
+        uses: bitovi/github-actions-apply-sql-files-to-postgres@split-script
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
