@@ -8,8 +8,8 @@ permissions:
  
 jobs:
   deploy:
-    #runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    #runs-on: self-hosted
     #environment:
      # name: ${{ github.ref_name }}
      # url: ${{ steps.deploy.outputs.lb_url }}
@@ -18,24 +18,24 @@ jobs:
 
       #- name: Create an RDS DB
 
-      - name: Create an RDS DB
-        id: create-rds
-        uses: bitovi/github-actions-deploy-rds@main
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
+     # - name: Create an RDS DB
+     #   id: create-rds
+     #   uses: bitovi/github-actions-deploy-rds@main
+     #   with:
+     #     aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+     #     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+     #     aws_default_region: us-east-1
     # #   
-          tf_state_bucket_destroy: true
-          tf_state_file_name_append: rds
-          #tf_stack_destroy: true
-          aws_rds_db_enable: true
-          aws_rds_db_proxy: true
-          aws_rds_db_name: postgres
-          aws_rds_db_ingress_allow_all: true
-          aws_rds_db_publicly_accessible: true
-          aws_db_proxy_allowed_security_group: sg-0d93315ea70f0f860
-          aws_db_proxy_allow_all_incoming: true
+     #     tf_state_bucket_destroy: true
+     #     tf_state_file_name_append: rds
+     #     #tf_stack_destroy: true
+     #     aws_rds_db_enable: true
+     #     aws_rds_db_proxy: true
+     #     aws_rds_db_name: postgres
+     #     aws_rds_db_ingress_allow_all: true
+     #     aws_rds_db_publicly_accessible: true
+     #     aws_db_proxy_allowed_security_group: sg-0d93315ea70f0f860
+     #     aws_db_proxy_allow_all_incoming: true
 
       - name: Apply SQL files
         uses: bitovi/github-actions-apply-sql-files-to-postgres@main
@@ -48,8 +48,9 @@ jobs:
           sql_scripts_path: sql-files
           dry_run: true
           db_host: bitovi-devops-training-ec2-gha-example-d2ec2.cxctnxfc3bfg.us-east-1.rds.amazonaws.com
-
-          
+          aws_secret_name: b4i-d4s-t6g-ec2-gha-e5e-d32-proxy-FdyNx
+          sql_scripts_path: sql-files
+          dry_run: true
 
 #      - id: deploy
 #        uses: bitovi/github-actions-deploy-github-runner-to-ec2@v0.1.1
