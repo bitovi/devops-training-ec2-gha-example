@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: deploy
-      uses: bitovi/github-actions-deploy-eks@deploy-eks
+      uses: bitovi/github-actions-deploy-eks@main
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -21,7 +21,8 @@ jobs:
   
         bitops_code_only: 
         bitops_code_store: 
-        tf_state_bucket_destroy: 
+        tf_state_bucket_destroy: true
+        tf_stack_destroy: true
         
         #aws_eks_create: true
         #aws_eks_region: 
