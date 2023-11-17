@@ -12,18 +12,15 @@ jobs:
     # if the branch name of the PR does not contain 'skip-deploy'
     if: "!contains(github.head_ref, 'skip-deploy')"
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.ref_name }}
-      url: ${{ steps.deploy.outputs.vm_url }}
+
     steps:
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.8
+      uses: bitovi/github-actions-deploy-docker-to-ec2@main
       with:
         ###
         ### App config
         ###        
-        app_port: 3000
         
         ###
         ### AWS config
@@ -37,10 +34,10 @@ jobs:
         ###
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         # dot_env: ${{ secrets.DOT_ENV }}
-        stack_destroy: true
+        tf_stack_destroy: true
         tf_state_bucket_destroy: true
 
-        aws_mount_efs_id: fs-089a6338a687599fc
+        #aws_mount_efs_id: fs-089a6338a687599fc
         ###
         ### Postgres config
         ###
