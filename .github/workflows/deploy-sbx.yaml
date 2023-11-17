@@ -34,7 +34,7 @@ jobs:
         ###
         # Provide a secret called `DOT_ENV` to append environment variables to the .env file
         # dot_env: ${{ secrets.DOT_ENV }}
-        #tf_stack_destroy: true
+        tf_stack_destroy: true
         tf_state_bucket_destroy: true
         tf_state_bucket: bitovi-devops-training-ec2-gha-example-feat-sbox-rds-tf-state
         tf_state_file_name: tf-state
