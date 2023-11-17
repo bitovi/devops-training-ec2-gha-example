@@ -13,12 +13,12 @@ jobs:
         uses: bitovi/github-actions-deploy-rds@commons-testing
         with:
           # AWS
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_session_token:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          #aws_session_token:
           aws_default_region: us-east-1
-          aws_resource_identifier:
-          aws_additional_tags:
+          #aws_resource_identifier:
+          #aws_additional_tags:
           # Terraform
           tf_stack_destroy:
           tf_state_file_name:
