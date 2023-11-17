@@ -27,6 +27,7 @@ jobs:
           aws_rds_db_enable: true
           aws_rds_db_proxy: true
           docker_install: false
+          
       #- name: Create an RDS DB
 
 #      - name: Create an RDS DB
