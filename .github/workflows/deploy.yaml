@@ -59,7 +59,7 @@ jobs:
         aws_r53_domain_name: bitovi-sandbox.com
         aws_r53_sub_domain_name: nginx-leo
         aws_r53_enable_cert: true
-        tf_state_file_name_append: nginx-leo
+       # tf_state_file_name_append: nginx-leo
 
 
 
