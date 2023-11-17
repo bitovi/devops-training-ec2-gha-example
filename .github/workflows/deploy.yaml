@@ -5,29 +5,10 @@ on:
 jobs:
   deploy-bucket-only:
     runs-on: ubuntu-latest
-    environment: 
-      name: nginx-leo
-      url: ${{ steps.ecs.outputs.ecs_dns_record }}
     steps:
-#    - name: Build tag and push container
-#      id: tag-and-push
-#      uses: bitovi/github-actions-ecr-publish@main
-#      with:
-#        checkout: true
-#        aws_login: true
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-#        aws_ecr_repo_name: testing-repo-leo
-        #image_tag:
-        #org_name:
-        #build_args:
-#        use_latest: true
-#        working_directory: container
-
     - name: Create an ECS-Fargate deploy
-      uses: bitovi/github-actions-deploy-ecs@commons-testing
-      id: ecs
+      uses: bitovi/github-actions-deploy-aws-ecr-registry@main
+      id: ecr
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -35,80 +16,3 @@ jobs:
 
         tf_stack_destroy: true
         tf_state_bucket_destroy: true
-
-        aws_ecs_task_cpu: 256,512,512
-        aws_ecs_task_mem: 512,1024,1024
-        aws_ecs_app_image: nginx:latest,httpd:latest,public.ecr.aws/nginx/unit
-        aws_ecs_assign_public_ip: true
-
-        aws_ecs_container_port: 80,80,80
-        aws_ecs_lb_port: 8000,8001,8082
-        aws_ecs_lb_redirect_enable: true
-        aws_ecs_lb_container_path: 'apache,unit'
-
-        tf_state_bucket: ecs-leo-testing
-
-        aws_ecs_enable: true
-        
-        aws_ecs_cloudwatch_enable: true
-        aws_ecs_cloudwatch_lg_name: nginx-leo
-        aws_ecs_cloudwatch_skip_destroy: false
-        aws_ecs_cloudwatch_retention_days: 1 
-
-        aws_r53_enable: true
-        aws_r53_domain_name: bitovi-sandbox.com
-        aws_r53_sub_domain_name: nginx-leo
-        aws_r53_enable_cert: true
-       # tf_state_file_name_append: nginx-leo
-
-
-
-#    - name: Create an ECS-Fargate deploy
-#      uses: bitovi/github-actions-deploy-ecs@commons-testing
-#      with:
-#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#        aws_default_region: us-east-1
-
-        #tf_stack_destroy: true
-#        tf_state_bucket: ecs-leo-testing
-#        tf_state_bucket_destroy: true
-        #aws_vpc_id: vpc-081abe910edab4281
-        #aws_vpc_subnet_id: subnet-056feca23aa09e324
-        
-#        aws_ecs_enable: true
-#        aws_ecs_task_cpu: 256
-#        aws_ecs_task_mem: 512
-        #aws_ecs_container_cpu: 2048
-        #aws_ecs_container_mem: 4096
-        #aws_ecs_container_cpu: 1024,1024,512,512
-        #aws_ecs_container_mem: 2048,2048,1024,1024
-        #aws_ecs_node_count: 1
-#        aws_ecs_app_image: nginx:latest
-        #aws_ecs_app_image: 755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:auth,755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:d2ec2,755521597925.dkr.ecr.us-east-1.amazonaws.com/testing-repo-leo:hello
-        #aws_ecs_security_group_name: somesgname
-        #aws_ecs_assign_public_ip: true
-#        aws_ecs_container_port: 80
-#        aws_ecs_lb_port: 8000
-#        aws_ecs_assign_public_ip: true
-        
-        #aws_ecs_lb_redirect_enable: true
-        #aws_ecs_lb_container_path: ''
-#        aws_ecs_cloudwatch_enable: true
-#        aws_ecs_cloudwatch_lg_name: nginx-leo
-        #aws_ecs_cloudwatch_skip_destroy: false
-#        aws_ecs_cloudwatch_retention_days: 1 
-        #aws_ecs_additional_tags: 
-
-        #aws_ecs_autoscaling_enable: false
-        #aws_ecs_autoscaling_max_nodes: 3,2,3,1
-        #aws_ecs_autoscaling_min_nodes: 1,1,1,1
-        #aws_ecs_autoscaling_max_mem: 77,78,79,80
-        #aws_ecs_autoscaling_max_cpu: 77,78,79,80
-
-        #ghv_env: ${{ vars.TEST_VARS }}
-        #dot_env: ${{ secrets.KV_SECRET_TEST }}
-#        aws_r53_enable: true
-#        aws_r53_domain_name: bitovi-sandbox.com
-#        aws_r53_sub_domain_name: nginx-leo
-#        tf_state_file_name_append: nginx-leo
