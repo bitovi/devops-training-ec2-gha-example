@@ -1,27 +1,79 @@
-name: Deploy GHR
+name: Deploy RDS
 on:
   push:
-    branches: [ ghr ]
+    branches: [ rds ]
       
 
 jobs:
   deploy-bucket-only:
     runs-on: ubuntu-latest
     steps:
-    - name: Create deploy-bucket
-      id: bucket-deploy-bucket
-      uses: bitovi/github-actions-deploy-gh-runner-to-ec2@v0.1.1
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-        ec2_instance_type: t2.medium
-        
-        #stack_destroy: true
-        tf_state_bucket_destroy: true
-        
-        repo_url: https://github.com/bitovi/devops-training-ec2-gha-example
-        repo_access_token: ${{ secrets.THIS_REPO_RUNNER_TOKEN }}
-        ec2_instance_public_ip: true
-#        ec2_user_data_file: user-data.sh
-
+      - id: deploy-rds
+        name: Deploy RDS DB
+        uses: bitovi/github-actions-deploy-rds@commons-testing
+        with:
+          # AWS
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_session_token:
+          aws_default_region: us-east-1
+          aws_resource_identifier:
+          aws_additional_tags:
+          # Terraform
+          tf_stack_destroy:
+          tf_state_file_name:
+          tf_state_file_name_append:
+          tf_state_bucket:
+          tf_state_bucket_destroy: true
+          # Current repo vars
+          bitops_code_only:
+          bitops_code_store:
+          # AWS RDS
+          aws_rds_db_enable: true
+          aws_rds_db_proxy:
+          aws_rds_db_identifier:
+          aws_rds_db_name:
+          aws_rds_db_user:
+          aws_rds_db_engine:
+          aws_rds_db_engine_version:
+          aws_rds_db_ca_cert_identifier:
+          aws_rds_db_security_group_name:
+          aws_rds_db_allowed_security_groups:
+          aws_rds_db_ingress_allow_all:
+          aws_rds_db_publicly_accessible:
+          aws_rds_db_port:
+          aws_rds_db_subnets:
+          aws_rds_db_allocated_storage:
+          aws_rds_db_max_allocated_storage:
+          aws_rds_db_storage_encrypted:
+          aws_rds_db_storage_type:
+          aws_rds_db_kms_key_id:
+          aws_rds_db_instance_class:
+          aws_rds_db_final_snapshot:
+          aws_rds_db_restore_snapshot_identifier:
+          aws_rds_db_cloudwatch_logs_exports:
+          aws_rds_db_multi_az:
+          aws_rds_db_maintenance_window:
+          aws_rds_db_apply_immediately:
+          aws_rds_db_additional_tags:
+          # DB Proxy
+          aws_db_proxy_name :
+          aws_db_proxy_client_password_auth_type :
+          aws_db_proxy_tls :
+          aws_db_proxy_security_group_name :
+          aws_db_proxy_database_security_group_allow :
+          aws_db_proxy_allowed_security_group :
+          aws_db_proxy_allow_all_incoming :
+          aws_db_proxy_cloudwatch_enable :
+          aws_db_proxy_cloudwatch_retention_days :
+          aws_db_proxy_additional_tags:
+          # AWS VPC Inputs
+          aws_vpc_create:
+          aws_vpc_name:
+          aws_vpc_cidr_block:
+          aws_vpc_public_subnets:
+          aws_vpc_private_subnets:
+          aws_vpc_availability_zones:
+          aws_vpc_id:
+          aws_vpc_subnet_id:
+          aws_vpc_additional_tags:
