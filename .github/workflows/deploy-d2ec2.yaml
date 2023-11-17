@@ -42,7 +42,7 @@ jobs:
           aws_default_region: us-east-1
           #tf_stack_destroy: true
           tf_state_bucket_destroy: true
-          aws_elb_app_port: 8080 #
+          aws_elb_app_port:  #
           aws_rds_db_enable: true
           aws_rds_db_proxy: true
           docker_install: false
