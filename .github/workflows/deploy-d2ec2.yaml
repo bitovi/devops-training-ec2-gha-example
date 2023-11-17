@@ -15,7 +15,18 @@ jobs:
      # url: ${{ steps.deploy.outputs.lb_url }}
     # #   
     steps:
-
+      - id: deploy
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          #tf_stack_destroy: 
+          tf_state_bucket_destroy: true
+          aws_elb_app_port: 8080 #
+          aws_rds_db_enable: true
+          aws_rds_db_proxy: true
+          docker_install: false
       #- name: Create an RDS DB
 
 #      - name: Create an RDS DB
@@ -38,21 +49,21 @@ jobs:
 #     #     aws_db_proxy_allowed_security_group: sg-0d93315ea70f0f860
 #     #     aws_db_proxy_allow_all_incoming: true
 
-      - name: Apply SQL files
-        uses: bitovi/github-actions-apply-sql-files-to-postgres@split-script
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1 
-          #aws_secret_name: ${{ steps.create-rds.outputs.db_proxy_secret_name_rds }}
-#         aws_secret_name: b4i-d4s-t6g-ec2-gha-e5e-d32-proxy-FdyNx
-          aws_secret_name: leo-test-secret
-          sql_scripts_path: sql-files
-          dry_run: true
-          db_host: bitovi-devops-training-ec2-gha-example-d2ec2.cxctnxfc3bfg.us-east-1.rds.amazonaws.com
-          db_port: 5432
-          db_username: dbuser
-          db_name: postgres
+#      - name: Apply SQL files
+#        uses: bitovi/github-actions-apply-sql-files-to-postgres@split-script
+#        with:
+#          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#          aws_default_region: us-east-1 
+#          #aws_secret_name: ${{ steps.create-rds.outputs.db_proxy_secret_name_rds }}
+##         aws_secret_name: b4i-d4s-t6g-ec2-gha-e5e-d32-proxy-FdyNx
+#          aws_secret_name: leo-test-secret
+#          sql_scripts_path: sql-files
+#          dry_run: true
+#          db_host: bitovi-devops-training-ec2-gha-example-d2ec2.cxctnxfc3bfg.us-east-1.rds.amazonaws.com
+#          db_port: 5432
+#          db_username: dbuser
+#          db_name: postgres
 
 
 #      - id: deploy
