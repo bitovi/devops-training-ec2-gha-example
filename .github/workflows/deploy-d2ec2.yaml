@@ -46,7 +46,7 @@ jobs:
           aws_rds_db_enable: true
           aws_rds_db_proxy: true
           docker_install: false
-          aws_ec2_instance_public_ip: true
+          
       #- name: Create an RDS DB
 
 #      - name: Create an RDS DB
