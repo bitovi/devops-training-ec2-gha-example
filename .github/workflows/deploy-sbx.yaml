@@ -36,6 +36,7 @@ jobs:
         # dot_env: ${{ secrets.DOT_ENV }}
         tf_stack_destroy: true
         tf_state_bucket_destroy: true
+        tf_state_bucket: bitovi-devops-training-ec2-gha-example-feat-sbox-rds-tf-state
 
         #aws_mount_efs_id: fs-089a6338a687599fc
         ###
