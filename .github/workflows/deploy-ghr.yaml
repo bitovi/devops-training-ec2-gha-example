@@ -20,7 +20,7 @@ jobs:
           #aws_resource_identifier:
           #aws_additional_tags:
           # Terraform
-          tf_stack_destroy:
+          tf_stack_destroy: true
           tf_state_file_name:
           tf_state_file_name_append:
           tf_state_bucket:
