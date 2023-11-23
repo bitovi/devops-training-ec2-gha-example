@@ -2,27 +2,20 @@ name: Jira-destroy
 on:
   workflow_dispatch:
     inputs:
-      github-repo-name:
-      github-banch-name:
-env: 
-  GITHUB_ORG_NAME: bitovi
-  GITHUB_REPO_NAME: ${{ github.event.inputs.github-repo-name }}
-  GITHUB_BRANCH_NAME: ${{ github.event.inputs.github-branch-name }}
+      aws_resource_identifier:
 jobs:
   destroy:
     runs-on: ubuntu-latest
-    env: 
-      GITHUB_ORG_NAME: bitovi
-      GITHUB_REPO_NAME: ${{ github.event.inputs.github-repo-name }}
-      GITHUB_BRANCH_NAME: ${{ github.event.inputs.github-branch-name }}
     steps:
     - id: destroy
       name: Destroy
-      uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
+      uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5-delete
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_JIRA_INTEGRATIONS}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_JIRA_INTEGRATIONS}}
         aws_default_region: us-east-1
+        aws_resource_identifier: ${{ github.event.inputs.aws_resource_identifier }}
+
 
         stack_destroy: "true"
         tf_state_bucket_destroy: true
