@@ -1,4 +1,4 @@
-name: Destroy
+name: Jira-destroy
 
 on:
   workflow_dispatch:
