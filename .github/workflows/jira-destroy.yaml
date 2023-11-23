@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - id: destroy
+      emv: 
+        - GITHUB_ORG_NAME: bitovi
+        - GITHUB_REPO_NAME: ${{ github.event.inputs.github-repo-name }}
+        - GITHUB_BRANCH_NAME: ${{ github.event.inputs.github-branch-name }}
       name: Destroy
       uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
       with:
-        GITHUB_ORG_NAME: bitovi
-        GITHUB_REPO_NAME: ${{ github.event.inputs.github-repo-name }}
-        GITHUB_BRANCH_NAME: ${{ github.event.inputs.github-branch-name }}
-
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_JIRA_INTEGRATIONS}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_JIRA_INTEGRATIONS}}
         aws_default_region: us-east-1
