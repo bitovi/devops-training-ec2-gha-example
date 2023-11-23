@@ -1,4 +1,4 @@
-name: Jira-destroy
+ name: Jira-destroy
 on:
   workflow_dispatch:
     inputs:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - id: destroy
-      emv: 
+      env: 
         - GITHUB_ORG_NAME: bitovi
         - GITHUB_REPO_NAME: ${{ github.event.inputs.github-repo-name }}
         - GITHUB_BRANCH_NAME: ${{ github.event.inputs.github-branch-name }}
