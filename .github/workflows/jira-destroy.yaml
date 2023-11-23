@@ -9,9 +9,9 @@ jobs:
   destroy:
     runs-on: ubuntu-latest
     env: 
-    - GITHUB_ORG_NAME: bitovi
-    - GITHUB_REPO_NAME: ${{ github.event.inputs.github-repo-name }}
-    - GITHUB_BRANCH_NAME: ${{ github.event.inputs.github-branch-name }}
+      GITHUB_ORG_NAME: bitovi
+      GITHUB_REPO_NAME: ${{ github.event.inputs.github-repo-name }}
+      GITHUB_BRANCH_NAME: ${{ github.event.inputs.github-branch-name }}
     steps:
     - id: destroy
 
