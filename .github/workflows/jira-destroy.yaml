@@ -9,6 +9,12 @@ jobs:
   destroy:
     runs-on: ubuntu-latest
     steps:
+    - id: echo-values
+      shell: bash
+      run: |
+        echo GITHUB_ORG_NAME=bitovi >> $GITHUB_ENV
+        echo GITHUB_REPO_NAME=${{ github.event.inputs.github-repo-name }} >> $GITHUB_ENV
+        echo GITHUB_BRANCH_NAME=${{ github.event.inputs.github-branch-name }} >> $GITHUB_ENV
     - id: destroy
       name: Destroy
       uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.2
