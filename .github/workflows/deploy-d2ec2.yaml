@@ -35,18 +35,13 @@ jobs:
     # #     aws_db_proxy_allowed_security_group: sg-0d93315ea70f0f860
     # #     aws_db_proxy_allow_all_incoming: true
       - id: deploy
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.0
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          tf_stack_destroy: true
-          tf_state_bucket_destroy: true
-          aws_elb_app_port:  #
-          aws_rds_db_enable: true
-         # aws_rds_db_proxy: true
-          docker_install: false
-
+          aws_default_region: eu-north-1
+          aws_elb_app_port: 8000
+          tf_state_bucket: dsjh-2123
           
       #- name: Create an RDS DB
 
