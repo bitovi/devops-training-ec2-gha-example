@@ -41,7 +41,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: eu-north-1
           aws_elb_app_port: 8000
-          tf_state_bucket: dsjh-2123
+          tf_state_bucket: leobucketdeleteme
           
       #- name: Create an RDS DB
 
