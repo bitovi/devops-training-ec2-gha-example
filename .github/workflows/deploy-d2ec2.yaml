@@ -42,6 +42,7 @@ jobs:
           aws_default_region: eu-north-1
           aws_elb_app_port: 8000
           tf_state_bucket: leobucketdeleteme
+          aws_ec2_instance_type: t3.micro
           
       #- name: Create an RDS DB
 
