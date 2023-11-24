@@ -38,12 +38,12 @@ jobs:
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          #aws_default_region: eu-north-1
+          aws_default_region: eu-north-1
           aws_elb_app_port: 3000
           tf_state_bucket: leobucketdeleteme
           aws_ec2_instance_type: t3.small
           tf_state_bucket_destroy: true
-          tf_stack_destroy: true
+          #tf_stack_destroy: true
       #- name: Create an RDS DB
 
 #      - name: Create an RDS DB
