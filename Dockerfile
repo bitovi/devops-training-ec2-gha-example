@@ -1,8 +1,11 @@
-FROM nginx:latest
-EXPOSE 8080
+FROM node:18-alpine
+ENV PORT=3000
 
-COPY ./app/default.conf /etc/nginx/conf.d/default.conf
-COPY ./app/.htpasswd  /etc/nginx/.htpasswd
-COPY ./app/index.html /usr/share/nginx/html/hc/index.html
+WORKDIR app
+COPY . .
 
-CMD ["nginx", "-g", "daemon off;"]
+COPY package.json .
+RUN npm install
+
+EXPOSE $PORT
+CMD npm run start
