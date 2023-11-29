@@ -23,3 +23,4 @@ jobs:
           aws_ec2_instance_type: t3.small
           tf_state_bucket_destroy: true
           #tf_stack_destroy: true
+
