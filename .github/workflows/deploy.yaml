@@ -1,0 +1,16 @@
+name: Basic deploy
+on:
+  push:
+    branches: [ prom ]
+
+jobs:
+  EC2-Deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - id: deploy
+      name: Deploy
+      uses: bitovi/github-actions-deploy-prometheus@0.1.0
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        prometheus_targets: "host1:port1,host2:port2"
