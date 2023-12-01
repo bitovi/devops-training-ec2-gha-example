@@ -14,17 +14,6 @@ jobs:
      # url: ${{ steps.deploy.outputs.lb_url }}
     # #   
     steps:
-      - id: destroy
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_elb_app_port: 3000
-          aws_ec2_instance_type: t3.small
-          tf_state_bucket_destroy: true
-          tf_stack_destroy: true
-
-
       - id: deploy
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -33,25 +22,5 @@ jobs:
           aws_elb_app_port: 3000
           aws_ec2_instance_type: t3.small
           tf_state_bucket_destroy: true
+          aws_efs_fs_id: fs-0a74d7a05adeb2c55
           #tf_stack_destroy: true
-
-      - id: deploy2
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_elb_app_port: 3000
-          aws_ec2_instance_type: t3.small
-          tf_state_bucket_destroy: true
-          #tf_stack_destroy: true
-
-      - id: destroy2
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_elb_app_port: 3000
-          aws_ec2_instance_type: t3.small
-          tf_state_bucket_destroy: true
-          tf_stack_destroy: true
-
