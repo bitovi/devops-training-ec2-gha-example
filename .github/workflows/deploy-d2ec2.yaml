@@ -15,7 +15,7 @@ jobs:
     # #   
     steps:
       - id: deploy
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@efs-bump
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -27,4 +27,4 @@ jobs:
           #bitops_code_only: true
           #bitops_code_store: true
           
-          tf_stack_destroy: true
+          #tf_stack_destroy: true
