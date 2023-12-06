@@ -22,8 +22,8 @@ jobs:
           aws_elb_app_port: 3000
           aws_ec2_instance_type: t3.small
           tf_state_bucket_destroy: true
-          aws_efs_create: true
-          #aws_efs_fs_id: fs-0a74d7a05adeb2c55
+         # aws_efs_create: true
+          aws_efs_fs_id: fs-0a74d7a05adeb2c55
           #bitops_code_only: true
           #bitops_code_store: true
           
