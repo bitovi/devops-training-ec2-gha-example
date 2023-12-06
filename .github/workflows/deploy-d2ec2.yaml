@@ -29,4 +29,4 @@ jobs:
           #bitops_code_only: true
           #bitops_code_store: true
           
-          #tf_stack_destroy: true
+          tf_stack_destroy: true
