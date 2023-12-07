@@ -39,4 +39,4 @@ jobs:
           aws_default_region: us-east-1
 
           # AWS VPC Inputs
-          aws_vpc_create: true
+          #aws_vpc_create: true
