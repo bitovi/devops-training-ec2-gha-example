@@ -52,8 +52,8 @@ jobs:
 
           tf_state_file_name_append: ${{ github.action }}
 
-          aws_efs_fs_id: ${{ steps.deploy-efs.outputs.aws_efs_fs_id }}
-          env_aws_secret: ${{ steps.deploy-rds.outputs.db_secret_details_name }}
+          aws_efs_fs_id: ${{ steps.efs.outputs.aws_efs_fs_id }}
+          env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
           #aws_efs_create_ha: true
           #bitops_code_only: true
           #bitops_code_store: true
