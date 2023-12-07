@@ -22,7 +22,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
 
-          tf_state_file_name_append: ${{ github.job }}
+          tf_state_file_name_append: ${{ github.run_id }}
           aws_efs_ingress_allow_all: true
 
           # AWS VPC Inputs
