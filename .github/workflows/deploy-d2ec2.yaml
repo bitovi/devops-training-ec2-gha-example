@@ -24,7 +24,8 @@ jobs:
 
           tf_state_file_name_append: ${{ github.action }}
           aws_efs_ingress_allow_all: true
-
+          aws_efs_create_ha: true
+          
           # AWS VPC Inputs
           #aws_vpc_create: true
           #tf_stack_destroy: true
@@ -44,6 +45,8 @@ jobs:
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          
           aws_elb_app_port: 3000
           aws_ec2_instance_type: t3.small
           tf_state_bucket_destroy: true
