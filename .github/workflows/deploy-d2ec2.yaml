@@ -15,21 +15,6 @@ jobs:
     # #   
     steps:
 
-      - id: efs
-        uses: bitovi/github-actions-deploy-efs-volume@initial-branch
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          tf_state_file_name_append: ${{ github.action }}
-          aws_efs_create_mount_target: false
-      - id: rds
-        uses: bitovi/github-actions-deploy-rds@v0.1.5
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          tf_state_file_name_append: ${{ github.action }}
       - id: ec2
         uses: bitovi/github-actions-deploy-docker-to-ec2@efs-bump
         with:
@@ -43,4 +28,21 @@ jobs:
           aws_efs_fs_id: ${{ steps.efs.outputs.aws_efs_fs_id }}
           aws_efs_create_mount_target: true
           env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
-          #tf_stack_destroy: true
+          tf_stack_destroy: true
+      - id: efs
+        uses: bitovi/github-actions-deploy-efs-volume@initial-branch
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          tf_state_file_name_append: ${{ github.action }}
+          aws_efs_create_mount_target: false
+          tf_stack_destroy: true
+      - id: rds
+        uses: bitovi/github-actions-deploy-rds@v0.1.5
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          tf_state_file_name_append: ${{ github.action }}
+          tf_stack_destroy: true
