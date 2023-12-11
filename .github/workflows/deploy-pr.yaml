@@ -32,10 +32,10 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
         aws_default_region: us-east-1
   
-        aws_eks_create: false
+        aws_eks_create: true
         tf_state_bucket_destroy: true
-        tf_stack_destroy: true
-
+        #tf_stack_destroy: true
+        aws_eks_cluster_name: leo-testing-stack
   
 #    - name: destroy2
 #      uses: bitovi/github-actions-deploy-eks@gha-testing
