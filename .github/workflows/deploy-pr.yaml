@@ -26,7 +26,7 @@ jobs:
     #    tf_stack_destroy: true
         
     - name: Create EKS Cluster
-      uses: bitovi/github-actions-deploy-eks@gha-testing
+      uses: bitovi/github-actions-deploy-eks@main
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
