@@ -11,7 +11,7 @@ env:
   AWS_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
   AWS_REGION: us-east-1
   AWS_AZ: us-east-1a
-
+  ENVIRONMENT: test
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
           aws_access_key_id: ${{ env.AWS_KEY_ID }}
           aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
           aws_default_region: ${{ env.AWS_REGION }}
-          tf_state_file_name_append: ${{ github.action }}
+          tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
           aws_efs_create_mount_target: true
           aws_efs_create_ha: false
           aws_vpc_availability_zones: $AWS_AZ
@@ -40,7 +40,7 @@ jobs:
           aws_access_key_id: ${{ env.AWS_KEY_ID }}
           aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
           aws_default_region: ${{ env.AWS_REGION }}
-          tf_state_file_name_append: ${{ github.action }}
+          tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
           aws_vpc_availability_zones: $AWS_AZ
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
           
@@ -53,9 +53,11 @@ jobs:
           aws_elb_app_port: 3000
           aws_ec2_instance_type: t3.small
           tf_state_bucket_destroy: true
-          tf_state_file_name_append: ${{ github.action }}
+          tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
           aws_efs_fs_id: ${{ steps.efs.outputs.aws_efs_fs_id }}
           aws_efs_create_mount_target: false
           env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
           aws_vpc_availability_zones: $AWS_AZ
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
+          # We can use this to set the location of the files based on the path
+          # docker_repo_app_directory: ${{ env.ENVIRONMENT }}
