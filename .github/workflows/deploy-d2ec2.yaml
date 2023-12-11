@@ -25,7 +25,7 @@ jobs:
           aws_efs_create_mount_target: true
           aws_efs_create_ha: false
           aws_vpc_availability_zones: us-east-1a
-          #tf_stack_destroy: true
+          tf_stack_destroy: true
       - id: rds
         uses: bitovi/github-actions-deploy-rds@v0.1.5
         with:
@@ -34,7 +34,7 @@ jobs:
           aws_default_region: us-east-1
           tf_state_file_name_append: ${{ github.action }}
           aws_vpc_availability_zones: us-east-1a
-          #tf_stack_destroy: true
+          tf_stack_destroy: true
       - id: ec2
         uses: bitovi/github-actions-deploy-docker-to-ec2@efs-bump
         with:
@@ -49,4 +49,4 @@ jobs:
           aws_efs_create_mount_target: false
           env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
           aws_vpc_availability_zones: us-east-1a
-          #tf_stack_destroy: true
+          tf_stack_destroy: true
