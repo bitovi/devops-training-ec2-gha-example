@@ -44,6 +44,6 @@ jobs:
           tf_state_bucket_destroy: true
           tf_state_file_name_append: ${{ github.action }}
           aws_efs_fs_id: ${{ steps.efs.outputs.aws_efs_fs_id }}
-          #aws_efs_create_mount_target: true
+          aws_efs_create_mount_target: false
           env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
           #tf_stack_destroy: true
