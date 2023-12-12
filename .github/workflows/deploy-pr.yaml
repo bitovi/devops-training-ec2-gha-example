@@ -33,7 +33,7 @@ jobs:
         aws_default_region: us-east-1
   
         tf_state_bucket_destroy: true
-        #tf_stack_destroy: true
+        tf_stack_destroy: true
   
 #    - name: destroy2
 #      uses: bitovi/github-actions-deploy-eks@gha-testing
