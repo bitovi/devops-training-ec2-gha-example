@@ -24,8 +24,18 @@ jobs:
 
     #    tf_state_bucket_destroy: true
     #    tf_stack_destroy: true
-        
+
     - name: Create EKS Cluster
+      uses: bitovi/github-actions-deploy-eks@commons-bump
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+        aws_default_region: us-east-1
+  
+        tf_state_bucket_destroy: true
+        #tf_stack_destroy: true
+        
+    - name: Recreate EKS Cluster
       uses: bitovi/github-actions-deploy-eks@commons-bump
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
