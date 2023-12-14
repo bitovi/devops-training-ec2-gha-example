@@ -1,0 +1,23 @@
+name: Verify and Deploy
+
+on: [push]
+
+jobs:
+  verify-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy
+        uses: bitovi/github-actions-deploy-static-site-to-aws@main
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+          aws_default_region: us-east-1
+  
+          tf_action: 'apply'
+          tf_state_bucket_destroy: true
+          
+          aws_spa_cdn_enabled: false
+          
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: spa
