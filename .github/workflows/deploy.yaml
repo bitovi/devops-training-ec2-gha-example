@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Create an ECS-Fargate deploy
-      uses: bitovi/github-actions-deploy-aws-ecr-registry@v0.1.0
+      uses: bitovi/github-actions-deploy-aws-ecr-registry@import-code
       id: ecr
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
