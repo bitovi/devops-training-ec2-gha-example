@@ -15,4 +15,4 @@ jobs:
         aws_default_region: us-east-1
         #tf_stack_destroy: true
         tf_state_bucket_destroy: true
-        aws_ecr_repo_create: true
+        #aws_ecr_repo_create: true
