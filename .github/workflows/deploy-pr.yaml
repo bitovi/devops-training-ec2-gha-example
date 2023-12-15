@@ -18,7 +18,7 @@ jobs:
   
         tf_state_bucket_destroy: true
         tf_stack_destroy: true
-        tf_state_filename: tf-state-eks
+        tf_state_file_name: tf-state-eks
 
     - name: Create EKS Cluster tf-state-aws
       uses: bitovi/github-actions-deploy-eks@bitops-conditional-helm
@@ -39,7 +39,7 @@ jobs:
   
         tf_state_bucket_destroy: true
         tf_stack_destroy: true
-        tf_state_filename: tf-state
+        tf_state_file_name: tf-state
 
     - name: Create EKS Cluster tf-state-aws_eks
       uses: bitovi/github-actions-deploy-eks@bitops-conditional-helm
@@ -50,7 +50,7 @@ jobs:
   
         tf_state_bucket_destroy: true
         tf_stack_destroy: true
-        tf_state_filename: tf-state-aws_eks
+        tf_state_file_name: tf-state-aws_eks
         
     - name: Create EKS Cluster tf-state-aws_eks2
       uses: bitovi/github-actions-deploy-eks@bitops-conditional-helm
@@ -61,7 +61,7 @@ jobs:
   
         tf_state_bucket_destroy: true
         tf_stack_destroy: true
-        tf_state_filename: tf-state-aws_eks2
+        tf_state_file_name: tf-state-aws_eks2
 
     - name: Create EKS Cluster
       uses: bitovi/github-actions-deploy-eks@bitops-conditional-helm
