@@ -29,6 +29,12 @@ jobs:
   
         tf_state_bucket_destroy: true
         #tf_stack_destroy: true
+        aws_eks_create: true
+        # input_helm_charts:
+        aws-auth-enable: true
+        tf_stack_destroy:
+        prometheus-enable:
+        grafana-enable: true
         
    # #- name: Create EKS Cluster
    #   uses: bitovi/github-actions-deploy-eks@legacy
