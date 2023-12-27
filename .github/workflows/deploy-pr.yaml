@@ -32,7 +32,6 @@ jobs:
         aws_eks_create: true
         # input_helm_charts:
         aws-auth-enable: false
-        tf_stack_destroy:
         prometheus-enable:
         grafana-enable: true
         
