@@ -28,7 +28,7 @@ jobs:
         aws_default_region: us-east-1
   
         tf_state_bucket_destroy: true
-        #tf_stack_destroy: true
+        tf_stack_destroy: true
         aws_eks_create: true
         # input_helm_charts:
         aws-auth-enable: false
