@@ -6,7 +6,7 @@ permissions:
   contents: read
  
 env:
-  STACK_DESTROY: true
+  STACK_DESTROY: false
   AWS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
   AWS_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
   AWS_REGION: us-east-1
@@ -45,7 +45,7 @@ jobs:
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
           
       - id: ec2
-        uses: bitovi/github-actions-deploy-docker-to-ec2@efs-bump
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ env.AWS_KEY_ID }}
           aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
