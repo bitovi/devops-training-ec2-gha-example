@@ -30,35 +30,19 @@ jobs:
         aws_eks_cluster_admin_role_arn: arn:aws:iam::755521597925:role/AWSReservedSSO_AdministratorAccess_402f22a297379e03
         aws_eks_create: true
         # input_helm_charts:
-        tf_stack_destroy: true
+        #tf_stack_destroy: true
         prometheus-enable: true
         grafana-enable: true
 
-    - name: Create EKS Cluster2
-      uses: bitovi/github-actions-deploy-eks@bitops-conditional-helm
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
-        
-        tf_state_bucket_destroy: true
-        
-        #aws_eks_cluster_admin_role_arn: arn:aws:iam::755521597925:role/AWSReservedSSO_AdministratorAccess_402f22a297379e03
-        aws_eks_create: true
-        # input_helm_charts:
-        tf_stack_destroy: true
-        prometheus-enable: true
-        grafana-enable: true
-
-    - name: Destroy EKS Cluster 2
-      uses: bitovi/github-actions-deploy-eks@bitops-conditional-helm
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-        aws_default_region: us-east-1
+#    - name: Destroy EKS Cluster 2
+#      uses: bitovi/github-actions-deploy-eks@bitops-conditional-helm
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+#        aws_default_region: us-east-1
   
-        tf_state_bucket_destroy: true
-        tf_stack_destroy: true
+#        tf_state_bucket_destroy: true
+#        tf_stack_destroy: true
    # #- name: Create EKS Cluster
    #   uses: bitovi/github-actions-deploy-eks@legacy
    #   with:
