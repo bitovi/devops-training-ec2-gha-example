@@ -31,7 +31,7 @@ jobs:
           tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
           aws_efs_create_mount_target: true
           aws_efs_create_ha: false
-          aws_vpc_availability_zones: $AWS_AZ
+          aws_vpc_availability_zones: ${{ env.$AWS_AZ }}
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
 
       - id: rds
@@ -41,7 +41,7 @@ jobs:
           aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
           aws_default_region: ${{ env.AWS_REGION }}
           tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
-          aws_vpc_availability_zones: $AWS_AZ
+          aws_vpc_availability_zones: ${{ env.$AWS_AZ }}
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
           
       - id: ec2
@@ -57,7 +57,7 @@ jobs:
           aws_efs_fs_id: ${{ steps.efs.outputs.aws_efs_fs_id }}
           aws_efs_create_mount_target: false
           env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
-          aws_vpc_availability_zones: $AWS_AZ
+          aws_vpc_availability_zones: ${{ env.$AWS_AZ }}
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
           # We can use this to set the location of the files based on the path
           # docker_repo_app_directory: ${{ env.ENVIRONMENT }}
