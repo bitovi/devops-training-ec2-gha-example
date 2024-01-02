@@ -41,7 +41,7 @@ jobs:
           aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
           aws_default_region: ${{ env.AWS_REGION }}
           tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
-          aws_vpc_availability_zones: ${{ env.$AWS_AZ }}
+          aws_vpc_availability_zones: ${{ env.AWS_AZ }}
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
           
       - id: ec2
