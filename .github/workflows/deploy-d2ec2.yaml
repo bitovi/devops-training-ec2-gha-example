@@ -45,7 +45,7 @@ jobs:
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
           
       - id: ec2
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@efs-bump
         with:
           aws_access_key_id: ${{ env.AWS_KEY_ID }}
           aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
