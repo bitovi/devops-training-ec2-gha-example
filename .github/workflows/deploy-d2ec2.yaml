@@ -63,5 +63,6 @@ jobs:
           env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
           aws_vpc_availability_zones: us-east-1a
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
+          ansible_skip: true
           # We can use this to set the location of the files based on the path
           # docker_repo_app_directory: ${{ env.ENVIRONMENT }}
