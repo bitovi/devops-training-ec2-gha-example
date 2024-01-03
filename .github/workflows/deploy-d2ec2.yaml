@@ -31,7 +31,7 @@ jobs:
           tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
           aws_efs_create_mount_target: true
           aws_efs_create_ha: false
-          aws_vpc_create: true
+          #aws_vpc_create: true
           aws_vpc_availability_zones: ${{ env.AWS_AZ }}
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
 
@@ -59,7 +59,7 @@ jobs:
           tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
           aws_efs_fs_id: ${{ steps.efs.outputs.aws_efs_fs_id }}
           aws_efs_create_mount_target: false
-          aws_vpc_id: ${{ steps.efs.outputs.aws_vpc_id }}
+          #aws_vpc_id: ${{ steps.efs.outputs.aws_vpc_id }}
           env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
           aws_vpc_availability_zones: ${{ env.AWS_AZ }}
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
