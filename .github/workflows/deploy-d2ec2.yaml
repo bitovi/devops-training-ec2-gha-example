@@ -35,17 +35,17 @@ jobs:
           aws_vpc_availability_zones: ${{ env.AWS_AZ }}
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
 
-      - id: rds
-        uses: bitovi/github-actions-deploy-rds@v0.1.5
-        with:
-          aws_access_key_id: ${{ env.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
-          aws_default_region: ${{ env.AWS_REGION }}
-          tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
-          aws_vpc_availability_zones: ${{ env.AWS_AZ }}
-          aws_vpc_id: ${{ steps.efs.outputs.aws_vpc_id }}
-          #tf_stack_destroy: ${{ env.STACK_DESTROY }}
-          tf_stack_destroy: true
+      #- id: rds
+      #  uses: bitovi/github-actions-deploy-rds@v0.1.5
+      #  with:
+      #    aws_access_key_id: ${{ env.AWS_KEY_ID }}
+      #    aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
+      #    aws_default_region: ${{ env.AWS_REGION }}
+      #    tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
+      #    aws_vpc_availability_zones: ${{ env.AWS_AZ }}
+      #    aws_vpc_id: ${{ steps.efs.outputs.aws_vpc_id }}
+      #    #tf_stack_destroy: ${{ env.STACK_DESTROY }}
+      #    tf_stack_destroy: true
           
       - id: ec2
         uses: bitovi/github-actions-deploy-docker-to-ec2@efs-bump
@@ -54,7 +54,7 @@ jobs:
           aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
           aws_default_region: ${{ env.AWS_REGION }}
           aws_elb_app_port: 3000
-          aws_ec2_instance_type: t3.small
+          aws_ec2_instance_type: t2.small
           tf_state_bucket_destroy: true
           tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
           aws_efs_fs_id: ${{ steps.efs.outputs.aws_efs_fs_id }}
