@@ -6,7 +6,7 @@ permissions:
   contents: read
  
 env:
-  STACK_DESTROY: false
+  STACK_DESTROY: true
   AWS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
   AWS_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
   AWS_REGION: us-east-1
@@ -61,8 +61,7 @@ jobs:
           aws_efs_create_mount_target: false
           aws_vpc_id: ${{ steps.efs.outputs.aws_vpc_id }}
           env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
-          aws_vpc_availability_zones: us-east-1a
+          aws_vpc_availability_zones: ${{ env.AWS_AZ }}
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
-          ansible_skip: false
           # We can use this to set the location of the files based on the path
           # docker_repo_app_directory: ${{ env.ENVIRONMENT }}
