@@ -6,7 +6,7 @@ permissions:
   contents: read
  
 env:
-  STACK_DESTROY: true
+  STACK_DESTROY: false
   AWS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
   AWS_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
   AWS_REGION: us-east-1
@@ -27,28 +27,33 @@ jobs:
           aws_access_key_id: ${{ env.AWS_KEY_ID }}
           aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
           aws_default_region: ${{ env.AWS_REGION }}
-          aws_elb_app_port: 3000
-          aws_ec2_instance_type: t2.small
+          #aws_elb_app_port: 3000
+          aws_ec2_instance_type: t3.small
+          aws_elb_create: false
           tf_state_bucket_destroy: true
           tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
-          aws_efs_fs_id: ${{ steps.efs.outputs.aws_efs_fs_id }}
-          aws_efs_create_mount_target: false
+          #aws_efs_fs_id: ${{ steps.efs.outputs.aws_efs_fs_id }}
+          #aws_efs_create_mount_target: false
           #aws_vpc_id: ${{ steps.efs.outputs.aws_vpc_id }}
-          env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
+          #env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
           aws_vpc_availability_zones: ${{ env.AWS_AZ }}
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
-      - id: efs
-        uses: bitovi/github-actions-deploy-efs-volume@initial-branch
-        with:
-          aws_access_key_id: ${{ env.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
-          aws_default_region: ${{ env.AWS_REGION }}
-          tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
-          aws_efs_create_mount_target: true
-          aws_efs_create_ha: false
-          #aws_vpc_create: true
-          aws_vpc_availability_zones: ${{ env.AWS_AZ }}
-          tf_stack_destroy: ${{ env.STACK_DESTROY }}
+          aws_vpc_create: true
+          aws_vpc_enable_nat_gateway: true
+          aws_vpc_single_nat_gateway: true
+          aws_ec2_instance_public_ip: false
+     # - id: efs
+     #   uses: bitovi/github-actions-deploy-efs-volume@initial-branch
+     #   with:
+     #     aws_access_key_id: ${{ env.AWS_KEY_ID }}
+     #     aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
+     #     aws_default_region: ${{ env.AWS_REGION }}
+     #     tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
+     #     aws_efs_create_mount_target: true
+     #     aws_efs_create_ha: false
+     #     #aws_vpc_create: true
+     #     aws_vpc_availability_zones: ${{ env.AWS_AZ }}
+     #     tf_stack_destroy: ${{ env.STACK_DESTROY }}
 
       #- id: rds
       #  uses: bitovi/github-actions-deploy-rds@v0.1.5
