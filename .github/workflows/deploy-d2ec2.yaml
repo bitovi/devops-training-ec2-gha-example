@@ -41,7 +41,7 @@ jobs:
           aws_vpc_create: true
           aws_vpc_enable_nat_gateway: true
           aws_vpc_single_nat_gateway: true
-          aws_ec2_instance_public_ip: false
+          aws_ec2_instance_public_ip: true
           ansible_skip: true
      # - id: efs
      #   uses: bitovi/github-actions-deploy-efs-volume@initial-branch
