@@ -20,7 +20,7 @@ jobs:
          # aws_spa_cdn_enabled: true
         
           # You should own and have this domain available in R53
-          aws_r53_domain_name: bitovi-sandbox.com
+          #aws_r53_domain_name: bitovi-sandbox.com
           #aws_r53_sub_domain_name: spa-training
           aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
 
