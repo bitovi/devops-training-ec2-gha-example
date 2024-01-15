@@ -8,16 +8,18 @@ jobs:
 
     steps:
       - name: Deploy
-        uses: bitovi/github-actions-deploy-static-site-to-aws@5-s3-bucket-creation-fails
+        uses: bitovi/github-actions-deploy-static-site-to-aws@cdn-cert-dep-fix
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
           aws_default_region: us-east-1
   
-          tf_action: 'destroy'
+          tf_action: 'apply'
           tf_state_bucket_destroy: true
           
-          aws_spa_cdn_enabled: false
-          
+          aws_spa_cdn_enabled: true
+        
+          # You should own and have this domain available in R53
           aws_r53_domain_name: bitovi-sandbox.com
-          aws_r53_sub_domain_name: spa
+          aws_r53_sub_domain_name: spa-training
+          aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
