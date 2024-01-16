@@ -7,14 +7,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy
+      - name: 0
         uses: bitovi/github-actions-deploy-static-site-to-aws@main
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
           aws_default_region: us-east-1
   
-          tf_action: 'apply'
+          tf_action: 'destriy'
           tf_state_bucket_destroy: true
           #aws_resource_identifier: bitovi-devops-training-ec2-gha-example-static-site
           aws_site_cdn_enabled: true
