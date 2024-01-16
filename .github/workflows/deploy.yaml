@@ -16,7 +16,7 @@ jobs:
   
           tf_action: 'apply'
           tf_state_bucket_destroy: true
-          aws_resource_identifier: bitovi-devops-training-ec2-gha-example-static-site
+          #aws_resource_identifier: bitovi-devops-training-ec2-gha-example-static-site
           aws_site_cdn_enabled: true
           # You should own and have this domain available in R53
           aws_r53_domain_name: bitovi-sandbox.com
