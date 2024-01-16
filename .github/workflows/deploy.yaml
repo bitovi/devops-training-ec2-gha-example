@@ -18,9 +18,8 @@ jobs:
           tf_state_bucket_destroy: true
           
           aws_site_cdn_enabled: true
-          aws_resource_identifier: bitovi-devops-training-ec2-gha-example-static-site
           # You should own and have this domain available in R53
           aws_r53_domain_name: bitovi-sandbox.com
-          #aws_r53_sub_domain_name: bitovi-devops-training-ec2-gha-example-static-site
+          aws_r53_sub_domain_name: bitovi-devops-training-ec2-gha-example-static-site
           aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
 
