@@ -22,3 +22,5 @@ jobs:
         aws_ec2_instance_type: t3.small
         
         aws_domain_name: bitovi-sandbox.com
+        prometheus_scrape_interval: 1h
+        prometheus_retention_period: 365d
