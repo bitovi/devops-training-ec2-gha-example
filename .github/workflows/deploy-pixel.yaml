@@ -1,0 +1,24 @@
+name: Deploy Pixel Tracker Sandbox
+
+on:
+  push:
+    branches: [ pixel ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # Bitovi's Deploy Pixel Tracker 
+    - id: deploy
+      name: Deploy
+      uses: bitovi/github-actions-deploy-pixel-tracker@fix-long-term-storage
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+
+        # tf_stack_destroy: true
+        tf_state_bucket_destroy: true
+
+        aws_ec2_instance_type: t3.small
+        
+        aws_domain_name: bitovi-sandbox.com
