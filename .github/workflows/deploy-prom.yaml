@@ -22,3 +22,4 @@ jobs:
         #cadvisor_extra_targets: "target1:8080,target2:8080"
         #node_exporter_enable: true
         #node_exporter_extra_targets: "target1:9100,target2:9100"
+
