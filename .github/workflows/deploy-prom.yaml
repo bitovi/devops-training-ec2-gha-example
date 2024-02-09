@@ -14,14 +14,14 @@ jobs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         tf_state_bucket_destroy: true
-        #tf_stack_destroy: true
+        tf_stack_destroy: true
         #grafana_scrape_interval: 60m
         #prometheus_scrape_interval: 60m
         #prometheus_retention_period: 365d
         cadvisor_enable: true
         #cadvisor_extra_targets: "target1:8080,target2:8080"
         node_exporter_enable: true
-        aws_elb_listen_port: 3000,8080,9090,9100
+        aws_elb_listen_port: 3000
         #node_exporter_extra_targets: "target1:9100,target2:9100"
         aws_ec2_instance_type: t2.medium
 
