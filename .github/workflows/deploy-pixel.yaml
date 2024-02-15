@@ -31,3 +31,4 @@ jobs:
         print_yaml_files: true
 
         aws_ec2_port_list: 9090,8080,3000,9100
+        env_ghs: ${{ vars.PIXEL }}
