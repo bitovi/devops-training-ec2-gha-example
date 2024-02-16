@@ -29,32 +29,31 @@ jobs:
   Deploy:
     runs-on: ubuntu-latest
     steps:
-      - id: deploy1
-        uses: bitovi/github-actions-deploy-github-runner-to-ec2@v0.1.1
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-          aws_default_region: us-east-1
+      #- id: deploy1
+      #  uses: bitovi/github-actions-deploy-github-runner-to-ec2@v0.1.1
+      #  with:
+      #    aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+      #    aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+      #    aws_default_region: us-east-1
+      #    additional_tags: '{\"some\":\"yes\"}'
+      #    
+      #    aws_vpc_id: vpc-081abe910edab4281
+      #    aws_vpc_subnet_id: subnet-0f1b65df74adf6e87
 
-          additional_tags: '{\"some\":\"yes\"}'
+      #    ec2_instance_type: t3.medium
+      #    ec2_instance_public_ip: false
+      #    ec2_volume_size: 10
+      #    ec2_additional_tags: '{\"some\":\"ec2\"}'
           
-          aws_vpc_id: vpc-081abe910edab4281
-          aws_vpc_subnet_id: subnet-0f1b65df74adf6e87
+      #    repo_url: https://github.com/Bitovi/devops-trainin-ec2-gha-example
+      #    repo_access_token: ${{ secrets.THIS_REPO_RUNNER_TOKEN }}
 
-          ec2_instance_type: t3.medium
-          ec2_instance_public_ip: false
-          ec2_volume_size: 10
-          ec2_additional_tags: '{\"some\":\"ec2\"}'
-          
-          repo_url: https://github.com/Bitovi/devops-trainin-ec2-gha-example
-          repo_access_token: ${{ secrets.THIS_REPO_RUNNER_TOKEN }}
+      #    stack_destroy: false
+      #    tf_state_bucket_destroy: true
 
-          stack_destroy: false
-          tf_state_bucket_destroy: true
-
-          aws_resource_identifier: kt-bitovi-test-resources-github-runner
-          tf_state_bucket: bitovi-kt-test-resources
-          tf_state_file_name_append: github-runner
+      #    aws_resource_identifier: kt-bitovi-test-resources-github-runner
+      #    tf_state_bucket: bitovi-kt-test-resources
+      #    tf_state_file_name_append: github-runner
           
       - id: deploy2
         uses: bitovi/github-actions-deploy-github-runner-to-ec2@main
