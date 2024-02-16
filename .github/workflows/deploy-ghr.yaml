@@ -53,7 +53,7 @@ jobs:
           tf_state_bucket_destroy: true
 
           aws_resource_identifier: kt-bitovi-test-resources-github-runner
-          tf_state_bucket: kt-bitovi-resources
+          tf_state_bucket: bitovi-kt-test-resources
           tf_state_file_name_append: github-runner
           
       - id: deploy2
@@ -80,5 +80,5 @@ jobs:
           tf_state_bucket_destroy: true
 
           aws_resource_identifier: kt-bitovi-test-resources-github-runner
-          tf_state_bucket: kt-bitovi-resources
+          tf_state_bucket: bitovi-kt-test-resources
           tf_state_file_name_append: github-runner
