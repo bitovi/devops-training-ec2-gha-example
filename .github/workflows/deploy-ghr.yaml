@@ -32,8 +32,8 @@ jobs:
       - id: deploy1
         uses: bitovi/github-actions-deploy-github-runner-to-ec2@v0.1.1
         with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVELOPMENT }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVELOPMENT }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
           aws_default_region: us-east-1
 
           additional_tags: '{\"some\":\"yes\"}'
@@ -59,8 +59,8 @@ jobs:
       - id: deploy2
         uses: bitovi/github-actions-deploy-github-runner-to-ec2@main
         with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVELOPMENT }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVELOPMENT }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
           aws_default_region: us-east-1
 
           additional_tags: '{\"o2:phi\":\"yes\",\"o2:environment\":\"development\",\"terraform\":\"true\"}'
