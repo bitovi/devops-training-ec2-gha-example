@@ -6,11 +6,11 @@ permissions:
   contents: read
  
 env:
-  STACK_DESTROY: false
+  STACK_DESTROY: true
   AWS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
   AWS_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
   AWS_REGION: us-east-1
-  AWS_AZ: us-east-1c
+  #AWS_AZ: #us-east-1c
   ENVIRONMENT: test
 jobs:
   deploy:
@@ -24,8 +24,8 @@ jobs:
           aws_default_region: ${{ env.AWS_REGION }}
           tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
           aws_efs_create_mount_target: true
-          aws_efs_create_ha: false
-          aws_vpc_availability_zones: ${{ env.AWS_AZ }}
+          aws_efs_create_ha: true
+         # aws_vpc_availability_zones: ${{ env.AWS_AZ }}
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
 
       - id: rds
@@ -35,7 +35,7 @@ jobs:
           aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
           aws_default_region: ${{ env.AWS_REGION }}
           tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
-          aws_vpc_availability_zones: ${{ env.AWS_AZ }}
+        #  aws_vpc_availability_zones: ${{ env.AWS_AZ }}
           aws_vpc_id: ${{ steps.efs.outputs.aws_vpc_id }}
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
 
@@ -53,7 +53,7 @@ jobs:
           aws_efs_fs_id: ${{ steps.efs.outputs.aws_efs_fs_id }}
           aws_efs_create_mount_target: false
           env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
-          aws_vpc_availability_zones: ${{ env.AWS_AZ }}
+          #aws_vpc_availability_zones: ${{ env.AWS_AZ }}
           aws_vpc_id: ${{ steps.efs.outputs.aws_vpc_id }}
           tf_stack_destroy: ${{ env.STACK_DESTROY }}
           tf_state_bucket: tf-state-leo
