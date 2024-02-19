@@ -1,13 +1,10 @@
- name: Deploy ECS Cluster Advanced
+name: Deploy ECS Cluster Advanced
 on:
   push:
-    branches: [ ecs ]
+    branches: [ main ]
 jobs:
- deploy-ecs:
+  deploy-ecs:
     runs-on: ubuntu-latest
-    environment: 
-      name: full-stack
-      url: ${{ steps.ecs.outputs.ecs_dns_record }}
     steps:
     - name: Create Nginx example
       uses: bitovi/github-actions-deploy-ecs@bump-commons
