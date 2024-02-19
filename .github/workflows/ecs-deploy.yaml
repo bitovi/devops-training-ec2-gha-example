@@ -1,0 +1,44 @@
+ name: Deploy ECS Cluster Advanced
+on:
+  push:
+    branches: [ ecs ]
+jobs:
+ deploy-ecs:
+    runs-on: ubuntu-latest
+    environment: 
+      name: full-stack
+      url: ${{ steps.ecs.outputs.ecs_dns_record }}
+    steps:
+    - name: Create Nginx example
+      uses: bitovi/github-actions-deploy-ecs@bump-commons
+      id: ecs
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        #tf_stack_destroy: true
+        tf_state_bucket_destroy: true
+
+        # Each comma separated value is for each consecutive container
+        aws_ecs_task_cpu: 256,512,512 
+        aws_ecs_task_mem: 512,1024,1024 
+        aws_ecs_app_image: nginx:latest,httpd:latest,public.ecr.aws/nginx/unit
+        aws_ecs_assign_public_ip: true
+
+        aws_ecs_container_port: 80,80,80
+        aws_ecs_lb_port: 8000,8001,8082
+        aws_ecs_lb_redirect_enable: true
+        aws_ecs_lb_container_path: 'apache,unit' # Fisrt container will be the URL root path
+
+        aws_ecs_additional_tags: '{\"key\":\"value\",\"key2\":\"value2\"}'
+
+        aws_ecs_cloudwatch_enable: true
+        aws_ecs_cloudwatch_lg_name: nginx-leo
+        aws_ecs_cloudwatch_skip_destroy: false
+        aws_ecs_cloudwatch_retention_days: 1
+
+        aws_r53_enable: true
+        aws_r53_domain_name: bitovi-sandbox.com
+        aws_r53_sub_domain_name: ecs-leo-test
+        aws_r53_enable_cert: true
