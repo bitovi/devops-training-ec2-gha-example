@@ -14,7 +14,6 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
 
-        aws_redis_enable: true
 
         aws_redis_num_cache_clusters: 0
         aws_redis_num_node_groups: 2
