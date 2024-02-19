@@ -1,7 +1,7 @@
 name: Deploy ECS Cluster Advanced
 on:
   push:
-    branches: [ main ]
+    branches: [ ecs ]
 jobs:
   deploy-ecs:
     runs-on: ubuntu-latest
