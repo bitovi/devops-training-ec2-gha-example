@@ -16,26 +16,26 @@ jobs:
     # Bitovi's Deploy StackStorm action
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-stackstorm@main
+      uses: bitovi/github-actions-deploy-stackstorm@bump-commons
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
 
-        tf_stack_destroy: true
+        #tf_stack_destroy: true
         tf_state_bucket_destroy: true
 
-        aws_ec2_instance_type: t2.large
+        #aws_ec2_instance_type: t3.large
         
         aws_default_region: us-east-1
         st2_auth_username: karam
         st2_auth_password: ${{ secrets.KARAM_ST2 }}
         st2_packs: "st2"
         #st2_ansible_extra_vars_file: "st2_vars.yaml"
-        st2_version_tag: "v3.2.0"
+        #st2_version_tag: "v3.2.0"
 
-        aws_domain_name: bitovi-sandbox.com
-        aws_sub_domain: st2-leo
+        aws_r53_domain_name: bitovi-sandbox.com
+        aws_r53_sub_domain_name: st2-leo
         #create_sub_cert: true
         #no_cert: true
-        aws_ec2_create_keypair_sm: true
+        #aws_ec2_create_keypair_sm: true
         
