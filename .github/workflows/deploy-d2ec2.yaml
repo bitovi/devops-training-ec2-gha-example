@@ -39,26 +39,74 @@ jobs:
       #    aws_vpc_id: ${{ steps.efs.outputs.aws_vpc_id }}
       #    tf_stack_destroy: ${{ env.STACK_DESTROY }}
 
-      - id: ec2
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.1
-        with:
-          aws_access_key_id: ${{ env.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
-          aws_default_region: ${{ env.AWS_REGION }}
-          aws_elb_app_port: 3000
-          aws_ec2_instance_type: t2.small
+      #- id: ec2
+      #  uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.1
+      #  with:
+      #    aws_access_key_id: ${{ env.AWS_KEY_ID }}
+      #    aws_secret_access_key: ${{ env.AWS_ACCESS_KEY }}
+      #    aws_default_region: ${{ env.AWS_REGION }}
+      #    aws_elb_app_port: 3000
+      #    aws_ec2_instance_type: t2.small
        #   aws_elb_create: false
-          tf_state_bucket_destroy: true
-          tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
+      #    tf_state_bucket_destroy: true
+      #    tf_state_file_name_append: ${{ github.action }}${{ env.ENVIRONMENT }}
       #    aws_efs_fs_id: ${{ steps.efs.outputs.aws_efs_fs_id }}
       #    aws_efs_create_mount_target: false
       #    env_aws_secret: ${{ steps.rds.outputs.db_secret_details_name }}
           #aws_vpc_availability_zones: ${{ env.AWS_AZ }}
       #    aws_vpc_id: ${{ steps.efs.outputs.aws_vpc_id }}
-          tf_stack_destroy: ${{ env.STACK_DESTROY }}
-          tf_state_bucket: tf-state-leo
-          ansible_skip: true
+      #    tf_stack_destroy: ${{ env.STACK_DESTROY }}
+      #    tf_state_bucket: tf-state-leo
+      #    ansible_skip: true
           
-          aws_ec2_user_data_replace_on_change: true
+     #     aws_ec2_user_data_replace_on_change: true
           # We can use this to set the location of the files based on the path
           # docker_repo_app_directory: ${{ env.ENVIRONMENT }}
+     - id: destroy-deployment
+       name: Destroy Deployment
+       uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.1
+       with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_r53_enable: true
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: hgd
+          aws_elb_app_port: 3000,3001,3002,3003
+          aws_elb_listen_port: 3000,3001,3002,3003
+          aws_elb_healthcheck: "HTTP:3000/"
+
+          aws_ec2_instance_root_vol_size: 40
+          aws_ec2_instance_type: t3.large
+          aws_ec2_create_keypair_sm: true
+          aws_ec2_ami_update: true
+
+          docker_full_cleanup: true
+          docker_repo_app_directory_cleanup: true
+
+          tf_stack_destroy: true
+          tf_state_bucket_destroy: true
+          
+     - id: deploy
+       name: Deploy
+       uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.1
+       with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_r53_enable: true
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: hgd
+          aws_elb_app_port: 3000,3001,3002,3003
+          aws_elb_listen_port: 3000,3001,3002,3003
+          aws_elb_healthcheck: "HTTP:3000/"
+
+          aws_ec2_instance_root_vol_size: 40
+          aws_ec2_instance_type: t3.large
+          aws_ec2_create_keypair_sm: true
+          aws_ec2_ami_update: true
+
+          docker_full_cleanup: true
+          docker_repo_app_directory_cleanup: true
