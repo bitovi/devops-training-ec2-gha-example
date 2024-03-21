@@ -87,7 +87,7 @@ jobs:
 
           aws_resource_identifier: bitovi-hatchify-main
 
-          #tf_stack_destroy: true
+          tf_stack_destroy: true
           tf_state_bucket_destroy: true
           
      - id: destroy-hatchify
