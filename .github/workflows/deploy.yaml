@@ -13,16 +13,5 @@ jobs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
-        tf_action: apply
         tf_stack_destroy: false
-        tf_state_bucket_destroy: true
-    - name: Destroy an ECS-Fargate deploy
-      uses: bitovi/github-actions-deploy-aws-ecr-registry@Upgrade-commons-version
-      id: ecr-destroy
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-        tf_action: apply
-        tf_stack_destroy: true
         tf_state_bucket_destroy: true
