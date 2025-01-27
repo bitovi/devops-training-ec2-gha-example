@@ -8,14 +8,14 @@ jobs:
     steps:
     - name: Create an Redis DB
       id: create-redis
-      uses: bitovi/github-actions-deploy-redis-db@main
+      uses: bitovi/github-actions-deploy-redis-db@Upgrade-commons-version
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
 
         tf_state_bucket_destroy: true
-        tf_stack_destroy: true
+        tf_stack_destroy: 
         aws_redis_num_cache_clusters: 0
         aws_redis_num_node_groups: 2
         aws_redis_replicas_per_node_group: 1
