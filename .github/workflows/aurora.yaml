@@ -1,0 +1,31 @@
+name: Deploy Aurora MySQL
+on:
+  push:
+    branches: [ aurora ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create an Aurora DB
+      id: create-aurora
+      uses: bitovi/github-actions-deploy-aurora@Upgrade-commons-version
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        tf_state_bucket_destroy: true
+        tf_stack_destroy: false
+        aws_aurora_engine: aurora-mysql
+
+    - name: Destroy an Aurora DB
+      id: destroy-aurora
+      uses: bitovi/github-actions-deploy-aurora@Upgrade-commons-version
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+
+        tf_state_bucket_destroy: true
+        tf_stack_destroy: true
+        aws_aurora_engine: aurora-mysql
