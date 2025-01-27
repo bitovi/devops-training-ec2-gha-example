@@ -6,16 +6,23 @@ jobs:
   deploy-bucket-only:
     runs-on: ubuntu-latest
     steps:
-    - name: Create an ECS-Fargate deploy
-      uses: bitovi/github-actions-deploy-aws-ecr-registry@import-code
-      id: ecr
+    - name: Create an ECR Registry
+      uses: bitovi/github-actions-deploy-aws-ecr-registry@Upgrade-commons-version
+      id: ecr-create
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         tf_action: apply
         tf_stack_destroy: false
-        #tf_state_bucket: bitovi-devops-training-ec2-gha-example-ecr-ecs-fargate-tf-stat2
-        tf_state_bucket: leo-deleteme
         tf_state_bucket_destroy: true
-        #aws_ecr_repo_create: true
+    - name: Destroy an ECS-Fargate deploy
+      uses: bitovi/github-actions-deploy-aws-ecr-registry@Upgrade-commons-version
+      id: ecr-destroy
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        tf_action: apply
+        tf_stack_destroy: true
+        tf_state_bucket_destroy: true
