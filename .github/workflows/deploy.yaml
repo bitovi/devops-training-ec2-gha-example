@@ -1,7 +1,8 @@
 name: Ollama Advanced deploy
 on:
-  workflow_dispatch:
-
+  push:
+    branches: [ ollama ]
+    
 jobs:
   Ollama-Deploy:
     runs-on: ubuntu-latest
