@@ -1,28 +1,28 @@
-name: Verify and Deploy
-
-on: [push]
+name: Ollama Advanced deploy
+on:
+  workflow_dispatch:
 
 jobs:
-  verify-and-deploy:
+  Ollama-Deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Go SPA
-        uses: bitovi/github-actions-deploy-static-site-to-aws@Upgrade-actions-version
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
-          aws_default_region: us-east-1
-  
-          tf_action: 'destroy'
-          tf_state_bucket_destroy: false
-          #aws_resource_identifier: bitovi-devops-training-ec2-gha-example-static-site
-          aws_site_cdn_enabled: true
-          #aws_site_cdn_custom_error_codes: '{error_caching_min_ttl:"0",error_code:"403",response_code:"200",response_page_path:"/custom_404.html"}'
-          aws_site_cdn_custom_error_codes: '[{\"error_caching_min_ttl\":\"0\",\"error_code\":\"403\",\"response_code\":\"200\",\"response_page_path\":\"/index.html\"},{\"error_caching_min_ttl\":\"0\",\"error_code\":\"404\",\"response_code\":\"200\",\"response_page_path\":\"/index.html\"}]'
-          # You should own and have this domain available in R53
-          aws_r53_domain_name: bitovi-sandbox.com
-          aws_r53_sub_domain_name: static-site
-          aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
-          
+    - id: deploy
+      name: Deploy
+      uses: bitovi/github-actions-deploy-ollama@upgrade-
+      with:
+        disable_signup: true
+        ollama_models: "phi3,qwen:0.5b,tinyllama,deepseek-r1"
+        
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
 
+        aws_r53_enable: true
+        aws_r53_domain_name: bitovi-sandbox.com
+        aws_r53_sub_domain_name: ollama
+        aws_r53_create_sub_cert: true
+
+        ansible_start_docker_timeout: 600
+
+        docker_cloudwatch_enable: true
+        docker_cloudwatch_retention_days: 7
