@@ -9,7 +9,7 @@ jobs:
     steps:
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-ollama@upgrade-
+      uses: bitovi/github-actions-deploy-ollama@upgrade-to-latest
       with:
         disable_signup: true
         ollama_models: "phi3,qwen:0.5b,tinyllama,deepseek-r1"
