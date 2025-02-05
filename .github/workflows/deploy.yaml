@@ -11,7 +11,7 @@ jobs:
       name: Deploy
       uses: bitovi/github-actions-deploy-ollama@upgrade-to-latest
       with:
-        disable_signup: true
+        disable_signup: false
         ollama_models: "phi3,qwen:0.5b,tinyllama,deepseek-r1"
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
