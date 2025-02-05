@@ -27,3 +27,6 @@ jobs:
 
         docker_cloudwatch_enable: true
         docker_cloudwatch_retention_days: 7
+
+        tf_stack_destroy: true
+        tf_state_bucket_destroy: true
