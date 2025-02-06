@@ -20,5 +20,5 @@ jobs:
         aws_r53_sub_domain_name: ollama
         aws_r53_create_sub_cert: true
         docker_cloudwatch_enable: false
-        tf_stack_destroy: true
+        tf_stack_destroy: false
         tf_state_bucket_destroy: true
