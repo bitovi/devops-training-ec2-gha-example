@@ -1,4 +1,4 @@
-uname: Ollama Advanced deploy
+name: Ollama Advanced deploy
 on:
   push:
     branches: [ ollama ]
