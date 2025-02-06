@@ -9,10 +9,10 @@ jobs:
     steps:
     - id: deploy
       name: Deploy
-      uses: bitovi/github-actions-deploy-ollama@upgrade-to-latest
+      uses: bitovi/github-actions-deploy-ollama@v0
       with:
         disable_signup: false
-        ollama_models: "phi3,qwen:0.5b,tinyllama,deepseek-r1"
+        ollama_models: "deepseek-r1"
         
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -23,10 +23,8 @@ jobs:
         aws_r53_sub_domain_name: ollama
         aws_r53_create_sub_cert: true
 
-        ansible_start_docker_timeout: 600
-
-        docker_cloudwatch_enable: true
+        docker_cloudwatch_enable: false
         docker_cloudwatch_retention_days: 7
 
-        tf_stack_destroy: true
+        tf_stack_destroy: false
         tf_state_bucket_destroy: true
