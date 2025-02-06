@@ -56,7 +56,7 @@ jobs:
       #    tf_state_file_name_append: github-runner
           
       - id: deploy2
-        uses: bitovi/github-actions-deploy-github-runner-to-ec2@Upgrade-commons-version
+        uses: bitovi/github-actions-deploy-github-runner-to-ec2@v0.1.4
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
@@ -75,5 +75,5 @@ jobs:
           repo_url: https://github.com/Bitovi/devops-trainin-ec2-gha-example
           repo_access_token: ${{ secrets.THIS_REPO_RUNNER_TOKEN }}
 
-          tf_stack_destroy: true
+          tf_stack_destroy: false
           tf_state_bucket_destroy: true
