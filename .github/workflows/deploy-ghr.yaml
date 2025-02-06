@@ -75,5 +75,5 @@ jobs:
           repo_url: https://github.com/Bitovi/devops-trainin-ec2-gha-example
           repo_access_token: ${{ secrets.THIS_REPO_RUNNER_TOKEN }}
 
-          tf_stack_destroy: false
+          tf_stack_destroy: true
           tf_state_bucket_destroy: true
