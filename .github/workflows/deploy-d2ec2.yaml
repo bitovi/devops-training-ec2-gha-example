@@ -22,3 +22,4 @@ jobs:
 
           env_ghs: ${{ secrets.DOT_ENV1 }}\n${{ secrets.DOT_ENV2 }}
           env_ghv: ${{ vars.VARS }}\n${{ vars.VARS2 }}
+          env_aws_secret: super-secret
