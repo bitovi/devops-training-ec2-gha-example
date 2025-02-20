@@ -38,7 +38,7 @@ jobs:
         aws_rds_db_enable: true
 
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Apply SQL files
         uses: bitovi/github-actions-apply-sql-files-to-postgres@v0
