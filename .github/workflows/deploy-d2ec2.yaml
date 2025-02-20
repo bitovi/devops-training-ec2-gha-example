@@ -39,7 +39,7 @@ jobs:
         
     - id: apply
       name: Apply SQL files
-      uses: bitovi/github-actions-apply-sql-files-to-postgres@v0
+      uses: bitovi/github-actions-apply-sql-files-to-postgres@updating-actions
       with:
          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -48,3 +48,4 @@ jobs:
          sql_scripts_path: sql-files
          db_host:	${{ steps.deploydb.outputs.db_endpoint }}
          db_port: 5432
+         dry_run: false
