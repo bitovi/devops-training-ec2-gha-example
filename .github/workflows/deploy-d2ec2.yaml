@@ -39,7 +39,7 @@ jobs:
         
     - id: apply
       name: Apply SQL files
-      uses: bitovi/github-actions-apply-sql-files-to-postgres@updating-actions
+      uses: bitovi/github-actions-apply-sql-files-to-postgres@v0.0.1
       with:
          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
