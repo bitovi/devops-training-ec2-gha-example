@@ -37,7 +37,7 @@ jobs:
         aws_rds_db_publicly_accessible: true
         aws_rds_db_enable: true
         
-    - id: apply
+    - id: dryrun
       name: Apply SQL files
       uses: bitovi/github-actions-apply-sql-files-to-postgres@updating-actions
       with:
