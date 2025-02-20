@@ -36,6 +36,7 @@ jobs:
         aws_default_region: us-east-1
         aws_rds_db_publicly_accessible: true
         aws_rds_db_enable: true
+        aws_rds_db_name: database
         
     - id: apply
       name: Apply SQL files
@@ -46,6 +47,5 @@ jobs:
          aws_default_region: us-east-1 
          aws_secret_name: ${{ steps.deploydb.outputs.db_secret_details_name }}
          sql_scripts_path: sql-files
-         db_host:	${{ steps.deploydb.outputs.db_endpoint }}
-         db_port: 5432
+         #db_host:	${{ steps.deploydb.outputs.db_endpoint }}
          dry_run: false
