@@ -6,41 +6,54 @@ permissions:
   contents: read
  
 jobs:
-#  deployec2:
-#    runs-on: ubuntu-latest
-#    steps:
-#     - id: destroy-deployment
-#       name: Test deploy
-#       uses: bitovi/github-actions-deploy-docker-to-ec2@v1
-#       with:
-#          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#          aws_default_region: us-east-1
+  deployec2:
+    runs-on: ubuntu-latest
+    steps:
+     - id: destroy-deployment
+       uses: bitovi/github-actions-commons@fix_ecr_action
+       with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
 #
 #          tf_stack_destroy: true
-#          tf_state_bucket_destroy: true
+          tf_state_bucket_destroy: true
 #
 #          env_ghs: ${{ secrets.DOT_ENV1 }}\n${{ secrets.DOT_ENV2 }}
 #          env_ghv: ${{ vars.VARS }}\n${{ vars.VARS2 }}
 #          env_aws_secret: super-secret
-
- 
+          checkout: true
+          aws_ec2_instance_create: true
+          aws_ec2_instance_public_ip: true
+          gh_deployment_input_ansible_playbook: playbook.yml
   deploydb:
     runs-on: ubuntu-latest
     steps:
-    - id: deploydb
-      uses: bitovi/github-actions-deploy-rds@v0.1.7
-      with:
+     - id: deploydb
+       uses: bitovi/github-actions-commons@fix_ecr_action
+       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         aws_rds_db_publicly_accessible: true
         aws_rds_db_enable: true
         aws_rds_db_name: superdatabase
-        tf_stack_destroy: true
         tf_state_bucket_destroy: true
-        
-   # - id: apply
+        #tf_stack_destroy: true
+  ecr-deploy:
+    runs-on: ubuntu-latest
+    steps:
+     - id: ecr-deploy
+       uses: bitovi/github-actions-deploy-aws-ecr-registry@Upgrade-commons-version
+
+       with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        tf_state_bucket_destroy: true
+        #tf_stack_destroy: true
+        aws_ecr_repo_create: true
+# - id: apply
    #   name: Apply SQL files
    #   uses: bitovi/github-actions-apply-sql-files-to-postgres@v0.0.1
    #   with:
