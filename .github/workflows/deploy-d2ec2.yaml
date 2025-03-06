@@ -16,7 +16,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
 #
-          #tf_stack_destroy: true
+          tf_stack_destroy: true
           tf_state_bucket_destroy: true
 #
 #          env_ghs: ${{ secrets.DOT_ENV1 }}\n${{ secrets.DOT_ENV2 }}
@@ -39,7 +39,7 @@ jobs:
         aws_rds_db_enable: true
         aws_rds_db_name: superdatabase
         tf_state_bucket_destroy: true
-        #tf_stack_destroy: true
+        tf_stack_destroy: true
 
   deploy-redis:
     runs-on: ubuntu-latest
@@ -52,7 +52,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         tf_state_bucket_destroy: true
-        #tf_stack_destroy: true
+        tf_stack_destroy: true
         aws_redis_enable: true
         
   ecr-deploy:
@@ -66,7 +66,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         tf_state_bucket_destroy: true
-      #  tf_stack_destroy: true
+        tf_stack_destroy: true
         aws_ecr_repo_create: true
 # - id: apply
    #   name: Apply SQL files
