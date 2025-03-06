@@ -16,8 +16,9 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
 #
-          tf_stack_destroy: true
+          #tf_stack_destroy: true
           tf_state_bucket_destroy: true
+          tf_state_file_name_append: deployec2
 #
 #          env_ghs: ${{ secrets.DOT_ENV1 }}\n${{ secrets.DOT_ENV2 }}
 #          env_ghv: ${{ vars.VARS }}\n${{ vars.VARS2 }}
@@ -39,7 +40,8 @@ jobs:
         aws_rds_db_enable: true
         aws_rds_db_name: superdatabase
         tf_state_bucket_destroy: true
-        tf_stack_destroy: true
+        #tf_stack_destroy: true
+        tf_state_file_name_append: deploydb
 
   deploy-redis:
     runs-on: ubuntu-latest
@@ -52,9 +54,10 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         tf_state_bucket_destroy: true
-        tf_stack_destroy: true
+        #tf_stack_destroy: true
         aws_redis_enable: true
-        
+        tf_state_file_name_append: redis
+
   ecr-deploy:
     runs-on: ubuntu-latest
     steps:
@@ -66,8 +69,10 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         tf_state_bucket_destroy: true
-        tf_stack_destroy: true
+        #tf_stack_destroy: true
         aws_ecr_repo_create: true
+        tf_state_file_name_append: ecr
+
 # - id: apply
    #   name: Apply SQL files
    #   uses: bitovi/github-actions-apply-sql-files-to-postgres@v0.0.1
