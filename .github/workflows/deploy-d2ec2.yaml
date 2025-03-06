@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - id: destroy-deployment
-       uses: bitovi/github-actions-commons@fix_ecr_action
+       uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.2
        with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
 #
-          tf_stack_destroy: true
+          #tf_stack_destroy: true
           tf_state_bucket_destroy: true
 #
 #          env_ghs: ${{ secrets.DOT_ENV1 }}\n${{ secrets.DOT_ENV2 }}
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - id: deploydb
-       uses: bitovi/github-actions-commons@fix_ecr_action
+       uses: bitovi/github-actions-deploy-rds@v0.1.7
        with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -39,19 +39,34 @@ jobs:
         aws_rds_db_enable: true
         aws_rds_db_name: superdatabase
         tf_state_bucket_destroy: true
-        tf_stack_destroy: true
+        #tf_stack_destroy: true
+
+  deploy-redis:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create an Redis DB
+      id: create-redis
+      uses: bitovi/github-actions-deploy-redis-db@v0.1.2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        tf_state_bucket_destroy: true
+        #tf_stack_destroy: true
+        aws_redis_enable: true
+        
   ecr-deploy:
     runs-on: ubuntu-latest
     steps:
      - id: ecr-deploy
-       uses: bitovi/github-actions-deploy-aws-ecr-registry@Upgrade-commons-version
+       uses: bitovi/github-actions-deploy-aws-ecr-registry@v0.1.1
 
        with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_default_region: us-east-1
         tf_state_bucket_destroy: true
-        tf_stack_destroy: true
+      #  tf_stack_destroy: true
         aws_ecr_repo_create: true
 # - id: apply
    #   name: Apply SQL files
