@@ -23,7 +23,7 @@ jobs:
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: static-site-test
           aws_site_cdn_enabled: true
-          aws_site_cdn_aliases: '[{\"static-site-test.bitovi-sandbox.com\",\"static-site-test2.bitovi-sandbox.com\"}]'
+          aws_site_cdn_aliases: '\"static-site-test.bitovi-sandbox.com\",\ \"static-site-test2.bitovi-sandbox.com\"'
           #aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
           #aws_site_source_include_hidden: true
 
