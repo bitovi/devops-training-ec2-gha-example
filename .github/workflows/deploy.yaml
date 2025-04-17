@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Go SPA
-        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.5
+        uses: bitovi/github-actions-deploy-static-site-to-aws@user_defined_aliases
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
@@ -23,7 +23,7 @@ jobs:
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: static-site-test
           aws_site_cdn_enabled: true
-          aws_site_cdn_aliases: "static-site-test.bitovi-sandbox.com", "static-site-test2.bitovi-sandbox.com"
+          aws_site_cdn_aliases: '"static-site-test.bitovi-sandbox.com", "static-site-test2.bitovi-sandbox.com"'
           #aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
           #aws_site_source_include_hidden: true
 
