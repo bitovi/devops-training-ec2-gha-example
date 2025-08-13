@@ -9,6 +9,7 @@ on:
         default: true
   push:
     branches: [ simple-ecr ]
+
 jobs:
   simple-ecr:
     runs-on: ubuntu-latest
@@ -38,6 +39,20 @@ jobs:
         #aws_ecr_repo_encryption_key_arn:
         aws_ecr_repo_force_destroy: ${{ inputs.tf_stack_destroy }}
         aws_ecr_repo_image_scan: true #default
+        #aws_ecr_registry_scan_rule:
+        #aws_ecr_registry_pull_through_cache_rules:
+        #aws_ecr_registry_scan_config:
+        #aws_ecr_registry_replication_rules_input:
+        #aws_ecr_repo_policy_attach:
+        #aws_ecr_repo_policy_create:
+        #aws_ecr_repo_policy_input:
+        #aws_ecr_repo_read_arn:
+        #aws_ecr_repo_write_arn:
+        #aws_ecr_repo_read_arn_lambda:
+        #aws_ecr_lifecycle_policy_input:
+        #aws_ecr_public_repo_catalog:
+        #aws_ecr_registry_policy_input:
+        #aws_ecr_additional_tags:
         # Lifecycle policy for automatic cleanup
         aws_ecr_lifecycle_policy_input: >
           {
@@ -57,18 +72,3 @@ jobs:
               }
             ]
           }
-
-        #aws_ecr_registry_scan_rule:
-        #aws_ecr_registry_pull_through_cache_rules:
-        #aws_ecr_registry_scan_config:
-        #aws_ecr_registry_replication_rules_input:
-        #aws_ecr_repo_policy_attach:
-        #aws_ecr_repo_policy_create:
-        #aws_ecr_repo_policy_input:
-        #aws_ecr_repo_read_arn:
-        #aws_ecr_repo_write_arn:
-        #aws_ecr_repo_read_arn_lambda:
-        #aws_ecr_lifecycle_policy_input:
-        #aws_ecr_public_repo_catalog:
-        #aws_ecr_registry_policy_input:
-        #aws_ecr_additional_tags:
