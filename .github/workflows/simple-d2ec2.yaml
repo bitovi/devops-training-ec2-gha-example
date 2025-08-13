@@ -15,10 +15,11 @@ jobs:
           aws_default_region: us-east-1
 
           aws_r53_enable: false
-          aws_r53_domain_name: bitovi-sandbox.com
-          aws_r53_sub_domain_name: sd2ec2
-          aws_r53_create_sub_cert: true
+          #aws_r53_domain_name: bitovi-sandbox.com
+          #aws_r53_sub_domain_name: sd2ec2
+          #aws_r53_create_sub_cert: true
 
           aws_elb_app_port: 80
-
+          aws_lb_type: alb
+          #aws_alb_enable_waf: false
           tf_stack_destroy: false
