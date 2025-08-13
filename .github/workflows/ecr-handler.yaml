@@ -48,6 +48,7 @@ jobs:
         #aws_ecr_repo_read_arn:
         #aws_ecr_repo_write_arn:
         #aws_ecr_repo_read_arn_lambda:
+
         aws_ecr_lifecycle_policy_input: |
           {
             "rules": [
@@ -91,6 +92,7 @@ jobs:
                 }
               }
             ]
-          }        #aws_ecr_public_repo_catalog:
+          }
+        #aws_ecr_public_repo_catalog:
         #aws_ecr_registry_policy_input:
         #aws_ecr_additional_tags:
