@@ -39,7 +39,7 @@ jobs:
         aws_ecr_repo_force_destroy: ${{ inputs.tf_stack_destroy }}
         aws_ecr_repo_image_scan: true #default
         # Lifecycle policy for automatic cleanup
-        aws_ecr_lifecycle_policy_input: <<EOF
+        aws_ecr_lifecycle_policy_input: '<<EOF
 {
     "rules": [
         {
@@ -57,7 +57,7 @@ jobs:
         }
     ]
 }
-EOF
+EOF'
         #aws_ecr_registry_scan_rule:
         #aws_ecr_registry_pull_through_cache_rules:
         #aws_ecr_registry_scan_config:
