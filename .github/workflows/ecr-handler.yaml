@@ -6,7 +6,7 @@ on:
         description: 'Destroy the Terraform stack'
         required: false
         type: boolean
-        default: false
+        default: true
   push:
     branches: [ simple-ecr ]
 jobs:
