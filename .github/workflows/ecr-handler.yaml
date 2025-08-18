@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - id: ecr-deploy
-      uses: bitovi/github-actions-deploy-aws-ecr-registry@v0.1.1
+      uses: bitovi/github-actions-deploy-aws-ecr-registry@ecr-testing
       # https://github.com/bitovi/github-actions-deploy-aws-ecr-registry/
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
