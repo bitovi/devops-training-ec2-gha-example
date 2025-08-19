@@ -1,5 +1,5 @@
 {
-  "name": "swp-hello-world",
+  "name": "test-world",
   "version": "1.0.0",
   "description": "Hello World application that displays environment information",
   "main": "server.js",
@@ -32,6 +32,6 @@
     "node": ">=18.0.0"
   },
   "keywords": ["hello-world", "environment", "docker", "ecs"],
-  "author": "SWP Team",
+  "author": "test Team",
   "license": "MIT"
 }

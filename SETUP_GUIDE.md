@@ -1,6 +1,6 @@
-# 🚀 SWP Hello World - Setup Guide
+# 🚀 test Hello World - Setup Guide
 
-This guide will help you set up and deploy the SWP Hello World application.
+This guide will help you set up and deploy the test Hello World application.
 
 ## 📋 Prerequisites
 
@@ -17,16 +17,15 @@ Configure these variables in your GitHub repository settings (`Settings > Secret
 
 ```bash
 AWS_REGION=us-east-1
-ECR_REPOSITORY=swp-hello-world
-ECS_SERVICE=swp-hello-world-service
-ECS_CLUSTER=swp-cluster
-TASK_DEFINITION_FAMILY=swp-hello-world-task
+ECR_REPOSITORY=test-world
+ECS_SERVICE=test-world-service
+ECS_CLUSTER=test-cluster
+TASK_DEFINITION_FAMILY=test-world-task
 TASK_CPU=256
 TASK_MEMORY=512
-EXECUTION_ROLE_ARN=arn:aws:iam::ACCOUNT_ID:role/ecsTaskExecutionRole
-TASK_ROLE_ARN=arn:aws:iam::ACCOUNT_ID:role/ecsTaskRole
-CONTAINER_NAME=swp-hello-world
-CLOUDWATCH_LOG_GROUP=/ecs/swp-hello-world
+
+CONTAINER_NAME=test-world
+CLOUDWATCH_LOG_GROUP=/ecs/test-world
 CLOUDWATCH_LOG_STREAM_PREFIX=ecs
 ```
 
@@ -46,7 +45,7 @@ SLACK_WEBHOOK_URL=your_slack_webhook_url
 
 ```bash
 aws ecr create-repository \
-    --repository-name swp-hello-world \
+    --repository-name test-world \
     --region us-east-1
 ```
 
@@ -54,7 +53,7 @@ aws ecr create-repository \
 
 ```bash
 aws ecs create-cluster \
-    --cluster-name swp-cluster \
+    --cluster-name test-cluster \
     --capacity-providers FARGATE \
     --default-capacity-provider-strategy capacityProvider=FARGATE,weight=1
 ```
@@ -63,7 +62,7 @@ aws ecs create-cluster \
 
 ```bash
 aws logs create-log-group \
-    --log-group-name /ecs/swp-hello-world \
+    --log-group-name /ecs/test-world \
     --region us-east-1
 ```
 
@@ -117,9 +116,9 @@ After the first successful deployment, create the ECS service:
 
 ```bash
 aws ecs create-service \
-    --cluster swp-cluster \
-    --service-name swp-hello-world-service \
-    --task-definition swp-hello-world-task:1 \
+    --cluster test-cluster \
+    --service-name test-world-service \
+    --task-definition test-world-task:1 \
     --desired-count 1 \
     --launch-type FARGATE \
     --network-configuration "awsvpcConfiguration={subnets=[subnet-12345678],securityGroups=[sg-12345678],assignPublicIp=ENABLED}"
@@ -200,14 +199,14 @@ curl http://your-load-balancer/health
 
 ```bash
 aws ecs describe-services \
-    --cluster swp-cluster \
-    --services swp-hello-world-service
+    --cluster test-cluster \
+    --services test-world-service
 ```
 
 ### View CloudWatch Logs
 
 ```bash
-aws logs tail /ecs/swp-hello-world --follow
+aws logs tail /ecs/test-world --follow
 ```
 
 ### Common Issues

@@ -79,7 +79,7 @@ jobs:
         with:
           context: .
           push: false
-          tags: swp-hello-world:test
+          tags: test-world:test
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -88,8 +88,8 @@ jobs:
           # Run the container in background
           docker run -d --name test-container -p 3000:3000 \
             -e ENVIRONMENT=test \
-            -e SERVICE_NAME=swp-hello-world \
-            swp-hello-world:test
+            -e SERVICE_NAME=test-world \
+            test-world:test
 
           # Wait for container to start
           sleep 10
@@ -168,19 +168,19 @@ jobs:
 
           # Test envsub substitution with dummy values
           export ECR_REGISTRY="123456789012.dkr.ecr.us-east-1.amazonaws.com"
-          export ECR_REPOSITORY="swp-hello-world"
+          export ECR_REPOSITORY="test-world"
           export IMAGE_TAG="test"
           export ENVIRONMENT="test"
           export AWS_REGION="us-east-1"
-          export TASK_DEFINITION_FAMILY="swp-hello-world-task"
+          export TASK_DEFINITION_FAMILY="test-world-task"
           export TASK_CPU="256"
           export TASK_MEMORY="512"
           export EXECUTION_ROLE_ARN="arn:aws:iam::123456789012:role/ecsTaskExecutionRole"
           export TASK_ROLE_ARN="arn:aws:iam::123456789012:role/ecsTaskRole"
-          export CONTAINER_NAME="swp-hello-world"
-          export CLOUDWATCH_LOG_GROUP="/ecs/swp-hello-world"
+          export CONTAINER_NAME="test-world"
+          export CLOUDWATCH_LOG_GROUP="/ecs/test-world"
           export CLOUDWATCH_LOG_STREAM_PREFIX="ecs"
-          export SERVICE_NAME="swp-hello-world"
+          export SERVICE_NAME="test-world"
           export APP_VERSION="1.0.0"
 
           # Test substitution

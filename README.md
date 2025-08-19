@@ -1,4 +1,4 @@
-# SWP Hello World Application
+# test Hello World Application
 
 A simple Node.js application that displays environment information, containerized with Docker and deployed to AWS ECS using GitHub Actions.
 
@@ -34,7 +34,7 @@ A simple Node.js application that displays environment information, containerize
 1. **Clone and install dependencies:**
    ```bash
    git clone <repository-url>
-   cd swp-iac
+   cd test-iac
    npm install
    ```
 
@@ -57,12 +57,12 @@ A simple Node.js application that displays environment information, containerize
 
 1. **Build the image:**
    ```bash
-   docker build -t swp-hello-world .
+   docker build -t test-world .
    ```
 
 2. **Run the container:**
    ```bash
-   docker run -p 3000:3000 -e ENVIRONMENT=development swp-hello-world
+   docker run -p 3000:3000 -e ENVIRONMENT=development test-world
    ```
 
 3. **Access the application:**
@@ -79,7 +79,7 @@ The application uses the following environment variables:
 | `ENVIRONMENT` | Application environment (development/staging/production) | `development` |
 | `PORT` | Port number for the application | `3000` |
 | `AWS_REGION` | AWS region | `us-east-1` |
-| `SERVICE_NAME` | Service name | `swp-hello-world` |
+| `SERVICE_NAME` | Service name | `test-world` |
 | `APP_VERSION` | Application version | `1.0.0` |
 
 ## GitHub Actions Setup
@@ -91,16 +91,14 @@ Configure these variables in your GitHub repository settings:
 | Variable | Description | Example |
 |----------|-------------|---------|
 | `AWS_REGION` | AWS region | `us-east-1` |
-| `ECR_REPOSITORY` | ECR repository name | `swp-hello-world` |
-| `ECS_SERVICE` | ECS service name | `swp-hello-world-service` |
-| `ECS_CLUSTER` | ECS cluster name | `swp-cluster` |
-| `TASK_DEFINITION_FAMILY` | Task definition family | `swp-hello-world-task` |
+| `ECR_REPOSITORY` | ECR repository name | `test-world` |
+| `ECS_SERVICE` | ECS service name | `test-world-service` |
+| `ECS_CLUSTER` | ECS cluster name | `test-cluster` |
+| `TASK_DEFINITION_FAMILY` | Task definition family | `test-world-task` |
 | `TASK_CPU` | Task CPU units | `256` |
 | `TASK_MEMORY` | Task memory (MB) | `512` |
-| `EXECUTION_ROLE_ARN` | ECS execution role ARN | `arn:aws:iam::123456789012:role/ecsTaskExecutionRole` |
-| `TASK_ROLE_ARN` | ECS task role ARN | `arn:aws:iam::123456789012:role/ecsTaskRole` |
-| `CONTAINER_NAME` | Container name | `swp-hello-world` |
-| `CLOUDWATCH_LOG_GROUP` | CloudWatch log group | `/ecs/swp-hello-world` |
+| `CONTAINER_NAME` | Container name | `test-world` |
+| `CLOUDWATCH_LOG_GROUP` | CloudWatch log group | `/ecs/test-world` |
 | `CLOUDWATCH_LOG_STREAM_PREFIX` | Log stream prefix | `ecs` |
 
 ### Repository Secrets Required
