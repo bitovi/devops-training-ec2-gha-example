@@ -90,8 +90,8 @@ jobs:
           #TASK_MEMORY: ${{ vars.TASK_MEMORY }}
           TASK_CPU: 256
           TASK_MEMORY: 512
-          #EXECUTION_ROLE_ARN: ${{ vars.EXECUTION_ROLE_ARN }}
-          #TASK_ROLE_ARN: ${{ vars.TASK_ROLE_ARN }}
+          EXECUTION_ROLE_ARN: "arn:aws:iam::755521597925:role/ecsTaskExecutionRole-staging"
+          TASK_ROLE_ARN: "arn:aws:iam::755521597925:role/ecsTaskRole-staging"
           #CONTAINER_NAME: ${{ vars.CONTAINER_NAME }}
           CONTAINER_NAME: test-world
           CLOUDWATCH_LOG_GROUP: test-world-cloudwatch-log-group
