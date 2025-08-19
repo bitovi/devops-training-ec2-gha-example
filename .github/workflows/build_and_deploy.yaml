@@ -117,7 +117,7 @@ jobs:
       #    wait-for-service-stability: true
 
       - name: Deploy using GHA
-        uses: bitovi/github-actions-deploy-ecs@v0.1.4
+        uses: bitovi/github-actions-deploy-ecs@v0.1.5
         id: ecs
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
