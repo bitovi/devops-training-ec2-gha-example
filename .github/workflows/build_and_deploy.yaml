@@ -133,7 +133,7 @@ jobs:
 
           aws_ecs_task_cpu: 256
           aws_ecs_task_mem: 512
-          #aws_ecs_app_image: ${{ inputs.image_tag }} #nginx:latest
+          aws_ecs_app_image: ${{ inputs.image_tag }} #nginx:latest
           aws_ecs_assign_public_ip: false # true
 
           aws_ecs_container_port: 3000
