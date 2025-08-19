@@ -1,0 +1,68 @@
+name: Docker Build and Test
+
+on:
+  pull_request:
+    branches: [main, simple-ecr-ecs-dockerfile]
+  push:
+    branches: [main, simple-ecr-ecs-dockerfile]
+
+jobs:
+  docker-test:
+    name: Docker Build Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: false
+        tags: swp-hello-world:test
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Test Docker image
+      run: |
+        # Run the container in background
+        docker run -d --name test-container -p 3000:3000 \
+          -e ENVIRONMENT=test \
+          -e SERVICE_NAME=swp-hello-world \
+          swp-hello-world:test
+
+        # Wait for container to start
+        sleep 10
+
+        # Test health endpoint
+        curl -f http://localhost:3000/health || exit 1
+
+        # Test main endpoint
+        curl -f http://localhost:3000/ || exit 1
+
+        # Test API endpoint
+        curl -f http://localhost:3000/api/env || exit 1
+
+        # Check logs
+        docker logs test-container
+
+        # Cleanup
+        docker stop test-container
+        docker rm test-container
+
+    - name: Run security scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: swp-hello-world:test
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'

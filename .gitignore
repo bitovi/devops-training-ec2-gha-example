@@ -1,0 +1,19 @@
+.env
+
+.DS_Store
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Generated task definition
+task-definition.json
+
+# Test artifacts
+junit.xml

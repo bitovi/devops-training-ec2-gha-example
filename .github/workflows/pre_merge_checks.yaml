@@ -1,0 +1,263 @@
+name: Pre-merge Checks
+
+on:
+  pull_request:
+    branches: [simple-ecr-ecs-dockerfile, main]
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  yaml-lint:
+    name: YAML Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Run YAML lint
+        run: |
+          yamllint -c .yamllint.yml .github/workflows/
+        continue-on-error: false
+
+  node-tests:
+    name: Node.js Tests and Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run security audit
+        run: npm run security
+
+      - name: Run tests with coverage
+        run: npm test -- --coverage
+
+  dockerfile-lint:
+    name: Dockerfile Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          failure-threshold: warning
+
+  docker-build-test:
+    name: Docker Build Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: swp-hello-world:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Test Docker image
+        run: |
+          # Run the container in background
+          docker run -d --name test-container -p 3000:3000 \
+            -e ENVIRONMENT=test \
+            -e SERVICE_NAME=swp-hello-world \
+            swp-hello-world:test
+
+          # Wait for container to start
+          sleep 10
+
+          # Test health endpoint
+          curl -f http://localhost:3000/health || exit 1
+
+          # Test main endpoint
+          curl -f http://localhost:3000/ || exit 1
+
+          # Test API endpoint
+          curl -f http://localhost:3000/api/env || exit 1
+
+          # Cleanup
+          docker stop test-container
+          docker rm test-container
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner in repo mode
+        uses: aquasecurity/trivy-action@0.32.0
+        with:
+          scan-type: 'fs'
+          ignore-unfixed: true
+          format: 'table'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+
+  secret-scan:
+    name: Secret Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run TruffleHog OSS
+        uses: trufflesecurity/trufflehog@v3.90.3
+        with:
+          path: ./
+          base: ${{ github.event.pull_request.base.sha }}
+          head: ${{ github.event.pull_request.head.sha }}
+          extra_args: --results=verified,unknown
+
+  task-definition-validation:
+    name: Task Definition Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install envsub
+        run: npm install -g envsub
+
+      - name: Validate task definition template
+        run: |
+          echo "Validating task definition template..."
+
+          # Check if template exists
+          if [ ! -f "task-definition.template.json" ]; then
+            echo "❌ task-definition.template.json not found"
+            exit 1
+          fi
+
+          # Validate JSON syntax
+          if ! python3 -m json.tool task-definition.template.json > /dev/null; then
+            echo "❌ Invalid JSON syntax in task-definition.template.json"
+            exit 1
+          fi
+
+          # Test envsub substitution with dummy values
+          export ECR_REGISTRY="123456789012.dkr.ecr.us-east-1.amazonaws.com"
+          export ECR_REPOSITORY="swp-hello-world"
+          export IMAGE_TAG="test"
+          export ENVIRONMENT="test"
+          export AWS_REGION="us-east-1"
+          export TASK_DEFINITION_FAMILY="swp-hello-world-task"
+          export TASK_CPU="256"
+          export TASK_MEMORY="512"
+          export EXECUTION_ROLE_ARN="arn:aws:iam::123456789012:role/ecsTaskExecutionRole"
+          export TASK_ROLE_ARN="arn:aws:iam::123456789012:role/ecsTaskRole"
+          export CONTAINER_NAME="swp-hello-world"
+          export CLOUDWATCH_LOG_GROUP="/ecs/swp-hello-world"
+          export CLOUDWATCH_LOG_STREAM_PREFIX="ecs"
+          export SERVICE_NAME="swp-hello-world"
+          export APP_VERSION="1.0.0"
+
+          # Test substitution
+          envsub task-definition.template.json task-definition-test.json
+
+          # Validate the generated file
+          if ! python3 -m json.tool task-definition-test.json > /dev/null; then
+            echo "❌ Generated task definition has invalid JSON"
+            exit 1
+          fi
+
+          echo "✅ Task definition template validation passed"
+
+  package-audit:
+    name: Package Audit
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+
+  markdown-lint:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli
+
+      - name: Run Markdown lint
+        run: markdownlint --disable MD013 "**/*.md" --ignore node_modules
+
+  pre-merge-status:
+    name: Pre-merge Status Check
+    runs-on: ubuntu-latest
+    needs: [yaml-lint, node-tests, dockerfile-lint, docker-build-test, security-scan, secret-scan, task-definition-validation, package-audit, markdown-lint]
+    if: always()
+    steps:
+      - name: Check all jobs status
+        run: |
+          # Required checks - these will fail the pipeline
+          if [[ "${{ needs.yaml-lint.result }}" == "failure" ||
+                "${{ needs.node-tests.result }}" == "failure" ||
+                "${{ needs.dockerfile-lint.result }}" == "failure" ||
+                "${{ needs.docker-build-test.result }}" == "failure" ||
+                "${{ needs.security-scan.result }}" == "failure" ||
+                "${{ needs.secret-scan.result }}" == "failure" ||
+                "${{ needs.task-definition-validation.result }}" == "failure" ||
+                "${{ needs.markdown-lint.result }}" == "failure" ]]; then
+            echo "One or more required pre-merge checks failed"
+            exit 1
+          fi
+
+          # Optional checks - these will only warn
+          echo "=== Optional Check Results ==="
+          if [[ "${{ needs.package-audit.result }}" == "failure" ]]; then
+            echo "⚠️  Package audit found vulnerabilities (optional check)"
+          else
+            echo "✅ Package audit passed"
+          fi
+
+          echo "✅ All required pre-merge checks passed"
