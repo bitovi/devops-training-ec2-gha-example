@@ -126,7 +126,7 @@ jobs:
           aws_default_region: us-east-1
 
           checkout: false
-          aws_ecs_task_name: test-world
+          #aws_ecs_task_name: test-world
           aws_ecs_task_json_definition_file: ./task-definition.json
 
           #tf_stack_destroy: true # This is to destroy the stack
