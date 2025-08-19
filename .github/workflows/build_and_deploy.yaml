@@ -140,7 +140,7 @@ jobs:
           tf_state_bucket_destroy: true # Will only destroy the bucket if tf_stack_destroy is true
 
           aws_ecs_app_image: "${{ steps.login-ecr.outputs.registry }}/bitovi-devops-training-ec2-gha-example-simple-ecr-ecr:${{ inputs.image_tag }}"
-          aws_ecs_assign_public_ip: false # true
+          aws_ecs_assign_public_ip: true
 
           aws_ecs_container_port: 3000
           aws_ecs_lb_port: 3000
