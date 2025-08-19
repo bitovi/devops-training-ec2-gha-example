@@ -87,8 +87,8 @@ jobs:
 
           aws_ecs_task_cpu: 256
           aws_ecs_task_mem: 512
-          tf_stack_destroy: ${{ inputs.tf_stack_destroy }}
-          tf_state_bucket_destroy: true 
+          tf_stack_destroy: true
+          tf_state_bucket_destroy: false 
 
           aws_ecs_app_image: "${{ steps.build-image.outputs.image }}"
           aws_ecs_assign_public_ip: true
