@@ -24,9 +24,16 @@ on:
           - staging
           - production
         default: staging
+      tf_stack_destroy:
+        description: 'Whether to destroy the Terraform stack'
+        required: true
+        type: boolean
+        default: false
 
 env:
   SERVICE_NAME: test-world
+  ECR_REPOSITORY: bitovi-devops-training-ec2-gha-example-simple-ecr-ecr
+  IMAGE_TAG: "${{ inputs.environment }}-${{ inputs.image_tag }}"
 
 permissions:
   contents: read
@@ -51,113 +58,47 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Install envsub
-        run: npm install -g envsub
-
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          #ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
-          ECR_REPOSITORY: bitovi-devops-training-ec2-gha-example-simple-ecr-ecr
-          IMAGE_TAG: ${{ inputs.image_tag }}
         run: |
           # Build a docker container and push it to ECR
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
 
-          # Add extra tag for the environment
-          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-                     $ECR_REGISTRY/$ECR_REPOSITORY:${{ inputs.environment }}
-
           # Push both tags
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ inputs.environment }}
 
           # Output the image reference
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
-      #- name: Substitute environment variables in task definition
-      #  env:
-      #    ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #    #ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
-      #    ECR_REPOSITORY: bitovi-devops-training-ec2-gha-example-simple-ecr-ecr
-      #    IMAGE_TAG: ${{ inputs.image_tag }}
-      #    ENVIRONMENT: ${{ inputs.environment }}
-      #    AWS_REGION: us-east-1 #${{ vars.AWS_REGION }}
-      #    #TASK_DEFINITION_FAMILY: ${{ vars.TASK_DEFINITION_FAMILY }}
-      #    TASK_DEFINITION_FAMILY: test-world-task
-      #    #TASK_CPU: ${{ vars.TASK_CPU }}
-      #    #TASK_MEMORY: ${{ vars.TASK_MEMORY }}
-      #    TASK_CPU: 256
-      #    TASK_MEMORY: 512
-      #    #EXECUTION_ROLE_ARN: "arn:aws:iam::755521597925:role/ecsTaskExecutionRole-staging"
-      #    #TASK_ROLE_ARN: "arn:aws:iam::755521597925:role/ecsTaskRole-staging"
-      #    #CONTAINER_NAME: ${{ vars.CONTAINER_NAME }}
-      #    CONTAINER_NAME: test-world
-      #    CLOUDWATCH_LOG_GROUP: test-world-cloudwatch-log-group
-      #    CLOUDWATCH_LOG_STREAM_PREFIX: test-world-cloudwatch-log-stream
-      #    APP_VERSION: ${{ inputs.image_tag }}
-      #  run: |
-      #    envsub task-definition.template.json task-definition.json
-      #    cat task-definition.json
-
-      #- name: Fill in the new image ID in the Amazon ECS task definition
-      #  id: task-def
-      #  uses: aws-actions/amazon-ecs-render-task-definition@v1
-      #  with:
-      #    task-definition: task-definition.json
-      #    container-name: test-world
-      #    image: ${{ steps.build-image.outputs.image }}
-
-      #- name: Deploy Amazon ECS task definition
-      #  uses: aws-actions/amazon-ecs-deploy-task-definition@v2
-      #  with:
-      #    task-definition: ${{ steps.task-def.outputs.task-definition }}
-      #    service: test-world-service
-      #    cluster: test-world-cluster
-      #    wait-for-service-stability: true
-
       - name: Deploy using GHA
-        uses: bitovi/github-actions-deploy-ecs@v0.1.5
+        uses: bitovi/github-actions-deploy-ecs@testing
         id: ecs
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ steps.login-ecr.outputs.registry }}/bitovi-devops-training-ec2-gha-example-simple-ecr-ecr:${{ inputs.image_tag }}
-          IMAGE_TAG: ${{ inputs.image_tag }}
-          ENVIRONMENT: ${{ inputs.environment }}
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
 
           checkout: false
-          #aws_ecs_task_name: test-world
-          #aws_ecs_task_json_definition_file: ./task-definition.json
+          aws_ecs_task_name: ${{ env.SERVICE_NAME }}
 
           aws_ecs_task_cpu: 256
           aws_ecs_task_mem: 512
-          #tf_stack_destroy: true # This is to destroy the stack
-          tf_state_bucket_destroy: true # Will only destroy the bucket if tf_stack_destroy is true
+          tf_stack_destroy: ${{ inputs.tf_stack_destroy }}
+          tf_state_bucket_destroy: true 
 
-          aws_ecs_app_image: "${{ steps.login-ecr.outputs.registry }}/bitovi-devops-training-ec2-gha-example-simple-ecr-ecr:${{ inputs.image_tag }}"
+          aws_ecs_app_image: "${{ steps.build-image.outputs.image }}"
           aws_ecs_assign_public_ip: true
 
           aws_ecs_container_port: 3000
           aws_ecs_lb_port: 3000
 
-
           aws_ecs_cloudwatch_enable: true
-          #aws_ecs_cloudwatch_lg_name: nginx-leo
-          #aws_ecs_cloudwatch_skip_destroy: false
+          aws_ecs_cloudwatch_lg_name: test-world
           aws_ecs_cloudwatch_retention_days: 1
-          #aws_ecs_lb_redirect_enable: false
-
-            #"executionRoleArn": "${EXECUTION_ROLE_ARN}",
-            #"taskRoleArn": "${TASK_ROLE_ARN}",
 
           env_ghv: |
-            ECR_REGISTRY=${{ steps.login-ecr.outputs.registry }}
-            #ECR_REPOSITORY=${{ vars.ECR_REPOSITORY }}
-            ECR_REPOSITORY=bitovi-devops-training-ec2-gha-example-simple-ecr-ecr
-            IMAGE_TAG=${{ inputs.image_tag }}
             ENVIRONMENT=${{ inputs.environment }}

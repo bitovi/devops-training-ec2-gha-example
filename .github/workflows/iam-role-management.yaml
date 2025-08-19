@@ -39,7 +39,7 @@ jobs:
       - name: Manage IAM Roles
         id: manage
         run: |
-          ACTION="create"
+          ACTION="delete"
           ENV="staging"
           EXEC_ROLE="ecsTaskExecutionRole-$ENV"
           TASK_ROLE="ecsTaskRole-$ENV"
