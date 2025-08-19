@@ -25,6 +25,9 @@ on:
 jobs:
   manage-roles:
     runs-on: ubuntu-latest
+    env:
+      action: create
+      environment: staging
     outputs:
       execution_role_arn: ${{ steps.output-arns.outputs.execution_role_arn }}
       task_role_arn: ${{ steps.output-arns.outputs.task_role_arn }}
