@@ -3,8 +3,6 @@ name: Docker Build and Test
 on:
   pull_request:
     branches: [main, simple-ecr-ecs-dockerfile]
-  push:
-    branches: [main, simple-ecr-ecs-dockerfile]
 
 jobs:
   docker-test:

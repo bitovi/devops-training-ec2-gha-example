@@ -4,6 +4,8 @@ on:
   pull_request:
     branches: [simple-ecr-ecs-dockerfile]
     types: [closed]
+  push:
+    branches: [main, simple-ecr-ecs-dockerfile]
 
 jobs:
   build-and-deploy:
