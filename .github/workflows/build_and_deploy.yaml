@@ -117,7 +117,7 @@ jobs:
       #    wait-for-service-stability: true
 
       - name: Deploy using GHA
-        uses: bitovi/github-actions-deploy-ecs@v0.1.5
+        uses: bitovi/github-actions-deploy-ecs@testing
         id: ecs
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -138,7 +138,7 @@ jobs:
 
           aws_ecs_container_port: 3000
           aws_ecs_lb_port: 3000
-          aws_ecs_lb_redirect_enable: false
+          #aws_ecs_lb_redirect_enable: false
 
             #"executionRoleArn": "${EXECUTION_ROLE_ARN}",
             #"taskRoleArn": "${TASK_ROLE_ARN}",
