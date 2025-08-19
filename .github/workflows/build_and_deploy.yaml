@@ -118,11 +118,10 @@ jobs:
       #    wait-for-service-stability: true
 
       - name: Deploy using GHA
-        uses: bitovi/github-actions-deploy-ecs@testing
+        uses: bitovi/github-actions-deploy-ecs@v0.1.5
         id: ecs
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          #ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
           ECR_REPOSITORY: ${{ steps.login-ecr.outputs.registry }}/bitovi-devops-training-ec2-gha-example-simple-ecr-ecr:${{ inputs.image_tag }}
           IMAGE_TAG: ${{ inputs.image_tag }}
           ENVIRONMENT: ${{ inputs.environment }}
