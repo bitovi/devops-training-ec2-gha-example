@@ -138,6 +138,7 @@ jobs:
 
           aws_ecs_container_port: 3000
           aws_ecs_lb_port: 3000
+          aws_ecs_lb_redirect_enable: false
 
             #"executionRoleArn": "${EXECUTION_ROLE_ARN}",
             #"taskRoleArn": "${TASK_ROLE_ARN}",
