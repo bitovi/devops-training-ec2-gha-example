@@ -28,11 +28,11 @@ jobs:
         #aws_resource_identifier: 
         #aws_additional_tags:
 
-        tf_stack_destroy: ${{ inputs.tf_stack_destroy }}
+        tf_stack_destroy: true
         #tf_state_file_name: 
         tf_state_file_name_append: ecr-registry
         #tf_state_bucket: 
-        #tf_state_bucket_destroy: ${{ inputs.tf_stack_destroy }}
+        tf_state_bucket_destroy: true
 
         aws_ecr_repo_create: true
         aws_ecr_repo_type: private # default
