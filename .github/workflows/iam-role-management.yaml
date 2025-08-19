@@ -25,9 +25,6 @@ on:
 jobs:
   manage-roles:
     runs-on: ubuntu-latest
-    env:
-      action: create
-      environment: staging
     outputs:
       execution_role_arn: ${{ steps.output-arns.outputs.execution_role_arn }}
       task_role_arn: ${{ steps.output-arns.outputs.task_role_arn }}
@@ -42,8 +39,8 @@ jobs:
       - name: Manage IAM Roles
         id: manage
         run: |
-          ACTION="${{ inputs.action }}"
-          ENV="${{ inputs.environment }}"
+          ACTION="create
+          ENV="staging"
           EXEC_ROLE="ecsTaskExecutionRole-$ENV"
           TASK_ROLE="ecsTaskRole-$ENV"
 
