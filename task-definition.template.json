@@ -1,62 +1,62 @@
-{
-  "family": "${TASK_DEFINITION_FAMILY}",
-  "networkMode": "awsvpc",
-  "requiresCompatibilities": ["FARGATE"],
-  "cpu": "${TASK_CPU}",
-  "memory": "${TASK_MEMORY}",
-  "executionRoleArn": "${EXECUTION_ROLE_ARN}",
-  "taskRoleArn": "${TASK_ROLE_ARN}",
-  "containerDefinitions": [
-    {
-      "name": "${CONTAINER_NAME}",
-      "image": "${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}",
-      "essential": true,
-      "portMappings": [
-        {
-          "containerPort": 3000,
-          "protocol": "tcp"
-        }
-      ],
-      "environment": [
-        {
-          "name": "ENVIRONMENT",
-          "value": "${ENVIRONMENT}"
-        },
-        {
-          "name": "AWS_REGION",
-          "value": "${AWS_REGION}"
-        },
-        {
-          "name": "SERVICE_NAME",
-          "value": "${SERVICE_NAME}"
-        },
-        {
-          "name": "APP_VERSION",
-          "value": "${APP_VERSION}"
-        }
-      ],
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-group": "${CLOUDWATCH_LOG_GROUP}",
-          "awslogs-region": "${AWS_REGION}",
-          "awslogs-stream-prefix": "${CLOUDWATCH_LOG_STREAM_PREFIX}"
-        }
-      },
-      "healthCheck": {
-        "command": [
-          "CMD-SHELL",
-          "curl -f http://localhost:3000/health || exit 1"
+[
+  {
+    "family": "${TASK_DEFINITION_FAMILY}",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "${TASK_CPU}",
+    "memory": "${TASK_MEMORY}",
+    "containerDefinitions": [
+      {
+        "name": "${CONTAINER_NAME}",
+        "image": "${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}",
+        "essential": true,
+        "portMappings": [
+          {
+            "containerPort": 3000,
+            "protocol": "tcp"
+          }
         ],
-        "interval": 30,
-        "timeout": 5,
-        "retries": 3,
-        "startPeriod": 60
-      },
-      "stopTimeout": 30,
-      "readonlyRootFilesystem": false,
-      "privileged": false,
-      "user": "1001:1001"
-    }
-  ]
-}
+        "environment": [
+          {
+            "name": "ENVIRONMENT",
+            "value": "${ENVIRONMENT}"
+          },
+          {
+            "name": "AWS_REGION",
+            "value": "${AWS_REGION}"
+          },
+          {
+            "name": "SERVICE_NAME",
+            "value": "${SERVICE_NAME}"
+          },
+          {
+            "name": "APP_VERSION",
+            "value": "${APP_VERSION}"
+          }
+        ],
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "${CLOUDWATCH_LOG_GROUP}",
+            "awslogs-region": "${AWS_REGION}",
+            "awslogs-stream-prefix": "${CLOUDWATCH_LOG_STREAM_PREFIX}"
+          }
+        },
+        "healthCheck": {
+          "command": [
+            "CMD-SHELL",
+            "curl -f http://localhost:3000/health || exit 1"
+          ],
+          "interval": 30,
+          "timeout": 5,
+          "retries": 3,
+          "startPeriod": 60
+        },
+        "stopTimeout": 30,
+        "readonlyRootFilesystem": false,
+        "privileged": false,
+        "user": "1001:1001"
+      }
+    ]
+  }
+]
