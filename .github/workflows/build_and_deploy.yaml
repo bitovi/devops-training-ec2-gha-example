@@ -124,8 +124,9 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
 
+          checkout: false
           aws_ecs_task_name: test-world
-          aws_ecs_task_json_definition_file: task-definition.json
+          aws_ecs_task_json_definition_file: ./task-definition.json
 
           #tf_stack_destroy: true # This is to destroy the stack
           tf_state_bucket_destroy: true # Will only destroy the bucket if tf_stack_destroy is true
