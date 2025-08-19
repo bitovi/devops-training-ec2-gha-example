@@ -3,8 +3,8 @@
     "family": "${TASK_DEFINITION_FAMILY}",
     "networkMode": "awsvpc",
     "requiresCompatibilities": ["FARGATE"],
-    "cpu": "${TASK_CPU}",
-    "memory": "${TASK_MEMORY}",
+    "cpu": 256,
+    "memory": 512,
     "containerDefinitions": [
       {
         "name": "${CONTAINER_NAME}",
