@@ -125,6 +125,7 @@ jobs:
           #ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
           ECR_REPOSITORY: ${{ steps.login-ecr.outputs.registry }}/bitovi-devops-training-ec2-gha-example-simple-ecr-ecr:${{ inputs.image_tag }}
           IMAGE_TAG: ${{ inputs.image_tag }}
+          ENVIRONMENT: ${{ inputs.environment }}
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -156,8 +157,8 @@ jobs:
             #"taskRoleArn": "${TASK_ROLE_ARN}",
 
           env_ghv: |
-            ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-            #ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
-            ECR_REPOSITORY: bitovi-devops-training-ec2-gha-example-simple-ecr-ecr
-            IMAGE_TAG: ${{ inputs.image_tag }}
-            ENVIRONMENT: ${{ inputs.environment }}
+            ECR_REGISTRY=${{ steps.login-ecr.outputs.registry }}
+            #ECR_REPOSITORY=${{ vars.ECR_REPOSITORY }}
+            ECR_REPOSITORY=bitovi-devops-training-ec2-gha-example-simple-ecr-ecr
+            IMAGE_TAG=${{ inputs.image_tag }}
+            ENVIRONMENT=${{ inputs.environment }}
