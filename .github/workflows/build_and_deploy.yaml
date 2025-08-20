@@ -74,41 +74,6 @@ jobs:
 
       - name: Deploy using GHA
         uses: bitovi/github-actions-deploy-ecs@testing
-        id: dest-2
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}2"
-
-          checkout: false
-          aws_ecs_cluster_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}2"
-          aws_ecs_task_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}2"
-
-          aws_ecs_task_cpu: 256
-          aws_ecs_task_mem: 512
-          tf_stack_destroy: true
-          tf_state_file_name_append: "${{ inputs.environment }}2"
-          tf_state_bucket_destroy: true 
-
-          aws_ecs_app_image: "${{ steps.build-image.outputs.image }}"
-          aws_ecs_assign_public_ip: true
-
-          aws_ecs_container_port: 3000
-          aws_ecs_lb_port: 3000
-
-          aws_ecs_cloudwatch_enable: true
-          aws_ecs_cloudwatch_lg_name: "test-world-${{ inputs.environment }}2"
-          aws_ecs_cloudwatch_retention_days: 1
-
-          env_ghv: |
-            ENVIRONMENT=${{ inputs.environment }}
-
-
-      - name: Deploy using GHA
-        uses: bitovi/github-actions-deploy-ecs@testing
         id: create-1
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -118,13 +83,10 @@ jobs:
           aws_default_region: us-east-1
           aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
           checkout: false
-          #aws_ecs_cluster_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          #aws_ecs_task_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment}}"
 
           aws_ecs_task_cpu: 256
           aws_ecs_task_mem: 512
           tf_stack_destroy: false
-          #tf_state_file_name_append: ${{ inputs.environment }}
           tf_state_bucket_destroy: true 
 
           aws_ecs_app_image: "${{ steps.build-image.outputs.image }}"
@@ -134,42 +96,36 @@ jobs:
           aws_ecs_lb_port: 3000
 
           aws_ecs_cloudwatch_enable: true
-          #aws_ecs_cloudwatch_lg_name: "test-world-${{ inputs.environment }}"
           aws_ecs_cloudwatch_retention_days: 1
 
           env_ghv: |
             ENVIRONMENT=${{ inputs.environment }}
 
-      #- name: Deploy using GHA
-#        uses: bitovi/github-actions-deploy-ecs@testing
-#        id: create-2
-#        env:
-#          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-#        with:
-#          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-#          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-#          aws_default_region: us-east-1
-#          aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}2"
-#
-#          checkout: false
-#          aws_ecs_cluster_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}2"
-#          aws_ecs_task_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}2"
-#
-#          aws_ecs_task_cpu: 256
-#          aws_ecs_task_mem: 512
-#          tf_stack_destroy: false
-#          tf_state_file_name_append: "${{ inputs.environment }}2"
-#          tf_state_bucket_destroy: true 
-#
-#          aws_ecs_app_image: "${{ steps.build-image.outputs.image }}"
-#          aws_ecs_assign_public_ip: true
-#
-#          aws_ecs_container_port: 3000
-#          aws_ecs_lb_port: 3000
-#
-#          aws_ecs_cloudwatch_enable: true
-#          aws_ecs_cloudwatch_lg_name: "test-world-${{ inputs.environment }}2"
-#          aws_ecs_cloudwatch_retention_days: 1
-#
-#          env_ghv: |
-#            ENVIRONMENT=${{ inputs.environment }}
+      - name: Deploy using GHA
+        uses: bitovi/github-actions-deploy-ecs@testing
+        id: create-2
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}2"
+
+          checkout: false
+          aws_ecs_task_cpu: 256
+          aws_ecs_task_mem: 512
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true 
+
+          aws_ecs_app_image: "${{ steps.build-image.outputs.image }}"
+          aws_ecs_assign_public_ip: true
+
+          aws_ecs_container_port: 3000
+          aws_ecs_lb_port: 3000
+
+          aws_ecs_cloudwatch_enable: true
+          aws_ecs_cloudwatch_retention_days: 1
+
+          env_ghv: |
+            ENVIRONMENT=${{ inputs.environment }}
