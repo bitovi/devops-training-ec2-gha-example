@@ -32,6 +32,7 @@ jobs:
 
         tf_stack_destroy: true
         tf_state_bucket_destroy: true
+        aws_ecr_repo_force_destroy: true
         #tf_state_file_name: 
         tf_state_file_name_append: ecr-registry
         #tf_state_bucket: 
@@ -44,6 +45,7 @@ jobs:
         aws_ecr_repo_mutable: true
         aws_ecr_repo_encryption_type: AES256
         #aws_ecr_repo_encryption_key_arn:
+        #aws_ecr_repo_force_destroy: ${{ inputs.tf_stack_destroy }}
         aws_ecr_repo_force_destroy: ${{ inputs.tf_stack_destroy }}
         aws_ecr_repo_image_scan: true #default
         #aws_ecr_registry_scan_rule:
