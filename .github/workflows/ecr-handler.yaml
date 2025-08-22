@@ -46,7 +46,7 @@ jobs:
         aws_ecr_repo_encryption_type: AES256
         #aws_ecr_repo_encryption_key_arn:
         #aws_ecr_repo_force_destroy: ${{ inputs.tf_stack_destroy }}
-        aws_ecr_repo_force_destroy: ${{ inputs.tf_stack_destroy }}
+        #aws_ecr_repo_force_destroy: ${{ inputs.tf_stack_destroy }}
         aws_ecr_repo_image_scan: true #default
         #aws_ecr_registry_scan_rule:
         #aws_ecr_registry_pull_through_cache_rules:
