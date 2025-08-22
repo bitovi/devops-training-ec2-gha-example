@@ -30,7 +30,7 @@ jobs:
         #aws_resource_identifier: 
         #aws_additional_tags:
 
-        tf_stack_destroy: true
+        tf_stack_destroy: false #true
         tf_state_bucket_destroy: true
         aws_ecr_repo_force_destroy: true
         #tf_state_file_name: 
