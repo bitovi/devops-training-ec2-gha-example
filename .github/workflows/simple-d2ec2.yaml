@@ -22,4 +22,5 @@ jobs:
           aws_elb_app_port: 80
           aws_lb_type: alb
           #aws_alb_enable_waf: false
-          tf_stack_destroy: false
+          tf_stack_destroy: true
+          tf_state_bucket_destroy: true 
