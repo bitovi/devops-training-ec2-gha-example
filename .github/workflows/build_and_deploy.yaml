@@ -99,6 +99,9 @@ jobs:
           aws_ecs_cloudwatch_enable: false
           aws_ecs_cloudwatch_retention_days: 1
 
+          aws_waf_enable: true
+          aws_waf_rate_limit: 100
+
           aws_r53_enable: true
           aws_r53_domain_name: "bitovi-sandbox.com"
           aws_r53_sub_domain_name: devops-training-example-ecs
