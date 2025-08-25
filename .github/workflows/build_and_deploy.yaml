@@ -100,7 +100,22 @@ jobs:
           aws_ecs_cloudwatch_retention_days: 1
 
           aws_waf_enable: true
-          aws_waf_rate_limit: 100
+          aws_waf_logging_enable: false
+          aws_waf_log_retention_days: 1
+          aws_waf_additional_tags: some
+          aws_waf_rule_rate_limit: 200
+          aws_waf_rule_managed_rules: true
+          aws_waf_rule_managed_bad_inputs: true
+          aws_waf_rule_ip_reputation: true
+          aws_waf_rule_anonymous_ip: true
+          aws_waf_rule_bot_control: true
+          aws_waf_rule_geo_block_countries: "CN,RU"
+          aws_waf_rule_geo_allow_only_countries: "US,AR"
+          aws_waf_rule_user_arn: "arn:aws:wafv2:us-east-1:755521597925:regional/rulegroup/some/351a2738-39ae-4d00-a864-599d6b3dc225"
+          aws_waf_rule_sqli: true
+          aws_waf_rule_linux: true
+          aws_waf_rule_unix: false
+          aws_waf_rule_admin_protection: true
 
           aws_r53_enable: true
           aws_r53_domain_name: "bitovi-sandbox.com"
