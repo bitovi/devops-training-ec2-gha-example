@@ -102,7 +102,7 @@ jobs:
           aws_waf_enable: true
           aws_waf_logging_enable: false
           aws_waf_log_retention_days: 1
-          aws_waf_additional_tags: some
+          aws_waf_additional_tags: '{"some":"tag"}'
           aws_waf_rule_rate_limit: 200
           aws_waf_rule_managed_rules: true
           aws_waf_rule_managed_bad_inputs: true
