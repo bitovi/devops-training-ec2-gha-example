@@ -1,10 +1,10 @@
-name: Simple-D2EC2 deploy
+name: Simple-Signoz deploy
 on:
   push:
-    branches: [ simple-d2ec2 ]
+    branches: [ simple-signoz ]
 
 jobs:
-  Simple-D2EC2-Deploy:
+  Simple-Signoz-Deploy:
     runs-on: ubuntu-latest
     steps:
       - id: deploy
