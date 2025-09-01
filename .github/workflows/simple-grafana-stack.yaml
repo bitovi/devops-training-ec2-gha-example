@@ -1,14 +1,14 @@
-name: Simple-D2EC2 deploy
+name: Simple-Grafana-Stack deploy
 on:
   push:
-    branches: [ simple-d2ec2 ]
+    branches: [ simple-grafana-stack ]
 
 jobs:
-  Simple-D2EC2-Deploy:
+  Simple-Grafana-Stack-Deploy:
     runs-on: ubuntu-latest
     steps:
       - id: deploy
-        uses: bitovi/github-actions-deploy-docker-to-ec2@main #alb-test
+        uses: bitovi/github-actions-deploy-docker-to-ec2@main
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -19,8 +19,12 @@ jobs:
           #aws_r53_sub_domain_name: sd2ec2
           #aws_r53_create_sub_cert: true
 
-          aws_elb_app_port: 80
-          aws_lb_type: alb
-          #aws_alb_enable_waf: false
-          tf_stack_destroy: true
+          aws_elb_create: false
+          tf_stack_destroy: false
           tf_state_bucket_destroy: true 
+
+          aws_ec2_instance_root_vol_size: 30
+          aws_ec2_instance_type: t3.medium
+          aws_ec2_port_list: 9090,3100,3200,3000,4317,4318
+          #aws_ec2_allowed_cidr: 
+          #ansible_skip: false
