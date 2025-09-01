@@ -1,5 +1,46 @@
+version: "3.9"
+
 services:
-  app:
-    image: nginx
+  clickhouse:
+    image: clickhouse/clickhouse-server:23.8
+    container_name: clickhouse
+    restart: always
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+
+  otel-collector:
+    image: signoz/signoz-otel-collector:0.110.0
+    container_name: otel-collector
+    restart: always
     ports:
-      - "80:80"
+      - "4317:4317"   # OTLP gRPC
+      - "4318:4318"   # OTLP HTTP
+    depends_on:
+      - clickhouse
+
+  query-service:
+    image: signoz/query-service:0.110.0
+    container_name: query-service
+    restart: always
+    environment:
+      - CLICKHOUSE_ADDR=clickhouse:9000
+    depends_on:
+      - clickhouse
+    ports:
+      - "8080:8080"
+
+  frontend:
+    image: signoz/frontend:0.110.0
+    container_name: frontend
+    restart: always
+    depends_on:
+      - query-service
+    ports:
+      - "3301:3301"
+
+volumes:
+  clickhouse_data:
