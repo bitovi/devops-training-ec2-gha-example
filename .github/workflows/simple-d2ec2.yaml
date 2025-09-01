@@ -20,7 +20,7 @@ jobs:
           #aws_r53_create_sub_cert: true
 
           aws_elb_create: false
-          tf_stack_destroy: false
+          tf_stack_destroy: true
           tf_state_bucket_destroy: true 
 
           aws_ec2_instance_root_vol_size: 30
