@@ -28,3 +28,5 @@ jobs:
           aws_ec2_port_list: 4317,4318,3301
           #aws_ec2_allowed_cidr: 
           #ansible_skip: false
+
+          docker_repo_app_directory: ./signoz/deploy/docker
