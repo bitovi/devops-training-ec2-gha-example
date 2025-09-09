@@ -23,6 +23,9 @@ on:
         required: false
         type: boolean
         default: false
+env:
+  TF_STATE_BUCKET: leo-uploaded-documents-bucket-tf-state
+  FILES_BUCKET: "leo-uploaded-documents-${{ inputs.environment }}"
 
 jobs:
   deploy:
@@ -33,8 +36,6 @@ jobs:
     env:
       AWS_REGION: "us-east-1"
       API_ENDPOINT: "https://miranda-cymoid-veronica.ngrok-free.app"
-      TF_STATE_BUCKET: leo-uploaded-documents-bucket-tf-state
-      FILES_BUCKET: "leo-uploaded-documents-${{ inputs.environment }}"
     defaults:
       run:
         working-directory: packages/lambda/terraform
@@ -116,7 +117,6 @@ jobs:
     environment: ${{ inputs.environment }}
     env:
       AWS_REGION: "us-east-1"
-      TF_STATE_BUCKET: leo-uploaded-documents-bucket-tf-state
     defaults:
       run:
         working-directory: packages/lambda/terraform
