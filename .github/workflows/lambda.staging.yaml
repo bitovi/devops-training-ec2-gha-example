@@ -13,12 +13,8 @@ on:
         description: 'Destroy the Terraform stack'
         required: false
         type: boolean
-        default: true
-      aws_ecr_repo_name:
-        description: 'Name of the ECR repository'
-        required: true
-        type: string
-        default: ecr-repo
+        default: false
+
   push:
     branches: [ simple-lambda ]
 jobs:

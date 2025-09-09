@@ -12,6 +12,17 @@ on:
         required: false
         type: boolean
         default: false
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        type: string
+      destroy:
+        description: 'Destroy the Terraform stack'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   deploy:
