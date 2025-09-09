@@ -32,7 +32,7 @@ jobs:
       - test
     with:
       environment: staging
-      #destroy: ${{ true }}
+      destroy: true
     secrets: inherit
     concurrency:
       group: lambda-staging-deployment
