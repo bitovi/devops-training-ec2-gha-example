@@ -7,9 +7,15 @@ on:
         description: 'Environment to deploy to'
         required: true
         type: string
+      destroy:
+        description: 'Destroy the Terraform stack'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   deploy:
+    if: ${{ inputs.destroy == false }}
     name: Deploy Lambda
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
@@ -84,14 +90,67 @@ jobs:
 
       - name: Deployment Summary
         run: |
-          echo "🚀 Lambda deployment completed successfully!"
-          echo "📋 Deployment Details:"
-          echo "  - Environment: ${{ inputs.environment }}"
-          echo "  - Lambda Function: ${{ steps.outputs.outputs.lambda_function_name }}"
-          echo "  - S3 Bucket: ${{ steps.outputs.outputs.s3_bucket_name }}"
-          echo "  - EventBridge Rule: ${{ steps.outputs.outputs.eventbridge_rule_name }}"
-          echo "  - AWS Region: ${{ env.AWS_REGION }}"
+          echo "🚀 Lambda deployment completed successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "📋 Deployment Details:" >> $GITHUB_STEP_SUMMARY
+          echo "  - Environment: ${{ inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "  - Lambda Function: ${{ steps.outputs.outputs.lambda_function_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "  - S3 Bucket: ${{ steps.outputs.outputs.s3_bucket_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "  - EventBridge Rule: ${{ steps.outputs.outputs.eventbridge_rule_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "  - AWS Region: ${{ env.AWS_REGION }} ">> $GITHUB_STEP_SUMMARY
 
+  destroy:
+    if: ${{ inputs.destroy == true }}
+    name: Destroy Lambda Infrastructure
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    env:
+      AWS_REGION: "us-east-1"
+      TF_STATE_BUCKET: leo-uploaded-documents-bucket-tf-state
+    defaults:
+      run:
+        working-directory: packages/lambda/terraform
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '~1.2'
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Create terraform.tfvars
+        run: |
+          cat > terraform.tfvars <<EOF
+          aws_region = "${{ env.AWS_REGION }}"
+          environment = "${{ inputs.environment }}"
+          api_endpoint = "${{ env.API_ENDPOINT }}"
+          bucket_name = "swp-uploaded-documents-${{ inputs.environment }}"
+          tf_state_bucket = "${{ env.TF_STATE_BUCKET }}"
+          EOF
+          echo "Contents of terraform.tfvars:"
+          cat terraform.tfvars
+
+      - name: Substitute environment variables in Terraform files
+        run: |
+          envsubst < main.tf > main.tf.tmp && mv main.tf.tmp main.tf
+          grep bucket main.tf
+          grep region main.tf
+
+      - name: Terraform Init
+        run: |
+          terraform init \
+            -backend-config="key=lambda/${{ inputs.environment }}/terraform.tfstate"
+
+      - name: Terraform Destroy
+        run: |
+          terraform destroy -auto-approve tfplan-${{ inputs.environment }}
 
 #  slackNotificationSuccess:
 #    name: Slack Notification (Success)
