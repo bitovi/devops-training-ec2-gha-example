@@ -42,29 +42,22 @@ jobs:
         run: |
           ../scripts/create-bucket.sh
 
-      - name: Debug variables
-        run: |
-          echo "AWS_REGION=${{ env.AWS_REGION }}"
-          echo "ENVIRONMENT=${{ inputs.environment }}"
-          echo "API_ENDPOINT=${{ env.API_ENDPOINT }}"
-          echo "TF_STATE_BUCKET=${{ env.TF_STATE_BUCKET }}"
-
       - name: Create terraform.tfvars
         run: |
-          AWS_REGION="${{ env.AWS_REGION }}"
-          ENVIRONMENT="${{ inputs.environment }}"
-          API_ENDPOINT="${{ env.API_ENDPOINT }}"
-          TF_STATE_BUCKET="${{ env.TF_STATE_BUCKET }}"
           cat > terraform.tfvars <<EOF
-          aws_region = "$AWS_REGION"
-          environment = "$ENVIRONMENT"
-          api_endpoint = "$API_ENDPOINT"
-          bucket_name = "swp-uploaded-documents-$ENVIRONMENT"
-          tf_state_bucket = "$TF_STATE_BUCKET"
+          aws_region = "${{ env.AWS_REGION }}"
+          environment = "${{ inputs.environment }}"
+          api_endpoint = "${{ env.API_ENDPOINT }}"
+          bucket_name = "swp-uploaded-documents-${{ inputs.environment }}"
+          tf_state_bucket = "${{ env.TF_STATE_BUCKET }}"
           EOF
           echo "Contents of terraform.tfvars:"
           cat terraform.tfvars
-
+      
+      - name: Substitute environment variables in Terraform files
+        run: |
+          envsubst < main.tf > main.tf.tmp && mv main.tf.tmp main.tf
+          
       - name: Terraform Init
         run: |
           terraform init \
