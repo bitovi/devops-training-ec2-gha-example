@@ -62,6 +62,8 @@ jobs:
           bucket_name = "swp-uploaded-documents-$ENVIRONMENT"
           tf_state_bucket = "$TF_STATE_BUCKET"
           EOF
+          echo "Contents of terraform.tfvars:"
+          cat terraform.tfvars
 
       - name: Terraform Init
         run: |
