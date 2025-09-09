@@ -161,7 +161,7 @@ jobs:
 
       - name: Terraform Destroy
         run: |
-          terraform destroy -auto-approve tfplan-${{ inputs.environment }}
+          terraform destroy -auto-approve
 
 #  slackNotificationSuccess:
 #    name: Slack Notification (Success)
