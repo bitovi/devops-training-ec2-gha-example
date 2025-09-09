@@ -35,9 +35,9 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket         = var.tf_state_bucket
-    region         = var.aws_region
-    encrypt        = true
+    bucket  = var.tf_state_bucket
+    region  = var.aws_region
+    encrypt = true
   }
 
   required_providers {
@@ -57,8 +57,8 @@ terraform {
 resource "aws_s3_bucket" "uploaded_documents" {
   bucket = var.bucket_name
   tags = {
-    swp-cayman = "true"
-    category = "documents"
+    swp-cayman  = "true"
+    category    = "documents"
     environment = var.environment
   }
 }
@@ -85,8 +85,8 @@ resource "aws_iam_role" "lambda_role" {
   })
 
   tags = {
-    swp-cayman = "true"
-    category = "documents"
+    swp-cayman  = "true"
+    category    = "documents"
     environment = var.environment
   }
 }
@@ -108,8 +108,8 @@ resource "aws_cloudwatch_log_group" "lambda_logs" {
   retention_in_days = 14
 
   tags = {
-    swp-cayman = "true"
-    category = "documents"
+    swp-cayman  = "true"
+    category    = "documents"
     environment = var.environment
   }
 }
@@ -137,8 +137,8 @@ resource "aws_lambda_function" "bucket_document_created" {
   ]
 
   tags = {
-    swp-cayman = "true"
-    category = "documents"
+    swp-cayman  = "true"
+    category    = "documents"
     environment = var.environment
   }
 
@@ -151,12 +151,12 @@ resource "aws_lambda_function" "bucket_document_created" {
 
 # EventBridge Rule (default bus)
 resource "aws_cloudwatch_event_rule" "object_created" {
-  name        = "uploaded-documents-bucket-object-created"
-  description = "Trigger when object is created in uploaded-documents-bucket bucket"
+  name           = "uploaded-documents-bucket-object-created"
+  description    = "Trigger when object is created in uploaded-documents-bucket bucket"
   event_bus_name = "default"
 
   event_pattern = jsonencode({
-    "source"      : ["aws.s3"],
+    "source" : ["aws.s3"],
     "detail-type" : ["Object Created"],
     "detail" : {
       "bucket" : {
@@ -166,8 +166,8 @@ resource "aws_cloudwatch_event_rule" "object_created" {
   })
 
   tags = {
-    swp-cayman = "true"
-    category = "documents"
+    swp-cayman  = "true"
+    category    = "documents"
     environment = var.environment
   }
 }
