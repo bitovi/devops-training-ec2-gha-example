@@ -1,0 +1,177 @@
+name: Lambda Run Tests (Local Only)
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: 'Environment to run tests for'
+        required: true
+        type: string
+
+jobs:
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/lambda/tests
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: packages/lambda/tests/package-lock.json
+
+      - name: Install test dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Run test coverage
+        run: npm run test:coverage
+
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-${{ inputs.environment }}
+          path: packages/lambda/tests/coverage/
+          retention-days: 5
+
+  local-tests:
+    name: Local Tests (Mocked APIs)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/lambda/tests
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: packages/lambda/tests/package-lock.json
+
+      - name: Install test dependencies
+        run: npm ci
+
+      - name: Run local tests with mocked APIs
+        run: npm run test:local
+        env:
+          NODE_ENV: test
+
+  lint-and-validate:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Validate Lambda code syntax
+        run: node -c packages/lambda/code/index.js
+
+      - name: Check for console.log statements (warning only)
+        run: |
+          if grep -r "console\.log" packages/lambda/code/; then
+            echo "⚠️ Warning: console.log statements found in production code"
+            echo "Consider using proper logging in production"
+          else
+            echo "✅ No console.log statements found"
+          fi
+        continue-on-error: true
+
+  terraform-validate:
+    name: Terraform Validation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/lambda/terraform
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~1.2"
+
+      - name: Terraform Format Check
+        run: terraform fmt -check=true -diff=true
+
+      - name: Terraform Init
+        run: terraform init -backend=false
+
+      - name: Terraform Validate
+        run: terraform validate
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/lambda/tests
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: packages/lambda/tests/package-lock.json
+
+      - name: Install test dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+      - name: Check for secrets in code
+        run: |
+          if grep -r -i "password\|secret\|token\|key" packages/lambda/code/ --exclude-dir=node_modules | grep -v "API_ENDPOINT"; then
+            echo "⚠️ Warning: Potential secrets found in code"
+            exit 1
+          else
+            echo "✅ No obvious secrets found in code"
+          fi
+
+  slackNotificationFailure:
+    name: Slack Notification (Failure)
+    runs-on: ubuntu-latest
+    needs: unit-tests
+    if: always() && needs.unit-tests.result == 'failure'
+    steps:
+      - name: Send Failure Notification
+        uses: slackapi/slack-github-action@v2.1.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            blocks:
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "<${{ github.server_url }}/${{ github.repository }}|Lambda unit-tests failed!> *${{ inputs.environment }}* :x:"
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "> Check the logs for <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|details>."

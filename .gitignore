@@ -1,0 +1,14 @@
+**/.env*
+node_modules
+.vke-kubeconfig.yaml
+.DS_Store
+.wrangler
+PR_TEXT.md
+/packages/api/dump
+# Terraform
+.terraform*
+terraform.tfstate*
+*.tfplan
+# Lambda deployment artifacts
+lambda.zip
+*.zip

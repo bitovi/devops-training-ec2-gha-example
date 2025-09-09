@@ -1,0 +1,23 @@
+{
+  "version": "0",
+  "id": "abcd1234-5678-90ab-cdef-1234567890ab",
+  "detail-type": "Object Created",
+  "source": "aws.s3",
+  "account": "123456789012",
+  "time": "2024-01-15T12:00:00Z",
+  "region": "us-east-1",
+  "detail": {
+    "version": "0",
+    "bucket": {
+      "name": "my-document-bucket"
+    },
+    "object": {
+      "key": "documents/invoice-2024-001.pdf",
+      "size": 1024,
+      "etag": "d41d8cd98f00b204e9800998ecf8427e",
+      "sequencer": "0A1B2C3D4E5F678901"
+    },
+    "request-id": "D82B88E6956D672F",
+    "requester": "123456789012"
+  }
+}

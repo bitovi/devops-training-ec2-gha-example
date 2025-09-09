@@ -1,0 +1,23 @@
+{
+  "version": "0",
+  "id": "xyz9876-5432-10fe-dcba-9876543210ba",
+  "detail-type": "Object Created",
+  "source": "aws.s3",
+  "account": "123456789012",
+  "time": "2024-01-15T12:30:00Z",
+  "region": "us-east-1",
+  "detail": {
+    "version": "0",
+    "bucket": {
+      "name": "uploads-bucket"
+    },
+    "object": {
+      "key": "contract.xlsx",
+      "size": 2048,
+      "etag": "e2fc714c4727ee9395f324cd2e7f331f",
+      "sequencer": "1B2C3D4E5F67890A"
+    },
+    "request-id": "A1B2C3D4E5F67890",
+    "requester": "123456789012"
+  }
+}

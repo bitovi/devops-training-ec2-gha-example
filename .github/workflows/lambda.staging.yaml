@@ -1,0 +1,48 @@
+name: Lambda Staging Deployment
+
+on:
+  pull_request:
+    branches: [staging]
+    types: [closed]
+    paths:
+      - ".github/workflows/lambda.*"
+      - "packages/lambda/**"
+  workflow_dispatch:
+    inputs:
+      tf_stack_destroy:
+        description: 'Destroy the Terraform stack'
+        required: false
+        type: boolean
+        default: true
+      aws_ecr_repo_name:
+        description: 'Name of the ECR repository'
+        required: true
+        type: string
+        default: ecr-repo
+  push:
+    branches: [ simple-lambda ]
+jobs:
+  test:
+    name: Run Tests
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    uses: ./.github/workflows/lambda.run-tests.yaml
+    with:
+      environment: staging
+    secrets: inherit
+      
+  deploy:
+    name: Deploy Lambda
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    uses: ./.github/workflows/lambda.deploy.yaml
+    needs:
+      - test
+    with:
+      environment: staging
+    secrets: inherit
+    concurrency:
+      group: lambda-staging-deployment
+      cancel-in-progress: true

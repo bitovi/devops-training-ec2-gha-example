@@ -1,0 +1,17 @@
+{
+  "name": "swp-lambda-tests",
+  "version": "1.0.0",
+  "description": "Tests for SWP Lambda function",
+  "main": "../code/index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:local": "node test-local.js"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "nock": "^13.0.0"
+  },
+  "dependencies": {}
+}

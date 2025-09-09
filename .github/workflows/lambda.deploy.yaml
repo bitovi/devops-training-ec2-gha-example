@@ -1,0 +1,132 @@
+name: Lambda Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    name: Deploy Lambda
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+      AWS_ACCESS_KEY_SECRET: ${{ secrets.AWS_ACCESS_KEY_SECRET_SANDBOX }}
+      AWS_REGION: "us-east-1"
+      API_ENDPOINT: "https://miranda-cymoid-veronica.ngrok-free.app"
+      TF_STATE_BUCKET: leo-uploaded-documents-bucket-tf-state
+      FILES_BUCKET: "leo-uploaded-documents-${{ inputs.environment }}"
+    defaults:
+      run:
+        working-directory: packages/lambda/terraform
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '~1.2'
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION || 'us-east-1' }}
+
+      - name: Create Terraform state file bucket (if not exists)
+        run: |
+          ../scripts/create-terraform-state-bucket.sh
+
+      - name: Create terraform.tfvars
+        run: |
+          cat > terraform.tfvars << EOF
+          aws_region = "${{ env.AWS_REGION }}"
+          environment = "${{ inputs.environment }}"
+          api_endpoint = "${{ env.API_ENDPOINT }}"
+          bucket_name = "${{ env.FILES_BUCKET }}"
+          tf_state_bucket = "${{ env.TF_STATE_BUCKET }}"
+          EOF
+
+      - name: Terraform Init
+        run: |
+          terraform init \
+            -backend-config="key=lambda/${{ inputs.environment }}/terraform.tfstate"
+
+      - name: Terraform Plan
+        run: |
+          terraform plan \
+            -var-file="terraform.tfvars" \
+            -out="tfplan-${{ inputs.environment }}"
+
+      - name: Terraform Apply
+        run: |
+          terraform apply -auto-approve tfplan-${{ inputs.environment }}
+
+      - name: Get Terraform outputs
+        id: outputs
+        run: |
+          echo "lambda_function_name=$(terraform output -raw lambda_function_name)" >> $GITHUB_OUTPUT
+          echo "s3_bucket_name=$(terraform output -raw s3_bucket_name)" >> $GITHUB_OUTPUT
+          echo "eventbridge_rule_name=$(terraform output -raw eventbridge_rule_name)" >> $GITHUB_OUTPUT
+
+      - name: Deployment Summary
+        run: |
+          echo "🚀 Lambda deployment completed successfully!"
+          echo "📋 Deployment Details:"
+          echo "  - Environment: ${{ inputs.environment }}"
+          echo "  - Lambda Function: ${{ steps.outputs.outputs.lambda_function_name }}"
+          echo "  - S3 Bucket: ${{ steps.outputs.outputs.s3_bucket_name }}"
+          echo "  - EventBridge Rule: ${{ steps.outputs.outputs.eventbridge_rule_name }}"
+          echo "  - AWS Region: ${{ env.AWS_REGION }}"
+
+
+#  slackNotificationSuccess:
+#    name: Slack Notification (Success)
+#    runs-on: ubuntu-latest
+#    needs: deploy
+#    if: needs.deploy.result == 'success'
+#    steps:
+#      - name: Send Success Notification
+#        uses: slackapi/slack-github-action@v2.1.0
+#        with:
+#          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+#          webhook-type: incoming-webhook
+#          payload: |
+#            blocks:
+#              - type: "section"
+#                text:
+#                  type: "mrkdwn"
+#                  text: "<${{ github.server_url }}/${{ github.repository }}|Lambda app deployed successfully in > *${{ inputs.environment }}* :white_check_mark:"
+#              - type: "section"
+#                text:
+#                  type: "mrkdwn"
+#                  text: "> Check the logs for <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|details>."
+#
+#  slackNotificationFailure:
+#    name: Slack Notification (Failure)
+#    runs-on: ubuntu-latest
+#    needs: deploy
+#    if: always() && needs.deploy.result == 'failure'
+#    steps:
+#      - name: Send Failure Notification
+#        uses: slackapi/slack-github-action@v2.1.0
+#        with:
+#          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+#          webhook-type: incoming-webhook
+#          payload: |
+#            blocks:
+#              - type: "section"
+#                text:
+#                  type: "mrkdwn"
+#                  text: "<${{ github.server_url }}/${{ github.repository }}|Lambda app failed to deploy in > *${{ inputs.environment }}* :x:"
+#              - type: "section"
+#                text:
+#                  type: "mrkdwn"
+#                  text: "> Check the logs for <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|details>."

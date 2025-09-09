@@ -1,0 +1,36 @@
+name: Lambda Production Deployment
+
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+    paths:
+      - ".github/workflows/lambda.*"
+      - "packages/lambda/**"
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run Tests
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    uses: ./.github/workflows/lambda.run-tests.yaml
+    with:
+      environment: production
+    secrets: inherit
+    concurrency:
+      group: lambda-production-deployment
+      cancel-in-progress: true
+      
+  deploy:
+    name: Deploy Lambda
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    uses: ./.github/workflows/lambda.deploy.yaml
+    needs:
+      - test
+    with:
+      environment: production
+    secrets: inherit
