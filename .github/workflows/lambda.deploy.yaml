@@ -14,8 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-      AWS_ACCESS_KEY_SECRET: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
       AWS_REGION: "us-east-1"
       API_ENDPOINT: "https://miranda-cymoid-veronica.ngrok-free.app"
       TF_STATE_BUCKET: leo-uploaded-documents-bucket-tf-state
@@ -36,8 +34,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Create Terraform state file bucket (if not exists)
