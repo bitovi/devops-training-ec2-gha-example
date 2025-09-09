@@ -40,7 +40,7 @@ jobs:
 
       - name: Create Terraform state file bucket (if not exists)
         run: |
-          ../scripts/create-terraform-state-bucket.sh
+          ../scripts/create-bucket.sh
 
       - name: Create terraform.tfvars
         run: |
