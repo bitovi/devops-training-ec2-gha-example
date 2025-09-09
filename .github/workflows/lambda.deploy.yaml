@@ -57,7 +57,9 @@ jobs:
       - name: Substitute environment variables in Terraform files
         run: |
           envsubst < main.tf > main.tf.tmp && mv main.tf.tmp main.tf
-          
+          grep bucket main.tf
+          grep region main.tf
+
       - name: Terraform Init
         run: |
           terraform init \

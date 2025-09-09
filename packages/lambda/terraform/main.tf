@@ -35,8 +35,8 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket  = "${TF_STATE_BUCKET}"
-    region  = "${AWS_REGION}"
+    bucket  = ${TF_STATE_BUCKET}
+    region  = ${AWS_REGION}
     encrypt = true
   }
 
