@@ -66,7 +66,7 @@ jobs:
           aws_region = "${{ env.AWS_REGION }}"
           environment = "${{ inputs.environment }}"
           api_endpoint = "${{ env.API_ENDPOINT }}"
-          bucket_name = "swp-uploaded-documents-${{ inputs.environment }}"
+          bucket_name = "leo-uploaded-documents-${{ inputs.environment }}"
           tf_state_bucket = "${{ env.TF_STATE_BUCKET }}"
           EOF
           echo "Contents of terraform.tfvars:"
@@ -142,7 +142,7 @@ jobs:
           aws_region = "${{ env.AWS_REGION }}"
           environment = "${{ inputs.environment }}"
           api_endpoint = "${{ env.API_ENDPOINT }}"
-          bucket_name = "swp-uploaded-documents-${{ inputs.environment }}"
+          bucket_name = "leo-uploaded-documents-${{ inputs.environment }}"
           tf_state_bucket = "${{ env.TF_STATE_BUCKET }}"
           EOF
           echo "Contents of terraform.tfvars:"

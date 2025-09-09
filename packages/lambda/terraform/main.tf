@@ -8,7 +8,7 @@ variable "aws_region" {
 variable "bucket_name" {
   description = "Name of the S3 bucket for uploaded documents"
   type        = string
-  default     = "swp-uploaded-documents-bucket"
+  default     = "leo-uploaded-documents-bucket"
 }
 
 variable "api_endpoint" {
@@ -26,7 +26,7 @@ variable "environment" {
 variable "tf_state_bucket" {
   description = "S3 bucket for Terraform state"
   type        = string
-  default     = "swp-uploaded-documents-bucket-tf-state"
+  default     = "leo-uploaded-documents-bucket-tf-state"
 }
 
 provider "aws" {
@@ -57,7 +57,7 @@ terraform {
 resource "aws_s3_bucket" "uploaded_documents" {
   bucket = var.bucket_name
   tags = {
-    swp-cayman  = "true"
+    leo-docs  = "true"
     category    = "documents"
     environment = var.environment
   }
@@ -85,7 +85,7 @@ resource "aws_iam_role" "lambda_role" {
   })
 
   tags = {
-    swp-cayman  = "true"
+    leo-docs  = "true"
     category    = "documents"
     environment = var.environment
   }
@@ -108,7 +108,7 @@ resource "aws_cloudwatch_log_group" "lambda_logs" {
   retention_in_days = 14
 
   tags = {
-    swp-cayman  = "true"
+    leo-docs  = "true"
     category    = "documents"
     environment = var.environment
   }
@@ -137,7 +137,7 @@ resource "aws_lambda_function" "bucket_document_created" {
   ]
 
   tags = {
-    swp-cayman  = "true"
+    leo-docs  = "true"
     category    = "documents"
     environment = var.environment
   }
@@ -166,7 +166,7 @@ resource "aws_cloudwatch_event_rule" "object_created" {
   })
 
   tags = {
-    swp-cayman  = "true"
+    leo-docs  = "true"
     category    = "documents"
     environment = var.environment
   }

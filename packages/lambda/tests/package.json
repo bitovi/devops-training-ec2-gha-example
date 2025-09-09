@@ -1,7 +1,7 @@
 {
-  "name": "swp-lambda-tests",
+  "name": "leo-lambda-tests",
   "version": "1.0.0",
-  "description": "Tests for SWP Lambda function",
+  "description": "Tests for LEO Lambda function",
   "main": "../code/index.js",
   "scripts": {
     "test": "jest",

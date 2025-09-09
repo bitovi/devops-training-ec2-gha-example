@@ -1,6 +1,6 @@
 # Lambda Testing Guide
 
-This document provides comprehensive **LOCAL-ONLY** testing strategies for the SWP Lambda function. All tests run locally with mocked dependencies to ensure fast, reliable testing without external dependencies.
+This document provides comprehensive **LOCAL-ONLY** testing strategies for the LEO Lambda function. All tests run locally with mocked dependencies to ensure fast, reliable testing without external dependencies.
 
 ## 🏗️ Setup
 

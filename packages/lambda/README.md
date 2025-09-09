@@ -1,6 +1,6 @@
-# SWP Lambda Repository
+# LEO Lambda Repository
 
-This repository contains the infrastructure and code for the SWP document processing Lambda function.
+This repository contains the infrastructure and code for the LEO document processing Lambda function.
 
 ## 📁 Repository Structure
 
