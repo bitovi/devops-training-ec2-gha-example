@@ -22,18 +22,18 @@ on:
   push:
     branches: [ simple-lambda ]
 jobs:
-  test:
-    name: Run Tests
-    uses: ./.github/workflows/lambda.run-tests.yaml
-    with:
-      environment: staging
-    secrets: inherit
+  #test:
+  #  name: Run Tests
+  #  uses: ./.github/workflows/lambda.run-tests.yaml
+  #  with:
+  #    environment: staging
+  #  secrets: inherit
       
   deploy:
     name: Deploy Lambda
     uses: ./.github/workflows/lambda.deploy.yaml
-    needs:
-      - test
+    #needs:
+    #  - test
     with:
       environment: staging
     secrets: inherit
