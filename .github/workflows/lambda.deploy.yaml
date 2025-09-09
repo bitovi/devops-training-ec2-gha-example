@@ -15,7 +15,7 @@ jobs:
     environment: ${{ inputs.environment }}
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-      AWS_ACCESS_KEY_SECRET: ${{ secrets.AWS_ACCESS_KEY_SECRET_SANDBOX }}
+      AWS_ACCESS_KEY_SECRET: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
       AWS_REGION: "us-east-1"
       API_ENDPOINT: "https://miranda-cymoid-veronica.ngrok-free.app"
       TF_STATE_BUCKET: leo-uploaded-documents-bucket-tf-state
