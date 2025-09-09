@@ -154,24 +154,24 @@ jobs:
             echo "✅ No obvious secrets found in code"
           fi
 
-  slackNotificationFailure:
-    name: Slack Notification (Failure)
-    runs-on: ubuntu-latest
-    needs: unit-tests
-    if: always() && needs.unit-tests.result == 'failure'
-    steps:
-      - name: Send Failure Notification
-        uses: slackapi/slack-github-action@v2.1.0
-        with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          webhook-type: incoming-webhook
-          payload: |
-            blocks:
-              - type: "section"
-                text:
-                  type: "mrkdwn"
-                  text: "<${{ github.server_url }}/${{ github.repository }}|Lambda unit-tests failed!> *${{ inputs.environment }}* :x:"
-              - type: "section"
-                text:
-                  type: "mrkdwn"
-                  text: "> Check the logs for <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|details>."
+#  slackNotificationFailure:
+#    name: Slack Notification (Failure)
+#    runs-on: ubuntu-latest
+#    needs: unit-tests
+#    if: always() && needs.unit-tests.result == 'failure'
+#    steps:
+#      - name: Send Failure Notification
+#        uses: slackapi/slack-github-action@v2.1.0
+#        with:
+#          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+#          webhook-type: incoming-webhook
+#          payload: |
+#            blocks:
+#              - type: "section"
+#                text:
+#                  type: "mrkdwn"
+#                  text: "<${{ github.server_url }}/${{ github.repository }}|Lambda unit-tests failed!> *${{ inputs.environment }}* :x:"
+#              - type: "section"
+#                text:
+#                  type: "mrkdwn"
+#                  text: "> Check the logs for <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|details>."
