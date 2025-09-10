@@ -73,7 +73,7 @@ jobs:
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Deploy using GHA
-        uses: bitovi/github-actions-deploy-ecs@add-waf
+        uses: bitovi/github-actions-deploy-ecs@ignore-task-defn
         id: create-1
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -86,36 +86,20 @@ jobs:
 
           aws_ecs_task_cpu: 256
           aws_ecs_task_mem: 512
-          tf_stack_destroy: true
+          tf_stack_destroy: false
           tf_state_bucket_destroy: true 
-
+          aws_ecs_task_ignore_definition: true
           aws_ecs_app_image: "${{ steps.build-image.outputs.image }}"
           aws_ecs_assign_public_ip: true
 
-          aws_ecs_container_port: 3000
+          aws_ecs_container_port: 80
           aws_ecs_lb_port: 443
           aws_ecs_lb_redirect_enable: true
 
           aws_ecs_cloudwatch_enable: false
           aws_ecs_cloudwatch_retention_days: 1
 
-          aws_waf_enable: true
-          aws_waf_logging_enable: false
-          aws_waf_log_retention_days: 1
-          aws_waf_additional_tags: '{\"some\":\"tag\"}'
-          aws_waf_rule_rate_limit: 200
-          aws_waf_rule_managed_rules: true
-          aws_waf_rule_managed_bad_inputs: true
-          aws_waf_rule_ip_reputation: true
-          aws_waf_rule_anonymous_ip: true
-          aws_waf_rule_bot_control: true
-          aws_waf_rule_geo_block_countries: "CN,RU"
-          aws_waf_rule_geo_allow_only_countries: "US,AR"
-          aws_waf_rule_user_arn: "arn:aws:wafv2:us-east-1:755521597925:regional/rulegroup/some/351a2738-39ae-4d00-a864-599d6b3dc225"
-          aws_waf_rule_sqli: true
-          aws_waf_rule_linux: true
-          aws_waf_rule_unix: false
-          aws_waf_rule_admin_protection: true
+          aws_waf_enable: false
 
           aws_r53_enable: true
           aws_r53_domain_name: "bitovi-sandbox.com"
