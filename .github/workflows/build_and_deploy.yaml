@@ -84,8 +84,8 @@ jobs:
           aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
           checkout: false
 
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
+          aws_ecs_task_cpu: 1024
+          aws_ecs_task_mem: 2048
           tf_stack_destroy: false
           tf_state_bucket_destroy: true 
           aws_ecs_task_ignore_definition: true
