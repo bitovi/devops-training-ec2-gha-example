@@ -73,8 +73,8 @@ jobs:
 #          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Deploy using GHA
-        uses: bitovi/github-actions-deploy-ecs@main
-        #uses: bitovi/github-actions-deploy-ecs@ignore-task-defn
+        #uses: bitovi/github-actions-deploy-ecs@main
+        uses: bitovi/github-actions-deploy-ecs@ignore-task-defn
         id: create-1
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
