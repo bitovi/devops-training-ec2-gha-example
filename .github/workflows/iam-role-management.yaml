@@ -19,8 +19,8 @@ on:
         options:
           - staging
           - production
-  push:
-    branches: [main, simple-ecr-ecs-dockerfile]
+ # push:
+ #   branches: [main, simple-ecr-ecs-dockerfile]
 
 jobs:
   manage-roles:
