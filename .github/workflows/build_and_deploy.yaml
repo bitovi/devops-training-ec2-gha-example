@@ -73,7 +73,8 @@ jobs:
 #          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Deploy using GHA
-        uses: bitovi/github-actions-deploy-ecs@ignore-task-defn
+        uses: bitovi/github-actions-deploy-ecs@main
+        #uses: bitovi/github-actions-deploy-ecs@ignore-task-defn
         id: create-1
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -86,9 +87,9 @@ jobs:
 
           aws_ecs_task_cpu: 1024
           aws_ecs_task_mem: 2048
-          tf_stack_destroy: false
+          tf_stack_destroy: true
           tf_state_bucket_destroy: true 
-          aws_ecs_task_ignore_definition: true
+          #aws_ecs_task_ignore_definition: true
           #aws_ecs_app_image: "${{ steps.build-image.outputs.image }}"
           aws_ecs_assign_public_ip: true
 
