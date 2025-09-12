@@ -71,7 +71,7 @@ jobs:
 #
 #          # Output the image reference
 #          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
-
+#
       - name: Deploy using GHA
         #uses: bitovi/github-actions-deploy-ecs@main
         uses: bitovi/github-actions-deploy-ecs@v0
@@ -110,3 +110,111 @@ jobs:
           env_ghv: |
             ENVIRONMENT=${{ inputs.environment }}
 
+          aws_ecs_task_json_definition_file: task-definition.json
+#
+#name: Deploy to ECS
+#
+#on:
+#  push:
+#    branches: [ main ]
+#
+##jobs:
+#  deploy:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#
+#      # Configure AWS
+#      - name: Configure AWS credentials
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#          aws-region: us-east-1
+#
+#      # Login to ECR
+#      - name: Login to Amazon ECR
+#        id: login-ecr
+#        uses: aws-actions/amazon-ecr-login@v1
+#
+##      # Build container 1
+##      - name: Build, tag, and push image for container 1
+##        id: build-image-1
+##        env:
+##          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+##          ECR_REPOSITORY: my-ecr-repo-1
+##          IMAGE_TAG: ${{ github.sha }}
+##        run: |
+#          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./container1
+#          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+#          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+#
+#      # Build container 2
+#      - name: Build, tag, and push image for container 2
+#        id: build-image-2
+#        env:
+#          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#          ECR_REPOSITORY: my-ecr-repo-2
+#          IMAGE_TAG: ${{ github.sha }}
+#        run: |
+#          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./container2
+#          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+#          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+#
+#      # Update container 1 in task definition
+#      - name: Update task definition for container 1
+#        id: task-def-1
+#        uses: aws-actions/amazon-ecs-render-task-definition@v1
+#        with:
+#          task-definition: task-definition.json
+#          container-name: api
+#          image: "alpine:ngingx" #${{ steps.build-image-1.outputs.image }}
+#
+#      # Update container 2 in task definition (chaining)
+#      - name: Update task definition for container 2
+#        id: task-def-2
+#        uses: aws-actions/amazon-ecs-render-task-definition@v1
+#        with:
+#          task-definition: ${{ steps.task-def-1.outputs.task-definition }}
+#          container-name: worker
+#          image: "alpine:nginx" #${{ steps.build-image-2.outputs.image }}
+#
+#      # Inject environment variables from .env files
+#      - name: Inject environment variables
+#        id: inject-env
+#        run: |
+#          TASK_DEF_FILE="${{ steps.task-def-2.outputs.task-definition }}"
+#          UPDATED_TASK_DEF="updated-task-def.json"
+#
+#          # API: load from .env.api
+#          if [ -f ".env.api" ]; then
+#            echo "Injecting env vars for container 1 from .env.api"
+#            jq_env_entries=$(awk -F= '!/^#/ && NF==2 {printf "{\"name\":\"%s\",\"value\":\"%s\"},", $1, $2}' .env.api | sed 's/,$//')
+#            if [ -n "$jq_env_entries" ]; then
+#              jq ".containerDefinitions |= map(if .name == \"api\" then .environment += [$jq_env_entries] else . end)" $TASK_DEF_FILE > $UPDATED_TASK_DEF
+#              mv $UPDATED_TASK_DEF $TASK_DEF_FILE
+#            fi
+#          fi
+#
+#          # Worker: load from .env.worker
+#          if [ -f ".env.worker" ]; then
+#            echo "Injecting env vars for container 2 from .env.worker"
+#            jq_env_entries=$(awk -F= '!/^#/ && NF==2 {printf "{\"name\":\"%s\",\"value\":\"%s\"},", $1, $2}' .env.worker | sed 's/,$//')
+#            if [ -n "$jq_env_entries" ]; then
+#              jq ".containerDefinitions |= map(if .name == \"worker\" then .environment += [$jq_env_entries] else . end)" $TASK_DEF_FILE > $UPDATED_TASK_DEF
+#              mv $UPDATED_TASK_DEF $TASK_DEF_FILE
+#            fi
+#          fi
+#
+#          echo "task-def=$TASK_DEF_FILE" >> $GITHUB_OUTPUT
+#
+#      # Deploy task definition to ECS
+#      - name: Deploy to ECS
+#        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+#        with:
+#          task-definition: ${{ steps.inject-env.outputs.task-def }}
+#          service: my-service
+#          cluster: my-cluster
+#          wait-for-service-stability: true
