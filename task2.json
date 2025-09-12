@@ -30,11 +30,11 @@
       "volumesFrom": []
     }
   ],
-  "cpu": "512",
+  "cpu": 512,
   "deregisteredAt": "2025-09-12T13:53:07.672Z",
   "executionRoleArn": "arn:aws:iam::755521597925:role/test-world-staging-ecs",
   "family": "test-world-staging-app0",
-  "memory": "1024",
+  "memory": 1024,
   "networkMode": "awsvpc",
   "placementConstraints": [],
   "registeredAt": "2025-09-12T11:43:24.207Z",
