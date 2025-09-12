@@ -6,17 +6,17 @@
   ],
   "containerDefinitions": [
     {
+      "name": "test-world-staging-app0",
       "cpu": 0,
+      "essential": true,
+      "image": "nginx:alpine",
+      "mountPoints": [],
       "environment": [
         {
           "name": "ENVIRONMENT",
           "value": "staging"
         }
       ],
-      "essential": true,
-      "image": "nginx:alpine",
-      "mountPoints": [],
-      "name": "test-world-staging-app0",
       "portMappings": [
         {
           "appProtocol": "http",
