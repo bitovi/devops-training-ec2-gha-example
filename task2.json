@@ -1,92 +1,39 @@
 [
 {
-  "compatibilities": [
-    "EC2",
+  "family": "test-world-staging-app0",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": [
     "FARGATE"
   ],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::755521597925:role/test-world-staging-ecs",
   "containerDefinitions": [
     {
       "name": "test-world-staging-app0",
-      "cpu": 0,
-      "essential": true,
       "image": "nginx:alpine",
-      "mountPoints": [],
+      "essential": true,
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp",
+          "name": "port-80",
+          "appProtocol": "http"
+        }
+      ],
       "environment": [
         {
           "name": "ENVIRONMENT",
           "value": "staging"
         }
       ],
-      "portMappings": [
-        {
-          "appProtocol": "http",
-          "containerPort": 80,
-          "hostPort": 80,
-          "name": "port-80",
-          "protocol": "tcp"
-        }
-      ],
-      "systemControls": [],
-      "volumesFrom": []
+      "mountPoints": [],
+      "volumesFrom": [],
+      "systemControls": []
     }
   ],
-  "cpu": 512,
-  "deregisteredAt": "2025-09-12T13:53:07.672Z",
-  "executionRoleArn": "arn:aws:iam::755521597925:role/test-world-staging-ecs",
-  "family": "test-world-staging-app0",
-  "memory": 1024,
-  "networkMode": "awsvpc",
-  "placementConstraints": [],
-  "registeredAt": "2025-09-12T11:43:24.207Z",
-  "registeredBy": "arn:aws:iam::755521597925:user/sandbox/operations-ci-user",
-  "requiresAttributes": [
-    {
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-    },
-    {
-      "name": "ecs.capability.task-eni"
-    }
-  ],
-  "requiresCompatibilities": [
-    "FARGATE"
-  ],
-  "revision": 19,
-  "status": "INACTIVE",
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:755521597925:task-definition/test-world-staging-app0:19",
   "volumes": [],
-  "tags": [
-    {
-      "key": "GitHubAction",
-      "value": "bitovi/github-actions-commons"
-    },
-    {
-      "key": "OperationsRepoEnvironment",
-      "value": "deployment"
-    },
-    {
-      "key": "GitHubOrgName",
-      "value": "bitovi"
-    },
-    {
-      "key": "OperationsRepo",
-      "value": "bitovi/github-actions-commons/operations/deployment"
-    },
-    {
-      "key": "GitHubRepoName",
-      "value": "devops-training-ec2-gha-example"
-    },
-    {
-      "key": "AWSResourceIdentifier",
-      "value": "test-world-staging"
-    },
-    {
-      "key": "Created_with",
-      "value": "Bitovi-BitOps"
-    },
-    {
-      "key": "GitHubBranchName",
-      "value": "simple-ecr-ecs-dockerfile"
-    }
-  ]
+  "placementConstraints": []
 }
 ]
