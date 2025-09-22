@@ -5,18 +5,16 @@
   "requiresCompatibilities": ["FARGATE"],
   "cpu": 512,
   "memory": 1024,
-  "executionRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/ecsTaskExecutionRole",
-  "taskRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/ecsTaskRole",
   "containerDefinitions": [
     {
       "name": "api",
-      "image": "alpine:nginx",
+      "image": "nginx:alpine",
       "essential": true,
       "cpu": 256,
       "memory": 512,
       "portMappings": [
         {
-          "containerPort": 3000,
+          "containerPort": 80,
           "protocol": "tcp"
         }
       ],
@@ -32,7 +30,7 @@
     },
     {
       "name": "worker",
-      "image": "alpine:nginx",
+      "image": "nginx:alpine",
       "essential": true,
       "cpu": 256,
       "memory": 512,

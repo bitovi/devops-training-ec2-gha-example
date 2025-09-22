@@ -86,7 +86,7 @@ jobs:
 
           aws_ecs_task_cpu: 512
           aws_ecs_task_mem: 1024
-          tf_stack_destroy: true
+          tf_stack_destroy: false
           tf_state_bucket_destroy: true 
           #aws_ecs_task_ignore_definition: true
           #aws_ecs_app_image: "nginx:alpine"
@@ -98,6 +98,7 @@ jobs:
 
           aws_ecs_cloudwatch_enable: false
           aws_ecs_cloudwatch_retention_days: 1
+          aws_ecs_cloudwatch_lg_name: "/ecs/my-task-family"
 
           aws_waf_enable: true
 
@@ -111,6 +112,7 @@ jobs:
             ENVIRONMENT=${{ inputs.environment }}
 
           #aws_ecs_task_json_definition_file: task2.json
+          aws_ecs_task_json_definition_file: task-definition.json
 #
 #name: Deploy to ECS
 #
