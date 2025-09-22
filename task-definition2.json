@@ -8,7 +8,9 @@
     "portMappings": [
       {
         "containerPort": 80,
-        "protocol": "tcp"
+        "protocol": "tcp",
+        "hostPort": 80,
+        "appProtocol": "http"
       }
     ],
     "environment": [],
