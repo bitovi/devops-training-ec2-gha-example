@@ -29,6 +29,14 @@
     "essential": true,
     "cpu": 256,
     "memory": 512,
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "protocol": "tcp",
+        "hostPort": 3000,
+        "appProtocol": "http"
+      }
+    ],
     "environment": [],
     "logConfiguration": {
       "logDriver": "awslogs",
