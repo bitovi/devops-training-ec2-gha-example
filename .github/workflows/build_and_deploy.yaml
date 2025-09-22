@@ -112,7 +112,7 @@ jobs:
             ENVIRONMENT=${{ inputs.environment }}
 
           #aws_ecs_task_json_definition_file: task2.json
-          aws_ecs_task_json_definition_file: task-definition.json
+          aws_ecs_task_json_definition_file: task-definition2.json
 #
 #name: Deploy to ECS
 #

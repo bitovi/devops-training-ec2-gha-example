@@ -1,0 +1,40 @@
+[
+  {
+    "name": "test-world-staging-api",
+    "image": "nginx:alpine",
+    "essential": true,
+    "cpu": 256,
+    "memory": 512,
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "protocol": "tcp"
+      }
+    ],
+    "environment": [],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/ecs/my-task-family",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "api"
+      }
+    }
+  },
+  {
+    "name": "test-world-staging-worker",
+    "image": "nginx:alpine",
+    "essential": true,
+    "cpu": 256,
+    "memory": 512,
+    "environment": [],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/ecs/my-task-family",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "worker"
+      }
+    }
+  }
+]
