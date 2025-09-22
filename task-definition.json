@@ -1,13 +1,13 @@
 [
 {
-  "family": "my-task-family",
+  "family": "test-world-staging-app0",
   "networkMode": "awsvpc",
   "requiresCompatibilities": ["FARGATE"],
   "cpu": 512,
   "memory": 1024,
   "containerDefinitions": [
     {
-      "name": "api",
+      "name": "test-world-staging-api",
       "image": "nginx:alpine",
       "essential": true,
       "cpu": 256,
@@ -23,13 +23,13 @@
         "logDriver": "awslogs",
         "options": {
           "awslogs-group": "/ecs/my-task-family",
-          "awslogs-region": "us-east-2",
+          "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "api"
         }
       }
     },
     {
-      "name": "worker",
+      "name": "test-world-staging-worker",
       "image": "nginx:alpine",
       "essential": true,
       "cpu": 256,
@@ -39,7 +39,7 @@
         "logDriver": "awslogs",
         "options": {
           "awslogs-group": "/ecs/my-task-family",
-          "awslogs-region": "us-east-2",
+          "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "worker"
         }
       }
