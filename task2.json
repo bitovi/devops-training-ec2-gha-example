@@ -1,0 +1,39 @@
+[
+{
+  "family": "test-world-staging-app0",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::755521597925:role/test-world-staging-ecs",
+  "containerDefinitions": [
+    {
+      "name": "test-world-staging-app0",
+      "image": "nginx:alpine",
+      "essential": true,
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp",
+          "name": "port-80",
+          "appProtocol": "http"
+        }
+      ],
+      "environment": [
+        {
+          "name": "ENVIRONMENT",
+          "value": "staging"
+        }
+      ],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "systemControls": []
+    }
+  ],
+  "volumes": [],
+  "placementConstraints": []
+}
+]
