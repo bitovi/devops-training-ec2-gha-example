@@ -83,27 +83,44 @@ jobs:
           aws_default_region: us-east-1
           aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
           checkout: false
-          bitops_code_only: true
-          bitops_code_store: true
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
 
-          aws_ecs_task_name: test-world-staging-api
+          aws_ecs_task_cpu: 256
+          aws_ecs_task_mem: 512
+          aws_ecs_app_image: "nginx:alpine"
+          #aws_ecs_app_image: "nginx:otel"
+
+          #aws_ecs_task_name: test-world-staging-api
           tf_stack_destroy: false
           tf_state_bucket_destroy: true 
+
           #aws_ecs_task_ignore_definition: true
-          #aws_ecs_app_image: "nginx:alpine"
           aws_ecs_assign_public_ip: true
+          aws_ecs_node_count: 1
 
           aws_ecs_container_port: 80
           aws_ecs_lb_port: 443
-          aws_ecs_lb_redirect_enable: true
+          aws_ecs_lb_redirect_enable: false
 
           aws_ecs_cloudwatch_enable: true
+          aws_ecs_cloudwatch_lg_name: "/${{ env.SERVICE_NAME }}/${{ inputs.environment }}"
           aws_ecs_cloudwatch_retention_days: 1
-          aws_ecs_cloudwatch_lg_name: "/ecs/my-task-family"
 
           aws_waf_enable: true
+          aws_waf_logging_enable: true
+          aws_waf_log_retention_days: 3
+          aws_waf_rule_rate_limit: 200
+          aws_waf_rule_managed_rules: true
+          aws_waf_rule_managed_bad_inputs: true
+          aws_waf_rule_ip_reputation: true
+          aws_waf_rule_anonymous_ip: true
+          aws_waf_rule_bot_control: false #(Extra cost)
+          aws_waf_rule_geo_block_countries: "CN,RU"
+          #aws_waf_rule_geo_allow_only_countries: "US,CA"
+          #aws_waf_rule_user_arn:
+          aws_waf_rule_sqli: true
+          aws_waf_rule_linux: true
+          aws_waf_rule_unix: true
+          aws_waf_rule_admin_protection: true
 
           aws_r53_enable: true
           aws_r53_domain_name: "bitovi-sandbox.com"
@@ -115,8 +132,10 @@ jobs:
             ENVIRONMENT=${{ inputs.environment }}
 
           #aws_ecs_task_json_definition_file: task2.json
-          aws_ecs_task_json_definition_file: task-definition2.json
-#
+          #aws_ecs_task_json_definition_file: task-definition2.json
+
+
+          #
 #name: Deploy to ECS
 #
 #on:
