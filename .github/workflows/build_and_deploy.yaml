@@ -105,7 +105,8 @@ jobs:
           aws_ecs_cloudwatch_log_driver: "awsfirelens"
           aws_ecs_firelens_output_type: "otlp"
           # Replace with your actual SigNoz instance details
-          aws_ecs_firelens_output_options: '{\"endpoint\":\\\"http://signoz.your-domain.com:4318/v1/logs\\\",\"tls\":\"off\",\"headers\":\"Content-Type=application/json\",\"add_label\":\"app-name\",\"add_label\":\"environment\"}'
+          #aws_ecs_firelens_output_options: "{\"Host\":\"collector\",\"Port\":\"4317\"}"
+          aws_ecs_firelens_output_options: "{\"endpoint\":\"http://signoz.your-domain.com:4318/v1/logs\",\"tls\":\"off\",\"headers\":\"Content-Type=application/json\",\"add_label\":\"app-name\",\"add_label\":\"environment\"}"
           aws_ecs_cloudwatch_lg_name: "/${{ env.SERVICE_NAME }}/${{ inputs.environment }}"
           aws_ecs_cloudwatch_retention_days: 1
 
