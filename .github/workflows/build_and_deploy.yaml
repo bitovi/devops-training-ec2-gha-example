@@ -105,7 +105,7 @@ jobs:
           aws_ecs_cloudwatch_log_driver: "awsfirelens"
           aws_ecs_firelens_output_type: "opentelemetry"
           # Replace with your actual SigNoz instance details - add_label, proxy, http_user, http_passwd, header, uri, and log_response_payload.
-          aws_ecs_firelens_output_options: '{\"Host\":\"signoz.my-domain.com\",\"Port\":\"4317\",\"tls\":\"off\",\"header\":\"Content-Type=application/json\",\"add_label\":\"environment production\"}'
+          aws_ecs_firelens_output_options: '{\"Host\":\"signoz.my-domain.com\",\"Port\":\"4317\",\"tls\":\"off\",\"header\":\"Content-Type=application/json\",\"add_label\":\\\"environment production\\\"}'
           #aws_ecs_firelens_output_options: '{\"endpoint\":\"http://signoz.your-domain.com:4318/v1/logs\",\"tls\":\"off\",\"headers\":\"Content-Type=application/json\",\"add_label\":\"app-name\",\"add_label\":\"environment\"}'
           aws_ecs_cloudwatch_lg_name: "/${{ env.SERVICE_NAME }}/${{ inputs.environment }}"
           aws_ecs_cloudwatch_retention_days: 1
