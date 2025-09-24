@@ -86,8 +86,8 @@ jobs:
 
           aws_ecs_task_cpu: 256
           aws_ecs_task_mem: 512
-          aws_ecs_app_image: "nginx:alpine"
-          #aws_ecs_app_image: "nginx:otel"
+          #aws_ecs_app_image: "nginx:alpine"
+          aws_ecs_app_image: "nginx:otel"
 
           #aws_ecs_task_name: test-world-staging-api
           tf_stack_destroy: false
