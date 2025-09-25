@@ -74,7 +74,7 @@ jobs:
 #
       - name: Deploy using GHA
         #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@v0
+        uses: bitovi/github-actions-deploy-ecs@testing
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         with:
@@ -97,7 +97,7 @@ jobs:
           #aws_ecs_assign_public_ip: true
           aws_ecs_node_count: 1
 
-          #aws_ecs_container_port: 80
+          aws_ecs_container_port: 80
           #aws_ecs_lb_port: 443
           #aws_ecs_lb_redirect_enable: false
 
