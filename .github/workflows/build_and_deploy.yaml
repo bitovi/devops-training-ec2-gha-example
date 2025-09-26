@@ -131,7 +131,7 @@ jobs:
           aws_waf_rule_unix: true
           aws_waf_rule_admin_protection: true
 
-          aws_r53_enable: false
+          aws_r53_enable: true
           aws_r53_domain_name: "bitovi-sandbox.com"
           aws_r53_sub_domain_name: devops-training-example-ecs
           aws_r53_enable_cert: true
