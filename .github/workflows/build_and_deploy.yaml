@@ -73,8 +73,8 @@ jobs:
 #          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 #
       - name: Deploy using GHA
-        uses: bitovi/github-actions-deploy-ecs@main
-        #uses: bitovi/github-actions-deploy-ecs@testing2
+        #uses: bitovi/github-actions-deploy-ecs@main
+        uses: bitovi/github-actions-deploy-ecs@testing2
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         with:
@@ -86,8 +86,8 @@ jobs:
 
           aws_ecs_task_cpu: 256
           aws_ecs_task_mem: 512
-          #aws_ecs_app_image: "nginx:alpine"
-          aws_ecs_app_image: "nginx:otel"
+          aws_ecs_app_image: "nginx:alpine"
+          #aws_ecs_app_image: "nginx:otel"
 
           #aws_ecs_task_name: test-world-staging-api
           tf_stack_destroy: false
