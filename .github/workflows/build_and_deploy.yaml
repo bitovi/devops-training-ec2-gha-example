@@ -93,7 +93,7 @@ jobs:
           tf_stack_destroy: false
           tf_state_bucket_destroy: true 
 
-          aws_ecs_task_ignore_definition: true
+          aws_ecs_task_ignore_definition: false
           aws_ecs_assign_public_ip: true
           aws_ecs_node_count: 1
 
@@ -141,7 +141,7 @@ jobs:
             ENVIRONMENT=${{ inputs.environment }}
 
           #aws_ecs_task_json_definition_file: task2.json
-          #aws_ecs_task_json_definition_file: task-definition2.json
+          aws_ecs_task_json_definition_file: task-definition2.json
 
 
           #
