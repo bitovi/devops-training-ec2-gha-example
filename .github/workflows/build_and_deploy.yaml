@@ -74,7 +74,7 @@ jobs:
 #
       - name: Deploy using GHA
         #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@testing
+        uses: bitovi/github-actions-deploy-ecs@main
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         with:
@@ -90,7 +90,7 @@ jobs:
           aws_ecs_app_image: "nginx:otel"
 
           #aws_ecs_task_name: test-world-staging-api
-          tf_stack_destroy: false
+          tf_stack_destroy: true
           tf_state_bucket_destroy: true 
 
           #aws_ecs_task_ignore_definition: true
