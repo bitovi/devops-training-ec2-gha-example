@@ -348,7 +348,7 @@ jobs:
           #aws_ecs_lb_port: 443
           ###
           aws_ecs_cloudwatch_enable: false
-          aws_r53_enable: true
+          aws_r53_enable: false
           aws_r53_domain_name: "bitovi-sandbox.com"
           aws_r53_sub_domain_name: devops-training-example-ecs
           aws_r53_enable_cert: true
