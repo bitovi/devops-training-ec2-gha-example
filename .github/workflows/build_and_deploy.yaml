@@ -252,10 +252,10 @@ jobs:
 #          cluster: my-cluster
 #          wait-for-service-stability: true
 
-      - name: Deploy using GHA - DESTROY NEW
-        id: destroy-new
+      - name: Deploy using GHA - DESTROY OLD
+        id: destroy-old
         #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@testing
+        uses: bitovi/github-actions-deploy-ecs@main
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         with:
