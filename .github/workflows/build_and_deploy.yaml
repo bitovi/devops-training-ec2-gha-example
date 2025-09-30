@@ -34,6 +34,8 @@ env:
   SERVICE_NAME: test-world
   ECR_REPOSITORY: bitovi-devops-training-ec2-gha-example-simple-ecr-ecr
   IMAGE_TAG: "${{ inputs.environment }}-${{ inputs.image_tag }}"
+  CPU: 256
+  MEMORY: 512
 
 permissions:
   contents: read
@@ -78,8 +80,8 @@ jobs:
         run: |
           jq '.[] |= . + {
             name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}",
-            cpu: 256,
-            memory: 512,
+            cpu: ${{ env.CPU }},
+            memory: ${{ env.MEMORY }},
             environment: (
               .environment + [
                 { "name": "ENVIRONMENT2", "value": "${{ inputs.environment }}" }
