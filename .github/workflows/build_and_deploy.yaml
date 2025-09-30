@@ -173,6 +173,42 @@ jobs:
 
           aws_ecs_task_json_definition_file: task-definition2.new.json
 
+  rds-management:
+    name: RDS Management
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+    steps:
+      - id: RDS-deploy
+        uses: bitovi/github-actions-deploy-rds@v0.1.7
+        # https://github.com/bitovi/github-actions-deploy-rds
+        with:
+          aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_default_region: ${{ vars.AWS_DEFAULT_REGION || 'us-east-1' }}
+
+          #aws_additional_tags: '{\"some\":\"extra\",\"tag\":\"added\"}'
+
+          tf_stack_destroy: ${{ inputs.tf_stack_destroy }}
+          tf_state_file_name_append: "rds-${{ inputs.environment }}"
+          # tf_state_file_name:
+          # tf_state_bucket:
+          tf_state_bucket_destroy: false
+
+          aws_rds_db_enable: true
+          aws_rds_db_proxy: true
+          aws_rds_db_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+          aws_rds_db_user: ${{ env.SERVICE_NAME }} #test-world
+          aws_rds_db_ingress_allow_all: true
+          #aws_rds_db_subnets: subnet-0000000000000,subnet-0000000000000
+          aws_rds_db_allocated_storage: 10
+          aws_rds_db_max_allocated_storage: 20
+          aws_rds_db_storage_encrypted: true
+          aws_rds_db_publicly_accessible: true
+          aws_rds_db_instance_class: db.t4g.micro
+          #aws_vpc_id: vpc-0000000000000
 
           #
 #name: Deploy to ECS
