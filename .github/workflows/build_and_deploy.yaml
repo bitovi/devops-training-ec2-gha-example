@@ -72,79 +72,107 @@ jobs:
 #          # Output the image reference
 #          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 #
-####      - name: Deploy using GHA
-####        #uses: bitovi/github-actions-deploy-ecs@main
-####        uses: bitovi/github-actions-deploy-ecs@main
-####        env:
-####          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-####        with:
-####          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-####          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-####          aws_default_region: us-east-1
-####          aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-####          checkout: false
-####
-####          aws_ecs_task_cpu: 512
-####          aws_ecs_task_mem: 1024
-####          #aws_ecs_app_image: "nginx:alpine"
-####          #aws_ecs_app_image: "nginx:otel"
-####
-####          aws_ecs_task_name: test-world-staging-api
-####          tf_stack_destroy: false
-####          tf_state_bucket_destroy: true 
-####
-####          aws_ecs_task_ignore_definition: false
-####          aws_ecs_assign_public_ip: true
-####          aws_ecs_node_count: 1
-####
-####          aws_ecs_container_port: 80
-####          aws_ecs_lb_port: 443
-####          #aws_ecs_lb_redirect_enable: false
-####
-####          aws_ecs_cloudwatch_enable: true
-####          #aws_ecs_cloudwatch_log_driver: "awsfirelens"
-####          #aws_ecs_firelens_output_type: "opentelemetry"
-####          #aws_ecs_firelens_output_type: "http"
-####          #aws_ecs_firelens_output_options: '{\"Host\":\"172.31.79.77\",\"Port\":\"4318\",\"URI\":\"/v1/logs\",\"Format\":\"json\"}'
-####          # Replace with your actual SigNoz instance details - add_label, proxy, http_user, http_passwd, header, uri, and log_response_payload.
-####          #aws_ecs_firelens_output_options: '{\"Host\":\"signoz.my-domain.com\",\"Port\":\"4317\",\"tls\":\"off\",\"header\":\"Content-Type=application/json\",\"add_label\":\\\"environment production\\\"}'
-####          #aws_ecs_firelens_output_options: '{\"Host\":\"172.31.79.77\",\"Port\":\"4317\",\"tls\":\"off\",\"header\":\"Content-Type=application/json\"}'
-####
-####          #aws_ecs_firelens_output_options: '{\"endpoint\":\"http://signoz.your-domain.com:4318/v1/logs\",\"tls\":\"off\",\"headers\":\"Content-Type=application/json\",\"add_label\":\"app-name\",\"add_label\":\"environment\"}'
-####          aws_ecs_cloudwatch_lg_name: "/${{ env.SERVICE_NAME }}/${{ inputs.environment }}"
-####          aws_ecs_cloudwatch_retention_days: 1
-####
-####          aws_waf_enable: false
-####          aws_waf_logging_enable: true
-####          aws_waf_log_retention_days: 3
-####          aws_waf_rule_rate_limit: 200
-####          aws_waf_rule_managed_rules: true
-####          aws_waf_rule_managed_bad_inputs: true
-####          aws_waf_rule_ip_reputation: true
-####          aws_waf_rule_anonymous_ip: true
-####          aws_waf_rule_bot_control: false #(Extra cost)
-####          aws_waf_rule_geo_block_countries: "CN,RU"
-####          #aws_waf_rule_geo_allow_only_countries: "US,CA"
-####          #aws_waf_rule_user_arn:
-####          aws_waf_rule_sqli: true
-####          aws_waf_rule_linux: true
-####          aws_waf_rule_unix: true
-####          aws_waf_rule_admin_protection: true
-####
-####          aws_r53_enable: true
-####          aws_r53_domain_name: "bitovi-sandbox.com"
-####          aws_r53_sub_domain_name: devops-training-example-ecs
-####          aws_r53_enable_cert: true
-####          aws_r53_create_sub_cert: true
-####
-####          env_ghv: |
-####            ENVIRONMENT=${{ inputs.environment }}
-####
-####          #aws_ecs_task_json_definition_file: task2.json
-####          aws_ecs_task_json_definition_file: task-definition2.json
-####
-####
-####          #
+#image: "${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ inputs.image_tag }}",
+
+      - name: Templetize ECS container definition JSON file
+        run: |
+          jq '.[] |= . + {
+            name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}",
+            cpu: "256",
+            memory: "512",
+            environment: (
+              .environment + [
+                { "name": "ENVIRONMENT2", "value": "${{ inputs.environment }}" }
+              ]
+            ),
+            logConfiguration: (
+              .logConfiguration + {
+                options: (
+                  .logConfiguration.options + {
+                    "awslogs-group": "/ecs/${{ env.SERVICE_NAME }}/${{ inputs.environment }}",
+                    "awslogs-region": "us-east-1",
+                  }
+                )
+              }
+            )
+          }' task-definition2.json > task-definition2.new.json
+          echo "####################################"
+          echo "Templatized worker task definition:"
+          echo "####################################"
+          cat task-definition2.new.json
+
+      - name: Deploy using GHA
+        #uses: bitovi/github-actions-deploy-ecs@main
+        uses: bitovi/github-actions-deploy-ecs@testing
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+          checkout: false
+
+          aws_ecs_task_cpu: 512
+          aws_ecs_task_mem: 1024
+          #aws_ecs_app_image: "nginx:alpine"
+          #aws_ecs_app_image: "nginx:otel"
+
+          aws_ecs_task_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true 
+
+          aws_ecs_task_ignore_definition: false
+          aws_ecs_assign_public_ip: true
+          aws_ecs_node_count: 1
+
+          aws_ecs_container_port: 80
+          aws_ecs_lb_port: 443
+          #aws_ecs_lb_redirect_enable: false
+
+          aws_ecs_cloudwatch_enable: true
+          #aws_ecs_cloudwatch_log_driver: "awsfirelens"
+          #aws_ecs_firelens_output_type: "opentelemetry"
+          #aws_ecs_firelens_output_type: "http"
+          #aws_ecs_firelens_output_options: '{\"Host\":\"172.31.79.77\",\"Port\":\"4318\",\"URI\":\"/v1/logs\",\"Format\":\"json\"}'
+          # Replace with your actual SigNoz instance details - add_label, proxy, http_user, http_passwd, header, uri, and log_response_payload.
+          #aws_ecs_firelens_output_options: '{\"Host\":\"signoz.my-domain.com\",\"Port\":\"4317\",\"tls\":\"off\",\"header\":\"Content-Type=application/json\",\"add_label\":\\\"environment production\\\"}'
+          #aws_ecs_firelens_output_options: '{\"Host\":\"172.31.79.77\",\"Port\":\"4317\",\"tls\":\"off\",\"header\":\"Content-Type=application/json\"}'
+
+          #aws_ecs_firelens_output_options: '{\"endpoint\":\"http://signoz.your-domain.com:4318/v1/logs\",\"tls\":\"off\",\"headers\":\"Content-Type=application/json\",\"add_label\":\"app-name\",\"add_label\":\"environment\"}'
+          aws_ecs_cloudwatch_lg_name: "/ecs/${{ env.SERVICE_NAME }}/${{ inputs.environment }}"
+          aws_ecs_cloudwatch_retention_days: 1
+
+          aws_waf_enable: false
+          aws_waf_logging_enable: true
+          aws_waf_log_retention_days: 3
+          aws_waf_rule_rate_limit: 200
+          aws_waf_rule_managed_rules: true
+          aws_waf_rule_managed_bad_inputs: true
+          aws_waf_rule_ip_reputation: true
+          aws_waf_rule_anonymous_ip: true
+          aws_waf_rule_bot_control: false #(Extra cost)
+          aws_waf_rule_geo_block_countries: "CN,RU"
+          #aws_waf_rule_geo_allow_only_countries: "US,CA"
+          #aws_waf_rule_user_arn:
+          aws_waf_rule_sqli: true
+          aws_waf_rule_linux: true
+          aws_waf_rule_unix: true
+          aws_waf_rule_admin_protection: true
+
+          aws_r53_enable: true
+          aws_r53_domain_name: "bitovi-sandbox.com"
+          aws_r53_sub_domain_name: devops-training-example-ecs
+          aws_r53_enable_cert: true
+          aws_r53_create_sub_cert: true
+
+          env_ghv: |
+            ENVIRONMENT=${{ inputs.environment }}
+
+          aws_ecs_task_json_definition_file: task-definition2.json
+
+
+          #
 #name: Deploy to ECS
 #
 #on:
@@ -251,373 +279,3 @@ jobs:
 #          service: my-service
 #          cluster: my-cluster
 #          wait-for-service-stability: true
-
-      - name: Deploy using GHA - DESTROY NEW
-        id: destroy-new
-        #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@testing
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          checkout: false
-
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
-          aws_ecs_app_image: "nginx:alpine"
-          #aws_ecs_app_image: "nginx:otel"
-          #aws_ecs_task_name: test-world-staging-api
-          tf_stack_destroy: true ##### DESTROY
-          tf_state_bucket_destroy: true 
-          aws_ecs_task_ignore_definition: false
-          aws_ecs_assign_public_ip: true
-          aws_ecs_node_count: 1
-          ###
-          aws_ecs_container_port: 80
-          aws_ecs_lb_port: 443
-          ###
-          aws_ecs_cloudwatch_enable: false
-          aws_r53_enable: true
-          aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
-
-      - name: Deploy using GHA - CREATE OLD
-        id: deploy-old
-        #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@main
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          checkout: false
-
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
-          aws_ecs_app_image: "nginx:alpine"
-          #aws_ecs_app_image: "nginx:otel"
-          #aws_ecs_task_name: test-world-staging-api
-          tf_stack_destroy: false
-          tf_state_bucket_destroy: true 
-          aws_ecs_task_ignore_definition: false
-          aws_ecs_assign_public_ip: true
-          aws_ecs_node_count: 1
-          ###
-          aws_ecs_container_port: 80
-          aws_ecs_lb_port: 443
-          ###
-          aws_ecs_cloudwatch_enable: false
-          aws_r53_enable: true
-          aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
-
-      - name: Deploy using GHA - CREATE OLD - Remove R53
-        id: deploy-old-2
-        #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@main
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          checkout: false
-
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
-          aws_ecs_app_image: "nginx:alpine"
-          #aws_ecs_app_image: "nginx:otel"
-          #aws_ecs_task_name: test-world-staging-api
-          tf_stack_destroy: false
-          tf_state_bucket_destroy: true 
-          aws_ecs_task_ignore_definition: false
-          aws_ecs_assign_public_ip: true
-          aws_ecs_node_count: 1
-          ###
-          aws_ecs_container_port: 80
-          aws_ecs_lb_port: 443
-          ###
-          aws_ecs_cloudwatch_enable: false
-          aws_r53_enable: false
-          aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
-
-      - name: Deploy using GHA - CREATE NEW - NO PORTS
-        id: deploy-new
-        #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@testing
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          checkout: false
-
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
-          aws_ecs_app_image: "nginx:alpine"
-          #aws_ecs_app_image: "nginx:otel"
-          #aws_ecs_task_name: test-world-staging-api
-          tf_stack_destroy: false
-          tf_state_bucket_destroy: true 
-          aws_ecs_task_ignore_definition: false
-          aws_ecs_assign_public_ip: true
-          aws_ecs_node_count: 1
-          ###
-          #aws_ecs_container_port: 80
-          #aws_ecs_lb_port: 443
-          ###
-          aws_ecs_cloudwatch_enable: false
-          aws_r53_enable: true
-          aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
-
-      - name: Deploy using GHA - CREATE NEW - ADD PORTS
-        id: deploy-new2
-        #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@testing
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          checkout: false
-
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
-          aws_ecs_app_image: "nginx:alpine"
-          #aws_ecs_app_image: "nginx:otel"
-          #aws_ecs_task_name: test-world-staging-api
-          tf_stack_destroy: false
-          tf_state_bucket_destroy: true 
-          aws_ecs_task_ignore_definition: false
-          aws_ecs_assign_public_ip: true
-          aws_ecs_node_count: 1
-          ###
-          aws_ecs_container_port: 80
-          aws_ecs_lb_port: 443
-          ###
-          aws_ecs_cloudwatch_enable: false
-          aws_r53_enable: true
-          aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
-
-      - name: Deploy using GHA - CREATE NEW - Change image
-        id: deploy-new4
-        #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@testing
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          checkout: false
-
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
-          #aws_ecs_app_image: "nginx:alpine"
-          aws_ecs_app_image: "nginx:otel"
-          tf_stack_destroy: false
-          tf_state_bucket_destroy: true 
-          aws_ecs_task_ignore_definition: false
-          aws_ecs_assign_public_ip: true
-          aws_ecs_node_count: 1
-          ###
-          aws_ecs_container_port: 80
-          aws_ecs_lb_port: 443
-          ###
-          aws_ecs_cloudwatch_enable: false
-          aws_r53_enable: true
-          aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
-
-      - name: Deploy using GHA - DESTROY NEW2
-        id: destroy-new2
-        #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@testing
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          checkout: false
-
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
-          aws_ecs_app_image: "nginx:alpine"
-          #aws_ecs_app_image: "nginx:otel"
-          #aws_ecs_task_name: test-world-staging-api
-          tf_stack_destroy: true ##### DESTROY
-          tf_state_bucket_destroy: true 
-          aws_ecs_task_ignore_definition: false
-          aws_ecs_assign_public_ip: true
-          aws_ecs_node_count: 1
-          ###
-          aws_ecs_container_port: 80
-          aws_ecs_lb_port: 443
-          ###
-          aws_ecs_cloudwatch_enable: false
-          aws_r53_enable: true
-          aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
-
-      - name: Deploy using GHA - CREATE OLD2
-        id: deploy-old2
-        #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@main
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          checkout: false
-
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
-          aws_ecs_app_image: "nginx:alpine"
-          #aws_ecs_app_image: "nginx:otel"
-          #aws_ecs_task_name: test-world-staging-api
-          tf_stack_destroy: false
-          tf_state_bucket_destroy: true 
-          aws_ecs_task_ignore_definition: false
-          aws_ecs_assign_public_ip: true
-          aws_ecs_node_count: 1
-          ###
-          aws_ecs_container_port: 80
-          aws_ecs_lb_port: 443
-          ###
-          aws_ecs_cloudwatch_enable: false
-          aws_r53_enable: true
-          aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
-
-      - name: Deploy using GHA - CREATE OLD - Remove R53
-        id: deploy-old-3
-        #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@main
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          checkout: false
-
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
-          aws_ecs_app_image: "nginx:alpine"
-          #aws_ecs_app_image: "nginx:otel"
-          #aws_ecs_task_name: test-world-staging-api
-          tf_stack_destroy: false
-          tf_state_bucket_destroy: true 
-          aws_ecs_task_ignore_definition: false
-          aws_ecs_assign_public_ip: true
-          aws_ecs_node_count: 1
-          ###
-          aws_ecs_container_port: 80
-          aws_ecs_lb_port: 443
-          ###
-          aws_ecs_cloudwatch_enable: false
-          aws_r53_enable: false
-          aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
-
-      - name: Deploy using GHA - CREATE NEW - ADD PORTS and R53 - Not removing ports
-        id: deploy-new3
-        #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@testing
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          checkout: false
-
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
-          aws_ecs_app_image: "nginx:alpine"
-          #aws_ecs_app_image: "nginx:otel"
-          #aws_ecs_task_name: test-world-staging-api
-          tf_stack_destroy: false
-          tf_state_bucket_destroy: true 
-          aws_ecs_task_ignore_definition: false
-          aws_ecs_assign_public_ip: true
-          aws_ecs_node_count: 1
-          ###
-          aws_ecs_container_port: 80
-          aws_ecs_lb_port: 443
-          ###
-          aws_ecs_cloudwatch_enable: false
-          aws_r53_enable: true
-          aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
-
-      - name: Deploy using GHA - DESTROY NEW3
-        if: always()
-        id: destroy-new3
-        #uses: bitovi/github-actions-deploy-ecs@main
-        uses: bitovi/github-actions-deploy-ecs@testing
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          checkout: false
-
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
-          aws_ecs_app_image: "nginx:alpine"
-          tf_stack_destroy: true ##### DESTROY
-          tf_state_bucket_destroy: true 
-          aws_ecs_task_ignore_definition: false
-          aws_ecs_assign_public_ip: true
-          aws_ecs_node_count: 1
-          ###
-          aws_ecs_container_port: 80
-          aws_ecs_lb_port: 443
-          ###
-          aws_ecs_cloudwatch_enable: false
-          aws_r53_enable: true
-          aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
