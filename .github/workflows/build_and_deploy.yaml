@@ -199,7 +199,8 @@ jobs:
 
           aws_rds_db_enable: true
           aws_rds_db_proxy: true
-          aws_rds_db_name: "test-world-stg"
+          aws_rds_db_name: test-world-stg
+          aws_rds_db_identifier: test-world-stg
           aws_rds_db_user: ${{ env.SERVICE_NAME }} #test-world
           aws_rds_db_ingress_allow_all: true
           #aws_rds_db_subnets: subnet-0000000000000,subnet-0000000000000
