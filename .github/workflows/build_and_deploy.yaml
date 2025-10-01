@@ -180,7 +180,7 @@ jobs:
       name: ${{ inputs.environment }}
     steps:
       - id: RDS-deploy
-        uses: bitovi/github-actions-deploy-rds@v0.1.7
+        uses: bitovi/github-actions-deploy-rds@add-performance-insights-for-dbs
         # https://github.com/bitovi/github-actions-deploy-rds
         with:
           #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
