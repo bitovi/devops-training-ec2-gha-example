@@ -200,7 +200,7 @@ jobs:
           aws_rds_db_enable: true
           aws_rds_db_proxy: true
           #aws_rds_db_name: test-world-stg
-          #aws_rds_db_identifier: test-world-stg
+          aws_rds_db_identifier: test-world-stg
           aws_rds_db_user: testworld #test-world
           aws_rds_db_ingress_allow_all: true
           #aws_rds_db_subnets: subnet-0000000000000,subnet-0000000000000
@@ -209,6 +209,7 @@ jobs:
           aws_rds_db_storage_encrypted: true
           aws_rds_db_publicly_accessible: true
           aws_rds_db_instance_class: db.t4g.micro
+          aws_rds_db_engine_version: 16.8
           #aws_vpc_id: vpc-0000000000000
           #aws_rds_db_identifier: ${{ env.SERVICE_NAME }}
 
