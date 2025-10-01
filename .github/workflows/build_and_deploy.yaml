@@ -212,7 +212,7 @@ jobs:
           #aws_vpc_id: vpc-0000000000000
           #aws_rds_db_identifier: ${{ env.SERVICE_NAME }}
           aws_rds_db_performance_insights_enable: true
-          aws_rds_db_performance_insights_retention  : 1
+          aws_rds_db_performance_insights_retention  : 31
 
           #
 #name: Deploy to ECS
