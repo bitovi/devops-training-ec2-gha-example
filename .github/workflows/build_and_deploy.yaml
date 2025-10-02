@@ -219,6 +219,7 @@ jobs:
           aws_rds_db_backup_retention_period: 7
           aws_rds_db_backup_window: "03:00-04:00"
           aws_rds_db_copy_tags_to_snapshot: true
+          aws_rds_db_apply_immediately: true
 
           #
 #name: Deploy to ECS
