@@ -213,6 +213,12 @@ jobs:
           #aws_rds_db_identifier: ${{ env.SERVICE_NAME }}
           aws_rds_db_performance_insights_enable: true
           aws_rds_db_performance_insights_retention  : 31
+          aws_rds_db_insights_mode: advanced
+          aws_rds_db_allow_major_version_upgrade: true
+          aws_rds_db_auto_minor_version_upgrade: true
+          aws_rds_db_backup_retention_period: 7
+          aws_rds_db_backup_window: "03:00-04:00"
+          aws_rds_db_copy_tags_to_snapshot: true
 
           #
 #name: Deploy to ECS
