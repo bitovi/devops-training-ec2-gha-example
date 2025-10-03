@@ -180,7 +180,7 @@ jobs:
       name: ${{ inputs.environment }}
     steps:
       - id: RDS-deploy
-        uses: bitovi/github-actions-deploy-rds@v0
+        uses: bitovi/github-actions-deploy-rds@testing
         # https://github.com/bitovi/github-actions-deploy-rds
         with:
           #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
@@ -212,7 +212,7 @@ jobs:
           #aws_vpc_id: vpc-0000000000000
           #aws_rds_db_identifier: ${{ env.SERVICE_NAME }}
           aws_rds_db_performance_insights_enable: true
-          aws_rds_db_performance_insights_retention  : 31
+          aws_rds_db_performance_insights_retention  : 7
           aws_rds_db_insights_mode: standard
           aws_rds_db_allow_major_version_upgrade: true
           aws_rds_db_auto_minor_version_upgrade: true
