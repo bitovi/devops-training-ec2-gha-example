@@ -191,7 +191,7 @@ jobs:
 
           #aws_additional_tags: '{\"some\":\"extra\",\"tag\":\"added\"}'
 
-          tf_stack_destroy: false
+          tf_stack_destroy: true
           tf_state_file_name_append: "rds-${{ inputs.environment }}"
           # tf_state_file_name:
           # tf_state_bucket:
