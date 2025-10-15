@@ -1,0 +1,18 @@
+name: Deploy Cluster
+on:
+    push:
+      branches: [pure-eks]
+
+jobs:
+  Deploy-Cluster:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create EKS Cluster
+      uses: bitovi/github-actions-deploy-eks@v0.1.1
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_AI }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_AI }}
+        aws_eks_cluster_name: bitovi-managed-n8n
+        #aws_eks_instance_type: t3a.large
+        tf_stack_destroy: false
+        tf_state_bucket_destroy: false
