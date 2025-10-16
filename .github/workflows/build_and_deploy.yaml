@@ -56,6 +56,15 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws-region: us-east-1
 
+      - name: Run TruffleHog OSS (subdir)
+        uses: trufflesecurity/trufflehog@v3.90.3
+        with:
+          path: test
+          base: ${{ github.event.pull_request.base.sha }}
+          head: ${{ github.event.pull_request.head.sha }}
+          extra_args: --results=verified,unknown
+          #extra_args: --results=verified,unknown --path test
+
 #      - name: Login to Amazon ECR
 #        id: login-ecr
 #        uses: aws-actions/amazon-ecr-login@v2
