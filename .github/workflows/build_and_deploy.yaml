@@ -59,11 +59,11 @@ jobs:
       - name: Run TruffleHog OSS (subdir)
         uses: trufflesecurity/trufflehog@v3.90.3
         with:
-          path: .github
+          #path: .github
           base: ${{ github.event.pull_request.base.sha }}
           head: ${{ github.event.pull_request.head.sha }}
-          extra_args: --results=verified,unknown
-          #extra_args: --results=verified,unknown --path test
+          #extra_args: --results=verified,unknown
+          extra_args: --results=verified,unknown --path .github
 
 #      - name: Login to Amazon ECR
 #        id: login-ecr
