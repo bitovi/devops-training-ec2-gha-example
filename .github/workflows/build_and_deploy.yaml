@@ -182,53 +182,53 @@ jobs:
 #####
 #####          aws_ecs_task_json_definition_file: task-definition2.new.json
 #####
-  rds-management:
-    name: RDS Management
-    runs-on: ubuntu-latest
-    environment:
-      name: ${{ inputs.environment }}
-    steps:
-      - id: RDS-deploy
-        uses: bitovi/github-actions-deploy-rds@v0
-        # https://github.com/bitovi/github-actions-deploy-rds
-        with:
-          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-
-          #aws_additional_tags: '{\"some\":\"extra\",\"tag\":\"added\"}'
-
-          tf_stack_destroy: true
-          tf_state_file_name_append: "rds-${{ inputs.environment }}"
-          # tf_state_file_name:
-          # tf_state_bucket:
-          tf_state_bucket_destroy: false
-          aws_rds_db_enable: true
-          aws_rds_db_proxy: false
-          #aws_rds_db_name: test-world-stg
-          aws_rds_db_identifier: test-world-stg
-          aws_rds_db_user: testworld #test-world
-          aws_rds_db_ingress_allow_all: true
-          #aws_rds_db_subnets: subnet-0000000000000,subnet-0000000000000
-          aws_rds_db_allocated_storage: 20
-          aws_rds_db_max_allocated_storage: 1000
-          aws_rds_db_storage_encrypted: true
-          aws_rds_db_publicly_accessible: true
-          aws_rds_db_instance_class: db.t4g.micro
-          aws_rds_db_engine_version: 16.8
-          #aws_vpc_id: vpc-0000000000000
-          #aws_rds_db_identifier: ${{ env.SERVICE_NAME }}
-          aws_rds_db_performance_insights_enable: true
-          aws_rds_db_performance_insights_retention  : 7
-          aws_rds_db_insights_mode: standard
-          aws_rds_db_allow_major_version_upgrade: true
-          aws_rds_db_auto_minor_version_upgrade: true
-          aws_rds_db_backup_retention_period: 7
-          aws_rds_db_backup_window: "03:00-04:00"
-          aws_rds_db_copy_tags_to_snapshot: true
-          aws_rds_db_apply_immediately: true
+#  rds-management:
+#    name: RDS Management
+#    runs-on: ubuntu-latest
+#    environment:
+#      name: ${{ inputs.environment }}
+#    steps:
+#      - id: RDS-deploy
+#        uses: bitovi/github-actions-deploy-rds@v0
+#        # https://github.com/bitovi/github-actions-deploy-rds
+#        with:
+#          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+#
+#          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+#          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+#          aws_default_region: us-east-1
+#
+#          #aws_additional_tags: '{\"some\":\"extra\",\"tag\":\"added\"}'
+#
+#          tf_stack_destroy: true
+#          tf_state_file_name_append: "rds-${{ inputs.environment }}"
+#          # tf_state_file_name:
+#          # tf_state_bucket:
+#          tf_state_bucket_destroy: false
+#          aws_rds_db_enable: true
+#          aws_rds_db_proxy: false
+#          #aws_rds_db_name: test-world-stg
+#          aws_rds_db_identifier: test-world-stg
+#          aws_rds_db_user: testworld #test-world
+#          aws_rds_db_ingress_allow_all: true
+#          #aws_rds_db_subnets: subnet-0000000000000,subnet-0000000000000
+#          aws_rds_db_allocated_storage: 20
+#          aws_rds_db_max_allocated_storage: 1000
+#          aws_rds_db_storage_encrypted: true
+#          aws_rds_db_publicly_accessible: true
+#          aws_rds_db_instance_class: db.t4g.micro
+#          aws_rds_db_engine_version: 16.8
+#          #aws_vpc_id: vpc-0000000000000
+#          #aws_rds_db_identifier: ${{ env.SERVICE_NAME }}
+#          aws_rds_db_performance_insights_enable: true
+#          aws_rds_db_performance_insights_retention  : 7
+#          aws_rds_db_insights_mode: standard
+#          aws_rds_db_allow_major_version_upgrade: true
+#          aws_rds_db_auto_minor_version_upgrade: true
+#          aws_rds_db_backup_retention_period: 7
+#          aws_rds_db_backup_window: "03:00-04:00"
+#          aws_rds_db_copy_tags_to_snapshot: true
+#          aws_rds_db_apply_immediately: true
 
           #aws_rds_db_monitoring_interval: 60
           #
@@ -338,3 +338,104 @@ jobs:
 #          service: my-service
 #          cluster: my-cluster
 #          wait-for-service-stability: true
+
+
+
+  Generate-tag:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.extract_tag.outputs.tag }}
+      source_branch: ${{ steps.extract_tag.outputs.source_branch }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # Fetch all history for tag information
+
+      - name: Extract or Generate Image Tag
+        id: extract_tag
+        run: |
+          # For staging environment, create a version tag based on the image_tag input
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            TAG="${GITHUB_REF#refs/tags/}"
+          else
+            # Generate a tag from timestamp and short SHA for non-tag triggers
+            TAG="v$(date +%Y%m%d%H%M%S)-${GITHUB_SHA:0:7}"
+          fi
+          echo "tag=${TAG}" >> $GITHUB_OUTPUT
+
+          # Get the current branch name
+          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+            BRANCH="${{ github.head_ref }}"
+          else
+            BRANCH="${{ github.ref_name }}"
+          fi
+          echo "source_branch=${BRANCH}" >> $GITHUB_OUTPUT
+          echo "Tag: ${TAG} from branch: ${BRANCH}"
+
+
+  release-tag:
+    name: Create and Release Tag
+    needs: [Generate-tag]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # Fetch all history for generating changelog
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get the previous tag (if any)
+          PREVIOUS_TAG=$(git tag --sort=-version:refname | head -n1 2>/dev/null || echo "")
+          NEW_TAG="${{ needs.Generate-tag.outputs.tag }}"
+          
+          if [[ -z "$PREVIOUS_TAG" || "$PREVIOUS_TAG" == "$NEW_TAG" ]]; then
+            echo "No previous tag found. This is the first release."
+            CHANGELOG="🎉 **First Release!**
+            
+            This is the initial release of the application."
+          else
+            echo "Generating changelog from $PREVIOUS_TAG to $NEW_TAG"
+            
+            # Generate commit log between tags
+            COMMITS=$(git log --pretty=format:"- %s (%h)" $PREVIOUS_TAG..HEAD 2>/dev/null || git log --pretty=format:"- %s (%h)" --max-count=10)
+            
+            if [[ -z "$COMMITS" ]]; then
+              CHANGELOG="📝 **Changes since $PREVIOUS_TAG:**
+              
+              No new commits found."
+            else
+              CHANGELOG="📝 **Changes since $PREVIOUS_TAG:**
+              
+              $COMMITS"
+            fi
+          fi
+          
+          # Save changelog to output, handling multiline content
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+          echo "previous_tag=$PREVIOUS_TAG" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ${{ needs.Generate-tag.outputs.tag }} \
+            --title "Release ${{ needs.Generate-tag.outputs.tag }}" \
+            --notes "Automated release for tag ${{ needs.Generate-tag.outputs.tag }}
+          **Source Branch:** ${{ needs.Generate-tag.outputs.source_branch }}
+          
+          **Deployed to Staging:** ✅
+          **Docker Image:** \`aa-web-staging:${{ needs.Generate-tag.outputs.tag }}\`
+          **Staging URL:** https://some-staging-url.example.com
+          
+          ---
+          
+          ${{ steps.changelog.outputs.changelog }}"
