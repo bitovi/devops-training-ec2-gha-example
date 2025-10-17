@@ -14,6 +14,6 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
         aws_eks_cluster_name: bitovi-eks-example
         tf_state_bucket: bitovi-eks-example-terraform-state
-        aws_eks_instance_type: t3a.large
+        #aws_eks_instance_type: t3a.large
         #tf_stack_destroy: true
         tf_state_bucket_destroy: true
