@@ -121,8 +121,8 @@ jobs:
   
           tf_state_file_name: tf-state-aws-rds
           tf_state_bucket: some-unique-bucket-name-1234567890
-          tf_stack_destroy: false
-          tf_state_bucket_destroy: true
+          tf_stack_destroy: true
+          tf_state_bucket_destroy: false
           
           aws_rds_db_name: somedb
           aws_rds_db_allocated_storage: 10
@@ -130,6 +130,53 @@ jobs:
           aws_rds_db_multi_az: true
           aws_rds_db_proxy: true
           aws_db_proxy_name: somedb
+          aws_db_proxy_tls: true
+          aws_rds_db_backup_retention_period: 7
+
+          aws_rds_db_monitoring_interval: 60
+
+      - name: Create RDS Cluster2
+        uses: bitovi/github-actions-deploy-rds@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-2
+  
+          tf_state_file_name: tf-state-aws-rds2
+          tf_state_bucket: some-unique-bucket-name-1234567890
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true
+          
+          aws_rds_db_name: somedb2
+          aws_rds_db_allocated_storage: 10
+          aws_rds_db_instance_class: db.t3.medium
+          #aws_rds_db_multi_az: true
+          #aws_rds_db_proxy: true
+          aws_db_proxy_name: somedb2
+          aws_db_proxy_tls: true
+          aws_rds_db_backup_retention_period: 7
+
+          aws_rds_db_monitoring_interval: 60
+
+
+      - name: Create RDS Cluster3
+        uses: bitovi/github-actions-deploy-rds@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-2
+  
+          tf_state_file_name: tf-state-aws-rds2
+          tf_state_bucket: some-unique-bucket-name-1234567890
+          tf_stack_destroy: true
+          tf_state_bucket_destroy: true
+          
+          aws_rds_db_name: somedb2
+          aws_rds_db_allocated_storage: 10
+          aws_rds_db_instance_class: db.t3.medium
+          #aws_rds_db_multi_az: true
+          #aws_rds_db_proxy: true
+          aws_db_proxy_name: somedb2
           aws_db_proxy_tls: true
           aws_rds_db_backup_retention_period: 7
 
