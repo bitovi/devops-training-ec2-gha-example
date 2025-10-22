@@ -120,7 +120,9 @@ jobs:
           aws_default_region: us-east-2
   
           tf_state_file_name: tf-state-aws-rds
-          #tf_state_bucket: xavierconcierge-com-tf-state-bucket-rds
+          tf_state_bucket: some-unique-bucket-name-1234567890
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true
           
           aws_rds_db_name: somedb
           aws_rds_db_allocated_storage: 10
