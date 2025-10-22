@@ -132,6 +132,8 @@ jobs:
           aws_db_proxy_name: somedb
           aws_db_proxy_tls: true
           aws_rds_db_backup_retention_period: 7
+
+          aws_rds_db_monitoring_interval: 60
 #####      - name: Deploy using GHA
 #####        #uses: bitovi/github-actions-deploy-ecs@main
 #####        uses: bitovi/github-actions-deploy-ecs@testing
