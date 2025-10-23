@@ -192,7 +192,7 @@ jobs:
   
           tf_state_file_name: tf-state-aws-rds2
           tf_state_bucket: some-unique-bucket-name-1234567890
-          tf_stack_destroy: false
+          tf_stack_destroy: true
           tf_state_bucket_destroy: true
           
           aws_rds_db_name: somedb2
