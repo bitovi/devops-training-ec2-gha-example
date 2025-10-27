@@ -1,21 +1,88 @@
-[
+[ 
   {
+    "name": "app",
     "image": "nginx:alpine",
     "essential": true,
-    "portMappings": [
-      {
-        "containerPort": 80,
-        "protocol": "tcp",
-        "hostPort": 80,
-        "appProtocol": "http"
+    "portMappings": [ 
+      { 
+        "containerPort": 80, 
+        "protocol": "tcp"
+       } 
+      ],
+      "environment": [], 
+      "linuxParameters": { 
+        "initProcessEnabled": true
+      },
+      "logConfiguration": { 
+        "logDriver": "awsfirelens",
+        "options": {
+          "Name": "opentelemetry",
+          "Host": "signoz-collector",
+          "Port": "4317",
+          "tls": "off",
+          "log_key": "message",
+          "add_label": "app-name nginx-app-environment"
+        }
       }
-    ],
-    "environment": [],
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-        "awslogs-stream-prefix": "api"
+    },
+    {
+      "name": "signoz-collector",
+      "image": "signoz/signoz-otel-collector:latest",
+      "user": "root",
+      "command": ["--config=env:SIGNOZ_CONFIG_CONTENT"],
+      "secrets": [
+        {
+          "name": "SIGNOZ_CONFIG_CONTENT",
+          "valueFrom": "/ecs/signoz/otelcol-sidecar.yaml"
+        }
+      ],
+      "essential": true,
+      "portMappings": [
+        { "protocol": "tcp", "containerPort": 4317 },
+        { "protocol": "tcp", "containerPort": 4318 },
+        { "protocol": "tcp", "containerPort": 8006 }
+      ],
+      "healthCheck": {
+        "command": ["CMD-SHELL", "wget -qO- http://localhost:13133/ || exit 1"],
+        "interval": 5,
+        "timeout": 6,
+        "retries": 5,
+        "startPeriod": 1
+      },
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/signoz-collector",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs",
+          "awslogs-create-group": "True"
+        }
+      }
+    },
+    {
+      "name": "fluent-bit",
+      "image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:stable",
+      "essential": true,
+      "dependsOn": [
+        {
+          "containerName": "signoz-collector",
+          "condition": "HEALTHY"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/log-router",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs",
+          "awslogs-create-group": "True"
+        }
+      },
+      "firelensConfiguration": {
+        "type": "fluentbit",
+        "options": {
+          "enable-ecs-log-metadata": "true"
+        }
       }
     }
-  }
 ]

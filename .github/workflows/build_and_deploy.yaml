@@ -85,32 +85,32 @@ jobs:
 
 #image: "${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ inputs.image_tag }}",
 
-      - name: Templetize ECS container definition JSON file
-        run: |
-          jq '.[] |= . + {
-            name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}",
-            cpu: ${{ env.CPU }},
-            memory: ${{ env.MEMORY }},
-            environment: (
-              .environment + [
-                { "name": "ENVIRONMENT2", "value": "${{ inputs.environment }}" }
-              ]
-            ),
-            logConfiguration: (
-              .logConfiguration + {
-                options: (
-                  .logConfiguration.options + {
-                    "awslogs-group": "/ecs/${{ env.SERVICE_NAME }}/${{ inputs.environment }}",
-                    "awslogs-region": "us-east-1",
-                  }
-                )
-              }
-            )
-          }' task-definition2.json > task-definition2.new.json
-          echo "####################################"
-          echo "Templatized worker task definition:"
-          echo "####################################"
-          cat task-definition2.new.json
+      #- name: Templetize ECS container definition JSON file
+      #  run: |
+      #    jq '.[] |= . + {
+      #      name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}",
+      #      cpu: ${{ env.CPU }},
+      #      memory: ${{ env.MEMORY }},
+      #      environment: (
+      #        .environment + [
+      #          { "name": "ENVIRONMENT2", "value": "${{ inputs.environment }}" }
+      #        ]
+      #      ),
+      #      logConfiguration: (
+      #        .logConfiguration + {
+      #          options: (
+      #            .logConfiguration.options + {
+      #              "awslogs-group": "/ecs/${{ env.SERVICE_NAME }}/${{ inputs.environment }}",
+      #              "awslogs-region": "us-east-1",
+      #            }
+      #          )
+      #        }
+      #      )
+      #    }' task-definition2.json > task-definition2.new.json
+      #    echo "####################################"
+      #    echo "Templatized worker task definition:"
+      #    echo "####################################"
+      #    cat task-definition2.new.json
         
 
       - name: Deploy using GHA
@@ -158,6 +158,7 @@ jobs:
           #aws_ecs_firelens_output_options: '{\"endpoint\":\"http://signoz.your-domain.com:4318/v1/logs\",\"tls\":\"off\",\"headers\":\"Content-Type=application/json\",\"add_label\":\"app-name\",\"add_label\":\"environment\"}'
           aws_ecs_cloudwatch_lg_name: "/ecs/${{ env.SERVICE_NAME }}/${{ inputs.environment }}"
           aws_ecs_cloudwatch_retention_days: 1
+          aws_ecs_task_json_definition_file: task-definition2.json
 
         
           aws_waf_enable: false
@@ -187,7 +188,6 @@ jobs:
         
           env_ghv: |
             ENVIRONMENT=${{ inputs.environment }}
-            aws_ecs_task_json_definition_file: task-definition2.new.json
 
         
 #name: Deploy to ECS
