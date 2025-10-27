@@ -33,7 +33,7 @@
       "secrets": [
         {
           "name": "SIGNOZ_CONFIG_CONTENT",
-          "valueFrom": "/ecs/signoz/otelcol-sidecar.yaml"
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:755521597925:secret:/ecs/signoz/otelcol-sidecar.yaml-5CKuH3"
         }
       ],
       "essential": true,
