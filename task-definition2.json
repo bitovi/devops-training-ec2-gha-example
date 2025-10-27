@@ -1,6 +1,6 @@
 [ 
   {
-    "name": "app",
+    "name": "test-world-staging",
     "image": "nginx:alpine",
     "essential": true,
     "portMappings": [ 
