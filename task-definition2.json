@@ -24,8 +24,8 @@
               "tls.verify": "off"
           }
       },
-      "links": [
-          "signoz-collector"
+      "dependsOn": [
+        { "containerName": "signoz-collector", "condition": "HEALTHY" }
       ]
     },
     {
