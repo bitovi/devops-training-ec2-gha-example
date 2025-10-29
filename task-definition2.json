@@ -9,7 +9,16 @@
         "protocol": "tcp"
        } 
       ],
-      "environment": [], 
+      "environment": [
+        {
+          "name": "SERVICE_NAME",
+          "value": "nginx-app"
+        },
+        {
+          "name": "DEPLOYMENT_ENVIRONMENT",
+          "value": "staging"
+        }
+      ], 
       "linuxParameters": { 
         "initProcessEnabled": true
       },
@@ -30,6 +39,16 @@
       "image": "signoz/signoz-otel-collector:latest",
       "user": "root",
       "command": ["--config=env:SIGNOZ_CONFIG_CONTENT"],
+      "environment": [
+        {
+          "name": "SERVICE_NAME",
+          "value": "nginx-app2"
+        },
+        {
+          "name": "DEPLOYMENT_ENVIRONMENT",
+          "value": "staging"
+        }
+      ],
       "secrets": [
         {
           "name": "SIGNOZ_CONFIG_CONTENT",
