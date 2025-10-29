@@ -125,8 +125,8 @@ jobs:
           aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
           checkout: false
 
-          aws_ecs_task_cpu: 512
-          aws_ecs_task_mem: 1024
+          aws_ecs_task_cpu: 1024
+          aws_ecs_task_mem: 2048
           #aws_ecs_app_image: "nginx:alpine"
           #aws_ecs_app_image: "nginx:otel"
          
