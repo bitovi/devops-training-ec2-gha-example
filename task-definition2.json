@@ -27,7 +27,7 @@
     },
     {
       "name": "signoz-collector",
-      "image": "otel/opentelemetry-collector-contrib:0.109.0",
+      "image": "signoz/signoz-otel-collector:latest",
       "user": "root",
       "command": ["--config=env:SIGNOZ_CONFIG_CONTENT"],
       "secrets": [
