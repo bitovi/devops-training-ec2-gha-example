@@ -55,8 +55,10 @@
     }
   },
   {
-    "name": "log_router",
+    "name": "fluent-bit",
     "image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:stable",
+    "cpu": 250,
+    "memory": 512,
     "essential": true,
     "firelensConfiguration": {
       "type": "fluentbit",
