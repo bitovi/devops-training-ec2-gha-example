@@ -47,13 +47,13 @@
         { "protocol": "tcp", "containerPort": 8006 }
       ],
       "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-group": "/ecs/signoz-collector",
-          "awslogs-region": "us-east-1",
-          "awslogs-stream-prefix": "collector",
-          "awslogs-create-group": "True"
-        }
+          "logDriver": "awsfirelens",
+          "options": {
+              "Name": "forward",
+              "Host": "127.0.0.1",
+              "Port": "8006",
+              "tls": "off"
+          }
       }
     },
     {
