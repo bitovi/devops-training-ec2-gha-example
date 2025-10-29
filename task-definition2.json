@@ -60,12 +60,6 @@
       "cpu": 250,
       "memory": 512,
       "essential": true,
-      "dependsOn": [
-        {
-          "containerName": "signoz-collector",
-          "condition": "HEALTHY"
-        }
-      ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
