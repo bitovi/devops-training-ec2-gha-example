@@ -21,7 +21,9 @@
               "Host": "signoz-collector",
               "Port": "8006",
               "tls": "off",
-              "tls.verify": "off"
+              "tls.verify": "off",
+              "log_key": "message",
+              "add_label": "service_name=nginx-app,environment=staging"
           }
       }
     },
@@ -45,13 +47,13 @@
         { "protocol": "tcp", "containerPort": 8006 }
       ],
       "logConfiguration": {
-          "logDriver": "awsfirelens",
-          "options": {
-              "Name": "forward",
-              "Host": "127.0.0.1",
-              "Port": "8006",
-              "tls": "off"
-          }
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/signoz-collector",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "collector",
+          "awslogs-create-group": "True"
+        }
       }
     },
     {
