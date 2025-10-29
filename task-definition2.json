@@ -18,7 +18,7 @@
           "options": {
               "Name": "forward",
               "Match": "*",
-              "Host": "signoz-collector",
+              "Host": "127.0.0.1",
               "Port": "8006",
               "tls": "off",
               "tls.verify": "off"
