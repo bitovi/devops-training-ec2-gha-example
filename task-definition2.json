@@ -1,79 +1,98 @@
-[
+[ 
   {
     "name": "test-world-staging",
     "image": "nginx:alpine",
     "essential": true,
-    "portMappings": [
-      { "containerPort": 80, "protocol": "tcp" }
-    ],
-    "linuxParameters": {
-      "initProcessEnabled": true
-    },
-    "logConfiguration": {
-      "logDriver": "awsfirelens",
-      "options": {
-        "Name": "http",
-        "host": "localhost",
-        "port": "4318",
-        "uri": "/v1/logs",
-        "format": "json",
-        "tls": "off",
-        "header": "Content-Type: application/json",
-        "Header_key1": "X-SERVICE-NAME",
-        "Header_value1": "nginx",
-        "Header_key2": "X-ENV",
-        "Header_value2": "staging"
-      }
-    }
-  },
-  {
-    "name": "signoz-collector",
-    "image": "signoz/signoz-otel-collector:latest",
-    "user": "root",
-    "command": ["--config=env:SIGNOZ_CONFIG_CONTENT"],
-    "secrets": [
-      {
-        "name": "SIGNOZ_CONFIG_CONTENT",
-        "valueFrom": "arn:aws:secretsmanager:us-east-1:755521597925:secret:/ecs/signoz/otelcol-sidecar.yaml-5CKuH3"
-      }
-    ],
-    "memory": 1024,
-    "cpu": 512,
-    "essential": true,
-    "portMappings": [
-      { "protocol": "tcp", "containerPort": 4317 },
-      { "protocol": "tcp", "containerPort": 4318 }
-    ],
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-        "awslogs-group": "/ecs/signoz-collector",
-        "awslogs-region": "us-east-1",
-        "awslogs-stream-prefix": "collector",
-        "awslogs-create-group": "True"
-      }
-    }
-  },
-  {
-    "name": "fluent-bit",
-    "image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:stable",
-    "cpu": 250,
-    "memory": 512,
-    "essential": true,
-    "firelensConfiguration": {
-      "type": "fluentbit",
-      "options": {
-        "enable-ecs-log-metadata": "true"
+    "portMappings": [ 
+      { 
+        "containerPort": 80, 
+        "protocol": "tcp"
+       } 
+      ],
+      "environment": [
+        {
+          "name": "SERVICE_NAME",
+          "value": "nginx-app"
+        },
+        {
+          "name": "DEPLOYMENT_ENVIRONMENT",
+          "value": "staging"
+        }
+      ], 
+      "linuxParameters": { 
+        "initProcessEnabled": true
+      },
+      "logConfiguration": {
+          "logDriver": "awsfirelens",
+          "options": {
+              "Name": "forward",
+              "Match": "*",
+              "Host": "signoz-collector",
+              "Port": "8006",
+              "tls": "off",
+              "tls.verify": "off"
+          }
       }
     },
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-        "awslogs-group": "/ecs/log-router",
-        "awslogs-region": "us-east-1",
-        "awslogs-stream-prefix": "ecs",
-        "awslogs-create-group": "True"
+    {
+      "name": "signoz-collector",
+      "image": "signoz/signoz-otel-collector:latest",
+      "user": "root",
+      "command": ["--config=env:SIGNOZ_CONFIG_CONTENT"],
+      "environment": [
+        {
+          "name": "SERVICE_NAME",
+          "value": "nginx-app"
+        },
+        {
+          "name": "DEPLOYMENT_ENVIRONMENT",
+          "value": "staging"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "SIGNOZ_CONFIG_CONTENT",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:755521597925:secret:/ecs/signoz/otelcol-sidecar.yaml-5CKuH3"
+        }
+      ],
+      "memory": 1024,
+      "cpu": 512,
+      "essential": true,
+      "portMappings": [
+        { "protocol": "tcp", "containerPort": 4317 },
+        { "protocol": "tcp", "containerPort": 4318 },
+        { "protocol": "tcp", "containerPort": 8006 }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/signoz-collector",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "collector",
+          "awslogs-create-group": "True"
+        }
+      }
+    },
+    {
+      "name": "fluent-bit",
+      "image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:stable",
+      "cpu": 250,
+      "memory": 512,
+      "essential": true,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/log-router",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs",
+          "awslogs-create-group": "True"
+        }
+      },
+      "firelensConfiguration": {
+        "type": "fluentbit",
+        "options": {
+          "enable-ecs-log-metadata": "true"
+        }
       }
     }
-  }
 ]
