@@ -9,16 +9,6 @@
         "protocol": "tcp"
        } 
       ],
-      "environment": [
-        {
-          "name": "SERVICE_NAME",
-          "value": "nginx-app"
-        },
-        {
-          "name": "DEPLOYMENT_ENVIRONMENT",
-          "value": "staging"
-        }
-      ], 
       "linuxParameters": { 
         "initProcessEnabled": true
       },
@@ -69,7 +59,8 @@
           "awslogs-group": "/ecs/signoz-collector",
           "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "collector",
-          "awslogs-create-group": "True"
+          "awslogs-create-group": "True",
+          "awslogs-retention-in-days": "3"
         }
       }
     },
@@ -85,7 +76,8 @@
           "awslogs-group": "/ecs/log-router",
           "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "ecs",
-          "awslogs-create-group": "True"
+          "awslogs-create-group": "True",
+          "awslogs-retention-in-days": "3"
         }
       },
       "firelensConfiguration": {
