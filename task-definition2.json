@@ -59,8 +59,7 @@
           "awslogs-group": "/ecs/signoz-collector",
           "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "collector",
-          "awslogs-create-group": "True",
-          "awslogs-retention-in-days": "3"
+          "awslogs-create-group": "True"
         }
       }
     },
@@ -76,8 +75,7 @@
           "awslogs-group": "/ecs/log-router",
           "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "ecs",
-          "awslogs-create-group": "True",
-          "awslogs-retention-in-days": "3"
+          "awslogs-create-group": "True"
         }
       },
       "firelensConfiguration": {
