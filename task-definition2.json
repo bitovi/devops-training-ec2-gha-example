@@ -37,6 +37,10 @@
         {
           "name": "DEPLOYMENT_ENVIRONMENT",
           "value": "staging"
+        },
+        {
+          "name": "IMAGE_TAG",
+          "value": "some-tag"
         }
       ],
       "secrets": [
