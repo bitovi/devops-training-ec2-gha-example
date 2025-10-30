@@ -40,7 +40,7 @@
         },
         {
           "name": "IMAGE_TAG",
-          "value": "some-tag"
+          "value": "some"
         }
       ],
       "secrets": [
