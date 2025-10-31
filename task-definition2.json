@@ -40,7 +40,7 @@
         },
         {
           "name": "IMAGE_TAG",
-          "value": "v1.0.1"
+          "value": "v1.0.2"
         }
       ],
       "secrets": [
