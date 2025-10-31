@@ -3,8 +3,12 @@ receivers:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
+        auth:
+          authenticator: basicauth
       http:
         endpoint: 0.0.0.0:4318
+        auth:
+          authenticator: basicauth
   prometheus:
     config:
       global:
@@ -44,9 +48,9 @@ processors:
       - name: service.version
       - name: browser.platform
       - name: browser.mobile
-      - name: k8s.cluster.name
-      - name: k8s.node.name
-      - name: k8s.namespace.name
+      #- name: k8s.cluster.name
+      #- name: k8s.node.name
+      #- name: k8s.namespace.name
       - name: host.name
       - name: host.type
       - name: container.name
@@ -55,6 +59,11 @@ extensions:
     endpoint: 0.0.0.0:13133
   pprof:
     endpoint: 0.0.0.0:1777
+  basicauth:
+    htpasswd:
+      inline: |
+        someusername:somepassword
+        
 exporters:
   clickhousetraces:
     datasource: tcp://clickhouse:9000/signoz_traces
