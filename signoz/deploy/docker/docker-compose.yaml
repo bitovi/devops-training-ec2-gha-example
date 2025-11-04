@@ -2,6 +2,9 @@ version: "3"
 x-common: &common
   networks:
     - signoz-net
+  # Local monitoring
+  extra_hosts:
+    host.docker.internal: host-gateway
   restart: unless-stopped
   logging:
     options:
@@ -154,7 +157,10 @@ services:
     volumes:
       - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
       - ./common/signoz/otel-collector-opamp-config.yaml:/etc/manager-config.yaml
+      - /:/hostfs:ro
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
+      - SIGNOZ_COLLECTOR_ENDPOINT=http://host.docker.internal:4317
       - OTEL_RESOURCE_ATTRIBUTES=host.name=signoz-host,os.type=linux
       - LOW_CARDINAL_EXCEPTION_GROUPING=false
     ports:

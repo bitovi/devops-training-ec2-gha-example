@@ -27,7 +27,7 @@ receivers:
       network:
       paging:
       processes:
-      
+
 processors:
   batch:
     send_batch_size: 10000
@@ -94,9 +94,9 @@ service:
       processors: [signozspanmetrics/delta, batch]
       exporters: [clickhousetraces]
     metrics:
-      receivers: [otlp, hostmetrics]
-      processors: [batch]
-      exporters: [signozclickhousemetrics,otlp]
+      receivers: [otlp,hostmetrics]
+      processors: [resourcedetection,batch]
+      exporters: [signozclickhousemetrics]
     metrics/prometheus:
       receivers: [prometheus]
       processors: [batch]
