@@ -33,29 +33,29 @@ jobs:
           #tf_state_file_name_append:
           # tf_state_file_name:
           # tf_state_bucket:
-          
+
           aws_rds_db_enable: true
-          aws_rds_db_proxy: true
-          #aws_rds_db_identifier:
+          aws_rds_db_proxy: false
+          #aws_rds_db_identifier: "aa-engine-db-${{ inputs.environment }}"
           aws_rds_db_ingress_allow_all: true
 
-          aws_rds_db_allocated_storage: 10
-          aws_rds_db_max_allocated_storage: 20
+          aws_rds_db_allocated_storage: 20
+          aws_rds_db_max_allocated_storage: 1000
           aws_rds_db_storage_encrypted: true
-          aws_rds_db_instance_class: db.t4g.medium
+          aws_rds_db_instance_class: db.t4g.micro
+          #aws_rds_db_instance_class: db.t4g.medium
 
-          #aws_rds_db_monitoring_interval: 60
-          #aws_rds_db_performance_insights_enable: true
-          #aws_rds_db_performance_insights_retention: 7
-          #aws_rds_db_insights_mode: standard
+          aws_rds_db_monitoring_interval: 60
+          aws_rds_db_performance_insights_enable: true
+          aws_rds_db_performance_insights_retention: 7
+          aws_rds_db_insights_mode: standard
 
-          aws_rds_db_user: dbuser
+          aws_rds_db_user: aaengine
           aws_rds_db_publicly_accessible: true
           aws_rds_db_engine_version: 16.8
 
-          #aws_rds_db_auto_minor_version_upgrade: true
-          #aws_rds_db_backup_retention_period: 7
-          #aws_rds_db_backup_window: "03:00-04:00"
-          #aws_rds_db_copy_tags_to_snapshot: true
-          #aws_rds_db_apply_immediately: true
-          aws_rds_db_multi_az: true
+          aws_rds_db_auto_minor_version_upgrade: true
+          aws_rds_db_backup_retention_period: 7
+          aws_rds_db_backup_window: "03:00-04:00"
+          aws_rds_db_copy_tags_to_snapshot: true
+          aws_rds_db_apply_immediately: true
