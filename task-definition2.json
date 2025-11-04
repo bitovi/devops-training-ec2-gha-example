@@ -70,7 +70,7 @@
     {
       "name": "fluent-bit",
       "image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:stable",
-      "cpu": 250,
+      "cpu": 256,
       "memory": 512,
       "essential": true,
       "logConfiguration": {
