@@ -121,22 +121,26 @@ jobs:
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: |
-            gh release create ${{ needs.deploy-staging.outputs.tag }} \
-              --title "Release ${{ needs.deploy-staging.outputs.tag }}" \
-              --notes-file <(cat <<'EOF'
-  Automated release for tag ${{ needs.deploy-staging.outputs.tag }}
-  **Source Branch:** ${{ needs.deploy-staging.outputs.source_branch }}
-
-  **Deployed to Staging:** ✅ $(date -u '+%Y-%m-%d %H:%M UTC')
-  **Docker Image:** `aa-web-staging:${{ needs.deploy-staging.outputs.tag }}`
-  **Staging URL:** https://${{ vars.DOMAIN_NAME }}
-
-  ---
-
-  ${{ steps.changelog.outputs.changelog }}
-  EOF
-  )
+        run: |
+          cat > release_notes.md << 'EOF'
+          Automated release for tag ${{ needs.deploy-staging.outputs.tag }}
+          
+          **Source Branch:** ${{ needs.deploy-staging.outputs.source_branch }}
+          
+          **Deployed to Staging:** ✅ $(date -u '+%Y-%m-%d %H:%M UTC')
+          
+          **Docker Image:** `aa-web-staging:${{ needs.deploy-staging.outputs.tag }}`
+          
+          **Staging URL:** https://${{ vars.DOMAIN_NAME }}
+          
+          ---
+          
+          ${{ steps.changelog.outputs.changelog }}
+          EOF
+          
+          gh release create ${{ needs.deploy-staging.outputs.tag }} \
+            --title "Release ${{ needs.deploy-staging.outputs.tag }}" \
+            --notes-file release_notes.md
 
 #image: "${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ inputs.image_tag }}",
 
