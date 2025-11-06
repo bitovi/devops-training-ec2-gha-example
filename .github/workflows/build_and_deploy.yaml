@@ -40,8 +40,11 @@ env:
 permissions:
   contents: read 
 
+concurrency:
+      group: group
+      cancel-in-progress: false
 
-  
+
 jobs:
   deploy-staging:
     name: Generate Tag & Deploy to Staging
@@ -82,9 +85,6 @@ jobs:
   ECS-Mana:
     name: Build and Deploy
     runs-on: ubuntu-latest
-    concurrency:
-      group: group
-      cancel-in-progress: false
     environment: ${{ inputs.environment }}
     steps:
       - name: Checkout
