@@ -93,54 +93,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws-region: us-east-1
 
-      - name: Run TruffleHog OSS (subdir)
-        uses: trufflesecurity/trufflehog@v3.90.3
-        with:
-          base: ${{ github.event.pull_request.base.sha }}
-          head: ${{ github.event.pull_request.head.sha }}
-          extra_args: --results=verified,unknown --include-paths=".github"
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Build, tag, and push image to Amazon ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: |
-          # Build a docker container and push it to ECR
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-
-          # Push both tags
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
-          # Output the image reference
-          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
-
-      - name: Create Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cat > release_notes.md << 'EOF'
-          Automated release for tag ${{ needs.deploy-staging.outputs.tag }}
-          
-          **Source Branch:** ${{ needs.deploy-staging.outputs.source_branch }}
-          
-          **Deployed to Staging:** ✅ $(date -u '+%Y-%m-%d %H:%M UTC')
-          
-          **Docker Image:** `aa-web-staging:${{ needs.deploy-staging.outputs.tag }}`
-          
-          **Staging URL:** https://${{ vars.DOMAIN_NAME }}
-          
-          ---
-          
-          ${{ steps.changelog.outputs.changelog }}
-          EOF
-          
-          gh release create ${{ needs.deploy-staging.outputs.tag }} \
-            --title "Release ${{ needs.deploy-staging.outputs.tag }}" \
-            --notes-file release_notes.md
 
 #image: "${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ inputs.image_tag }}",
 
