@@ -75,7 +75,7 @@ jobs:
           fi
           echo "source_branch=${BRANCH}" >> $GITHUB_OUTPUT
           echo "Tag: ${TAG} from branch: ${BRANCH}"
-
+ 
   ECS-Mana:
     name: Build and Deploy
     runs-on: ubuntu-latest
