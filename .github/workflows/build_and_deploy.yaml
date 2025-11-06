@@ -50,6 +50,9 @@ jobs:
       tag: ${{ steps.extract_tag.outputs.tag }}
       source_branch: ${{ steps.extract_tag.outputs.source_branch }}
     steps:
+            
+      
+      - uses: ahmadnassri/action-workflow-queue@v1
       - name: Checkout
         uses: actions/checkout@v5
         with:
