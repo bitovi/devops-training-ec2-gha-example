@@ -44,7 +44,6 @@ concurrency:
       group: group
       cancel-in-progress: false
 
-
 jobs:
   deploy-staging:
     name: Generate Tag & Deploy to Staging
