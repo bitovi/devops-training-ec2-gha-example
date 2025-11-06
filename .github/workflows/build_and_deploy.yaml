@@ -40,6 +40,8 @@ env:
 permissions:
   contents: read 
 
+
+  
 jobs:
   deploy-staging:
     name: Generate Tag & Deploy to Staging
