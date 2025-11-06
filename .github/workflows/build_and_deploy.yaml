@@ -29,7 +29,7 @@ on:
         required: true
         type: boolean
         default: false
-
+ 
 env:
   SERVICE_NAME: test-world
   ECR_REPOSITORY: bitovi-devops-training-ec2-gha-example-simple-ecr-ecr
