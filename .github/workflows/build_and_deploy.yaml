@@ -38,7 +38,7 @@ env:
   MEMORY: 512
 
 permissions:
-  contents: read
+  contents: read 
 
 jobs:
   deploy-staging:
