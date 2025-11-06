@@ -30,10 +30,6 @@ on:
         type: boolean
         default: false
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
-
 env:
   SERVICE_NAME: test-world
   ECR_REPOSITORY: bitovi-devops-training-ec2-gha-example-simple-ecr-ecr
@@ -83,6 +79,9 @@ jobs:
   ECS-Mana:
     name: Build and Deploy
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-deploy-${{ inputs.environment }}
+      cancel-in-progress: false
     environment: ${{ inputs.environment }}
     steps:
       - name: Checkout
