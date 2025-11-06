@@ -81,7 +81,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-deploy-${{ inputs.environment }}
-      cancel-in-progress: false
+      cancel-in-progress: true
     environment: ${{ inputs.environment }}
     steps:
       - name: Checkout
