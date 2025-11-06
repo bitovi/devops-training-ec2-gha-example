@@ -80,7 +80,8 @@ jobs:
     name: Build and Deploy
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-deploy-${{ inputs.environment }}
+      group: group
+      cancel-in-progress: false
     environment: ${{ inputs.environment }}
     steps:
       - name: Checkout
