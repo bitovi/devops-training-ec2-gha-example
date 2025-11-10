@@ -465,7 +465,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
             # Check if the release exists
-            if gh release view $${{ needs.Generate-tag.outputs.tag }} >/dev/null 2>&1; then
+            if true; then 
               echo "Release ${{ needs.Generate-tag.outputs.tag }} found, updating with staging deployment info..."
               # Get current release body
               CURRENT_BODY=$(gh release view ${{ needs.Generate-tag.outputs.tag }} --json body --jq '.body')
