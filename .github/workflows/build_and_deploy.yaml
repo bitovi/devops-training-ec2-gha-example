@@ -473,6 +473,7 @@ jobs:
               {
                 echo "$CURRENT_BODY"
                 echo
+                echo "---"
                 echo "**Deployed to Staging:** ✅ $(date -u '+%Y-%m-%d %H:%M UTC')"
                 echo "**Staging URL:** https://${{ vars.DOMAIN_NAME }}"
               } > release_update_notes.md
