@@ -436,10 +436,20 @@ jobs:
             --title "Release ${{ needs.Generate-tag.outputs.tag }}" \
             --notes-file release_notes.md
 
-  update-release:
+  wait:
     name: Update Release with Staging Info
     runs-on: ubuntu-latest
     needs: [Generate-tag,release-tag]
+
+    steps:
+      - name: Wait
+        run: |
+            sleep 10
+
+  update-release:
+    name: Update Release with Staging Info
+    runs-on: ubuntu-latest
+    needs: [Generate-tag,release-tag,wait]
     permissions:
       contents: write
       actions: write
@@ -447,9 +457,6 @@ jobs:
       name: staging
       url: https://${{ vars.DOMAIN_NAME }}
     steps:
-      - name: Wait
-        run: |
-            sleep 10
       - name: Checkout
         uses: actions/checkout@v5
 
