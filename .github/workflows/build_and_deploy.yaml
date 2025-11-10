@@ -423,7 +423,7 @@ jobs:
           
           **Deployed to Staging:** ✅ $(date -u '+%Y-%m-%d %H:%M UTC')
 
-          **Docker Image:** `aa-web-staging:${{ needs.Generate-tag.outputs.tag }}`
+          **Docker Image:** \`aa-web-staging:${{ needs.Generate-tag.outputs.tag }}\`
 
           **Staging URL:** https://${{ vars.DOMAIN_NAME }}
           
