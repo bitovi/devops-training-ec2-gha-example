@@ -454,6 +454,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+            # Wait a few seconds to ensure the release exists
+            sleep 10
             # Check if the release exists
             if gh release view $${{ needs.Generate-tag.outputs.tag }} >/dev/null 2>&1; then
               echo "Release ${{ needs.Generate-tag.outputs.tag }} found, updating with staging deployment info..."
