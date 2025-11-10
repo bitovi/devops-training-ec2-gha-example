@@ -400,7 +400,9 @@ jobs:
               
               No new commits found."
             else
-            CHANGELOG="📝 **Changes since $PREVIOUS_TAG:**\n\n$COMMITS"
+              CHANGELOG="📝 **Changes since $PREVIOUS_TAG:**
+              
+              $COMMITS"
             fi
           fi
           
