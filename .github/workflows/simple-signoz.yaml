@@ -24,7 +24,7 @@ jobs:
           aws_elb_app_protocol: TCP,TCP
           aws_elb_healthcheck: "HTTP:8080/"
           #aws_elb_create: false
-          #tf_stack_destroy: true
+          tf_stack_destroy: true
           tf_state_bucket_destroy: true 
 
           aws_ec2_instance_root_vol_size: 30
