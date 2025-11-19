@@ -179,7 +179,7 @@ jobs:
           aws_ecs_container_port: 80
           aws_ecs_lb_port: 443
           #aws_ecs_lb_redirect_enable: false
-          #aws_ecs_lb_www_to_apex_redirect: false
+          aws_ecs_lb_www_to_apex_redirect: true
           aws_r53_enable: true
           aws_r53_domain_name: "bitovi-sandbox.com"
           #aws_r53_sub_domain_name: devops-training-example-ecs
@@ -189,7 +189,7 @@ jobs:
           aws_ecs_lb_redirect_enable: true
           aws_r53_root_domain_deploy: true
           aws_ecs_cloudwatch_enable: false
-          
+
           #aws_ecs_cloudwatch_log_driver: "awsfirelens"
           #aws_ecs_firelens_output_type: "opentelemetry"
           #aws_ecs_firelens_output_type: "http"
