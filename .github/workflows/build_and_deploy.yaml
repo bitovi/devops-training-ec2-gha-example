@@ -178,7 +178,6 @@ jobs:
         
           aws_ecs_container_port: 80
           aws_ecs_lb_port: 80
-          #aws_ecs_lb_redirect_enable: false
           aws_ecs_lb_www_to_apex_redirect: true
           aws_r53_enable: true
           aws_r53_domain_name: "bitovi-sandbox.com"
@@ -186,7 +185,7 @@ jobs:
           aws_r53_enable_cert: false
           #aws_r53_create_sub_cert: true
 
-          aws_ecs_lb_redirect_enable: true
+          aws_ecs_lb_redirect_enable: false
           aws_r53_root_domain_deploy: true
           aws_ecs_cloudwatch_enable: false
 
