@@ -182,7 +182,7 @@ jobs:
           aws_r53_enable: true
           aws_r53_domain_name: "bitovi-sandbox.com"
           #aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: false
+          aws_r53_enable_cert: true
           #aws_r53_create_sub_cert: true
 
           aws_ecs_lb_redirect_enable: false
