@@ -154,7 +154,7 @@ jobs:
       TASK_MEM: 2048
     steps:
       - name: Deploy using GHA
-        uses: bitovi/github-actions-deploy-ecs@main
+        uses: bitovi/github-actions-deploy-ecs@testing
     #uses: bitovi/github-actions-deploy-ecs@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -179,14 +179,14 @@ jobs:
           aws_ecs_container_port: 80
           aws_ecs_lb_port: 443
           #aws_ecs_lb_redirect_enable: false
-        
+          #aws_ecs_lb_www_to_apex_redirect: false
           aws_r53_enable: true
           aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: devops-training-example-ecs
+          #aws_r53_sub_domain_name: devops-training-example-ecs
           aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
+          #aws_r53_create_sub_cert: true
 
-          
+
           aws_ecs_cloudwatch_enable: false
           #aws_ecs_cloudwatch_log_driver: "awsfirelens"
           #aws_ecs_firelens_output_type: "opentelemetry"
