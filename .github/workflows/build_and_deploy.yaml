@@ -187,7 +187,7 @@ jobs:
           #aws_r53_create_sub_cert: true
 
           aws_ecs_lb_redirect_enable: true
-          aws_r53_root_domain_deploy: true
+          #aws_r53_root_domain_deploy: true
           aws_ecs_cloudwatch_enable: false
 
           #aws_ecs_cloudwatch_log_driver: "awsfirelens"
