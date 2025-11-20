@@ -168,7 +168,7 @@ jobs:
           #aws_ecs_app_image: "nginx:otel"
          
           #aws_ecs_task_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          #tf_stack_destroy: true
+          tf_stack_destroy: true
           tf_state_bucket_destroy: false 
         
           aws_ecs_task_ignore_definition: false
