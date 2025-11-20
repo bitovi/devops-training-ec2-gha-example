@@ -154,8 +154,8 @@ jobs:
       TASK_MEM: 2048
     steps:
       - name: Deploy using GHA
-        uses: bitovi/github-actions-deploy-ecs@v1
-    #uses: bitovi/github-actions-deploy-ecs@testing
+        #uses: bitovi/github-actions-deploy-ecs@v1
+        uses: bitovi/github-actions-deploy-ecs@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
