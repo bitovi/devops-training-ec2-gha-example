@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - id: ecr-deploy
-      uses: bitovi/github-actions-deploy-aws-ecr-registry@v0.1.1
+      uses: bitovi/github-actions-deploy-aws-ecr-registry@ecr-testing
       # https://github.com/bitovi/github-actions-deploy-aws-ecr-registry/
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -57,12 +57,14 @@ jobs:
         #aws_ecr_repo_policy_input:
         #aws_ecr_repo_read_arn:
         #aws_ecr_repo_write_arn:
+        aws_ecr_repo_read_external_aws_account: 011379514041
+        aws_ecr_repo_write_external_aws_account: 011379514041
         #aws_ecr_repo_read_arn_lambda:
         #aws_ecr_lifecycle_policy_input:
         #aws_ecr_public_repo_catalog:
         #aws_ecr_registry_policy_input:
         #aws_ecr_additional_tags:
         # Lifecycle policy for automatic cleanup
-        aws_ecr_lifecycle_policy_input: '{\"rules\":[{\"rulePriority\":1,\"description\":\"Expire-100-tagged\",\"selection\":{\"tagStatus\":\"tagged\",\"countType\":\"imageCountMoreThan\",\"countNumber\":100},\"action\":{\"type\":\"expire\"}},{\"rulePriority\":2,\"description\":\"Expire-tagged-older-than-180-days\",\"selection\":{\"tagStatus\":\"tagged\",\"countType\":\"sinceImagePushed\",\"countUnit\":\"days\",\"countNumber\":180},\"action\":{\"type\":\"expire\"}}]}'
+        aws_ecr_lifecycle_policy_input: '{\"rules\":[{\"rulePriority\":1,\"description\":\"expire-after-100\",\"selection\":{\"tagStatus\":\"any\",\"countType\":\"imageCountMoreThan\",\"countNumber\":100},\"action\":{\"type\":\"expire\"}},{\"rulePriority\":2,\"description\":\"expire-older-than-180-days\",\"selection\":{\"tagStatus\":\"any\",\"countType\":\"sinceImagePushed\",\"countUnit\":\"days\",\"countNumber\":180},\"action\":{\"type\":\"expire\"}}]}'
         
         #aws_ecr_lifecycle_policy_input: '{\"rules\":[{\"rulePriority\":1,\"description\":\"Keep-last-10-production\",\"selection\":{\"tagStatus\":\"tagged\",\"tagPrefixList\":[\"production\"],\"countType\":\"imageCountMoreThan\",\"countNumber\":10},\"action\":{\"type\":\"expire\"}},{\"rulePriority\":2,\"description\":\"Keep-last-5-staging\",\"selection\":{\"tagStatus\":\"tagged\",\"tagPrefixList\":[\"staging\"],\"countType\":\"imageCountMoreThan\",\"countNumber\":5},\"action\":{\"type\":\"expire\"}},{\"rulePriority\":3,\"description\":\"Delete-untagged-older-than-10-days\",\"selection\":{\"tagStatus\":\"untagged\",\"countType\":\"sinceImagePushed\",\"countUnit\":\"days\",\"countNumber\":10},\"action\":{\"type\":\"expire\"}}]}'
