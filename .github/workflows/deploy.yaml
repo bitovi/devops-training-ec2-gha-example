@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Go SPA
-        uses: bitovi/github-actions-deploy-static-site-to-aws@main
+        uses: bitovi/github-actions-deploy-static-site-to-aws@fix-bucket-deletion
         #add-caching-to-cdn 
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -16,7 +16,7 @@ jobs:
           aws_default_region: us-east-1
   
           #aws_site_source_folder: .
-          tf_action: 'destroy'
+          tf_action: 'apply'
           tf_state_bucket_destroy: true
           aws_resource_identifier: bitovi-devops-training-ec2-gha-example-static-site
           #aws_site_cdn_custom_error_codes: '{error_caching_min_ttl:"0",error_code:"403",response_code:"200",response_page_path:"/custom_404.html"}'
@@ -30,5 +30,5 @@ jobs:
           aws_site_cdn_max_ttl: 604800      # 7 days          #aws_site_cdn_aliases: static-site-test.bitovi-sandbox.com,static-site-test2.bitovi-sandbox.com
           aws_site_cdn_response_headers_policy_id: "eaab4381-ed33-4a86-88ca-d9558dc6cd63"
           aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
-          aws_site_source_include_hidden: true
+          aws_site_source_include_hidden: false
 
