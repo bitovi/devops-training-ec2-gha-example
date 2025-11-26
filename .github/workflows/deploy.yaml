@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Go SPA No Cache
-        uses: bitovi/github-actions-deploy-static-site-to-aws@main
+        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.8
         #add-caching-to-cdn 
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -36,7 +36,7 @@ jobs:
           aws_site_source_include_hidden: false
 
       - name: Go SPA old Cache
-        uses: bitovi/github-actions-deploy-static-site-to-aws@main
+        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.8
         #add-caching-to-cdn 
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -53,15 +53,15 @@ jobs:
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: static-site-test-oc
           aws_site_cdn_enabled: true
-          aws_site_cdn_min_ttl: 0
-          aws_site_cdn_default_ttl: 172800  # 48 hours
-          aws_site_cdn_max_ttl: 604800      # 7 days          #aws_site_cdn_aliases: static-site-test.bitovi-sandbox.com,static-site-test2.bitovi-sandbox.com
+          aws_site_cdn_min_ttl: 11
+          aws_site_cdn_default_ttl: 172801  # 48 hours
+          aws_site_cdn_max_ttl: 604801      # 7 days          #aws_site_cdn_aliases: static-site-test.bitovi-sandbox.com,static-site-test2.bitovi-sandbox.com
           #aws_site_cdn_response_headers_policy_id: "eaab4381-ed33-4a86-88ca-d9558dc6cd63"
           aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
           aws_site_source_include_hidden: false
 
       - name: Go SPA old Cache + CORS
-        uses: bitovi/github-actions-deploy-static-site-to-aws@main
+        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.8
         #add-caching-to-cdn 
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -78,9 +78,9 @@ jobs:
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: static-site-test-occ
           aws_site_cdn_enabled: true
-          #aws_site_cdn_min_ttl: 0
-          #aws_site_cdn_default_ttl: 172800  # 48 hours
-          #aws_site_cdn_max_ttl: 604800      # 7 days          #aws_site_cdn_aliases: static-site-test.bitovi-sandbox.com,static-site-test2.bitovi-sandbox.com
+          aws_site_cdn_min_ttl: 22
+          aws_site_cdn_default_ttl: 172802  # 48 hours
+          aws_site_cdn_max_ttl: 604802      # 7 days          #aws_site_cdn_aliases: static-site-test.bitovi-sandbox.com,static-site-test2.bitovi-sandbox.com
           aws_site_cdn_response_headers_policy_id: "eaab4381-ed33-4a86-88ca-d9558dc6cd63"
           aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
           aws_site_source_include_hidden: false
@@ -103,9 +103,9 @@ jobs:
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: static-site-test-c
           aws_site_cdn_enabled: true
-          aws_site_cdn_min_ttl: 0
-          aws_site_cdn_default_ttl: 172800  # 48 hours
-          aws_site_cdn_max_ttl: 604800      # 7 days          #aws_site_cdn_aliases: static-site-test.bitovi-sandbox.com,static-site-test2.bitovi-sandbox.com
+          aws_site_cdn_min_ttl: 33
+          aws_site_cdn_default_ttl: 172803  # 48 hours
+          aws_site_cdn_max_ttl: 604803      # 7 days          #aws_site_cdn_aliases: static-site-test.bitovi-sandbox.com,static-site-test2.bitovi-sandbox.com
           aws_site_cdn_response_headers_policy_id: "eaab4381-ed33-4a86-88ca-d9558dc6cd63"
           aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
           aws_site_source_include_hidden: true
