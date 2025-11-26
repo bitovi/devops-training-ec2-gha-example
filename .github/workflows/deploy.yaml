@@ -8,6 +8,7 @@ jobs:
 
     steps:
       - name: Go SPA Min
+        if: false
         uses: bitovi/github-actions-deploy-static-site-to-aws@Split-tf-code
         #add-caching-to-cdn 
         with:
@@ -33,7 +34,7 @@ jobs:
           aws_site_source_include_hidden: false
 
       - name: Go SPA Full
-        uses: bitovi/github-actions-deploy-static-site-to-aws@Split-tf-code
+        uses: bitovi/github-actions-deploy-static-site-to-aws@main
         #add-caching-to-cdn 
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -59,6 +60,7 @@ jobs:
 
 
       - name: Go down SPA
+        if: false
         uses: bitovi/github-actions-deploy-static-site-to-aws@Split-tf-code
         #add-caching-to-cdn 
         with:
