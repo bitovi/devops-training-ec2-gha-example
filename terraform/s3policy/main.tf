@@ -58,7 +58,7 @@ resource "aws_cloudfront_response_headers_policy" "cors_with_preflight_security_
       override        = true
     }
     content_security_policy {
-      content_security_policy = ""
+      content_security_policy = "default-src 'self'"
       override                = true
     }
   }
