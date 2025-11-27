@@ -1,0 +1,74 @@
+name: WAF Rule Management
+
+on: [push]
+
+env:
+  TF_ACTION: 'apply'
+
+jobs:
+  Policy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: us-east-1
+      TF_BUCKET: policy-s3-tf-state-bucket
+      TF_STATE_KEY: policy-s3-tf-state.tfstate
+      TF_DIR: terraform/s3policy
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws-region: us-east-1
+
+      - name: Create S3 bucket for Terraform state (if needed)
+        run: |
+          if ! aws s3api head-bucket --bucket "$TF_BUCKET" 2>/dev/null; then
+            echo "Creating S3 bucket $TF_BUCKET for Terraform state..."
+            aws s3api create-bucket --bucket "$TF_BUCKET" --region "$AWS_REGION" $(if [ "$AWS_REGION" != "us-east-1" ]; then echo "--create-bucket-configuration LocationConstraint=$AWS_REGION"; fi)
+          else
+            echo "S3 bucket $TF_BUCKET already exists."
+          fi
+
+      - name: Setup Terraform backend and provider config
+        working-directory: ${{ env.TF_DIR}}
+        run: |
+          cat > backend.tf <<EOF
+          terraform {
+            backend "s3" {
+              bucket = "$TF_BUCKET"
+              key    = "$TF_STATE_KEY"
+              region = "$AWS_REGION"
+            }
+          }
+          EOF
+
+          cat > provider.tf <<EOF
+          provider "aws" {
+            region = "$AWS_REGION"
+          }
+          EOF
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform init
+
+      - name: Terraform Apply or Destroy
+        working-directory: ${{ env.TF_DIR }}
+        id: apply
+        run: |          
+          if [ "${{ env.TF_ACTION }}" = "apply" ]; then
+            terraform apply -auto-approve
+            echo "policy_id=$(terraform output -raw policy_id)" >> $GITHUB_OUTPUT
+          else
+            terraform destroy -auto-approve
+          fi
+
+      - name: Use Policy ID
+        run: echo "Policy ID is ${{ steps.apply.outputs.policy_id }}"
