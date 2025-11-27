@@ -4,58 +4,59 @@ resource "aws_cloudfront_response_headers_policy" "cors_with_preflight_security_
   # -----------------------
   # CORS (matches AWS managed)
   # -----------------------
-  cors_config {
-    access_control_allow_credentials = false
+    cors_config {
+      access_control_allow_credentials = false
+      access_control_max_age_sec      = 600
+      origin_override                 = true
 
-    access_control_allow_origins = ["*"]
-    access_control_allow_headers = ["*"]
-    access_control_allow_methods = [
-      "GET",
-      "POST",
-      "PUT",
-      "PATCH",
-      "DELETE",
-      "HEAD",
-      "OPTIONS"
-    ]
-
-    access_control_expose_headers = []
-    access_control_max_age_sec    = 600
-    origin_override               = true
-  }
+      access_control_allow_origins {
+        items = ["*"]
+      }
+      access_control_allow_headers {
+        items = ["*"]
+      }
+      access_control_allow_methods {
+        items = [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ]
+      }
+      access_control_expose_headers {
+        items = []
+      }
+    }
 
   # -----------------------
   # Security headers (matches AWS managed)
   # -----------------------
   security_headers_config {
-
     strict_transport_security {
       access_control_max_age_sec = 31536000
       include_subdomains         = true
       preload                    = false
       override                   = true
     }
-
     xss_protection {
       mode_block = true
       protection = true
       override   = true
     }
-
-    x_content_type_options {
+    content_type_options {
       override = true
     }
-
-    x_frame_options {
+    frame_options {
       frame_option = "SAMEORIGIN"
       override     = true
     }
-
     referrer_policy {
       referrer_policy = "strict-origin-when-cross-origin"
       override        = true
     }
-
     content_security_policy {
       content_security_policy = ""
       override                = true

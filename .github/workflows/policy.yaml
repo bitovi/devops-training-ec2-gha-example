@@ -1,4 +1,4 @@
-name: WAF Rule Management
+name: CDN Policy Deployment
 
 on: [push]
 
