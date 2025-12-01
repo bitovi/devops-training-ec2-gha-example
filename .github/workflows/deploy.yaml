@@ -3,7 +3,7 @@ name: Verify and Deploy
 on: [push]
 
 env:
-  TF_ACTION: 'apply'
+  TF_ACTION: 'destroy'
 
 jobs:
   verify-and-nc:
