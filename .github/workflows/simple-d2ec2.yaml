@@ -17,6 +17,8 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
 
+          aws_resource_identifier: old-alb-and-waf-to-ec2
+
           aws_r53_enable: false
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: sd2ec2
@@ -35,6 +37,8 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
 
+          aws_resource_identifier: old-alb-and-waf-to-ec2
+
           aws_r53_enable: false
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: sd2ec2
@@ -52,6 +56,8 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
+
+          aws_resource_identifier: old-alb-and-waf-to-ec2
 
           aws_r53_enable: false
           aws_r53_domain_name: bitovi-sandbox.com
@@ -74,6 +80,8 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
 
+          aws_resource_identifier: new-alb-and-waf-to-ec2
+
           aws_r53_enable: false
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: sd2ec2
@@ -92,6 +100,8 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
 
+          aws_resource_identifier: new-alb-and-waf-to-ec2
+
           aws_r53_enable: false
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: sd2ec2
@@ -109,6 +119,8 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
+
+          aws_resource_identifier: new-alb-and-waf-to-ec2
 
           aws_r53_enable: false
           aws_r53_domain_name: bitovi-sandbox.com
@@ -129,6 +141,8 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
+
+          aws_resource_identifier: new-alb-and-waf-to-ec2
 
           aws_r53_enable: false
           aws_r53_domain_name: bitovi-sandbox.com
