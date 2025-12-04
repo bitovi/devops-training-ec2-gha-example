@@ -7,8 +7,78 @@ env:
   TF_DESTROY: 'false'
 
 jobs:
+  Destroy-D2EC2-Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - id: elb
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v1
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_r53_enable: false
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: sd2ec2
+          aws_r53_create_sub_cert: true
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 80
+          aws_elb_create: true
+          #aws_lb_type: alb
+          #aws_alb_enable_waf: false
+          tf_stack_destroy: true
+
+  Destroy-D2EC2-Deploy-new:
+    runs-on: ubuntu-latest
+    steps:
+      - id: deploy-new0
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_resource_identifier: new-alb-and-waf-to-ec2
+
+          aws_r53_enable: false
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: sd2ec2n
+          aws_r53_create_sub_cert: true
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 80
+          #aws_lb_type: alb
+          #aws_alb_enable_waf: false
+          tf_stack_destroy: true
+
+  Test-3rd-D2EC2-Deploy-new2:
+    runs-on: ubuntu-latest
+    steps:
+      - id: deploy-new0
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_resource_identifier: new-alb-and-waf-to-ec2-3
+
+          aws_r53_enable: false
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: sd2ec2n-3
+          aws_r53_create_sub_cert: true
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 80
+          #aws_lb_type: alb
+          #aws_alb_enable_waf: false
+          tf_stack_destroy: false
+
+
   Simple-D2EC2-Deploy:
     runs-on: ubuntu-latest
+    if: false == true
     steps:
       - id: elb
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1
@@ -120,7 +190,7 @@ jobs:
 
           aws_r53_enable: false
           aws_r53_domain_name: bitovi-sandbox.com
-          aws_r53_sub_domain_name: sd2ec2
+          aws_r53_sub_domain_name: sd2ec2n
           aws_r53_create_sub_cert: true
 
           aws_ec2_instance_type: t3.micro
@@ -140,7 +210,7 @@ jobs:
 
           aws_r53_enable: false
           aws_r53_domain_name: bitovi-sandbox.com
-          aws_r53_sub_domain_name: sd2ec2
+          aws_r53_sub_domain_name: sd2ec2n
           aws_r53_create_sub_cert: true
 
           aws_ec2_instance_type: t3.micro
@@ -160,7 +230,7 @@ jobs:
 
           aws_r53_enable: false
           aws_r53_domain_name: bitovi-sandbox.com
-          aws_r53_sub_domain_name: sd2ec2
+          aws_r53_sub_domain_name: sd2ec2n
           aws_r53_create_sub_cert: true
 
           aws_ec2_instance_type: t3.micro
@@ -182,7 +252,7 @@ jobs:
 
           aws_r53_enable: false
           aws_r53_domain_name: bitovi-sandbox.com
-          aws_r53_sub_domain_name: sd2ec2
+          aws_r53_sub_domain_name: sd2ec2n
           aws_r53_create_sub_cert: true
 
           aws_ec2_instance_type: t3.micro
