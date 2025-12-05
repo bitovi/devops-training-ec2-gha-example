@@ -9,7 +9,7 @@ env:
 jobs:
   Destroy-D2EC2-Deploy:
     runs-on: ubuntu-latest
-    if: false == true
+    if: false == false
     steps:
       - id: elb
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1
@@ -32,7 +32,7 @@ jobs:
 
   Destroy-D2EC2-Deploy-new:
     runs-on: ubuntu-latest
-    if: false == true
+    if: false == false
     steps:
       - id: deploy-new0
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
@@ -75,15 +75,15 @@ jobs:
           aws_elb_app_port: 80
           #aws_lb_type: alb
           #aws_alb_enable_waf: false
-          tf_stack_destroy: false
-
+          tf_stack_destroy: true
+          tf_state_bucket_destroy: true
 
   Simple-D2EC2-Deploy:
     runs-on: ubuntu-latest
     if: false == true
     steps:
       - id: elb
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v1
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -102,7 +102,7 @@ jobs:
           tf_stack_destroy: false
 
       - id: elb-r53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v1
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -121,7 +121,7 @@ jobs:
           tf_stack_destroy: false
 
       - id: elb-no-r53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v1
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -140,7 +140,7 @@ jobs:
           tf_stack_destroy: false
 
       - id: no-elb-no-r53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v1
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -159,7 +159,7 @@ jobs:
           tf_stack_destroy: false
 
       - id: r53-yes-no-elb
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v1
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
