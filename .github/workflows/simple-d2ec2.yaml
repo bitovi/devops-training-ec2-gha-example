@@ -199,6 +199,8 @@ jobs:
           aws_ec2_instance_type: t3.micro
           aws_elb_app_port: 80
 
+          tf_stack_destroy: true
+
       - id: deploy-r53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
