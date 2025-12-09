@@ -81,11 +81,11 @@ jobs:
 
   Simple-D2EC2-Deploy:
     runs-on: ubuntu-latest
-    if: false == true
+    if: false == false
     steps:
       - id: elb
         name: Deploy without R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v1
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -207,7 +207,7 @@ jobs:
 
   Simple-D2EC2-Deploy-new:
     runs-on: ubuntu-latest
-    if: false == false
+    if: false == true
     steps:
       - id: deploy-new0
         name: Deploy without R53
