@@ -207,7 +207,7 @@ jobs:
 
   Simple-D2EC2-Deploy-new:
     runs-on: ubuntu-latest
-    if: false == false
+    if: false == true
     steps:
       - id: deploy-new0
         name: Deploy without R53
