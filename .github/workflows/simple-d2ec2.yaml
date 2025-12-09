@@ -81,7 +81,7 @@ jobs:
 
   Simple-D2EC2-Deploy:
     runs-on: ubuntu-latest
-    if: false == false
+    if: false == true
     steps:
       - id: elb
         name: Deploy without R53
@@ -207,7 +207,7 @@ jobs:
 
   Simple-D2EC2-Deploy-new:
     runs-on: ubuntu-latest
-    if: false == true
+    if: false == false
     steps:
       - id: deploy-new0
         name: Deploy without R53
