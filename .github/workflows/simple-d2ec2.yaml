@@ -316,7 +316,7 @@ jobs:
           aws_alb_create: true
           aws_alb_app_port: 80
 
-      - id: deploy-r53-enable-alb-waf
+      - id: deploy-r53-enable-alb-waf-final
         name: Deploy with R53, ALB, and WAF
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
