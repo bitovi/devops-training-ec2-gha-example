@@ -86,7 +86,7 @@ jobs:
     steps:
       - id: destroy
         name: Deploy with ELB and R53
-        if: true
+        if: false
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -97,6 +97,7 @@ jobs:
 
       - id: elb-no-r53
         name: Deploy with ELB and R53
+        if: false
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -117,6 +118,7 @@ jobs:
 
       - id: elb
         name: Deploy without R53
+        if: false
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -137,6 +139,7 @@ jobs:
 
       - id: elb-r53
         name: Deploy with R53
+        if: false
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -157,6 +160,7 @@ jobs:
 
       - id: elb-no-r53-v2
         name: Deploy with ELB and R53
+        if: false
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -177,6 +181,7 @@ jobs:
 
       - id: no-elb-no-r53
         name: Deploy with ELB and remove R53
+        if: false
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
