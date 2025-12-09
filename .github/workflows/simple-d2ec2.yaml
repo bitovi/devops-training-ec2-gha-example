@@ -79,10 +79,40 @@ jobs:
           tf_stack_destroy: true
           tf_state_bucket_destroy: true
 
+#############################
   Simple-D2EC2-Deploy:
     runs-on: ubuntu-latest
-    if: false == true
+    if: true
     steps:
+      - id: destroy-v1
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v1
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          tf_stack_destroy: true
+
+      - id: elb-no-r53
+        name: Deploy with ELB and R53
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_r53_enable: true
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: sd2ec2
+          aws_r53_create_sub_cert: true
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 80
+          aws_elb_create: true
+          #aws_lb_type: alb
+          #aws_alb_enable_waf: false
+          tf_stack_destroy: false
+
       - id: elb
         name: Deploy without R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
@@ -123,7 +153,7 @@ jobs:
           #aws_alb_enable_waf: false
           tf_stack_destroy: false
 
-      - id: elb-no-r53
+      - id: elb-no-r53-v2
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -207,7 +237,7 @@ jobs:
 
   Simple-D2EC2-Deploy-new:
     runs-on: ubuntu-latest
-    if: false == false
+    if: false
     steps:
       - id: deploy-r53-enable-alb-waf
         name: Deploy with R53, ALB, and WAF
