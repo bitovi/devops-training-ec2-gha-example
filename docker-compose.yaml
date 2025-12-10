@@ -1,5 +1,12 @@
 services:
-  app:
-    image: nginx
+  #app:
+  #  image: nginx
+  #  ports:
+  #    - "80:80"
+  web:
+    image: busybox
+    command: httpd -f -p 3000 -h /www
     ports:
-      - "80:80"
+      - "3000:3000"
+    volumes:
+      - ./public:/www
