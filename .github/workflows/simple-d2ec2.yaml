@@ -202,6 +202,7 @@ jobs:
 
       - id: destroy1
         name: Destroy new
+        if: false
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -212,6 +213,7 @@ jobs:
   
       - id: r53-yes-no-elb-destroy
         name: Destroy old
+        if: false
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
