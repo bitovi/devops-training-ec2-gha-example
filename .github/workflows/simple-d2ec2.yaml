@@ -499,6 +499,12 @@ jobs:
           aws_alb_redirect_enable: true
           aws_alb_www_to_apex_redirect: true
 
+          aws_waf_enable: true
+          aws_waf_logging_enable: false
+          aws_waf_rule_anonymous_ip: true
+          aws_waf_rule_anonymous_ip_priority: 18
+
+
       - id: deploy-r53-enable-alb-waf-final
         if: false
         name: Deploy with R53, ALB, and WAF
