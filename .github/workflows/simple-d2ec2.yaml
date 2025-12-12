@@ -485,9 +485,9 @@ jobs:
           aws_resource_identifier: new-alb-and-waf-to-ec2
 
           aws_r53_enable: false
-          aws_r53_domain_name: bitovi-sandbox.com
-          aws_r53_sub_domain_name: sd2ec2n
-          aws_r53_create_sub_cert: false
+          #aws_r53_domain_name: bitovi-sandbox.com
+          #aws_r53_sub_domain_name: sd2ec2n
+          #aws_r53_create_sub_cert: false
           aws_r53_enable_cert: true
           aws_r53_cert_arn: "arn:aws:acm:us-east-1:755521597925:certificate/c2ee1a5f-3fd9-406d-b0a2-5c655142579f"
 
