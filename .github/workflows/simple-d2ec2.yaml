@@ -344,10 +344,9 @@ jobs:
 
   Simple-D2EC2-Deploy-new:
     runs-on: ubuntu-latest
-    if: false
+    if: true
     steps:
       - id: destroy-new
-        if: false
         name: Deploy with R53, ALB, and WAF
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -360,7 +359,6 @@ jobs:
           tf_stack_destroy: true
 
       - id: deploy-r53-enable-alb-waf
-        if: false
         name: Deploy with R53, ALB, and WAF
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -389,7 +387,6 @@ jobs:
           aws_waf_rule_anonymous_ip: true
 
       - id: deploy-new0
-        if: false
         name: Deploy without R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -408,7 +405,6 @@ jobs:
           aws_elb_app_port: 3000
 
       - id: deploy-r53
-        if: false
         name: Deploy with R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -429,7 +425,6 @@ jobs:
           aws_elb_app_port: 3000
 
       - id: deploy-r53-enable-elb
-        if: false
         name: Deploy with R53 and ELB
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -450,7 +445,6 @@ jobs:
           aws_elb_app_port: 3000
 
       - id: deploy-r53-enable-alb
-        if: false
         name: Deploy with R53 and ALB
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -474,7 +468,6 @@ jobs:
           aws_alb_www_to_apex_redirect: true
 
       - id: deploy-r53-enable-alb-ports
-        if: true
         name: Deploy with R53 and ALB - shift ports
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -508,7 +501,6 @@ jobs:
 
 
       - id: deploy-r53-enable-alb-waf-final
-        if: false
         name: Deploy with R53, ALB, and WAF
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -540,7 +532,6 @@ jobs:
           aws_alb_www_to_apex_redirect: true
 
       - id: deploy-r53-enable-alb-waf-final-2
-        if: false
         name: Deploy with R53, ALB, and WAF
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -571,7 +562,6 @@ jobs:
           aws_alb_www_to_apex_redirect: true
 
       - id: final-go
-        if: false
         name: Deploy with R53, ALB, and WAF
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
