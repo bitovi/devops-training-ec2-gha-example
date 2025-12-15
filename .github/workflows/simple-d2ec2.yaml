@@ -485,7 +485,7 @@ jobs:
           aws_alb_www_to_apex_redirect: true
 
       - id: deploy-r53-enable-alb-ports
-        #if: false
+        if: false
         name: Deploy with R53 and ALB - shift ports
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
