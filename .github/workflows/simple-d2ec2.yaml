@@ -82,7 +82,7 @@ jobs:
 #############################
   Simple-D2EC2-Deploy:
     runs-on: ubuntu-latest
-    if: false
+    if: true
     steps:
       - id: destroy
         name: Deploy with ELB and R53
@@ -359,7 +359,7 @@ jobs:
     steps:
       - id: destroy-new
         name: Deploy with R53, ALB, and WAF
-        if: false
+        #if: false
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -371,7 +371,7 @@ jobs:
           tf_stack_destroy: true
 
       - id: deploy-r53-enable-alb-waf
-        if: false
+        #if: false
         name: Deploy with R53, ALB, and WAF
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -400,7 +400,7 @@ jobs:
           aws_waf_rule_anonymous_ip: true
 
       - id: deploy-new0
-        if: false
+       #if: false
         name: Deploy without R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -419,7 +419,7 @@ jobs:
           aws_elb_app_port: 3000
 
       - id: deploy-r53
-        if: false
+        #if: false
         name: Deploy with R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -440,7 +440,7 @@ jobs:
           aws_elb_app_port: 3000
 
       - id: deploy-r53-enable-elb
-        if: false
+        #if: false
         name: Deploy with R53 and ELB
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -461,7 +461,7 @@ jobs:
           aws_elb_app_port: 3000
 
       - id: deploy-r53-enable-alb
-        if: false
+        #if: false
         name: Deploy with R53 and ALB
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
