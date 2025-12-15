@@ -359,7 +359,7 @@ jobs:
     steps:
       - id: destroy-new
         name: Deploy with R53, ALB, and WAF
-        if: false
+        if: true
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -375,6 +375,7 @@ jobs:
         name: Deploy with R53, ALB, and WAF
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
+          ansible_skip: false
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
@@ -404,6 +405,7 @@ jobs:
         name: Deploy without R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
+          ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
@@ -423,6 +425,7 @@ jobs:
         name: Deploy with R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
+          ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
@@ -444,6 +447,7 @@ jobs:
         name: Deploy with R53 and ELB
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
+          ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
@@ -465,6 +469,7 @@ jobs:
         name: Deploy with R53 and ALB
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
+          #ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
