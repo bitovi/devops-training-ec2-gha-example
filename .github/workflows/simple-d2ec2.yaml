@@ -82,7 +82,7 @@ jobs:
 #############################
   Simple-D2EC2-Deploy:
     runs-on: ubuntu-latest
-    if: false
+    if: true
     steps:
       - id: destroy
         name: Deploy with ELB and R53
