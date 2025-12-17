@@ -82,7 +82,7 @@ jobs:
 #############################
   Simple-D2EC2-Deploy:
     runs-on: ubuntu-latest
-    if: true
+    if: false
     steps:
       - id: destroy
         name: Deploy with ELB and R53
@@ -604,6 +604,43 @@ jobs:
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: sd2ec2n
           aws_r53_create_sub_cert: true
+
+          aws_ec2_instance_type: t3.micro
+
+          tf_stack_destroy: false
+
+          aws_elb_app_port: 3000
+          aws_elb_create: false
+          aws_alb_create: true
+          aws_alb_app_port: 3000
+          aws_alb_listen_port: 3000
+          aws_waf_enable: true
+          aws_waf_logging_enable: false
+          aws_waf_rule_anonymous_ip: true
+          aws_alb_redirect_enable: true
+          aws_alb_www_to_apex_redirect: true
+
+  Side-go-D2EC2-Deploy-new:
+    runs-on: ubuntu-latest
+    if: true
+    steps:
+      - id: final-go
+        name: Deploy with R53, ALB, and WAF
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        with:
+          ansible_skip: true
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_resource_identifier: new-alb-and-waf-to-ec2
+
+          aws_r53_enable: true
+          aws_r53_domain_name: bitovi-sandbox.com
+          #aws_r53_sub_domain_name: sd2ec2n
+          aws_r53_create_sub_cert: true
+          aws_r53_create_root_cert: true
+          aws_r53_root_domain_deploy: true
 
           aws_ec2_instance_type: t3.micro
 
