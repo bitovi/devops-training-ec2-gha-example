@@ -9,7 +9,7 @@ env:
 jobs:
   Destroy-D2EC2-Deploy:
     runs-on: ubuntu-latest
-    if: false
+    if: true
     steps:
       - id: elb
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1
@@ -29,10 +29,11 @@ jobs:
           #aws_lb_type: alb
           #aws_alb_enable_waf: false
           tf_stack_destroy: true
-
+          tf_state_bucket_destroy: true
+  
   Destroy-D2EC2-Deploy-new:
     runs-on: ubuntu-latest
-    if: false
+    if: true
     steps:
       - id: deploy-new0
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
@@ -53,10 +54,11 @@ jobs:
           #aws_lb_type: alb
           #aws_alb_enable_waf: false
           tf_stack_destroy: true
+          tf_state_bucket_destroy: true
 
   Test-3rd-D2EC2-Deploy-new2:
     runs-on: ubuntu-latest
-    if: false
+    if: true
     steps:
       - id: deploy-new0
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
@@ -622,7 +624,7 @@ jobs:
 
   Side-go-D2EC2-Deploy-new:
     runs-on: ubuntu-latest
-    if: true
+    if: false
     steps:
       - id: final-go
         name: Deploy with R53, ALB, and WAF
