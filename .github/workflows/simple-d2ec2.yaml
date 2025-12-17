@@ -638,9 +638,9 @@ jobs:
           aws_r53_enable: true
           aws_r53_domain_name: lodiaz.com.ar
           aws_r53_sub_domain_name: some
-          aws_r53_create_sub_cert: true
+          #aws_r53_create_sub_cert: true
           aws_r53_create_root_cert: true
-          aws_r53_root_domain_deploy: true
+          #aws_r53_root_domain_deploy: true
 
           aws_ec2_instance_type: t3.micro
 
