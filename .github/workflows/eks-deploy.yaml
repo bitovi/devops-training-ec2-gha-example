@@ -18,4 +18,4 @@ jobs:
         tf_stack_destroy: false
         tf_state_bucket_destroy: true
         aws_eks_cluster_version: 1.32
-        aws_eks_create_bk_node_group: true
+        aws_eks_create_bk_node_group: false
