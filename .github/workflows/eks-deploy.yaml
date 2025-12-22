@@ -18,7 +18,7 @@ jobs:
         aws_eks_instance_ami_type: AL2023_x86_64_STANDARD
         tf_stack_destroy: false
         tf_state_bucket_destroy: true
-        aws_eks_cluster_version: 1.32
+        aws_eks_cluster_version: 1.33
         aws_eks_create_bk_node_group: true
         aws_eks_instance_type_bk: t3.large
         aws_eks_instance_ami_type_bk: AL2023_x86_64_STANDARD
