@@ -665,8 +665,22 @@ jobs:
     runs-on: ubuntu-latest
     if: true
     steps:
+      - id: a0
+        name: Deploy with ELB and R53
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          tf_stack_destroy: true
+          aws_r53_enable: false
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+
+          docker_repo_app_directory_cleanup: true
       - id: a1
-        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -683,7 +697,6 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a2
-        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -700,7 +713,6 @@ jobs:
           docker_repo_app_directory_cleanup: true
   
       - id: a3
-        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -717,7 +729,6 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a4
-        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -734,7 +745,6 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a5
-        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
