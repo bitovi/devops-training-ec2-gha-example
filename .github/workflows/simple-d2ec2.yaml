@@ -675,7 +675,7 @@ jobs:
 
           tf_stack_destroy: true
 
-      - id: 1
+      - id: a1
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -691,55 +691,7 @@ jobs:
 
           docker_repo_app_directory_cleanup: true
 
-      - id: 2
-        name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-
-          aws_r53_enable: false
-
-          aws_ec2_instance_type: t3.micro
-          aws_elb_app_port: 3000
-          aws_elb_create: true
-
-          docker_repo_app_directory_cleanup: true
-  
-      - id: 3
-        name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-
-          aws_r53_enable: false
-
-          aws_ec2_instance_type: t3.micro
-          aws_elb_app_port: 3000
-          aws_elb_create: true
-
-          docker_repo_app_directory_cleanup: true
-
-      - id: 4
-        name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-
-          aws_r53_enable: false
-
-          aws_ec2_instance_type: t3.micro
-          aws_elb_app_port: 3000
-          aws_elb_create: true
-
-          docker_repo_app_directory_cleanup: true
-
-      - id: 5
+      - id: a2
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -755,7 +707,55 @@ jobs:
 
           docker_repo_app_directory_cleanup: true
   
-      - id: 6
+      - id: a3
+        name: Deploy with ELB and R53
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_r53_enable: false
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+
+          docker_repo_app_directory_cleanup: true
+
+      - id: a4
+        name: Deploy with ELB and R53
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_r53_enable: false
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+
+          docker_repo_app_directory_cleanup: true
+
+      - id: a5
+        name: Deploy with ELB and R53
+        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_r53_enable: false
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+
+          docker_repo_app_directory_cleanup: true
+  
+      - id: a6
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
