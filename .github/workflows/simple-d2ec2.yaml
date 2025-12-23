@@ -666,7 +666,7 @@ jobs:
     if: true
     steps:
       - id: a0
-        if: false
+        if: true
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -767,6 +767,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
   
       - id: a6
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
