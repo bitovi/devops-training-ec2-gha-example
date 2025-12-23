@@ -666,6 +666,7 @@ jobs:
     if: true
     steps:
       - id: a0
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -681,6 +682,7 @@ jobs:
 
           docker_repo_app_directory_cleanup: true
       - id: a1
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -697,6 +699,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a2
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -713,6 +716,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
   
       - id: a3
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -729,6 +733,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a4
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
@@ -745,6 +750,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a5
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
         with:
