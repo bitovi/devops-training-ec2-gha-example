@@ -788,7 +788,7 @@ jobs:
 ####
   Cleanup:
     runs-on: ubuntu-latest
-    if: true
+    if: false
     steps:
       - id: destroy-backup-test
         name: Destroy Simple-docker-backup-test-Deploy
@@ -804,7 +804,7 @@ jobs:
 
   Cleanup2:
     runs-on: ubuntu-latest
-    if: true
+    if: false
     steps:
       - id: destroy-backup-test
         name: Destroy Simple-docker-backup-test-Deploy
@@ -820,7 +820,7 @@ jobs:
 
   Cleanup3:
     runs-on: ubuntu-latest
-    if: true
+    if: false
     steps:
       - id: destroy-backup-test
         name: Destroy Simple-docker-backup-test-Deploy
@@ -853,6 +853,8 @@ jobs:
           aws_ec2_instance_type: t3.micro
           aws_elb_app_port: 3000
           aws_elb_create: true
+          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-test60
+          tf_state_bucket_destroy: true
 
           docker_repo_app_directory_cleanup: true
       - id: a1
@@ -871,7 +873,7 @@ jobs:
           aws_elb_create: true
 
           docker_repo_app_directory_cleanup: true
-          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-test60
+          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-tes59
 
       - id: a2
         if: false
