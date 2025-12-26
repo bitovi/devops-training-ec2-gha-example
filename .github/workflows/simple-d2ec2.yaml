@@ -821,7 +821,7 @@ jobs:
           aws_elb_create: true
 
           docker_repo_app_directory_cleanup: true
-          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-testing64o
+          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-testi61
 
       - id: a2
         if: false
