@@ -806,7 +806,7 @@ jobs:
 
           docker_repo_app_directory_cleanup: true
       - id: a1
-        #if: false
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
         with:
@@ -823,7 +823,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a2
-        #if: false
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
         with:
@@ -841,7 +841,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
   
       - id: a3
-        #if: false
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
         with:
@@ -859,7 +859,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a4
-        #if: false
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
         with:
@@ -877,7 +877,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a5
-        #if: false
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
         with:
@@ -909,6 +909,54 @@ jobs:
           aws_ec2_instance_type: t3.micro
           aws_elb_app_port: 3000
           aws_elb_create: true
+
+          aws_alb_create: true
+          aws_alb_access_log_enabled: true
+          aws_alb_access_log_bucket_name: "bitovi-commons-testing-elb-logs-bucket-bitovi-commons-testing12"
+
+          docker_repo_app_directory_cleanup: true
+          docker_backup_retention: 4
+
+      - id: a7
+        #if: false
+        name: Deploy with ELB and R53
+        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_r53_enable: false
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+
+          aws_alb_create: true
+          aws_alb_access_log_enabled: true
+          aws_alb_access_log_bucket_name: "bitovi-commons-testing-elb-logs-bucket-bitovi-commons-testing123"
+
+          docker_repo_app_directory_cleanup: true
+          docker_backup_retention: 4
+
+      - id: a8
+        #if: false
+        name: Deploy with ELB and R53
+        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+
+          aws_r53_enable: false
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+
+          aws_alb_create: true
+          aws_alb_access_log_enabled: true
+          aws_alb_access_log_bucket_name: "bitovi-commons-testing-elb-logs-bucket-bitovi-commons-testing1234"
 
           docker_repo_app_directory_cleanup: true
           docker_backup_retention: 4
