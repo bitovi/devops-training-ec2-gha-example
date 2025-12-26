@@ -784,6 +784,56 @@ jobs:
           docker_repo_app_directory_cleanup: true
           docker_backup_retention: 4
 
+
+####
+  Cleanup:
+    runs-on: ubuntu-latest
+    if: true
+    steps:
+      - id: destroy-backup-test
+        name: Destroy Simple-docker-backup-test-Deploy
+        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          tf_stack_destroy: true
+          aws_r53_enable: false
+          tf_state_bucket_destroy: true
+          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-testi61
+
+  Cleanup2:
+    runs-on: ubuntu-latest
+    if: true
+    steps:
+      - id: destroy-backup-test
+        name: Destroy Simple-docker-backup-test-Deploy
+        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          tf_stack_destroy: true
+          aws_r53_enable: false
+          tf_state_bucket_destroy: true
+          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-testing64o
+
+  Cleanup3:
+    runs-on: ubuntu-latest
+    if: true
+    steps:
+      - id: destroy-backup-test
+        name: Destroy Simple-docker-backup-test-Deploy
+        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          tf_stack_destroy: true
+          aws_r53_enable: false
+          tf_state_bucket_destroy: true
+          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-testing63
+
 #############################
   Simple-docker-backup-test-elb-bucket-naming:
     runs-on: ubuntu-latest
@@ -821,7 +871,7 @@ jobs:
           aws_elb_create: true
 
           docker_repo_app_directory_cleanup: true
-          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-testi61
+          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-test60
 
       - id: a2
         if: false
