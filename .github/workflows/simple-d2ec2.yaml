@@ -790,7 +790,7 @@ jobs:
     if: true
     steps:
       - id: a0
-        if: false
+        #if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
         with:
@@ -806,7 +806,7 @@ jobs:
 
           docker_repo_app_directory_cleanup: true
       - id: a1
-        if: false
+        #if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
         with:
@@ -821,6 +821,7 @@ jobs:
           aws_elb_create: true
 
           docker_repo_app_directory_cleanup: true
+          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-testing63
 
       - id: a2
         if: false
@@ -896,7 +897,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
   
       - id: a6
-        #if: false
+        if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
         with:
