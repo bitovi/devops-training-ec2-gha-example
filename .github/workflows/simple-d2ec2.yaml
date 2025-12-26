@@ -896,7 +896,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
   
       - id: a6
-        if: false
+        #if: false
         name: Deploy with ELB and R53
         uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
         with:
