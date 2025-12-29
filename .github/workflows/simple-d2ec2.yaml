@@ -840,7 +840,7 @@ jobs:
     if: true
     steps:
       - id: a0
-        #if: false
+        if: false
         name: Create to lodiaz.com.ar root.
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1
         with:
@@ -860,7 +860,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
   
       - id: a0-bis
-        #if: false
+        if: false
         name: Create to lodiaz.com.ar root - again - new version.
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
@@ -880,7 +880,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a0-destroy
-        #if: false
+        if: false
         name: Destroy root
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
@@ -900,7 +900,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a1
-        #if: false
+        if: false
         name: Create without root cert. 
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1
         with:
@@ -921,7 +921,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a1-bis
-        #if: false
+        if: false
         name: Create without root cert - again - new version.
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
@@ -942,7 +942,7 @@ jobs:
           docker_repo_app_directory_cleanup: true
 
       - id: a1-destroy
-        if: false
+        #if: false
         name: Create new - destroy
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
