@@ -858,8 +858,28 @@ jobs:
           aws_r53_root_domain_deploy: true
 
           docker_repo_app_directory_cleanup: true
+  
+      - id: a0-bis
+        #if: false
+        name: Create to lodiaz.com.ar root - again.
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          tf_stack_destroy: false
+          aws_r53_enable: false
 
-      - id: a1
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+          aws_r53_domain_name: lodiaz.com.ar
+          aws_r53_create_root_cert: true
+          aws_r53_root_domain_deploy: true
+
+          docker_repo_app_directory_cleanup: true
+
+      - id: a0-destroy
         #if: false
         name: Destroy root
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
@@ -879,7 +899,7 @@ jobs:
 
           docker_repo_app_directory_cleanup: true
 
-      - id: a1-bis
+      - id: a1
         #if: false
         name: Create without root cert. 
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
@@ -900,25 +920,28 @@ jobs:
 
           docker_repo_app_directory_cleanup: true
 
-      - id: a1-bis-new
-        if: false
-        name: Create new - no name
+      - id: a1-bis
+        #if: false
+        name: Create without root cert - again.
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
-
+          tf_stack_destroy: false
           aws_r53_enable: false
 
           aws_ec2_instance_type: t3.micro
           aws_elb_app_port: 3000
           aws_elb_create: true
-          #aws_elb_access_log_bucket_name: some-uncommon-name-1234567890
-          docker_repo_app_directory_cleanup: true
-          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-tes59
+          aws_r53_domain_name: lodiaz.com.ar
+          aws_r53_sub_domain_name: some
+          aws_r53_create_sub_cert: true
+          aws_r53_root_domain_deploy: false
 
-      - id: a1-bis-new-name
+          docker_repo_app_directory_cleanup: true
+
+      - id: a1-destroy
         if: false
         name: Create new - yes name
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
@@ -926,15 +949,17 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
           aws_default_region: us-east-1
-
           aws_r53_enable: false
 
           aws_ec2_instance_type: t3.micro
           aws_elb_app_port: 3000
           aws_elb_create: true
-          aws_elb_access_log_bucket_name: some-uncommon-name-1234567890
+          aws_r53_domain_name: lodiaz.com.ar
+          aws_r53_sub_domain_name: some
+          aws_r53_create_sub_cert: true
+          aws_r53_root_domain_deploy: false
+
           docker_repo_app_directory_cleanup: true
-          aws_resource_identifier: bitovi-commons-testing-elb-logs-bucket-bitovi-commons-tes59
           tf_stack_destroy: true
           tf_state_bucket_destroy: true
 
