@@ -154,6 +154,7 @@ jobs:
       TASK_MEM: 2048
     steps:
       - name: Deploy using GHA
+        if: false
         #uses: bitovi/github-actions-deploy-ecs@v1
         uses: bitovi/github-actions-deploy-ecs@v1
         with:
