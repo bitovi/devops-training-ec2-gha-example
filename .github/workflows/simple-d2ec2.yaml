@@ -36,7 +36,7 @@ jobs:
     if: false
     steps:
       - id: deploy-new0
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -61,7 +61,7 @@ jobs:
     if: false
     steps:
       - id: deploy-new0
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -118,7 +118,7 @@ jobs:
 
       - id: elb-no-r53-2
         name: Deploy with ELB and R53 - Check this one for diffs
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -160,7 +160,7 @@ jobs:
 
       - id: elb-2
         name: Deploy without R53 - Check this one for diffs
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -202,7 +202,7 @@ jobs:
 
       - id: elb-no-r53-v2
         name: Deploy with ELB and R53 - Check this one for diffs
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -245,7 +245,7 @@ jobs:
 
       - id: no-elb-no-r53-2
         name: Deploy with ELB and remove R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -266,7 +266,7 @@ jobs:
 
       - id: r53-yes-no-elb
         name: Deploy with R53 and remove ELB
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -289,7 +289,7 @@ jobs:
 
       - id: r53-yes-no-elb2
         name: Deploy with R53 and remove ELB (alternate)
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -310,7 +310,7 @@ jobs:
 
       - id: r53-yes-no-elb2-2
         name: Deploy with R53 and remove ELB (alternate)
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -333,7 +333,7 @@ jobs:
 
       - id: r53-yes-no-elb2-3
         name: Deploy with R53 and remove ELB (alternate)
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -362,7 +362,7 @@ jobs:
       - id: destroy-new
         name: Deploy with R53, ALB, and WAF
         if: true
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -375,7 +375,7 @@ jobs:
       - id: deploy-r53-enable-alb-waf
         #if: false
         name: Deploy with R53, ALB, and WAF
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: false
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -405,7 +405,7 @@ jobs:
       - id: deploy-new0
        #if: false
         name: Deploy without R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -425,7 +425,7 @@ jobs:
       - id: deploy-r53
         #if: false
         name: Deploy with R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -447,7 +447,7 @@ jobs:
       - id: deploy-r53-enable-elb
        #if: false
         name: Deploy with R53 and ELB
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -469,7 +469,7 @@ jobs:
       - id: deploy-r53-enable-alb
         #if: false
         name: Deploy with R53 and ALB
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           #ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -494,7 +494,7 @@ jobs:
       - id: deploy-r53-enable-alb-ports
         #if: false
         name: Deploy with R53 and ALB - shift ports
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -529,7 +529,7 @@ jobs:
       - id: deploy-r53-enable-alb-waf-final
         #if: false
         name: Deploy with R53, ALB, and WAF
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -562,7 +562,7 @@ jobs:
       - id: deploy-r53-enable-alb-waf-final-2
         #if: false
         name: Deploy with R53, ALB, and WAF
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -593,7 +593,7 @@ jobs:
 
       - id: final-go
         name: Deploy with R53, ALB, and WAF
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -628,7 +628,7 @@ jobs:
     steps:
       - id: final-go
         name: Deploy with R53, ALB, and WAF
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           ansible_skip: true
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -668,7 +668,7 @@ jobs:
       - id: a0
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -684,7 +684,7 @@ jobs:
       - id: a1
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -701,7 +701,7 @@ jobs:
       - id: a2
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -718,7 +718,7 @@ jobs:
       - id: a3
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -735,7 +735,7 @@ jobs:
       - id: a4
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -752,7 +752,7 @@ jobs:
       - id: a5
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -769,7 +769,7 @@ jobs:
       - id: a6
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@commons-testing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -792,7 +792,7 @@ jobs:
     steps:
       - id: destroy-backup-test
         name: Destroy Simple-docker-backup-test-Deploy
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -808,7 +808,7 @@ jobs:
     steps:
       - id: destroy-backup-test
         name: Destroy Simple-docker-backup-test-Deploy
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -824,7 +824,7 @@ jobs:
     steps:
       - id: destroy-backup-test
         name: Destroy Simple-docker-backup-test-Deploy
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -903,7 +903,7 @@ jobs:
       - id: a1-bis-new
         if: false
         name: Create new - no name
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -921,7 +921,7 @@ jobs:
       - id: a1-bis-new-name
         if: false
         name: Create new - yes name
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -941,7 +941,7 @@ jobs:
       - id: a1-bis-new-re-name
         if: false
         name: Create new - yes name again
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -960,7 +960,7 @@ jobs:
       - id: a2
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -978,7 +978,7 @@ jobs:
       - id: a3
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -996,7 +996,7 @@ jobs:
       - id: a4
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -1014,7 +1014,7 @@ jobs:
       - id: a5
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -1033,7 +1033,7 @@ jobs:
       - id: a6
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -1055,7 +1055,7 @@ jobs:
       - id: a7
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -1077,7 +1077,7 @@ jobs:
       - id: a8
         if: false
         name: Deploy with ELB and R53
-        uses: bitovi/github-actions-deploy-docker-to-ec2@alb-waf-certificates-docker-cleanup
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
