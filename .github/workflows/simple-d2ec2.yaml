@@ -1222,7 +1222,7 @@ jobs:
           tf_state_bucket_destroy: true
           ansible_skip: true
 
-      - id: a3
+      - id: a4
         #if: false
         name: ALB-no-ELB-DNS
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
@@ -1247,7 +1247,7 @@ jobs:
           tf_state_bucket_destroy: true
           ansible_skip: true
 
-      - id: a4
+      - id: a5
         #if: false
         name: no-ALB-no-ELB-DNS
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
@@ -1272,7 +1272,7 @@ jobs:
           tf_state_bucket_destroy: true
           ansible_skip: true
 
-      - id: a4
+      - id: a6
         #if: false
         name: no-ALB-yes-ELB-DNS
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
