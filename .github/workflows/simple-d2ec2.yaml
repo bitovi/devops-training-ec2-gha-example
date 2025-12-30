@@ -1128,9 +1128,31 @@ jobs:
     steps:
 
       - id: a0
-        if: true
-        name: Create new - destroy
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v1
+        #if: false
+        name: Nothing
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          aws_r53_enable: false
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: false
+          aws_r53_domain_name: lodiaz.com.ar
+          aws_r53_sub_domain_name: some
+          aws_r53_create_sub_cert: true
+          aws_r53_root_domain_deploy: false
+
+          docker_repo_app_directory_cleanup: true
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true
+
+      - id: a1
+        #if: false
+        name: ELB
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -1148,3 +1170,129 @@ jobs:
           docker_repo_app_directory_cleanup: true
           tf_stack_destroy: false
           tf_state_bucket_destroy: true
+          ansible_skip: true
+
+      - id: a2
+        #if: false
+        name: ALB-and-ELB
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          aws_r53_enable: false
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+          aws_alb_create: true
+          aws_alb_app_port: 3000
+          aws_r53_domain_name: lodiaz.com.ar
+          aws_r53_sub_domain_name: some
+          aws_r53_create_sub_cert: true
+          aws_r53_root_domain_deploy: false
+
+          docker_repo_app_directory_cleanup: true
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true
+          ansible_skip: true
+
+      - id: a3
+        #if: false
+        name: ALB-and-ELB-DNS
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          aws_r53_enable: true
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+          aws_alb_create: true
+          aws_alb_app_port: 3000
+          aws_r53_domain_name: lodiaz.com.ar
+          aws_r53_sub_domain_name: some
+          aws_r53_create_sub_cert: true
+          aws_r53_root_domain_deploy: false
+
+          docker_repo_app_directory_cleanup: true
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true
+          ansible_skip: true
+
+      - id: a3
+        #if: false
+        name: ALB-no-ELB-DNS
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          aws_r53_enable: true
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: false
+          aws_alb_create: true
+          aws_alb_app_port: 3000
+          aws_r53_domain_name: lodiaz.com.ar
+          aws_r53_sub_domain_name: some
+          aws_r53_create_sub_cert: true
+          aws_r53_root_domain_deploy: false
+
+          docker_repo_app_directory_cleanup: true
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true
+          ansible_skip: true
+
+      - id: a4
+        #if: false
+        name: no-ALB-no-ELB-DNS
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          aws_r53_enable: true
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: false
+          aws_alb_create: false
+          aws_alb_app_port: 3000
+          aws_r53_domain_name: lodiaz.com.ar
+          aws_r53_sub_domain_name: some
+          aws_r53_create_sub_cert: true
+          aws_r53_root_domain_deploy: false
+
+          docker_repo_app_directory_cleanup: true
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true
+          ansible_skip: true
+
+      - id: a4
+        #if: false
+        name: no-ALB-yes-ELB-DNS
+        uses: bitovi/github-actions-deploy-docker-to-ec2@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          aws_r53_enable: true
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+          aws_alb_create: false
+          aws_alb_app_port: 3000
+          aws_r53_domain_name: lodiaz.com.ar
+          aws_r53_sub_domain_name: some
+          aws_r53_create_sub_cert: true
+          aws_r53_root_domain_deploy: false
+
+          docker_repo_app_directory_cleanup: true
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true
+          ansible_skip: true
