@@ -508,7 +508,7 @@ jobs:
           aws_ecs_app_image: "hashicorp/http-echo"
          
           #aws_ecs_task_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          tf_stack_destroy: false # true
+          tf_stack_destroy: true # true
           tf_state_bucket_destroy: false 
         
           aws_ecs_task_ignore_definition: false
