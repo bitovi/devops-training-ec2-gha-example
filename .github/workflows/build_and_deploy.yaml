@@ -624,7 +624,7 @@ jobs:
           aws_ecs_lb_port: 5678
           #aws_ecs_lb_www_to_apex_redirect: true
           aws_r53_enable: true
-          aws_r53_domain_name: "lodiaz.com.ar"
+          aws_r53_domain_name: "bitovi-sandbox.com"
           #aws_r53_sub_domain_name: devops-training-example-ecs
           #aws_r53_enable_cert: true
           #aws_r53_create_sub_cert: true
@@ -659,7 +659,7 @@ jobs:
           aws_ecs_lb_port: 5678
           aws_ecs_lb_www_to_apex_redirect: true
           aws_r53_enable: true
-          aws_r53_domain_name: "lodiaz.com.ar"
+          aws_r53_domain_name: "bitovi-sandbox.com"
           aws_r53_sub_domain_name: devops-training-example-ecs
           aws_r53_enable_cert: true
           aws_r53_create_sub_cert: true
