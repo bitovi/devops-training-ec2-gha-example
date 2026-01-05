@@ -501,14 +501,14 @@ jobs:
           aws_default_region: us-east-1
           #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
           checkout: false
-          aws_ecs_task_cpu: 1024
-          aws_ecs_task_mem: 2048
+          aws_ecs_task_cpu: 256
+          aws_ecs_task_mem: 512
           #aws_ecs_app_image: "nginx:alpine"
           #aws_ecs_app_image: "nginx:otel"
           aws_ecs_app_image: "hashicorp/http-echo"
          
           #aws_ecs_task_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          tf_stack_destroy: true # true
+          tf_stack_destroy: false # true
           tf_state_bucket_destroy: false 
         
           aws_ecs_task_ignore_definition: false
@@ -522,7 +522,7 @@ jobs:
           aws_r53_enable: true
           aws_r53_domain_name: "bitovi-sandbox.com"
           aws_r53_sub_domain_name: devops-training-example-ecs
-          aws_r53_enable_cert: false
+          aws_r53_enable_cert: true
           #aws_r53_create_sub_cert: true
 
           aws_ecs_lb_redirect_enable: true
