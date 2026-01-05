@@ -492,7 +492,7 @@ jobs:
 #              echo "⚠️ Release ${{ needs.Generate-tag.outputs.tag }} not found. Skipping update."
 #            fi
 
-      - name: Deploy using GHA testing
+      - name: Destroy using GHA testing
         #uses: bitovi/github-actions-deploy-ecs@v1
         uses: bitovi/github-actions-deploy-ecs@testing
         with:
@@ -503,18 +503,15 @@ jobs:
           checkout: false
           aws_ecs_task_cpu: 256
           aws_ecs_task_mem: 512
-          #aws_ecs_app_image: "nginx:alpine"
-          #aws_ecs_app_image: "nginx:otel"
           aws_ecs_app_image: "hashicorp/http-echo"
          
           #aws_ecs_task_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
-          tf_stack_destroy: false # true
-          tf_state_bucket_destroy: false 
+          tf_stack_destroy: true # true
+          tf_state_bucket_destroy: true 
         
           aws_ecs_task_ignore_definition: false
           aws_ecs_assign_public_ip: true
           aws_ecs_node_count: 1
-          #aws_ecs_task_execution_role: "ecs-leo"
         
           aws_ecs_container_port: 5678
           aws_ecs_lb_port: 5678
@@ -528,3 +525,139 @@ jobs:
           aws_ecs_lb_redirect_enable: true
           aws_r53_root_domain_deploy: true
           aws_ecs_cloudwatch_enable: false
+
+      - name: Deploy using GHA testing
+        #uses: bitovi/github-actions-deploy-ecs@v1
+        uses: bitovi/github-actions-deploy-ecs@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+          checkout: false
+          aws_ecs_task_cpu: 256
+          aws_ecs_task_mem: 512
+          aws_ecs_app_image: "hashicorp/http-echo"
+          aws_ecs_cloudwatch_enable: false
+          aws_ecs_node_count: 1
+         
+          #aws_ecs_task_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+          tf_stack_destroy: false # true
+          tf_state_bucket_destroy: false 
+        
+          #aws_ecs_task_ignore_definition: false
+          #aws_ecs_assign_public_ip: true
+        
+          #aws_ecs_container_port: 5678
+          #aws_ecs_lb_port: 5678
+          #aws_ecs_lb_www_to_apex_redirect: true
+          #aws_r53_enable: true
+          #aws_r53_domain_name: "bitovi-sandbox.com"
+          #aws_r53_sub_domain_name: devops-training-example-ecs
+          #aws_r53_enable_cert: true
+          #aws_r53_create_sub_cert: true
+
+          #aws_ecs_lb_redirect_enable: true
+          #aws_r53_root_domain_deploy: true
+
+      - name: Deploy using GHA testing - step2
+        #uses: bitovi/github-actions-deploy-ecs@v1
+        uses: bitovi/github-actions-deploy-ecs@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+          checkout: false
+          aws_ecs_task_cpu: 256
+          aws_ecs_task_mem: 512
+          aws_ecs_app_image: "hashicorp/http-echo"
+          aws_ecs_cloudwatch_enable: false
+         
+          #aws_ecs_task_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+          tf_stack_destroy: false # true
+          tf_state_bucket_destroy: false 
+        
+          aws_ecs_task_ignore_definition: false
+          aws_ecs_assign_public_ip: true
+          aws_ecs_node_count: 1
+        
+          aws_ecs_container_port: 5678
+          aws_ecs_lb_port: 5678
+          #aws_ecs_lb_www_to_apex_redirect: true
+          #aws_r53_enable: true
+          #aws_r53_domain_name: "bitovi-sandbox.com"
+          #aws_r53_sub_domain_name: devops-training-example-ecs
+          #aws_r53_enable_cert: true
+          #aws_r53_create_sub_cert: true
+
+          #aws_ecs_lb_redirect_enable: true
+          #aws_r53_root_domain_deploy: true
+
+      - name: Deploy using GHA testing - step3
+        #uses: bitovi/github-actions-deploy-ecs@v1
+        uses: bitovi/github-actions-deploy-ecs@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+          checkout: false
+          aws_ecs_task_cpu: 256
+          aws_ecs_task_mem: 512
+          aws_ecs_app_image: "hashicorp/http-echo"
+          aws_ecs_cloudwatch_enable: false
+         
+          #aws_ecs_task_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+          tf_stack_destroy: false # true
+          tf_state_bucket_destroy: false 
+        
+          aws_ecs_task_ignore_definition: false
+          aws_ecs_assign_public_ip: true
+          aws_ecs_node_count: 1
+        
+          aws_ecs_container_port: 5678
+          aws_ecs_lb_port: 5678
+          #aws_ecs_lb_www_to_apex_redirect: true
+          aws_r53_enable: true
+          aws_r53_domain_name: "lodiaz.com.ar"
+          #aws_r53_sub_domain_name: devops-training-example-ecs
+          #aws_r53_enable_cert: true
+          #aws_r53_create_sub_cert: true
+
+          #aws_ecs_lb_redirect_enable: true
+          #aws_r53_root_domain_deploy: true
+
+      - name: Deploy using GHA testing - step4
+        #uses: bitovi/github-actions-deploy-ecs@v1
+        uses: bitovi/github-actions-deploy-ecs@testing
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          #aws_resource_identifier: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+          checkout: false
+          aws_ecs_task_cpu: 256
+          aws_ecs_task_mem: 512
+          aws_ecs_app_image: "hashicorp/http-echo"
+          aws_ecs_cloudwatch_enable: false
+         
+          #aws_ecs_task_name: "${{ env.SERVICE_NAME }}-${{ inputs.environment }}"
+          tf_stack_destroy: false # true
+          tf_state_bucket_destroy: false 
+        
+          aws_ecs_task_ignore_definition: false
+          aws_ecs_assign_public_ip: true
+          aws_ecs_node_count: 1
+        
+          aws_ecs_container_port: 5678
+          aws_ecs_lb_port: 5678
+          #aws_ecs_lb_www_to_apex_redirect: true
+          aws_r53_enable: true
+          aws_r53_domain_name: "lodiaz.com.ar"
+          aws_r53_sub_domain_name: devops-training-example-ecs
+          aws_r53_enable_cert: true
+          #aws_r53_create_sub_cert: true
+
+          #aws_ecs_lb_redirect_enable: true
+          #aws_r53_root_domain_deploy: true
