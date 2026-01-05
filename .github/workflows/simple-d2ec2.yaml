@@ -1128,7 +1128,7 @@ jobs:
     steps:
 
       - id: cleanup
-        #if: false
+        if: false
         name: no-ALB-yes-ELB-DNS
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
@@ -1153,7 +1153,7 @@ jobs:
           ansible_skip: true
 
       - id: a0
-        if: false
+        #if: false
         name: Nothing
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
@@ -1175,7 +1175,7 @@ jobs:
           tf_state_bucket_destroy: true
 
       - id: a1
-        if: false
+        #if: false
         name: ELB
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
@@ -1198,7 +1198,7 @@ jobs:
           ansible_skip: true
 
       - id: a2
-        if: false
+        #if: false
         name: ALB-and-ELB
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
@@ -1223,7 +1223,7 @@ jobs:
           ansible_skip: true
 
       - id: a3
-        if: false
+        #if: false
         name: ALB-and-ELB-DNS
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
@@ -1248,7 +1248,7 @@ jobs:
           ansible_skip: true
 
       - id: a4
-        if: false
+        #if: false
         name: ALB-no-ELB-DNS
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
@@ -1273,7 +1273,7 @@ jobs:
           ansible_skip: true
 
       - id: a5
-        if: false
+        #if: false
         name: no-ALB-no-ELB-DNS
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
@@ -1298,7 +1298,7 @@ jobs:
           ansible_skip: true
 
       - id: a6
-        if: false
+        #if: false
         name: no-ALB-yes-ELB-DNS
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
