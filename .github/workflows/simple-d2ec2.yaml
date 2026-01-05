@@ -1128,7 +1128,7 @@ jobs:
     steps:
 
       - id: cleanup
-        if: false
+        if: true
         name: Cleanup
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
@@ -1323,7 +1323,7 @@ jobs:
           ansible_skip: true
 
       - id: a7
-        if: true
+        if: false
         name: ALB-no-ELB-DNS-Root-cert
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
