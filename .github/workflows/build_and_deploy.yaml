@@ -495,7 +495,7 @@ jobs:
       - name: Destroy using GHA testing
         #uses: bitovi/github-actions-deploy-ecs@v1
         uses: bitovi/github-actions-deploy-ecs@v1.0.2
-        if: true
+        if: false
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -530,7 +530,7 @@ jobs:
       - name: Deploy using GHA testing
         #uses: bitovi/github-actions-deploy-ecs@v1
         uses: bitovi/github-actions-deploy-ecs@v1.0.2
-        if: true
+        if: false
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -565,7 +565,7 @@ jobs:
       - name: Deploy using GHA testing - step2
         #uses: bitovi/github-actions-deploy-ecs@v1
         uses: bitovi/github-actions-deploy-ecs@v1.0.2
-        if: true
+        if: false
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -599,7 +599,7 @@ jobs:
 
       - name: Deploy using GHA testing - step3
         #uses: bitovi/github-actions-deploy-ecs@v1
-        uses: bitovi/github-actions-deploy-ecs@v1.0.2
+        uses: bitovi/github-actions-deploy-ecs@v1.0.1
         if: true
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
