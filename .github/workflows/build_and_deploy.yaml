@@ -495,6 +495,7 @@ jobs:
       - name: Destroy using GHA testing
         #uses: bitovi/github-actions-deploy-ecs@v1
         uses: bitovi/github-actions-deploy-ecs@testing
+        if: false
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -529,6 +530,7 @@ jobs:
       - name: Deploy using GHA testing
         #uses: bitovi/github-actions-deploy-ecs@v1
         uses: bitovi/github-actions-deploy-ecs@testing
+        if: false
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -563,6 +565,7 @@ jobs:
       - name: Deploy using GHA testing - step2
         #uses: bitovi/github-actions-deploy-ecs@v1
         uses: bitovi/github-actions-deploy-ecs@testing
+        if: false
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -597,6 +600,7 @@ jobs:
       - name: Deploy using GHA testing - step3
         #uses: bitovi/github-actions-deploy-ecs@v1
         uses: bitovi/github-actions-deploy-ecs@testing
+        if: false
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -657,7 +661,7 @@ jobs:
           aws_r53_domain_name: "lodiaz.com.ar"
           aws_r53_sub_domain_name: devops-training-example-ecs
           aws_r53_enable_cert: true
-          #aws_r53_create_sub_cert: true
+          aws_r53_create_sub_cert: true
 
           #aws_ecs_lb_redirect_enable: true
           #aws_r53_root_domain_deploy: true
