@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: RDS-deploy
-        uses: bitovi/github-actions-deploy-rds@v0
+        uses: bitovi/github-actions-deploy-rds@testing
         # https://github.com/bitovi/github-actions-deploy-rds
         with:
           #aws_resource_identifier:
