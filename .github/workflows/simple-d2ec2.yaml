@@ -1128,8 +1128,8 @@ jobs:
     steps:
 
       - id: cleanup
-        if: true
-        name: no-ALB-yes-ELB-DNS
+        if: false
+        name: Cleanup
         uses: bitovi/github-actions-deploy-docker-to-ec2@testing
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -1346,4 +1346,4 @@ jobs:
           docker_repo_app_directory_cleanup: true
           tf_stack_destroy: false
           tf_state_bucket_destroy: true
-          ansible_skip: true
+          ansible_skip: false
