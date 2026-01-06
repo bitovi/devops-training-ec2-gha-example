@@ -1374,7 +1374,7 @@ jobs:
           tf_state_bucket_destroy: true
           ansible_skip: false
 
-      - id: a8-1.0.2
+      - id: a8-102
         if: true
         name: ALB-no-ELB-DNS-Root-cert
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.2
