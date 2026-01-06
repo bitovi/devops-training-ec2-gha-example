@@ -1375,7 +1375,7 @@ jobs:
           ansible_skip: false
 
       - id: a8-102
-        if: false
+        if: true
         name: ALB-no-ELB-DNS-Root-cert
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.2
         with:
@@ -1389,7 +1389,7 @@ jobs:
           aws_elb_create: true
           #aws_alb_create: false
           #aws_alb_app_port: 3000
-          aws_r53_domain_name: lodiaz.com.ar
+          aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: some
           aws_r53_create_root_cert: true
           aws_r53_create_sub_cert: true
@@ -1403,7 +1403,7 @@ jobs:
       - id: a9
         if: true
         name: ALB-no-ELB-DNS-Root-cert
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.3
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.2
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -1415,7 +1415,7 @@ jobs:
           aws_elb_create: false
           #aws_alb_create: true
           #aws_alb_app_port: 3000
-          aws_r53_domain_name: lodiaz.com.ar
+          aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: some
           aws_r53_create_root_cert: true
           aws_r53_create_sub_cert: true
