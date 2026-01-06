@@ -1349,7 +1349,7 @@ jobs:
           ansible_skip: false
 
       - id: a8
-        if: false
+        if: true
         name: ALB-no-ELB-DNS-Root-cert
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.3
         with:
@@ -1370,7 +1370,7 @@ jobs:
           aws_r53_root_domain_deploy: false
 
           docker_repo_app_directory_cleanup: true
-          tf_stack_destroy: false
+          tf_stack_destroy: true
           tf_state_bucket_destroy: true
           ansible_skip: false
 
@@ -1393,12 +1393,82 @@ jobs:
           aws_r53_sub_domain_name: some
           #aws_r53_create_root_cert: true
           aws_r53_create_sub_cert: true
-          aws_r53_root_domain_deploy: false
 
           docker_repo_app_directory_cleanup: true
           tf_stack_destroy: false
           tf_state_bucket_destroy: true
-          ansible_skip: false
+
+      - id: a8-102-bis
+        if: true
+        name: ALB-no-ELB-DNS-Root-cert
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.2
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          aws_r53_enable: true
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+          #aws_alb_create: false
+          #aws_alb_app_port: 3000
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: some
+          #aws_r53_create_root_cert: true
+          aws_r53_create_sub_cert: true
+
+          docker_repo_app_directory_cleanup: true
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true
+
+      - id: a8-103-bis
+        if: true
+        name: ALB-no-ELB-DNS-Root-cert
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.3
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          aws_r53_enable: true
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+          #aws_alb_create: false
+          #aws_alb_app_port: 3000
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: some
+          #aws_r53_create_root_cert: true
+          aws_r53_create_sub_cert: true
+
+          docker_repo_app_directory_cleanup: true
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true
+
+      - id: a8-102-bis2
+        if: true
+        name: ALB-no-ELB-DNS-Root-cert
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.3
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          aws_r53_enable: true
+
+          aws_ec2_instance_type: t3.micro
+          aws_elb_app_port: 3000
+          aws_elb_create: true
+          #aws_alb_create: false
+          #aws_alb_app_port: 3000
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: some
+          #aws_r53_create_root_cert: true
+          aws_r53_create_sub_cert: true
+
+          docker_repo_app_directory_cleanup: true
+          tf_stack_destroy: false
+          tf_state_bucket_destroy: true
 
       - id: a9
         if: true
