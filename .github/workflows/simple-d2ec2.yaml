@@ -1349,7 +1349,7 @@ jobs:
           ansible_skip: false
 
       - id: a8
-        if: true
+        if: false
         name: ALB-no-ELB-DNS-Root-cert
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.3
         with:
@@ -1375,7 +1375,7 @@ jobs:
           ansible_skip: false
 
       - id: a8-102
-        if: true
+        if: false
         name: ALB-no-ELB-DNS-Root-cert
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.2
         with:
@@ -1403,7 +1403,7 @@ jobs:
       - id: a9
         if: true
         name: ALB-no-ELB-DNS-Root-cert
-        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.2
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.3
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
