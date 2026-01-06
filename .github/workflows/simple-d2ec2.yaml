@@ -1391,7 +1391,7 @@ jobs:
           #aws_alb_app_port: 3000
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: some
-          aws_r53_create_root_cert: true
+          #aws_r53_create_root_cert: true
           aws_r53_create_sub_cert: true
           aws_r53_root_domain_deploy: false
 
@@ -1417,7 +1417,7 @@ jobs:
           #aws_alb_app_port: 3000
           aws_r53_domain_name: bitovi-sandbox.com
           aws_r53_sub_domain_name: some
-          aws_r53_create_root_cert: true
+          #aws_r53_create_root_cert: true
           aws_r53_create_sub_cert: true
           aws_r53_root_domain_deploy: false
 
