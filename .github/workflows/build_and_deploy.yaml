@@ -719,7 +719,6 @@ jobs:
           checkout: false
           aws_ecs_task_cpu: 256
           aws_ecs_task_mem: 512
-          aws_ecs_app_image: "hashicorp/http-echo"
 
           tf_stack_destroy: false # true
           tf_state_bucket_destroy: true 
@@ -731,12 +730,9 @@ jobs:
           aws_r53_enable: true
           aws_r53_enable_cert: true
           aws_r53_domain_name: bitovi-sandbox.com
-#          aws_r53_sub_domain_name: devops-training-echo
-#          aws_r53_create_sub_cert: true
-          aws_r53_root_domain_deploy: true
-        
-          #aws_ecs_container_port: 5678
-          #aws_ecs_lb_port: 443
+          aws_r53_sub_domain_name: ignore
+          aws_r53_create_sub_cert: true
+
           aws_ecs_lb_www_to_apex_redirect: true
           aws_ecs_lb_redirect_enable: true
           
