@@ -724,7 +724,7 @@ jobs:
           tf_stack_destroy: false # true
           tf_state_bucket_destroy: true 
         
-          aws_ecs_task_ignore_definition: false
+          aws_ecs_task_ignore_definition: true
           aws_ecs_assign_public_ip: true
           aws_ecs_node_count: 1
           
@@ -738,6 +738,6 @@ jobs:
           aws_ecs_container_port: 5678
           aws_ecs_lb_port: 443
           aws_ecs_lb_www_to_apex_redirect: true
-          #aws_ecs_lb_redirect_enable: true
+          aws_ecs_lb_redirect_enable: true
           
           aws_ecs_cloudwatch_enable: false
