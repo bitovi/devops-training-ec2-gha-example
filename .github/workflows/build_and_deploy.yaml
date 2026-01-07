@@ -737,5 +737,3 @@ jobs:
           aws_ecs_lb_redirect_enable: true
           
           aws_ecs_cloudwatch_enable: false
-
-          
