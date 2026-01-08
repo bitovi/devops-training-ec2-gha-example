@@ -710,6 +710,7 @@ jobs:
     steps:
       - name: Deploy using GHA
         uses: bitovi/github-actions-deploy-ecs@v1.0.2
+        if: false
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -774,3 +775,4 @@ jobs:
           aws_r53_root_domain_deploy: false
           aws_ecs_cloudwatch_enable: false
 
+          env_ghv: ${{ vars.SOME }}
