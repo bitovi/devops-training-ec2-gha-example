@@ -5,22 +5,22 @@ import FooterLinks from "../../shared/components/FooterLinks";
 export const links = [
   {
     text: "Catalog",
-    href: "https://catalog-mfe.bitovi-sandbox.com",
+    href: "https://catalog-mfe.lodiaz.com.ar",
     external: true,
   },
   {
     text: "Marketing",
-    href: "https://marketing-mfe.bitovi-sandbox.com",
+    href: "https://marketing-mfe.lodiaz.com.ar",
     external: true,
   },
   {
     text: "Order",
-    href: "https://order-mfe.bitovi-sandbox.com",
+    href: "https://order-mfe.lodiaz.com.ar",
     external: true,
   },
   {
     text: "Profile",
-    href: "https://profile-mfe.bitovi-sandbox.com",
+    href: "https://profile-mfe.lodiaz.com.ar",
     external: true,
   },
 ];

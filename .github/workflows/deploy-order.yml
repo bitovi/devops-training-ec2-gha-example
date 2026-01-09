@@ -35,7 +35,7 @@ jobs:
           cat .env
           cd ../marketing
           touch .env
-          echo MFE_URL_CATALOG="https://catalog.${{ env.DOMAIN }} >> .env
+          echo MFE_URL_CATALOG=https://catalog.${{ env.DOMAIN }} >> .env
           echo MFE_URL_ORDER=https://order-mfe.${{ env.DOMAIN }} >> .env
           echo SENTRY_DSN_MARKETING=${{ vars.SENTRY_DSN_MARKETING }} >> .env
           cd ../catalog

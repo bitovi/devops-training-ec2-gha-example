@@ -61,7 +61,7 @@ const CheatSheetContent = () => {
       <Box py="lg">
         <Text sx={{ fontWeight: "bold" }}>Helpful Links</Text>
         <List>
-          <List.Item><a href="https://micro-frontend-workshop.bitovi-sandbox.com/" target="_blank">Deployed Project</a></List.Item>
+          <List.Item><a href="https://micro-frontend-workshop.lodiaz.com.ar/" target="_blank">Deployed Project</a></List.Item>
           <List.Item>
             Slides
             <List>
