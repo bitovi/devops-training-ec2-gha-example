@@ -1,37 +1,30 @@
 {
-  "name": "test-world",
-  "version": "1.0.0",
-  "description": "Hello World application that displays environment information",
-  "main": "server.js",
+  "name": "enterprise-grade-micro-frontends",
+  "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "security": "npm audit"
+    "setup:local": "sh ./setup.sh",
+    "start": "nx run-many -t dev --parallel=10"
   },
-  "dependencies": {
-    "express": "^4.18.2",
-    "dotenv": "^16.3.1",
-    "helmet": "^7.0.0",
-    "cors": "^2.8.5"
-  },
+  "private": true,
   "devDependencies": {
-    "jest": "^29.6.2",
-    "supertest": "^6.3.3",
-    "nodemon": "^3.0.1",
-    "eslint": "^8.46.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.28.0",
-    "eslint-plugin-n": "^16.0.1",
-    "eslint-plugin-promise": "^6.1.1"
+    "@nx/jest": "18.3.3",
+    "@nx/js": "18.3.3",
+    "@testing-library/dom": "^10.1.0",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "nx": "18.3.3"
   },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "keywords": ["hello-world", "environment", "docker", "ecs"],
-  "author": "test Team",
-  "license": "MIT"
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@mantine/code-highlight": "^7.11.2",
+    "react-canvas-confetti": "^2.0.7",
+    "react-router-dom": "^6.25.1",
+    "webpack": "^5.92.1"
+  }
 }
