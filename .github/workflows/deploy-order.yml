@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v3
 
       - name: Setup
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v3
         with:
           node-version-file: ".nvmrc"
 
@@ -60,37 +60,37 @@ jobs:
         run: nx run-many -t build --parallel=10
 
       - name: Upload catalog build artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: catalog-artifacts
           path: packages/catalog/dist
 
       - name: Upload marketing build artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: marketing-artifacts
           path: packages/marketing/dist
 
       - name: Upload order build artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: order-artifacts
           path: packages/order/dist
 
       - name: Upload profile build artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: profile-artifacts
           path: packages/profile/dist
 
       - name: Upload shell build artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: shell-artifacts
           path: packages/shell/dist
 
       - name: Upload workshop build artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: workshop-artifacts
           path: packages/workshop/dist
@@ -101,13 +101,13 @@ jobs:
 
     steps:
       - name: Download build artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: catalog-artifacts
           path: packages/catalog/dist
 
       - name: Create deploy-bucket
-        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
+        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.6
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -135,13 +135,13 @@ jobs:
 
     steps:
       - name: Download build artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: marketing-artifacts
           path: packages/marketing/dist
 
       - name: Create deploy-bucket
-        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
+        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.6
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -169,13 +169,13 @@ jobs:
 
     steps:
       - name: Download build artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: order-artifacts
           path: packages/order/dist
 
       - name: Create deploy-bucket
-        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
+        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.6
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -203,13 +203,13 @@ jobs:
 
     steps:
       - name: Download build artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: profile-artifacts
           path: packages/profile/dist
 
       - name: Create deploy-bucket
-        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
+        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.6
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -237,14 +237,14 @@ jobs:
 
     steps:
       - name: Download build artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: shell-artifacts
           path: packages/shell/dist
 
       - name: Create deploy-bucket
-        #uses: bitovi/github-actions-deploy-static-site-to-aws@feat/point-to-bucket-endpoint
-        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
+        uses: bitovi/github-actions-deploy-static-site-to-aws@feat/point-to-bucket-endpoint
+        #uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.6
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -267,7 +267,7 @@ jobs:
 
           aws_site_bucket_name: micro-frontend-workshop
 
-          aws_site_cdn_response_headers_policy_id: eaab4381-ed33-4a86-88ca-d9558dc6cd63
+          #aws_site_cdn_response_headers_policy_id: eaab4381-ed33-4a86-88ca-d9558dc6cd63
 
   deploy-workshop:
     runs-on: ubuntu-latest
@@ -275,13 +275,13 @@ jobs:
 
     steps:
       - name: Download build artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: workshop-artifacts
           path: packages/workshop/dist
 
       - name: Create deploy-bucket
-        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
+        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.6
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
