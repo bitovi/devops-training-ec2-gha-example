@@ -34,7 +34,7 @@ init({
   // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
   tracePropagationTargets: [
     "localhost",
-    /^https:\/\/*-mfe\.bitovi-sandbox\.com/,
+    /^https:\/\/*-mfe\.lodiaz\.com\.ar/,
   ],
   // Session Replay
   replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.

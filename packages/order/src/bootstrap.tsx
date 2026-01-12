@@ -13,7 +13,7 @@ init({
   tracesSampleRate: 1.0,
   tracePropagationTargets: [
     "localhost",
-    /^https:\/\/*-mfe\.bitovi-sandbox\.com/,
+    /^https:\/\/*-mfe\.lodiaz\.com\.ar/,
   ],
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0,
