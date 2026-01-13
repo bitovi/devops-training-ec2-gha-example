@@ -11,7 +11,7 @@ jobs:
     steps:
     - name: Go SPA - stage 0 - no thing
       if: true
-      uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
+      uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.10
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -20,8 +20,8 @@ jobs:
         tf_action: apply
 
     - name: Go SPA - stage 0 - no thing - testing
-      if: true
-      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      if: false
+      uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.10
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -30,7 +30,7 @@ jobs:
         tf_action: apply
 
     - name: Go SPA - add CDN
-      if: true
+      if: false
       uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -41,8 +41,8 @@ jobs:
         aws_site_cdn_enabled: true
 
     - name: Go SPA - add CDN - testing
-      if: true
-      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      if: false
+      uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.10
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -66,8 +66,8 @@ jobs:
         aws_r53_create_root_cert: true
 
     - name: Go SPA - add CDN - root domain + create root - testing
-      if: true
-      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      if: false
+      uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.10
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -80,8 +80,8 @@ jobs:
         aws_r53_create_root_cert: true
 
     - name: Go SPA - add CDN - root domain + create root + extras - testing
-      if: true
-      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      if: false
+      uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.10
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -103,7 +103,8 @@ jobs:
         aws_site_source_include_hidden: true
 
     - name: Go SPA - add CDN - root domain + create root + extras - testin
-      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      if: false
+      uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.10
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -127,8 +128,8 @@ jobs:
         aws_site_cdn_aliases: static-site-test-cp.lodiaz.com.ar,static-site-test-cp.bitovi-sandbox.com #,www.static-site-test-cp.lodiaz.com.ar,www.static-site-test-cp.bitovi-sandbox.com
 
     - name: Go SPA - back to 0
-      if: true
-      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      if: false
+      uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.10
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -137,7 +138,7 @@ jobs:
         tf_action: apply
 
     - name: Cleanup
-      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.10
       if: true
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
