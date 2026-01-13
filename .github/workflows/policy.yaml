@@ -1,6 +1,6 @@
 name: CDN Policy Deployment
 
-on: [push]
+on: workflow_dispatch
 
 env:
   TF_ACTION: 'destroy'
