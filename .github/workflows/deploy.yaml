@@ -80,6 +80,7 @@ jobs:
         aws_r53_create_root_cert: true
 
     - name: Go SPA - add CDN - root domain + create root + extras - testing
+      if: false
       uses: bitovi/github-actions-deploy-static-site-to-aws@testing
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -101,7 +102,7 @@ jobs:
         #aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
         aws_site_source_include_hidden: true
 
-    - name: Go SPA - add CDN - root domain + create root + extras - testing
+    - name: Go SPA - add CDN - root domain + create root + extras - testin
       uses: bitovi/github-actions-deploy-static-site-to-aws@testing
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -122,7 +123,7 @@ jobs:
         aws_site_cdn_response_headers_policy_id: "eaab4381-ed33-4a86-88ca-d9558dc6cd63"
         #aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
         aws_site_source_include_hidden: true
-        aws_r53_cert_arn: arn:aws:acm:us-east-1:755521597925:certificate/c6b904b1-3e73-4773-984d-f52cd298ff46
+        aws_r53_cert_arn: arn:aws:acm:us-east-1:755521597925:certificate/b509d16e-a721-4542-b473-b65b2c9bbe01
         aws_site_cdn_aliases: static-site-test-cp.lodiaz.com.ar,static-site-test-cp.bitovi-sandbox.com,www.static-site-test-cp.lodiaz.com.ar,www.static-site-test-cp.bitovi-sandbox.com
 
     - name: Cleanup
