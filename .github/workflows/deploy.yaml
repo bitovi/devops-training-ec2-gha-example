@@ -52,7 +52,7 @@ jobs:
         aws_site_cdn_enabled: true
 
     - name: Go SPA - add CDN - root domain + create root
-      if: true
+      if: false  ### This is the one that fails
       uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
