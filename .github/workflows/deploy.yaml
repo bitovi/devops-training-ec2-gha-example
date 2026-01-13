@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Go SPA - stage 0 - no thing
-      if: false
+      if: true
       uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -20,7 +20,7 @@ jobs:
         tf_action: apply
 
     - name: Go SPA - stage 0 - no thing - testing
-      if: false
+      if: true
       uses: bitovi/github-actions-deploy-static-site-to-aws@testing
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -30,7 +30,7 @@ jobs:
         tf_action: apply
 
     - name: Go SPA - add CDN
-      if: false
+      if: true
       uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -41,7 +41,7 @@ jobs:
         aws_site_cdn_enabled: true
 
     - name: Go SPA - add CDN - testing
-      if: false
+      if: true
       uses: bitovi/github-actions-deploy-static-site-to-aws@testing
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -52,7 +52,7 @@ jobs:
         aws_site_cdn_enabled: true
 
     - name: Go SPA - add CDN - root domain + create root
-      if: false
+      if: true
       uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -66,7 +66,7 @@ jobs:
         aws_r53_create_root_cert: true
 
     - name: Go SPA - add CDN - root domain + create root - testing
-      if: false
+      if: true
       uses: bitovi/github-actions-deploy-static-site-to-aws@testing
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -80,7 +80,7 @@ jobs:
         aws_r53_create_root_cert: true
 
     - name: Go SPA - add CDN - root domain + create root + extras - testing
-      if: false
+      if: true
       uses: bitovi/github-actions-deploy-static-site-to-aws@testing
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -126,9 +126,19 @@ jobs:
         aws_r53_cert_arn: arn:aws:acm:us-east-1:755521597925:certificate/b509d16e-a721-4542-b473-b65b2c9bbe01
         aws_site_cdn_aliases: static-site-test-cp.lodiaz.com.ar,static-site-test-cp.bitovi-sandbox.com #,www.static-site-test-cp.lodiaz.com.ar,www.static-site-test-cp.bitovi-sandbox.com
 
+    - name: Go SPA - back to 0
+      if: true
+      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_site_source_folder: .
+        tf_action: apply
+
     - name: Cleanup
-      uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
-      if: false
+      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      if: true
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
