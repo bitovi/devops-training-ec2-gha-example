@@ -66,6 +66,7 @@ jobs:
         aws_r53_create_root_cert: true
 
     - name: Go SPA - add CDN - root domain + create root - testing
+      if: false
       uses: bitovi/github-actions-deploy-static-site-to-aws@testing
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -77,6 +78,52 @@ jobs:
         aws_r53_domain_name: lodiaz.com.ar
         aws_r53_root_domain_deploy: true
         aws_r53_create_root_cert: true
+
+    - name: Go SPA - add CDN - root domain + create root + extras - testing
+      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_site_source_folder: .
+        tf_action: apply
+        aws_site_cdn_enabled: true
+        aws_r53_domain_name: lodiaz.com.ar
+        #aws_r53_root_domain_deploy: true
+        aws_r53_create_root_cert: true
+        aws_site_cdn_custom_error_codes: '[{\"error_caching_min_ttl\":\"0\",\"error_code\":\"403\",\"response_code\":\"200\",\"response_page_path\":\"/index.html\"},{\"error_caching_min_ttl\":\"0\",\"error_code\":\"404\",\"response_code\":\"200\",\"response_page_path\":\"/index.html\"}]'
+        # You should own and have this domain available in R53
+        aws_r53_sub_domain_name: static-site-test-cp
+        aws_site_cdn_min_ttl: 33
+        aws_site_cdn_default_ttl: 172803  # 48 hours
+        aws_site_cdn_max_ttl: 604803      # 7 days          #aws_site_cdn_aliases: static-site-test.bitovi-sandbox.com,static-site-test2.bitovi-sandbox.com
+        aws_site_cdn_response_headers_policy_id: "eaab4381-ed33-4a86-88ca-d9558dc6cd63"
+        #aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
+        aws_site_source_include_hidden: true
+
+    - name: Go SPA - add CDN - root domain + create root + extras - testing
+      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_site_source_folder: .
+        tf_action: apply
+        aws_site_cdn_enabled: true
+        aws_r53_domain_name: lodiaz.com.ar
+        #aws_r53_root_domain_deploy: true
+        aws_r53_create_root_cert: true
+        aws_site_cdn_custom_error_codes: '[{\"error_caching_min_ttl\":\"0\",\"error_code\":\"403\",\"response_code\":\"200\",\"response_page_path\":\"/index.html\"},{\"error_caching_min_ttl\":\"0\",\"error_code\":\"404\",\"response_code\":\"200\",\"response_page_path\":\"/index.html\"}]'
+        # You should own and have this domain available in R53
+        aws_r53_sub_domain_name: static-site-test-cp
+        aws_site_cdn_min_ttl: 33
+        aws_site_cdn_default_ttl: 172803  # 48 hours
+        aws_site_cdn_max_ttl: 604803      # 7 days          #aws_site_cdn_aliases: static-site-test.bitovi-sandbox.com,static-site-test2.bitovi-sandbox.com
+        aws_site_cdn_response_headers_policy_id: "eaab4381-ed33-4a86-88ca-d9558dc6cd63"
+        #aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
+        aws_site_source_include_hidden: true
+        aws_r53_cert_arn: arn:aws:acm:us-east-1:755521597925:certificate/c6b904b1-3e73-4773-984d-f52cd298ff46
+        aws_site_cdn_aliases: static-site-test-cp.lodiaz.com.ar,static-site-test-cp.bitovi-sandbox.com,www.static-site-test-cp.lodiaz.com.ar,www.static-site-test-cp.bitovi-sandbox.com
 
     - name: Cleanup
       uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
