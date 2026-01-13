@@ -18,6 +18,15 @@ jobs:
         aws_site_source_folder: .
         tf_action: apply
 
+    - name: Go SPA - stage 0 - no thing - testing
+      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_site_source_folder: .
+        tf_action: apply
+
     - name: Go SPA - add CDN
       uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
       with:
@@ -28,8 +37,45 @@ jobs:
         tf_action: apply
         aws_site_cdn_enabled: true
 
+    - name: Go SPA - add CDN - testing
+      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_site_source_folder: .
+        tf_action: apply
+        aws_site_cdn_enabled: true
+
+    - name: Go SPA - add CDN - root domain + create root
+      uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_site_source_folder: .
+        tf_action: apply
+        aws_site_cdn_enabled: true
+        aws_r53_domain_name: lodiaz.com.ar
+        aws_r53_root_domain_deploy: true
+        aws_r53_create_root_cert: true
+
+    - name: Go SPA - add CDN - root domain + create root - testing
+      uses: bitovi/github-actions-deploy-static-site-to-aws@testing
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+        aws_default_region: us-east-1
+        aws_site_source_folder: .
+        tf_action: apply
+        aws_site_cdn_enabled: true
+        aws_r53_domain_name: lodiaz.com.ar
+        aws_r53_root_domain_deploy: true
+        aws_r53_create_root_cert: true
+
     - name: Cleanup
       uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
+      if: false
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
