@@ -4,7 +4,7 @@ on:
     branches: [micro-frontend]
 
 env:
-  TF_ACTION: destroy
+  TF_ACTION: apply
   AWS_REGION: us-east-1
   TF_STATE_BUCKET: testing-micro-frontends-shared-tf-state
   DOMAIN: lodiaz.com.ar
