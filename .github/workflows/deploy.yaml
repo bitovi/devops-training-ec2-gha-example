@@ -124,7 +124,7 @@ jobs:
         #aws_r53_create_sub_cert: true # Will create and validate a cert for this sub-domain
         aws_site_source_include_hidden: true
         aws_r53_cert_arn: arn:aws:acm:us-east-1:755521597925:certificate/b509d16e-a721-4542-b473-b65b2c9bbe01
-        aws_site_cdn_aliases: static-site-test-cp.lodiaz.com.ar,static-site-test-cp.bitovi-sandbox.com,www.static-site-test-cp.lodiaz.com.ar,www.static-site-test-cp.bitovi-sandbox.com
+        aws_site_cdn_aliases: static-site-test-cp.lodiaz.com.ar,static-site-test-cp.bitovi-sandbox.com #,www.static-site-test-cp.lodiaz.com.ar,www.static-site-test-cp.bitovi-sandbox.com
 
     - name: Cleanup
       uses: bitovi/github-actions-deploy-static-site-to-aws@v0.2.9
