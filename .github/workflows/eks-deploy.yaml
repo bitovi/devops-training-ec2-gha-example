@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: Destroy EKS Cluster
       uses: bitovi/github-actions-deploy-eks@v0.1.2
-      if: false
+      if: true
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
@@ -25,7 +25,7 @@ jobs:
 
     - name: Add EKS Backup NG Cluster
       uses: bitovi/github-actions-deploy-eks@commons-testing
-      if: true
+      if: false
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
