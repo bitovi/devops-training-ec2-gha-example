@@ -777,7 +777,7 @@ jobs:
           aws_ecs_task_mem: 512
           aws_ecs_app_image: "filebrowser/filebrowser:v2"
          
-          tf_stack_destroy: false
+          tf_stack_destroy: true
           tf_state_bucket_destroy: true 
         
           aws_ecs_task_ignore_definition: false
