@@ -755,7 +755,7 @@ jobs:
           checkout: false
           aws_ecs_task_cpu: 256
           aws_ecs_task_mem: 512
-          aws_ecs_app_image: "filebrowser/filebrowser"
+          aws_ecs_app_image: "filebrowser/filebrowser:v2"
          
           tf_stack_destroy: false
           tf_state_bucket_destroy: true 
@@ -775,6 +775,7 @@ jobs:
 
           aws_ecs_lb_redirect_enable: true
           aws_r53_root_domain_deploy: false
-          aws_ecs_cloudwatch_enable: false
+          aws_ecs_cloudwatch_enable: true
+          aws_ecs_cloudwatch_retention_days: 1
 
           aws_ecs_efs_fs_id: fs-0a839262fedfff6e2
