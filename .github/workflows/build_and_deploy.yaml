@@ -147,6 +147,7 @@ jobs:
   deploy-worker:
     name: Deploy ECS Container
     runs-on: ubuntu-latest
+    if: false
     environment: 
       name: ${{ inputs.environment }}
     env:
@@ -710,7 +711,7 @@ jobs:
     steps:
       - name: Deploy using GHA
         uses: bitovi/github-actions-deploy-ecs@v1.0.2
-        if: false
+        if: true
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
