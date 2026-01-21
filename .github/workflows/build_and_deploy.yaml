@@ -918,7 +918,7 @@ jobs:
       - name: Deploy using GHA testing 3
         #uses: bitovi/github-actions-deploy-ecs@v1
         uses: bitovi/github-actions-deploy-ecs@testing
-        if: true
+        if: false
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -995,3 +995,4 @@ jobs:
           aws_ecs_efs_container_path: "/data"
           aws_ecs_container_user: '0'
           aws_ecs_efs_transit_encryption: true
+          aws_ecs_efs_iam: false
