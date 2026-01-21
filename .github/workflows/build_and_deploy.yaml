@@ -777,7 +777,7 @@ jobs:
           aws_ecs_task_mem: 512
           aws_ecs_app_image: "filebrowser/filebrowser:v2"
          
-          tf_stack_destroy: true
+          tf_stack_destroy: false
           tf_state_bucket_destroy: true 
         
           aws_ecs_task_ignore_definition: false
@@ -796,6 +796,8 @@ jobs:
           aws_ecs_lb_redirect_enable: true
           aws_r53_root_domain_deploy: false
           aws_ecs_cloudwatch_enable: true
-          aws_ecs_cloudwatch_retention_days: 3
+          aws_ecs_cloudwatch_retention_days: 1
 
           aws_ecs_efs_fs_id: fs-0a839262fedfff6e2
+          aws_ecs_efs_container_path: /
+          aws_ecs_container_user: '0'
