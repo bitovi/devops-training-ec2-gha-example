@@ -775,7 +775,7 @@ jobs:
           checkout: false
           aws_ecs_task_cpu: 256
           aws_ecs_task_mem: 512
-          aws_ecs_app_image: "filebrowser/filebrowser:v2-s6"
+          aws_ecs_app_image: "hurlenko/filebrowser"
          
           tf_stack_destroy: false
           tf_state_bucket_destroy: true 
@@ -784,7 +784,7 @@ jobs:
           aws_ecs_assign_public_ip: true
           aws_ecs_node_count: 1
         
-          aws_ecs_container_port: 80
+          aws_ecs_container_port: 8080
           aws_ecs_lb_port: 443
           aws_ecs_lb_www_to_apex_redirect: true
           aws_r53_enable: true
@@ -799,5 +799,5 @@ jobs:
           aws_ecs_cloudwatch_retention_days: 1
 
           aws_ecs_efs_fs_id: fs-0a839262fedfff6e2
-          aws_ecs_efs_container_path: "/srv"
-          aws_ecs_container_user: '0'
+          aws_ecs_efs_container_path: "/data"
+          #aws_ecs_container_user: '0'
