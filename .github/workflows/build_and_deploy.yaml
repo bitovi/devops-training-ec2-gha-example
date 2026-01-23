@@ -1035,10 +1035,10 @@ jobs:
           #aws_ecs_container_user: '0'
 
           #aws_ecs_efs_fs_id: fs-0a839262fedfff6e2
-          aws_ecs_efs_fs_id: fs-06416310995267b14
+          aws_ecs_efs_fs_id: fs-0e90557a8315a06e1
           aws_ecs_efs_container_path: "/data"
           aws_ecs_efs_transit_encryption: true
           aws_ecs_efs_iam: true
 
           aws_efs_create_mount_target: true
-          aws_efs_create_ha: true
+          #aws_efs_create_ha: true
