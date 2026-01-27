@@ -130,7 +130,7 @@ concurrency:
  
 #      - name: Deploy using GHA
 #        uses: bitovi/github-actions-deploy-ecs@main
-#        #uses: bitovi/github-actions-deploy-ecs@testing
+#        #uses: bitovi/github-actions-deploy-ecs@add-efs-support
 #        env:
 #          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
 #        with:
@@ -710,8 +710,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Destroy using GHA
-        uses: bitovi/github-actions-deploy-ecs@testing
-        if: false
+        uses: bitovi/github-actions-deploy-ecs@add-efs-support
+        if: true
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -730,8 +730,8 @@ jobs:
           aws_ecs_node_count: 1
 
       - name: Deploy using GHA 1.0.2
-        uses: bitovi/github-actions-deploy-ecs@testing
-        if: false
+        uses: bitovi/github-actions-deploy-ecs@add-efs-support
+        if: true
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -763,7 +763,7 @@ jobs:
           aws_ecs_cloudwatch_enable: false
 
       - name: Deploy using GHA 1.0.2 - testing
-        uses: bitovi/github-actions-deploy-ecs@testing
+        uses: bitovi/github-actions-deploy-ecs@add-efs-support
         if: true
         with:
           # AWS Definitions
@@ -838,7 +838,7 @@ jobs:
 
 
       - name: Deploy using GHA testing
-        uses: bitovi/github-actions-deploy-ecs@testing
+        uses: bitovi/github-actions-deploy-ecs@add-efs-support
         if: true
         with:
           # AWS Definitions
@@ -876,7 +876,7 @@ jobs:
 
       - name: Deploy using GHA testing 2
         #uses: bitovi/github-actions-deploy-ecs@v1
-        uses: bitovi/github-actions-deploy-ecs@testing
+        uses: bitovi/github-actions-deploy-ecs@add-efs-support
         if: true
         with:
           # AWS Definitions
@@ -917,7 +917,7 @@ jobs:
 
       - name: Deploy using GHA testing 3
         #uses: bitovi/github-actions-deploy-ecs@v1
-        uses: bitovi/github-actions-deploy-ecs@testing
+        uses: bitovi/github-actions-deploy-ecs@add-efs-support
         if: true
         with:
           # AWS Definitions
@@ -952,53 +952,7 @@ jobs:
           aws_ecs_cloudwatch_retention_days: 1
 
       - name: Deploy using GHA testing 4
-        uses: bitovi/github-actions-deploy-ecs@testing
-        if: false
-        with:
-          # AWS Definitions
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-          aws_default_region: us-east-1
-          checkout: false
-          aws_ecs_task_cpu: 256
-          aws_ecs_task_mem: 512
-          aws_ecs_app_image: "hurlenko/filebrowser"
-         
-          tf_stack_destroy: true
-          tf_state_bucket_destroy: true 
-        
-          aws_ecs_task_ignore_definition: false
-          aws_ecs_assign_public_ip: true
-          aws_ecs_node_count: 1
-          aws_ecs_task_reuse_role: true
-
-          aws_ecs_container_port: 8080
-          aws_ecs_lb_port: 443
-          aws_ecs_lb_www_to_apex_redirect: true
-          aws_r53_enable: true
-          aws_r53_domain_name: "bitovi-sandbox.com"
-          aws_r53_sub_domain_name: filebrowser-ecs
-          aws_r53_enable_cert: true
-          aws_r53_create_sub_cert: true
-
-          aws_ecs_lb_redirect_enable: true
-          aws_r53_root_domain_deploy: false
-          aws_ecs_cloudwatch_enable: true
-          aws_ecs_cloudwatch_retention_days: 1
-
-          #aws_ecs_efs_fs_id: fs-0a839262fedfff6e2
-          #aws_ecs_efs_fs_id: fs-0e90557a8315a06e1
-          aws_ecs_efs_container_path: "/data"
-          aws_ecs_efs_transit_encryption: true
-          aws_ecs_efs_iam: true
-
-          aws_efs_create_mount_target: true
-          aws_efs_create_ha: false
-          aws_efs_create: true
-
-
-      - name: Deploy using GHA testing 4
-        uses: bitovi/github-actions-deploy-ecs@testing
+        uses: bitovi/github-actions-deploy-ecs@add-efs-support
         if: true
         with:
           # AWS Definitions
@@ -1041,4 +995,50 @@ jobs:
 
           aws_efs_create_mount_target: true
           aws_efs_create_ha: true
+          aws_efs_create: true
+
+
+      - name: Destroy using GHA testing 4
+        uses: bitovi/github-actions-deploy-ecs@add-efs-support
+        if: true
+        with:
+          # AWS Definitions
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
+          aws_default_region: us-east-1
+          checkout: false
+          aws_ecs_task_cpu: 256
+          aws_ecs_task_mem: 512
+          aws_ecs_app_image: "hurlenko/filebrowser"
+         
+          tf_stack_destroy: true
+          tf_state_bucket_destroy: true 
+        
+          aws_ecs_task_ignore_definition: false
+          aws_ecs_assign_public_ip: true
+          aws_ecs_node_count: 1
+          aws_ecs_task_reuse_role: true
+
+          aws_ecs_container_port: 8080
+          aws_ecs_lb_port: 443
+          aws_ecs_lb_www_to_apex_redirect: true
+          aws_r53_enable: true
+          aws_r53_domain_name: "bitovi-sandbox.com"
+          aws_r53_sub_domain_name: filebrowser-ecs
+          aws_r53_enable_cert: true
+          aws_r53_create_sub_cert: true
+
+          aws_ecs_lb_redirect_enable: true
+          aws_r53_root_domain_deploy: false
+          aws_ecs_cloudwatch_enable: true
+          aws_ecs_cloudwatch_retention_days: 1
+
+          #aws_ecs_efs_fs_id: fs-0a839262fedfff6e2
+          #aws_ecs_efs_fs_id: fs-0e90557a8315a06e1
+          aws_ecs_efs_container_path: "/data"
+          aws_ecs_efs_transit_encryption: true
+          aws_ecs_efs_iam: true
+
+          aws_efs_create_mount_target: true
+          aws_efs_create_ha: false
           aws_efs_create: true
