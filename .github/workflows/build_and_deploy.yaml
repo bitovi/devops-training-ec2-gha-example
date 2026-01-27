@@ -764,7 +764,7 @@ jobs:
 
       - name: Deploy using GHA 1.0.2 - testing
         uses: bitovi/github-actions-deploy-ecs@testing
-        if: false
+        if: true
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -801,7 +801,7 @@ jobs:
 
       - name: Deploy using GHA 1.0.2
         uses: bitovi/github-actions-deploy-ecs@v1.0.2
-        if: false
+        if: true
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -839,7 +839,7 @@ jobs:
 
       - name: Deploy using GHA testing
         uses: bitovi/github-actions-deploy-ecs@testing
-        if: false
+        if: true
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -877,7 +877,7 @@ jobs:
       - name: Deploy using GHA testing 2
         #uses: bitovi/github-actions-deploy-ecs@v1
         uses: bitovi/github-actions-deploy-ecs@testing
-        if: false
+        if: true
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -909,16 +909,16 @@ jobs:
           aws_ecs_cloudwatch_enable: true
           aws_ecs_cloudwatch_retention_days: 1
 
-          #aws_ecs_efs_fs_id: fs-0a839262fedfff6e2
-          #aws_ecs_efs_container_path: "/data"
-          #aws_ecs_container_user: '0'
+          aws_ecs_efs_fs_id: fs-0a839262fedfff6e2
+          aws_ecs_efs_container_path: "/data"
+          aws_ecs_container_user: '0'
           #aws_ecs_efs_transit_encryption: false
           #aws_ecs_efs_iam: false
 
       - name: Deploy using GHA testing 3
         #uses: bitovi/github-actions-deploy-ecs@v1
         uses: bitovi/github-actions-deploy-ecs@testing
-        if: false
+        if: true
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -953,7 +953,7 @@ jobs:
 
       - name: Deploy using GHA testing 4
         uses: bitovi/github-actions-deploy-ecs@testing
-        if: true
+        if: false
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
