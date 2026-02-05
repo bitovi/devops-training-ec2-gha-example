@@ -41,3 +41,4 @@ An `.astro` file looks like this:
 /* Styles for this component go here */
 </style>
 ```
+
