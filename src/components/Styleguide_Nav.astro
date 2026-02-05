@@ -1,0 +1,64 @@
+---
+// JS Code
+---
+
+<div class="bitovi-module header-7">
+  <a href="/">
+    <img src="/logos/bitovi-logo-red-1.svg" alt="Bitovi Logo" />
+  </a>
+
+  <ul class="header-nav-text">
+    <li><a href="/style-guide">Colors</a></li>
+    <li><a href="/style-guide/text">Text</a></li>
+  </ul>
+
+  <button>Contact</button>
+</div>
+
+<style is:global>
+  /* Underline the active link. Requires a class name to be set on the page element */
+  .colors [href='/style-guide'],
+  .text [href^='/style-guide/text'] {
+    border-bottom: solid 4px var(--brand-1-600);
+  }
+</style>
+
+<style>
+  .header-7 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 8px;
+  }
+  .header-7 ul {
+    display: none;
+    gap: 1.375rem;
+    list-style: none;
+    flex-direction: column;
+    text-transform: uppercase;
+  }
+  .header-7 li {
+    margin: 0;
+  }
+  .header-7 a {
+    color: var(--nav-text-color);
+    padding-bottom: 0.3125rem;
+    border-bottom: solid 4px transparent;
+  }
+
+  /* Tablet */
+  @media (min-width: 48rem) {
+    .header-7 ul {
+      display: flex;
+      flex-direction: row;
+    }
+    .header-7 li {
+      margin: 0;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 64rem) {
+  }
+</style>

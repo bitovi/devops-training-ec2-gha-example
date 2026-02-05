@@ -1,0 +1,88 @@
+.theme-bitovi-light {
+  /* Colors */
+  --brand-1-600: #CB3036;
+  --brand-1-500: #D8585D;
+  --brand-1-400: #E07D81;
+  --brand-1-300: #E89DA0;
+  --brand-1-200: #EFBABC;
+  --brand-1-100: #FFEEEE;
+  --brand-1-content: white;
+
+  --brand-2-600: #0B0D17;
+  --brand-2-500: #131627;
+  --brand-2-400: #1A1F36;
+  --brand-2-300: #222847;
+  --brand-2-200: #323B68;
+  --brand-2-100: #3A4479;
+  --brand-2-content: white;
+
+  --gray-500: #9499A9;
+  --gray-400: #B3B7C2;
+  --gray-300: #C9CCD4;
+  --gray-200: #ECEDF0;
+  --gray-100: #FCFCFD;
+
+  --gray-dark-500: #242424;
+  --gray-dark-400: #555555;
+  --gray-dark-300: #6C6C6C;
+  --gray-dark-200: #838383;
+  --gray-dark-100: #B3B3B3;
+
+  --accent-1-500: #2EC5CE;
+  --accent-1-400: #6ED8DF;
+  --accent-1-300: #8FE1E6;
+  --accent-1-200: #D1F3F5;
+  --accent-1-100: #F1FBFC;
+  --accent-1-50: #F7F9FC;
+
+  --accent-2-500: #62BAEE;
+  --accent-2-400: #8BCCF2;
+  --accent-2-300: #A1D6F5;
+  --accent-2-200: #CFEAFA;
+  --accent-2-100: #F7F9FC;
+
+  --accent-3-500: #FE9A22;
+  --accent-3-400: #FEB761;
+  --accent-3-300: #FEC784;
+  --accent-3-200: #FFE4C4;
+  --accent-3-100: #FFF1E0;
+
+  --base-content: var(--gray-dark-500);
+  --base-300: var(--gray-300);
+  --base-200: var(--gray-200);
+  --base-100: var(--gray-100);
+  --base-2-100: var(--base-100);
+  --base-2-200: var(--accent-1-50);
+  --base-2-300: var(--accent-1-100);
+
+  /* Border Radius */
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+
+  /* Shadows */
+  --shadow-2: -2px 4px 45px rgba(0, 0, 0, 0.13);
+  --shadow-dark: 0px 10px 20px rgba(41, 41, 42, 0.07);
+  --shadow-dark-2: -2px 4px 45px rgba(0, 0, 0, 0.13);
+
+  /* Text */
+  --nav-text-color: var(--gray-dark-400);
+
+  /* Font Size declared as rem for accessibility */
+  /* same as 12rem / 16 or 12px */
+  --font-size-xs: 0.75rem;
+  /* same as 14rem / 16 or 14px */
+  --font-size-sm: 0.875rem;
+  /* same as 16rem / 16 or 16px */
+  --font-size-md: 1rem;
+  /* same as 16rem / 16 or 16px */
+  --font-size-lg: 1.125rem;
+  /* same as 18rem / 16 or 18px */
+  --font-size-xl: 1.3125rem;
+  /* same as 24rem / 16 or 24px */
+  --font-size-2xl: 1.5rem;
+  /* same as 42rem / 16 or 42px */
+  --font-size-3xl: 2.625rem;
+  /* same as 64rem / 16 or 64px */
+  --font-size-4xl: 4rem;
+}

@@ -1,0 +1,31 @@
+html,
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.bitovi-module-wrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.bitovi-module {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Tablet */
+@media (min-width: 48rem) {
+  /* styles go here */
+}
+
+/* Desktop */
+@media (min-width: 64rem) {
+  /* styles go here */
+}

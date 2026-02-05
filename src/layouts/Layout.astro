@@ -1,0 +1,54 @@
+---
+// Import styles for hot module reloading (HMR)
+import '../styles/reset.css'
+import '../styles/theme-bitovi-light.css'
+import '../styles/main.css'
+import '../styles/colors.css'
+import '../styles/text.css'
+import '../styles/shadows.css'
+import '../styles/forms.css'
+import '../styles/buttons.css'
+
+export interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en" class="theme-bitovi-light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@100;300;400;500;600;700;800;900&family=Inter&family=Lato:wght@100;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/sanitize.css/2.0.0/sanitize.min.css"
+      integrity="sha512-uZEpdg8O5w6a2kJ9VKX6MJPr5MIj+R85f7706fR5D+dlr91P0sWQq3mBL/O/cQ8MfAOavO7VjUoJCH55BNsLDw=="
+      crossorigin="anonymous"
+      referrer-policy="no-referrer"
+    /> -->
+
+    <!-- Styles imported, above.  -->
+    <!-- <link href="/styles/reset.css" rel="stylesheet" />
+    <link href="/styles/variables.css" rel="stylesheet" />
+    <link href="/styles/main.css" rel="stylesheet" />
+    <link href="/styles/colors.css" rel="stylesheet" />
+    <link href="/styles/text.css" rel="stylesheet" />
+    <link href="/styles/shadows.css" rel="stylesheet" /> -->
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,67 @@
+/* We are using this font directly from Google in Layout.astro */
+
+/* @font-face {
+  font-family: Poppins;
+  src: local(Poppins-Regular),
+    url(/path/to/Poppins-Regular.woff2) format("woff2"),
+    url(/path/to/Poppins-Regular.woff) format("woff"),
+    url(/path/to/Poppins-Regular.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: local(Poppins-Medium),
+    url(/path/to/Poppins-Medium.woff2) format("woff2"),
+    url(/path/to/Poppins-Medium.woff) format("woff"),
+    url(/path/to/Poppins-Medium.ttf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: local(Poppins-SemiBold),
+    url(/path/to/Poppins-SemiBold.woff2) format("woff2"),
+    url(/path/to/Poppins-SemiBold.woff) format("woff"),
+    url(/path/to/Poppins-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: local(Poppins-Semibold),
+    url(/path/to/Poppins-Semibold.woff2) format("woff2"),
+    url(/path/to/Poppins-Semibold.woff) format("woff"),
+    url(/path/to/Poppins-Semibold.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: local(Poppins-Bold),
+    url(/path/to/Poppins-Bold.woff2) format("woff2"),
+    url(/path/to/Poppins-Bold.woff) format("woff"),
+    url(/path/to/Poppins-Bold.ttf) format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: local(Poppins-ExtraBold),
+    url(/path/to/Poppins-ExtraBold.woff2) format("woff2"),
+    url(/path/to/Poppins-ExtraBold.woff) format("woff"),
+    url(/path/to/Poppins-ExtraBold.ttf) format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: normal;
+} */

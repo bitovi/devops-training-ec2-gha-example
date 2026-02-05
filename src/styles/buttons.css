@@ -1,0 +1,61 @@
+.btn {
+  height: 3rem;
+  background-color: var(--gray-dark-200);
+  border-radius: var(--radius-md);
+  padding: 0 1.4rem;
+  white-space: nowrap;
+  font-size: 18px;
+  transition: transform 200ms;
+}
+
+.btn:active {
+  transform: scale(.97);
+}
+
+.btn.btn-sm {
+  height: 2.5rem;
+  padding: 0 1rem;
+  font-size: 16px;
+}
+
+.btn.btn-lg {
+  height: 3.5rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 20px;
+}
+
+.btn.block {
+  width: 100%;
+}
+
+.btn-brand-1 {
+  background-color: var(--brand-1-600);
+  color: var(--brand-1-content);
+}
+
+.btn-brand-2 {
+  background-color: var(--brand-2-600);
+  color: var(--brand-2-content);
+}
+
+
+/* Tablet */
+@media (min-width: 48rem) {
+  .btn {
+    height: 3rem;
+    padding: 0 1.25rem;
+  }
+
+  .btn-sm {
+    height: 2.5rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 64rem) {
+  .btn {
+    height: 3rem;
+    padding: 0 1.5rem;
+    font-size: 20px;
+  }
+}

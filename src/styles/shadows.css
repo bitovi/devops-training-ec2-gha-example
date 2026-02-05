@@ -1,0 +1,11 @@
+.shadow-2 {
+  box-shadow: var(--shadow-2);
+}
+
+.shadow-dark {
+  box-shadow: var(--shadow-dark);
+}
+
+.shadow-dark-2 {
+  box-shadow: var(--shadow-dark-2);
+}

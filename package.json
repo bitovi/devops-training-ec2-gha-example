@@ -1,0 +1,30 @@
+{
+  "name": "@example/basics",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build -o dist/storybook"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^3.1.0",
+    "@astrojs/vue": "^1.2.0",
+    "astro": "^1.5.1",
+    "vue": "^3.2.41"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@storybook/addon-essentials": "^7.0.0-alpha.42",
+    "@storybook/addon-interactions": "^7.0.0-alpha.42",
+    "@storybook/addon-links": "^7.0.0-alpha.42",
+    "@storybook/testing-library": "^0.0.13",
+    "@storybook/vue3": "^7.0.0-alpha.42",
+    "@storybook/vue3-vite": "^7.0.0-alpha.42",
+    "@unocss/preset-uno": "^0.45.30",
+    "babel-loader": "^8.2.5",
+    "storybook": "^7.0.0-alpha.42",
+    "unocss": "^0.45.30",
+    "vue-loader": "^17.0.0",
+    "wrangler": "^2.1.12"
+  }
+}

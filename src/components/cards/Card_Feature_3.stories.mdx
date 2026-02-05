@@ -1,0 +1,19 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs'
+import CardFeature4 from './Card_Feature_3.vue'
+
+<Meta title="Cards / Feature 3 / Usage" component={CardFeature4} />
+
+# Card Feature 3
+
+CardFeature3 will automatically fill the width of its parent container.  You can give it its own width by providing the `classes` attribute.
+This example applies a `max-w-120` class:
+
+<div class="mb-12">
+  <Story id="cards-feature-3--example" />
+</div>
+
+### imgAlt is required to show the img
+
+If `imgAlt` is missing, the image will not show, even if you've provided `imgSrc`:
+
+<Story id="cards-feature-3--missing-img-alt"/>

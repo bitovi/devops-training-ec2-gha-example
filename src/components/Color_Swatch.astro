@@ -1,0 +1,46 @@
+---
+export interface Props {
+  name: string
+  prefix: string
+}
+const { name = '', prefix = '' } = Astro.props
+---
+
+<div class:list={['color-swatch', `bg-${name}`]}>
+  <label class="label-sm">{prefix}{name}</label>
+</div>
+
+<style>
+  .color-swatch {
+    height: 6rem;
+    width: 6rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 0.2rem;
+    text-align: right;
+    transition: all 300ms;
+  }
+  .color-swatch label {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    border-radius: var(--radius-md);
+    padding: 1px 0.4rem;
+  }
+
+  /* Tablet */
+  @media (min-width: 48rem) {
+    .color-swatch {
+      height: 8rem;
+      width: 8rem;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 64rem) {
+    .color-swatch {
+      height: 10rem;
+      width: 10rem;
+    }
+  }
+</style>

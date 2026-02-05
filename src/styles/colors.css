@@ -1,0 +1,365 @@
+/* Brand-1 Backgrounds */
+.bg-brand-1-600 {
+  background-color: var(--brand-1-600);
+}
+
+.bg-brand-1-500 {
+  background-color: var(--brand-1-500);
+}
+
+.bg-brand-1-400 {
+  background-color: var(--brand-1-400);
+}
+
+.bg-brand-1-300 {
+  background-color: var(--brand-1-300);
+}
+
+.bg-brand-1-200 {
+  background-color: var(--brand-1-200);
+}
+
+.bg-brand-1-100 {
+  background-color: var(--brand-1-100);
+}
+
+
+/* Brand-1 Text (Currently Red) */
+.text-brand-1-600 {
+  color: var(--brand-1-600);
+}
+
+.text-brand-1-500 {
+  color: var(--brand-1-500);
+}
+
+.text-brand-1-400 {
+  color: var(--brand-1-400);
+}
+
+.text-brand-1-300 {
+  color: var(--brand-1-300);
+}
+
+.text-brand-1-200 {
+  color: var(--brand-1-200);
+}
+
+.text-brand-1-100 {
+  color: var(--brand-1-100);
+}
+
+
+/* Brand-2 Backgrounds */
+.bg-brand-2-600 {
+  background-color: var(--brand-2-600);
+}
+
+.bg-brand-2-500 {
+  background-color: var(--brand-2-500);
+}
+
+.bg-brand-2-400 {
+  background-color: var(--brand-2-400);
+}
+
+.bg-brand-2-300 {
+  background-color: var(--brand-2-300);
+}
+
+.bg-brand-2-200 {
+  background-color: var(--brand-2-200);
+}
+
+.bg-brand-2-100 {
+  background-color: var(--brand-2-100);
+}
+
+/* Brand-2 Text */
+.text-brand-2-600 {
+  color: var(--brand-2-600);
+}
+
+.text-brand-2-500 {
+  color: var(--brand-2-500);
+}
+
+.text-brand-2-400 {
+  color: var(--brand-2-400);
+}
+
+.text-brand-2-300 {
+  color: var(--brand-2-300);
+}
+
+.text-brand-2-200 {
+  color: var(--brand-2-200);
+}
+
+.text-brand-2-100 {
+  color: var(--brand-2-100);
+}
+
+
+/* Gray Backgrounds */
+.bg-gray-500 {
+  background-color: var(--gray-500)
+}
+
+.bg-gray-400 {
+  background-color: var(--gray-400)
+}
+
+.bg-gray-300 {
+  background-color: var(--gray-300)
+}
+
+.bg-gray-200 {
+  background-color: var(--gray-200)
+}
+
+.bg-gray-100 {
+  background-color: var(--gray-100)
+}
+
+/* Gray Text */
+.text-gray-500 {
+  color: var(--gray-500)
+}
+
+.text-gray-400 {
+  color: var(--gray-400)
+}
+
+.text-gray-300 {
+  color: var(--gray-300)
+}
+
+.text-gray-200 {
+  color: var(--gray-200)
+}
+
+.text-gray-100 {
+  color: var(--gray-100)
+}
+
+
+/* Gray-Dark Backgrounds */
+.bg-gray-dark-500 {
+  background-color: var(--gray-dark-500)
+}
+
+.bg-gray-dark-400 {
+  background-color: var(--gray-dark-400)
+}
+
+.bg-gray-dark-300 {
+  background-color: var(--gray-dark-300)
+}
+
+.bg-gray-dark-200 {
+  background-color: var(--gray-dark-200)
+}
+
+.bg-gray-dark-100 {
+  background-color: var(--gray-dark-100)
+}
+
+/* Gray-Dark Text */
+.text-gray-dark-500 {
+  color: var(--gray-dark-500)
+}
+
+.text-gray-dark-400 {
+  color: var(--gray-dark-400)
+}
+
+.text-gray-dark-300 {
+  color: var(--gray-dark-300)
+}
+
+.text-gray-dark-200 {
+  color: var(--gray-dark-200)
+}
+
+.text-gray-dark-100 {
+  color: var(--gray-dark-100)
+}
+
+
+/* Accent-1 Backgrounds */
+.bg-accent-1-500 {
+  background-color: var(--accent-1-500);
+}
+
+.bg-accent-1-400 {
+  background-color: var(--accent-1-400);
+}
+
+.bg-accent-1-300 {
+  background-color: var(--accent-1-300);
+}
+
+.bg-accent-1-200 {
+  background-color: var(--accent-1-200);
+}
+
+.bg-accent-1-100 {
+  background-color: var(--accent-1-100);
+}
+
+.bg-accent-1-50 {
+  background-color: var(--accent-1-50);
+}
+
+/* Accent-1 Text */
+.text-accent-1-500 {
+  color: var(--accent-1-500);
+}
+
+.text-accent-1-400 {
+  color: var(--accent-1-400);
+}
+
+.text-accent-1-300 {
+  color: var(--accent-1-300);
+}
+
+.text-accent-1-200 {
+  color: var(--accent-1-200);
+}
+
+.text-accent-1-100 {
+  color: var(--accent-1-100);
+}
+
+
+/* Accent-2 Backgrounds */
+.bg-accent-2-500 {
+  background-color: var(--accent-2-500);
+}
+
+.bg-accent-2-400 {
+  background-color: var(--accent-2-400);
+}
+
+.bg-accent-2-300 {
+  background-color: var(--accent-2-300);
+}
+
+.bg-accent-2-200 {
+  background-color: var(--accent-2-200);
+}
+
+.bg-accent-2-100 {
+  background-color: var(--accent-2-100);
+}
+
+/* Accent-2 Text */
+.text-accent-2-500 {
+  color: var(--accent-2-500);
+}
+
+.text-accent-2-400 {
+  color: var(--accent-2-400);
+}
+
+.text-accent-2-300 {
+  color: var(--accent-2-300);
+}
+
+.text-accent-2-200 {
+  color: var(--accent-2-200);
+}
+
+.text-accent-2-100 {
+  color: var(--accent-2-100);
+}
+
+
+/* Accent-3 Backgrounds */
+.bg-accent-3-500 {
+  background-color: var(--accent-3-500);
+}
+
+.bg-accent-3-400 {
+  background-color: var(--accent-3-400);
+}
+
+.bg-accent-3-300 {
+  background-color: var(--accent-3-300);
+}
+
+.bg-accent-3-200 {
+  background-color: var(--accent-3-200);
+}
+
+.bg-accent-3-100 {
+  background-color: var(--accent-3-100);
+}
+
+/* Accent-3 Text */
+.text-accent-3-500 {
+  color: var(--accent-3-500);
+}
+
+.text-accent-3-400 {
+  color: var(--accent-3-400);
+}
+
+.text-accent-3-300 {
+  color: var(--accent-3-300);
+}
+
+.text-accent-3-200 {
+  color: var(--accent-3-200);
+}
+
+.text-accent-3-100 {
+  color: var(--accent-3-100);
+}
+
+
+/* Base Backgrounds */
+.bg-base-300 {
+  background-color: var(--base-300);
+}
+
+.bg-base-200 {
+  background-color: var(--base-200);
+}
+
+.bg-base-100 {
+  background-color: var(--base-100);
+}
+
+.bg-base-2-100 {
+  background-color: var(--base-2-100);
+}
+
+.bg-base-2-200 {
+  background-color: var(--base-2-200);
+}
+
+.bg-base-2-300 {
+  background-color: var(--base-2-300);
+}
+
+
+/* Base Text */
+.text-base-300 {
+  color: var(--base-300);
+}
+
+.text-base-200 {
+  color: var(--base-200);
+}
+
+.text-base-100 {
+  color: var(--base-100);
+}
+
+/* Base Content Text */
+.text-base-content {
+  color: var(--base-content)
+}

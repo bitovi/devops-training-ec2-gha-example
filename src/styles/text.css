@@ -1,0 +1,211 @@
+/* Mobile-First Heading Styles */
+
+/* all headings share these styles */
+[class^='heading-'],
+[class*=' heading-'] {
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+}
+
+/* Headings */
+.heading-1 {
+  font-size: 41px;
+  font-weight: 800;
+  /* line-height: 2.17; */
+  line-height: 49px;
+}
+
+.heading-2 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 44px;
+}
+
+.heading-3 {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 36px;
+}
+
+.heading-4 {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 32px;
+}
+
+.heading-5 {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 28px;
+}
+
+.heading-6 {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 24px;
+}
+
+/* Tablet */
+@media (min-width: 48rem) {
+  .heading-1 {
+    font-size: 56px;
+    line-height: 64px;
+  }
+
+  .heading-2 {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .heading-3 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .heading-4 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .heading-5 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .heading-6 {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 64rem) {
+  .heading-1 {
+    font-size: 72px;
+    line-height: 80px;
+  }
+
+  .heading-2 {
+    font-size: 48px;
+    line-height: 56px;
+  }
+
+  .heading-3 {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .heading-4 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .heading-5 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .heading-6 {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+  }
+}
+
+.heading-footer {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 24px;
+}
+
+.header-nav-text {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 20px;
+  font-family: 'Lato', sans-serif;
+}
+
+/* Labels */
+.label-lg {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 28px;
+  font-family: 'Lato', sans-serif;
+}
+
+.label-md {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 22px;
+  font-family: 'Lato', sans-serif;
+}
+
+.label-sm {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 20px;
+  font-family: 'Lato', sans-serif;
+}
+
+.label-badge {
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 28px;
+  font-family: 'Lato', sans-serif;
+}
+
+/* Subtitles */
+.subtitle-1 {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 26px;
+  font-family: 'Lato', sans-serif;
+}
+
+.subtitle-2 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 26px;
+  font-family: 'Lato', sans-serif;
+}
+
+/* Lead Text */
+.lead-1 {
+  font-size: 18px;
+  font-weight: normal;
+  /* line-height: 26px; */
+  /* line-height: 2rem; */
+  font-family: 'Lato', sans-serif;
+}
+
+.lead-2 {
+  font-size: 14px;
+  font-weight: 500;
+  /* line-height: 22px; */
+  font-family: 'Lato', sans-serif;
+}
+
+/* Body Text */
+.body-1 {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 24px;
+  font-family: 'Lato', sans-serif;
+}
+
+.body-2 {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 22px;
+  font-family: 'Lato', sans-serif;
+}
+
+/* waiting for feedback from Adri on where this is used, because I would expect an uppercase transform on it -Marshall */
+.capitalized {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 22px;
+  letter-spacing: 2px;
+  font-family: 'Lato', sans-serif;
+}
