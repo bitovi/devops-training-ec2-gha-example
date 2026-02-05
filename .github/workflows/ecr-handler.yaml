@@ -13,59 +13,13 @@ on:
         type: string
         default: ecr-repo
   push:
-    branches: [ simple-ecr ]
+    branches: [ simple-storybook ]
 
 jobs:
-  simple-ecr:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - id: ecr-deploy
-      uses: bitovi/github-actions-deploy-aws-ecr-registry@v0.1.2
-      # https://github.com/bitovi/github-actions-deploy-aws-ecr-registry/
+    - id: build-publish
+      uses: bitovi/github-actions-storybook-to-github-pages@main
       with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX }}
-        aws_default_region: us-east-1
-
-        #aws_resource_identifier: 
-        #aws_additional_tags:
-
-        tf_stack_destroy: false #true
-        tf_state_bucket_destroy: true
-        aws_ecr_repo_force_destroy: true
-        #tf_state_file_name: 
-        tf_state_file_name_append: ecr-registry
-        #tf_state_bucket: 
-        #tf_stack_destroy: ${{ inputs.tf_stack_destroy }}
-        #tf_state_bucket_destroy: ${{ inputs.tf_stack_destroy }}
-
-        aws_ecr_repo_create: true
-        aws_ecr_repo_type: private # default
-        aws_ecr_repo_name: ${{ inputs.aws_ecr_repo_name }}
-        aws_ecr_repo_mutable: true
-        aws_ecr_repo_encryption_type: AES256
-        #aws_ecr_repo_encryption_key_arn:
-        #aws_ecr_repo_force_destroy: ${{ inputs.tf_stack_destroy }}
-        #aws_ecr_repo_force_destroy: ${{ inputs.tf_stack_destroy }}
-        aws_ecr_repo_image_scan: true #default
-        #aws_ecr_registry_scan_rule:
-        #aws_ecr_registry_pull_through_cache_rules:
-        #aws_ecr_registry_scan_config:
-        #aws_ecr_registry_replication_rules_input:
-        #aws_ecr_repo_policy_attach:
-        #aws_ecr_repo_policy_create:
-        #aws_ecr_repo_policy_input:
-        #aws_ecr_repo_read_arn:
-        #aws_ecr_repo_write_arn:
-        #aws_ecr_repo_read_external_aws_account: 471112793724,011379514041
-        aws_ecr_repo_read_external_aws_account: ${{ vars.AWSACCNTID }} 
-        #aws_ecr_repo_write_external_aws_account: 471112793724,011379514041
-        #aws_ecr_repo_read_arn_lambda:
-        #aws_ecr_lifecycle_policy_input:
-        #aws_ecr_public_repo_catalog:
-        #aws_ecr_registry_policy_input:
-        #aws_ecr_additional_tags:
-        # Lifecycle policy for automatic cleanup
-        #aws_ecr_lifecycle_policy_input: '{\"rules\":[{\"rulePriority\":1,\"description\":\"expire-after-100\",\"selection\":{\"tagStatus\":\"any\",\"countType\":\"imageCountMoreThan\",\"countNumber\":100},\"action\":{\"type\":\"expire\"}}]}'
-        
-        #aws_ecr_lifecycle_policy_input: '{\"rules\":[{\"rulePriority\":1,\"description\":\"Keep-last-10-production\",\"selection\":{\"tagStatus\":\"tagged\",\"tagPrefixList\":[\"production\"],\"countType\":\"imageCountMoreThan\",\"countNumber\":10},\"action\":{\"type\":\"expire\"}},{\"rulePriority\":2,\"description\":\"Keep-last-5-staging\",\"selection\":{\"tagStatus\":\"tagged\",\"tagPrefixList\":[\"staging\"],\"countType\":\"imageCountMoreThan\",\"countNumber\":5},\"action\":{\"type\":\"expire\"}},{\"rulePriority\":3,\"description\":\"Delete-untagged-older-than-10-days\",\"selection\":{\"tagStatus\":\"untagged\",\"countType\":\"sinceImagePushed\",\"countUnit\":\"days\",\"countNumber\":10},\"action\":{\"type\":\"expire\"}}]}'
+        path: build # change to your build folder
