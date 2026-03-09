@@ -1,4 +1,5 @@
 name: Deploy to Amazon ECS
+run-name: Deploy to Amazon ECS - ${{ inputs.environment }} - ${{ inputs.image_tag }}
 
 on:
   workflow_call:
@@ -130,7 +131,7 @@ concurrency:
  
 #      - name: Deploy using GHA
 #        uses: bitovi/github-actions-deploy-ecs@main
-#        #uses: bitovi/github-actions-deploy-ecs@add-efs-support
+#        #uses: bitovi/github-actions-deploy-ecs@main
 #        env:
 #          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
 #        with:
@@ -710,7 +711,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Destroy using GHA
-        uses: bitovi/github-actions-deploy-ecs@add-efs-support
+        uses: bitovi/github-actions-deploy-ecs@main
         if: true
         with:
           # AWS Definitions
@@ -730,8 +731,8 @@ jobs:
           aws_ecs_node_count: 1
 
       - name: Deploy using GHA 1.0.2
-        uses: bitovi/github-actions-deploy-ecs@add-efs-support
-        if: true
+        uses: bitovi/github-actions-deploy-ecs@main
+        if: false
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -763,8 +764,8 @@ jobs:
           aws_ecs_cloudwatch_enable: false
 
       - name: Deploy using GHA 1.0.2 - testing
-        uses: bitovi/github-actions-deploy-ecs@add-efs-support
-        if: true
+        uses: bitovi/github-actions-deploy-ecs@main
+        if: false
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -801,7 +802,7 @@ jobs:
 
       - name: Deploy using GHA 1.0.2
         uses: bitovi/github-actions-deploy-ecs@v1.0.2
-        if: true
+        if: false
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -838,8 +839,8 @@ jobs:
 
 
       - name: Deploy using GHA testing
-        uses: bitovi/github-actions-deploy-ecs@add-efs-support
-        if: true
+        uses: bitovi/github-actions-deploy-ecs@main
+        if: false
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -876,8 +877,8 @@ jobs:
 
       - name: Deploy using GHA testing 2
         #uses: bitovi/github-actions-deploy-ecs@v1
-        uses: bitovi/github-actions-deploy-ecs@add-efs-support
-        if: true
+        uses: bitovi/github-actions-deploy-ecs@main
+        if: false
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -917,8 +918,8 @@ jobs:
 
       - name: Deploy using GHA testing 3
         #uses: bitovi/github-actions-deploy-ecs@v1
-        uses: bitovi/github-actions-deploy-ecs@add-efs-support
-        if: true
+        uses: bitovi/github-actions-deploy-ecs@main
+        if: false
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -952,8 +953,8 @@ jobs:
           aws_ecs_cloudwatch_retention_days: 1
 
       - name: Deploy using GHA testing 4
-        uses: bitovi/github-actions-deploy-ecs@add-efs-support
-        if: true
+        uses: bitovi/github-actions-deploy-ecs@main
+        if: false
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
@@ -999,8 +1000,8 @@ jobs:
 
 
       - name: Destroy using GHA testing 4
-        uses: bitovi/github-actions-deploy-ecs@add-efs-support
-        if: true
+        uses: bitovi/github-actions-deploy-ecs@main
+        if: false
         with:
           # AWS Definitions
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX }}
