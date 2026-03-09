@@ -30,6 +30,86 @@ on:
         required: true
         type: boolean
         default: false
+      test01:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test02:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test03:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test04:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test05:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test06:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test07:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test08:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test09:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test10:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test11:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test12:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test13:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test14:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test15:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test16:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test17:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test18:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test19:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
+      test20:
+        description: 'Test input to check max ammount'
+        type: string
+        required: false
  
 env:
   SERVICE_NAME: test-world

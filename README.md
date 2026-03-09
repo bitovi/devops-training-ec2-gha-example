@@ -12,7 +12,7 @@ A simple Node.js application that displays environment information, containerize
 - 📊 Health checks and monitoring
 - 🔔 Slack notifications
 
-## Architecture
+## Architecture232
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
